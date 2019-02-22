@@ -18,7 +18,7 @@ Npm - Node.js package manager, comes with Node.js. Please make sure npm version 
 Download the code and install dependencies :
 
 
-git clone https://github.com/francisedulab/ui.git
+git clone https://github.com/ShwetaEdulab/garware.git
 
 
 cd ui && npm i
