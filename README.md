@@ -1,10 +1,6 @@
-# garware
-garware university
-
-
 UI for Admissiondesk Backend
 
-Inspired by akveo's Nebular
+Inspired by akveo's Nebular 
 
 https://github.com/akveo/ngx-admin
 
@@ -18,12 +14,18 @@ Node.js - https://nodejs.org. Please note the version should be >=8
 
 Npm - Node.js package manager, comes with Node.js. Please make sure npm version is >=5
 
+
 Download the code and install dependencies :
 
-git clone https://github.com/ShwetaEdulab/garware.git
+
+git clone https://github.com/francisedulab/ui.git
+
 
 cd ui && npm i
 
-To run a local copy : npm start
+To run a local copy :
+npm start
 
-For Production bundle : npm run build:prod
+For Production bundle :
+npm run build:prod
+

@@ -1,0 +1,51 @@
+<nb-actions size="large">
+    <nb-action icon="ion-arrow-left-c"  (click)="backClicked()"></nb-action>
+</nb-actions>
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header>#{{ticketData?.uid}}&nbsp;&nbsp;&nbsp;&nbsp;{{ticketData?.subject}}</nb-card-header>
+                <nb-card-body>
+                   <nb-card accent="success">
+                        <nb-card-header>
+                            {{ticketData?.issue}}
+                            <!-- <button nbButton outline status="info" (click)="writeComment()" style="float:right;">Comment</button> -->
+                        </nb-card-header>
+                        <nb-list>
+                            <nb-list-item *ngFor="let comment of comments">
+                                <div class="row">
+                                    <div class="col-md-12" style="color:red;">
+                                        {{comment.owner.fullname}} &lt;{{comment.owner.email}}&gt;
+                                    </div>
+                                    <div class="col-md-12" style="font-size:10px;">
+                                        {{comment.date}}
+                                     </div>
+                                     <br/><br/>
+                                    <div class="col-md-12">
+                                        {{comment.comment}}
+                                    </div>
+                                </div>   
+                            </nb-list-item>
+                            <nb-list-item>
+                                <div class="row">
+                                    <div class="col-md-12" style="color:red;">
+                                       {{ticketData?.owner.fullname}} &lt;{{ticketData?.owner.email}}&gt;
+                                    </div>
+                                    <div class="col-md-12" style="font-size:10px;">
+                                       {{today}}
+                                     </div>
+                                     <br/><br/>
+                                    <div class="col-md-12">
+                                        <input type="text" nbInput [(ngModel)]="comment" shape="semi-round" fullWidth fieldSize="large" placeholder="Comment">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button nbButton outline status="danger" size="xsmall" shape="semi-round" style="margin-top:50px;" (click)="writeComment()">Comment</button>
+                                    </div>
+                                </div>   
+                            </nb-list-item>
+                        </nb-list>
+                    </nb-card>
+                </nb-card-body> 
+        </nb-card>
+    </div>
+</div>

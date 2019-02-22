@@ -1,0 +1,215 @@
+<h1 id="title" class="title">Register</h1>
+<nb-card status="success">
+	<nb-card-body>
+		<form [formGroup]="RegisterForm" >
+			<nb-alert status="danger" closable (close)="onClose()" *ngIf="messgealertflag == 1">
+					Email Already Exists !!!!
+			</nb-alert> 
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="form-group">
+						<label for="inputFirstName">First Name  <span style="color:red;">*</span>
+							<!-- <i class="fa fa-info-circle" nbPopover="Enter name exactly as it appears on official documents(fullname as on marksheet). Do not use nicknames."  nbPopoverMode="hover"></i> -->
+						</label> 
+						<span> ( Enter name exactly as it appears on official documents. Do not use nicknames.)</span>
+						<input type="text" class="form-control" name="fname"   id="inputFirstName" formControlName="firstNameCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.firstNameCtrl.invalid && (RegisterForm.controls.firstNameCtrl.dirty || RegisterForm.controls.firstNameCtrl.touched)}" placeholder="First Name">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="form-group">
+						<label for="lastFirstName">Last Name/ Surname  <span style="color:red;">*</span></label>
+						<input type="text" class="form-control"   id="lastFirstName" formControlName="LastNameCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.LastNameCtrl.invalid && (RegisterForm.controls.LastNameCtrl.dirty || RegisterForm.controls.LastNameCtrl.touched)}" placeholder="Last Name">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="form-group">
+						<label for="inputEmail">Email  <span style="color:red;">*</span></label>
+						<input type="text" class="form-control" id="inputEmail" (change)="onKeyPress($event)" formControlName="emailCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.emailCtrl.invalid && (RegisterForm.controls.emailCtrl.dirty || RegisterForm.controls.emailCtrl.touched)}" placeholder="Email">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="form-group">
+						<label for="inputPassWord">Password  <span style="color:red;">*</span> </label>
+						<span> (Use 6 or more characters,numbers or symbols .)</span>
+						<input type="password" class="form-control"  id="inputPassWord" formControlName="passwordCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.passwordCtrl.invalid && (RegisterForm.controls.passwordCtrl.dirty || RegisterForm.controls.passwordCtrl.touched)}" placeholder="Password">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+				<div class="form-group">
+					<label for="inputRePassWord">Confirm Password  <span style="color:red;">*</span></label>
+					<input type="password" class="form-control"  id="inputRePassWord" (change)="checkpassword(3000,'danger')" formControlName="repasswordCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.repasswordCtrl.invalid && (RegisterForm.controls.repasswordCtrl.dirty || RegisterForm.controls.repasswordCtrl.touched)}" placeholder="Re- Type Password">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="form-group">
+					<label for="inputPermAdd">Address  <span style="color:red;">*</span></label>
+					<textarea class="form-control" id="inputPermAdd" formControlName="AddCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.AddCtrl.invalid && (RegisterForm.controls.AddCtrl.dirty || RegisterForm.controls.AddCtrl.touched)}" placeholder="Permanent Address"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<label for="inputPermCountry">Country of Origin  <span style="color:red;">*</span></label>
+					<mat-form-field>
+						<mat-select [(ngModel)]="selectedCountry" name="selectedCountry"   formControlName="CountryOriginCtrl"   (ngModelChange)="disablestate($event)">
+							<mat-option *ngFor="let country of Countries" [value]="country.id">
+							{{country.name}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<div class="col-lg-6">
+					<div class="form-group">
+					<label for="inputState"id="State" >State  <span style="color:red;">*</span></label>
+					<input   type="text" class="form-control" name="state" id="inputState" style="visibility: visible;"formControlName="StateCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.StateCtrl.invalid && (RegisterForm.controls.StateCtrl.dirty || RegisterForm.controls.StateCtrl.touched)}" placeholder="State">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="form-group">
+						<label for="inputCity">City  <span style="color:red;">*</span></label>
+							<input   type="text" class="form-control" id="inputCity" formControlName="CityCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.CityCtrl.invalid && (RegisterForm.controls.CityCtrl.dirty || RegisterForm.controls.CityCtrl.touched)}" placeholder="City">
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="form-group">
+						<label for="inputPremPost" id ="Postal">Postal Code</label>
+						<input  type="text" class="form-control" id="inputPremPost" style="visibility: visible;" formControlName="PostCodeCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.PostCodeCtrl.invalid && (RegisterForm.controls.PostCodeCtrl.dirty || RegisterForm.controls.PostCodeCtrl.touched)}" placeholder="Postal Code">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<label for="inputGender">Gender  <span style="color:red;">*</span></label>
+					<mat-form-field>
+						<mat-select [(ngModel)]="selectedGender" name="selectedCountry"   formControlName="genderCtrl" >
+								<mat-option value="Male">Male</mat-option>
+								<mat-option value="Female">Female</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<div class="col-lg-6">
+					<label for="inputCategory">Student Category  <span style="color:red;">*</span></label>
+					<mat-form-field>
+						<mat-select [(ngModel)]="selectedCategory" name="selectedCountry"   formControlName="categoryCtrl" >
+								<mat-option value="Foreign National"><i class="fa fa-info-circle" nbPopover=" Foreign passport holder. Requires a student visa to travel and study in India."  nbPopoverMode="hover"></i> Foreign National </mat-option>
+								<mat-option value="PIO"> <i class="fa fa-info-circle" nbPopover="Foreign passport holder (NON-INDIAN PASSPORT) holding an PIO card. The card is an official document from the Indian government which acts like a visa." nbPopoverMode="hover"></i> Person Of Indian Origin (PIO)</mat-option>
+								<mat-option value="OCI"> <i class="fa fa-info-circle" nbPopover=" Foreign passport holder (NON-INDIAN PASSPORT) holding an OCI card. The card is an official document from the Indian government which acts like a visa." nbPopoverMode="hover"></i> Overseas Citizenship of India (OCI)</mat-option>
+								<mat-option value="NRI of Gulf"> <i class="fa fa-info-circle" nbPopover=" Indian passport holder living for more than 180 days, in the current or past financial year, outside India. Doesn’t need a visa."  nbPopoverMode="hover"></i> NRI (Children of Indians working outside India</mat-option>
+								<mat-option value="NRI of SEAsia"><i class="fa fa-info-circle" nbPopover="Indian passport holder living for more than 180 days, in the current or past financial year, outside India. Doesn’t need a visa." nbPopoverMode="hover" ></i> Children of Indians working in South East Asia</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<label for="inputPermCountry">Country (for mobile) <span style="color:red;">*</span></label>
+					<mat-form-field>
+						<mat-select [(ngModel)]="permCountry" name="selectedCountry"   formControlName="CountryCtrl"   (ngModelChange)="onValueChange($event)">
+							<mat-option *ngFor="let country of Countries" [value]="country.id">
+							{{country.name}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<div class="col-lg-6">
+					<label for="inputCountry">Country Code  <span style="color:red;">*</span></label>
+					<div class="input-group">
+						<div class="dropdown input-group-prepend input-group-btn" ngbDropdown>
+							<input readonly class="form-control"  ngModel="{{profile_info}}" id="inputPhonecode" formControlName="phonecodeCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.phonecodeCtrl.invalid && (RegisterForm.controls.phonecodeCtrl.dirty ||  RegisterForm.controls.phonecodeCtrl.touched)}" nbInput placeholder="Phonecode" >
+						</div>	
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<label for="inputMobile"> Mobile number  <span style="color:red;">*</span></label>
+					<div class="input-group">
+						<input type="text" class="form-control"  formControlName="phoneCtrl" nbInput placeholder="Mobile number" [ngClass]="{'form-control-danger': RegisterForm.controls.phoneCtrl.invalid && (RegisterForm.controls.phoneCtrl.dirty ||  RegisterForm.controls.phoneCtrl.touched)}">
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<label for="inputDob">Date of Birth  <span style="color:red;">*</span></label>
+					<input class="form-control"   id="inputDob" formControlName="dobCtrl" nbInput placeholder="Date of birth" [nbDatepicker]="picker" [ngClass]="{'form-control-danger': RegisterForm.controls.dobCtrl.invalid && (RegisterForm.controls.dobCtrl.dirty || RegisterForm.controls.dobCtrl.touched)}">
+					<nb-datepicker #picker [(date)]="date" [max]="max" ></nb-datepicker>
+				</div>
+			</div>
+			<!-- <div class="row">
+					<div class="col-lg-6">
+							<label for="inputPermCountry">Country  <span style="color:red;">*</span></label>
+							<mat-form-field>
+								<mat-select [(ngModel)]="permCountry" name="selectedCountry"   formControlName="CountryCtrl"   (ngModelChange)="onValueChange($event)">
+									<mat-option *ngFor="let country of Countries" [value]="country.id">
+									{{country.name}}
+									</mat-option>
+								</mat-select>
+							</mat-form-field>
+							
+						</div>
+				
+				<div class="col-lg-6">
+					<label for="inputDob">Date of Birth  <span style="color:red;">*</span></label>
+					<input class="form-control"   id="inputDob" formControlName="dobCtrl" nbInput placeholder="Date of birth" [nbDatepicker]="picker" [ngClass]="{'form-control-danger': RegisterForm.controls.dobCtrl.invalid && (RegisterForm.controls.dobCtrl.dirty || RegisterForm.controls.dobCtrl.touched)}">
+					<nb-datepicker #picker [(date)]="date" [max]="max" ></nb-datepicker>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+						<label for="inputCountry">Country Code  <span style="color:red;">*</span></label>
+							<div class="input-group">
+								<div class="dropdown input-group-prepend input-group-btn" ngbDropdown>
+									<input readonly class="form-control"  ngModel="{{profile_info}}" id="inputPhonecode" formControlName="phonecodeCtrl" [ngClass]="{'form-control-danger': RegisterForm.controls.phonecodeCtrl.invalid && (RegisterForm.controls.phonecodeCtrl.dirty ||  RegisterForm.controls.phonecodeCtrl.touched)}" nbInput placeholder="Phonecode" >
+									</div>
+									
+							</div>
+						</div>
+				<div class="col-lg-6">
+						<label for="inputMobile"> Mobile number  <span style="color:red;">*</span></label>
+						<div class="input-group">
+							<input type="text" class="form-control"  formControlName="phoneCtrl" nbInput placeholder="Mobile number" [ngClass]="{'form-control-danger': RegisterForm.controls.phoneCtrl.invalid && (RegisterForm.controls.phoneCtrl.dirty ||  RegisterForm.controls.phoneCtrl.touched)}">
+						</div>
+				</div>
+			</div> -->
+			<br><br>
+			<div class="row">
+					<div class="offset-lg-1"></div>
+					<div class="col-lg-4" [innerHTML]="svg"></div>
+					<div class="col-lg-5">					
+						<input type="text" class="form-control" (change)="checkcaptcha(3000,'danger')" shape="round" formControlName="captchaCtrl" nbInput placeholder="Enter Captcha Here" [ngClass]="{'form-control-danger': RegisterForm.controls.captchaCtrl.invalid && (RegisterForm.controls.captchaCtrl.dirty ||  RegisterForm.controls.captchaCtrl.touched)}">
+					</div>
+			</div><br>
+			<div class="row">
+				<div class="col-lg-12">
+					<nb-alert status="danger" closable (close)="close()" *ngIf="alertflag == 1">
+						{{validation_messages}}
+					</nb-alert>
+				</div>
+			</div> 
+			<br><br>
+			<div class="row">
+				<div class="offset-lg-4"></div>
+					<button nbButton
+					shape="round"
+					size="small"
+					outline status="danger"
+					(click)="onSubmit(3000,'danger')"  class="col-lg-4">
+				Proceed 
+				</button>
+			</div>
+		</form>
+		<section class="another-action" aria-label="Sign in"> 
+		Already have an account? <a style="color:DodgerBlue;" class="text-link" routerLink="../login">Log in</a>
+		</section>
+	</nb-card-body>
+</nb-card>

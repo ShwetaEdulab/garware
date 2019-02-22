@@ -1,0 +1,43 @@
+<nb-actions size="large">
+    <nb-action icon="ion-arrow-left-c"  (click)="backClicked()"></nb-action>
+  </nb-actions>
+  <div class="row">
+    <div class="col-md-6">
+      <nb-card accent="success">
+        <nb-card-header>
+          <div class="row">
+            <div class="col-md-12">Chats</div>
+            
+          </div>
+        </nb-card-header>
+        <nb-list>
+          <nb-list-item *ngFor="let chat of chats" (click)="viewTicket(chat.id)">
+            <div class="row">
+              <div class="col-md-4" style="margin-left: 20px; color:red;">
+               {{chat.fullname}}
+              </div>
+              <div class="col-md-4" style="margin-left:90px; font-size:10px;">
+                {{chat.lastOnline}}
+              </div>
+              <div class="col-md-12" style="margin-top:10px; margin-left: 20px;">
+                {{chat.message}}
+              </div>
+            </div>
+          </nb-list-item>
+        </nb-list>
+      </nb-card>
+    </div>
+    <div class="col-md-6" *ngIf="flag == 1">
+      <nb-chat title="Conversations" size="medium" status="success">
+        <nb-chat-message *ngFor="let msg of messages"
+          [message]="msg.text"
+          [sender]="msg.sender"
+          [reply]="msg.reply"
+          [date]="msg.date"
+        >
+        </nb-chat-message>
+        <nb-chat-form (send)="sendMessage($event)" [dropFiles]="true">
+        </nb-chat-form>
+      </nb-chat>
+    </div>
+  </div>

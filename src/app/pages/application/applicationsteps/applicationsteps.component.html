@@ -1,0 +1,1157 @@
+<div class="row" [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerSize="xlarge">
+    <div class="col-md-12">
+      <nb-card status="success">
+        <nb-card-header>Complete all steps to complete your admission process !!!</nb-card-header>
+        <nb-card-body>
+          <nb-stepper orientation="vertical" #stepper (click)="selectStep()">
+            <nb-step [stepControl]="ProvisionalForm" [completed]="tabcheck1"  label="Download Provisional Eligiblity Letter" class="step-container">
+              <form [formGroup]="ProvisionalForm" class="step-container">
+                  <nb-card status="success" class="col-lg-12">
+                  <nb-card-header>Download Provisional Eligiblity Letter</nb-card-header>
+                  <nb-card-body>
+                    This is the letter from eligibility department.You have to carry this letter while taking admission.
+                  </nb-card-body>
+                  <nb-card-footer>
+                        <button type="button" (click)="downloadletter('Provisional Letter');" nbButton nbStepperNext>Download	and next</button>                     
+                  </nb-card-footer>
+                </nb-card>
+              </form>
+            </nb-step>
+            <nb-step [stepControl]="visaForm"  [completed]="tabcheck2"  label="Upload Your Visa">
+              <form [formGroup]="visaForm" class="step-container">
+                <nb-card status="success" class="col-lg-12">
+                  <nb-card-header>Fill details of any below option !!!</nb-card-header>
+                  <nb-card-body>
+                    <p-tabView (onChange)="handleChange($event)" [activeIndex]="index">
+                      <p-tabPanel header="Visa Details">
+                        <div class="row">
+                          <div class="offset-md-3"></div>
+                          <div class="col-md-6">
+                            <h4 class='visahead'>Visa Upload</h4>
+                          </div>
+                          <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+  
+                             <p-fileUpload name="file" url="http://mu.admissiondesk.org:5000/api/myApplication/upload?userid={{userId}}&visa_document=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,this.visaForm.controls.visaDocument,'visaDocument')" (onSelect)="mySelect($event);this.visaForm.controls.visaDocument.reset();" accept="image/*" maxFileSize="1000000" formControlName="visaDocument" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.visaDocument.errors }" ngDefaultControl>
+                              <ng-template pTemplate="content">
+                                <ul *ngIf="uploadedFiles.length">
+                                  <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                                </ul>
+                              </ng-template>
+                            </p-fileUpload>
+                            <div *ngIf="submitted && f.visaDocument.errors" class="invalid-feedback">
+                              <div *ngIf="f.visaDocument.errors.required">Visa Document is required</div> 
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="showvisaImage == 1">
+                          <div class="col-md-3">
+
+                          </div>
+                          <div class="col-md-4">
+                            <img class="img-responsive" style= "width: 200px; height:200px;" [src]=" visaImage | auth"/>
+                          </div>
+                          <div class="col-md-4">
+
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-3"></div>
+                          <div class="col-md-4">
+                            <h4 class='visahead'>Visa Details</h4>
+                          </div>
+                          <div class="col-md-4"></div>
+                        </div>
+                        <div class="row paddingForDetails">
+                          <!-- <div class="col-md-1 enrollDetailsCol1">
+                            
+                          </div> -->
+                          <div class="col-md-6 enrollDetailsCol1">
+                              Visa Number :
+                            </div>
+                            <div class="col-md-6 enrollDetailsCol2">
+                            <input type="text" nbInput placeholder="Input Visa Number" ngModel="{{visadetails?.visa_no}}" formControlName="visaNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.visaNumber.errors }">
+                            <div *ngIf="submitted && f.visaNumber.errors" class="invalid-feedback">
+                              <div *ngIf="f.visaNumber.errors.required">Visa Number is required</div>
+                              <div *ngIf="f.visaNumber.errors.pattern">Visa Number should contain alphanumerics only</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row paddingForDetails">
+                          <!-- <div class="col-md-1 enrollDetailsCol1">
+                        
+                          </div> -->
+                          <div class="col-md-6 enrollDetailsCol1">
+                              Place of Issuance :
+                            </div>
+                            <div class="col-md-6 enrollDetailsCol2">
+                            <nb-select placeholder="Select country"  status="info" ngModel="{{ visacountry }}"  formControlName="issuancePlace" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.issuancePlace.errors }">
+                                <nb-option  value="{{country.id}}" *ngFor="let country of Countries">{{country.name}}</nb-option>
+                            </nb-select>
+                            <div *ngIf="submitted && f.issuancePlace.errors" class="invalid-feedback">
+                              <div *ngIf="f.issuancePlace.errors.required">Place of Issuance is required</div>
+                            </div> 
+                          </div>
+                        </div>
+                        <div class="row paddingForDetails">
+                            <div class="col-md-6 enrollDetailsCol1">
+                                Date of Issuance :
+                              </div>
+                              <div class="col-md-6 enrollDetailsCol2">
+                            <input nbInput [nbDatepicker]="issuedate" ngModel="{{ visaissuedate }}" placeholder="Date of Issuance" formControlName="issuanceDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.issuanceDate.errors }">
+                            <nb-datepicker #issuedate [max]="max"></nb-datepicker>
+                            <div *ngIf="submitted && f.issuanceDate.errors" class="invalid-feedback">
+                              <div *ngIf="f.issuanceDate.errors.required">Date of Issuance is required</div>
+                            </div> 
+                          </div>
+                        </div>
+                        <div class="row paddingForDetails">
+                            <div class="col-md-6 enrollDetailsCol1">
+                                Date of Expiry :
+                              </div>
+                              <div class="col-md-6 enrollDetailsCol2">
+                            <input nbInput [nbDatepicker]="expirydate" ngModel="{{ visaexpirydate }}" placeholder="Date of Expiry" formControlName="expiryDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.expiryDate.errors }">
+                            <nb-datepicker #expirydate [min]="min"></nb-datepicker>
+                            <div *ngIf="submitted && f.expiryDate.errors" class="invalid-feedback">
+                              <div *ngIf="f.expiryDate.errors.required">Date of Expiry is required</div>
+                            </div> 
+                          </div>
+                        </div>
+                      </p-tabPanel>
+                      <p-tabPanel header="Passport / OCI card">
+                        <div class="row">
+                          <div class="offset-md-1"></div>
+                          <div class="col-md-10">
+                            <h4 class='visahead'>Passport / OCI Card Upload</h4>
+                          </div>
+                          <div class="col-md-4"></div>
+                        </div>
+                        <div class="row" style="margin-bottom: 100px">
+                          <div class="col-md-12">
+                            <p-fileUpload name="file" url="http://mu.admissiondesk.org:5000/api/myApplication/upload?userid={{userId}}&pass_document=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,this.visaForm.controls.passDocument,'passDocument')" (onSelect)="mySelect($event);this.visaForm.controls.passDocument.reset();" accept="application/pdf,image/*" maxFileSize="1000000" formControlName="passDocument" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.passDocument.errors }" ngDefaultControl>
+                              <ng-template pTemplate="content">
+                                <ul *ngIf="uploadedFiles.length">
+                                  <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                                </ul>
+                              </ng-template>
+                            </p-fileUpload>
+                            <div *ngIf="submitted && f.passDocument.errors" class="invalid-feedback">
+                              <div *ngIf="f.passDocument.errors.required">Passport / OCI Card Document is required</div>
+                            </div>
+                          </div>
+                         </div>
+                        <div class="row" *ngIf="showpassImage == 1">
+                          <div class="col-md-3">
+
+                          </div>
+                          <div class="col-md-4">
+                            <img class="img-responsive" style= "width: 200px; height:200px;" [src]=" passImage | auth"/>
+                          </div>
+                          <div class="col-md-4">
+
+                          </div>
+                        </div>
+                        <div *ngIf="showpassbuttondiv == 1">
+                          <div class="row">
+                            <h5 class='passbutton_div'>Download uploaded Passport/OCI card Document</h5>
+                          </div>
+                          <div class="row">
+                            <button class="downloadPagebtn" (click)="downloaddoc('passport_oci_card')">Download</button>
+                          </div>
+                        </div>
+                      </p-tabPanel>
+                      <p-tabPanel header="Country ID card">
+                        <div class="row">
+                            <div class="offset-md-1"></div>
+                            <div class="col-md-10">
+                            <h4 class='visahead'>Country ID Card Upload</h4>
+                          </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 100px">
+                          <div class="col-md-12">
+                            <p-fileUpload name="file" url="http://mu.admissiondesk.org:5000/api/myApplication/upload?userid={{userId}}&countryId_document=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,this.visaForm.controls.countryDocument,'countryDocument')" (onSelect)="mySelect($event);this.visaForm.controls.countryDocument.reset();" accept="application/pdf,image/*" maxFileSize="1000000" formControlName="countryDocument" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.countryDocument.errors }" ngDefaultControl>
+                              <ng-template pTemplate="content">
+                                <ul *ngIf="uploadedFiles.length">
+                                  <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                                </ul>
+                              </ng-template>
+                            </p-fileUpload>
+                            <div *ngIf="submitted && f.countryDocument.errors" class="invalid-feedback">
+                              <div *ngIf="f.countryDocument.errors.required">Country ID Card Document is required</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="showcountryImage == 1">
+                          <div class="col-md-4">
+
+                          </div>
+                          <div class="col-md-4">
+                            <img class="img-responsive" style= "width: 200px; height:200px;" [src]=" countryImage | auth"/>
+                          </div>
+                          <div class="col-md-4">
+                            
+                          </div>
+                        </div>
+                        <div *ngIf="showcidbuttondiv == 1">
+                          <div class="row">
+                            <h5 class='passbutton_div'>Download uploaded Country ID card Document</h5>
+                          </div>
+                          <div class="row">
+                            <button class="downloadPagebtn" (click)="downloaddoc('country_id_card')">Download</button>
+                          </div>
+                        </div>
+                      </p-tabPanel>
+                    </p-tabView>
+                  </nb-card-body>
+                  <nb-card-footer>
+                    <div class="form-group row">
+                      <div class="col-md-4">
+  
+                      </div>
+                      <div class="col-md-4">
+                        <button nbButton nbStepperNext (click)="onSubmit()">NEXT</button>
+                      </div>
+                      <div class="col-md-4">
+  
+                      </div>
+                    </div>
+                  </nb-card-footer>
+                </nb-card> 
+              </form>
+            </nb-step>
+            <nb-step [stepControl]="ApplicationForm" [completed]="tabcheck3" label="Download Application Form Letter And Pay">
+              <form [formGroup]="ApplicationForm" class="step-container">
+                <nb-card status="success" class="col-lg-12">
+                  <nb-card-header>Download Application Form Letter And Pay Admission Processing Fees</nb-card-header>
+                  <nb-card-body>
+                    <div *ngIf="alerttab3 == 'false'">
+                      <div class="row">
+                        <div class="col-md-4">
+                      
+                        </div>
+                        <div class="col-md-4">
+                          <button nbButton shape="rectangle" hero status="primary" (click)="downloadletter('Application Form Letter');">Download Application Letter</button>
+                        </div>
+                        <div class="col-md-4">
+                        
+                        </div>
+                      </div>
+                      <div *ngIf='showonline == 1'>
+                        <div class="row">
+                          <div class="col-md-4">
+                    
+                          </div>
+                          <div class="col-md-4">
+                            <button nbButton shape="rectangle" hero status="primary" (click)="onlinepayment();" style="margin-top: 50px;">Proceed For Payment</button>
+                          </div>
+                          <div class="col-md-4">
+                          
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf='transdetails == 1'>
+                        <div class="row" style="margin-top: 20px;">
+                          <div class="col-md-4"></div>
+                          <div class="col-md-4">
+                            <h4 class='visahead'>Payment Details</h4>
+                          </div>
+                          <div class="col-md-4"></div>
+                        </div>
+                        <div class="row paddingForDetails">
+                          <div class="col-md-1 enrollDetailsCol1">
+                          
+                          </div>
+                          <div class="col-md-4 enrollDetailsCol1">
+                            Payment Mode
+                          </div>
+                          <div class="col-md-2 enrollDetailsCol1">
+                            :
+                          </div>
+                          <div class="col-md-4 enrollDetailsCol2">
+                            {{secondpaymentdata?.payment_mode}}
+                          </div>
+                        </div>
+                        <div class="row paddingForDetails">
+                          <div class="col-md-1 enrollDetailsCol1">
+                          
+                          </div>
+                          <div class="col-md-4 enrollDetailsCol1">
+                            Payment date
+                          </div>
+                          <div class="col-md-2 enrollDetailsCol1">
+                            :
+                          </div>
+                          <div class="col-md-4 enrollDetailsCol2">
+                            {{secondpaymentdata?.payment_date}}
+                          </div>
+                        </div>
+                        <div class="row paddingForDetails">
+                          <div class="col-md-1 enrollDetailsCol1">
+                        
+                          </div>
+                          <div class="col-md-4 enrollDetailsCol1">
+                            Currency
+                          </div>
+                          <div class="col-md-2 enrollDetailsCol1">
+                            :
+                          </div>
+                          <div class="col-md-4 enrollDetailsCol2">
+                            {{secondpaymentdata?.currency}}
+                          </div>
+                        </div>
+                        <div class="row paddingForDetails">
+                          <div class="col-md-1 enrollDetailsCol1">
+                          
+                          </div>
+                          <div class="col-md-4 enrollDetailsCol1">
+                            Total Amount
+                          </div>
+                          <div class="col-md-2 enrollDetailsCol1">
+                            :
+                          </div>
+                          <div class="col-md-4 enrollDetailsCol2">
+                            {{secondpaymentdata?.amount}}
+                          </div>
+                        </div>
+                        <div class="row paddingForDetails">
+                          <div class="col-md-1 enrollDetailsCol1">
+                        
+                          </div>
+                          <div class="col-md-4 enrollDetailsCol1">
+                            Transaction ID
+                          </div>
+                          <div class="col-md-2 enrollDetailsCol1">
+                            :
+                          </div>
+                          <div class="col-md-4 enrollDetailsCol2">
+                            {{secondpaymentdata?.transaction_id}}
+                          </div>
+                        </div>
+                        <div *ngIf='showoffdown == 1'>
+                          <div class="row paddingForDetails">
+                            <div class="col-md-1 enrollDetailsCol1">
+                          
+                            </div>
+                            <div class="col-md-4 enrollDetailsCol1">
+                              Uploaded challan
+                            </div>
+                            <div class="col-md-2 enrollDetailsCol1">
+                              :
+                            </div>
+                            <div class="col-md-4 enrollDetailsCol2">
+                              <a (click)="downloaddoc('offlinechallan');">Download</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div *ngIf='secondpaymentdata.uploaded_challan_flag == "true"'>
+                          <div class="row paddingForDetails">
+                            <div class="col-md-1 enrollDetailsCol1">
+                          
+                            </div>
+                            <div class="col-md-4 enrollDetailsCol1">
+                              Uploaded receipt
+                            </div>
+                            <div class="col-md-2 enrollDetailsCol1">
+                              :
+                            </div>
+                            <div class="col-md-4 enrollDetailsCol2">
+                              <a (click)="downloaddoc('offlinechallan');">Download</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div *ngIf='secondpaymentdata.payment_mode == "online"'>
+                          <div class="row">
+                            <div class="col-md-4">
+                      
+                            </div>
+                            <div class="col-md-4">
+                              <button nbButton shape="rectangle" hero status="primary" (click)="online_receipt(secondpaymentdata.transaction_id,secondpaymentdata.user_id,'2');">Download Online Payment Receipt</button>
+                            </div>
+                            <div class="col-md-4">
+                            
+                            </div>
+                          </div>
+                          <div *ngIf='secondpaymentdata.uploaded_challan_flag == "false"'>
+                            <div *ngIf='secondpaymentdata.receipt_exists == "true"'>
+                              <div class="row">
+                                <div class="col-md-4">
+                          
+                                </div>
+                                <div class="col-md-4">
+                                  <button nbButton shape="rectangle" hero status="primary" (click)="upload_online_receipt();">Upload Online Payment Receipt</button>
+                                </div>
+                                <div class="col-md-4">
+                                
+                                </div>
+                              </div>
+                            </div>
+                            <div *ngIf='secondpaymentdata.receipt_exists == "false"'>
+                              <div class="row">
+                                <div class="col-md-4">
+                          
+                                </div>
+                                <div class="col-md-4">
+                                  <button nbButton shape="rectangle" hero status="primary" (click)="upload_online_receipt();">Upload Online Payment Receipt</button>
+                                </div>
+                                <div class="col-md-4">
+                                
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf='this.showoffdown == 1'>
+                        <div class="row">
+                          <div class="col-md-5">
+
+                          </div>
+                          <div class="col-md-4">
+                            <button nbButton nbStepperNext style="margin-top: 20px">NEXT</button>
+                          </div>
+                          <div class="col-md-3">
+
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf='this.showonldown == 1'>
+                        <div *ngIf='secondpaymentdata.uploaded_challan_flag == "true"'>
+                          <div class="row">
+                            <div class="col-md-5">
+    
+                            </div>
+                            <div class="col-md-4">
+                              <button nbButton nbStepperNext style="margin-top: 20px">NEXT</button>
+                            </div>
+                            <div class="col-md-3">
+    
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="alerttab3 == 'true'">
+                      <font color='red' face="verdana" size="4">
+                        First fill all visa details then you can download application letter and can pay fees!!!!!!!!!
+                      </font>
+                      <br>
+                      <br>
+                      <font face="verdana" size="3">
+                          Click on below button to go on previous incomplete step
+                      </font>
+                      <br>
+                      <br>
+                      <button nbButton status="info" (click)='prevIncomp()'>GO</button>
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+              </form>
+            </nb-step>
+            <nb-step [stepControl]="EnrollmentForm" [completed]="tabcheck4" label="Enrollment details">
+              <form [formGroup]="EnrollmentForm" class="step-container">
+                <div *ngIf="alerttab4 == 'false'">
+                  <div *ngIf='enrollmentdetails?.enroll_flag == "notassign"'>
+                    <nb-card status="success">
+                      <nb-card-header>
+                          <div class="row span1" >
+                            Your Enrollment number : {{ enrollmentdetails?.enrollmentNo }} is under process for college allocation.
+                          </div>
+                      </nb-card-header> 
+                    </nb-card>
+                  </div>
+                  <div *ngIf='enrollmentdetails?.enroll_flag == "assign"' style="margin-left: 50px">
+                    <nb-card status="success">
+                      <nb-card-header>
+                        <div class="row">
+                          <div class='col-md-4 span1'>
+                              
+                          </div>
+                          <div class='col-md-4 span1'>
+                              Enrollment number :
+                          </div>
+                          <div class='col-md-4 span1'>
+                              
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class='col-md-4 span1'>
+                            
+                          </div>
+                          <div class='col-md-4 span1' style="padding-left: 30px;">
+                              {{ enrollmentdetails?.enrollmentNo }}
+                          </div>
+                          <div class='col-md-4 span1'>
+                              
+                          </div>
+                        </div>
+                      </nb-card-header>
+                      <nb-card-body>
+                        <div class="row paddingForDetails">
+                          <div class="col-md-5 enrollDetailsCol1">
+                            Full name
+                          </div>
+                          <div class="col-md-1 enrollDetailsCol1">
+                            :
+                          </div>
+                          <div class="col-md-6 enrollDetailsCol2">
+                            {{ enrollmentdetails?.name }}
+                          </div>
+                        </div>
+                        <div class="row paddingForDetails">
+                          <div class="col-md-5 enrollDetailsCol1">
+                            Email address
+                          </div>
+                          <div class="col-md-1 enrollDetailsCol1">
+                              :
+                          </div>
+                          <div class="col-md-6 enrollDetailsCol2">
+                            {{ enrollmentdetails?.email }}
+                          </div>
+                        </div>
+                        <div class="row paddingForDetails">
+                          <div class="col-md-5 enrollDetailsCol1">
+                            Institute Assigned
+                          </div>
+                          <div class="col-md-1 enrollDetailsCol1">
+                              :
+                          </div>
+                          <div class="col-md-6 enrollDetailsCol2">
+                            {{ enrollmentdetails?.instituteName }}
+                          </div>
+                        </div>
+                        <div class="row paddingForDetails">
+                          <div class="col-md-5 enrollDetailsCol1">
+                            Course name
+                          </div>
+                          <div class="col-md-1 enrollDetailsCol1">
+                              :
+                          </div>
+                          <div class="col-md-6 enrollDetailsCol2">
+                            {{ enrollmentdetails?.specialization }}  {{ enrollmentdetails?.courseName }} 
+                          </div>
+                        </div>
+                        <div class="row paddingForDetails" style="margin-bottom: 30px">
+                          <div class="col-md-5 enrollDetailsCol1">
+                              Date Of application
+                          </div>
+                          <div class="col-md-1 enrollDetailsCol1">
+                              :
+                          </div>
+                          <div class="col-md-6 enrollDetailsCol2">
+                            {{ enrollmentdetails?.dateOfApplication }} 
+                          </div>
+                        </div>
+                        <div *ngIf='enrollmentdetails?.firm_flag == "firmrexists"'>
+                          <div class="row" style="margin-top:30px">
+                              <div class="col-md-4">
+                              
+                              </div>
+                              <div class="col-md-4">
+                                <button nbButton nbStepperPrevious>PREV</button>
+                                <button nbButton nbStepperNext (click)="checkfirm(enrollmentdetails?.enrollmentNo,enrollmentdetails?.instituteName,applicationId)">NEXT</button>
+                              </div>
+                              <div class="col-md-4">
+                              
+                              </div>
+                            </div>
+                        </div>
+                        <div *ngIf='enrollmentdetails?.firm_flag == "firmrnotexists"'>
+                            <div class="row">
+                                <nb-alert status="success" style="margin-left:10px">
+                                  Your Firm letter generation is under process !!! After generation of firm letter you can make 3 rd payment !!!
+                                </nb-alert>
+                            </div>
+                            <div class="row" style="margin-top:30px">
+                                <div class="col-md-5">
+                                
+                                </div>
+                                <div class="col-md-3">
+                                  <button nbButton nbStepperPrevious>PREV</button>
+                                </div>
+                                <div class="col-md-4">
+                                
+                                </div>
+                              </div> 
+                        </div>
+                    </nb-card-body>
+                  </nb-card>
+                  </div>
+                </div>
+                <div *ngIf="alerttab4 == 'true'">
+                  <font color='red' face="verdana" size="4">
+                    You should pay fees and upload receipt before college allocation!!!!!!!!!
+                  </font>
+                  <br>
+                  <br>
+                  <font face="verdana" size="3">
+                      Click on below button to go on previous incomplete step
+                  </font>
+                  <br>
+                  <br>
+                  <button nbButton status="info" (click)='prevIncomp()'>GO</button>
+                </div> 
+              </form>
+            </nb-step>
+            <nb-step [stepControl]="ThirdPaymentForm" [completed]="tabcheck5" label="Third Payment">
+              <form [formGroup]="ThirdPaymentForm" class="step-container">
+                <nb-card status="success" class="col-lg-12">
+                  <nb-card-header>Pay College Fees (Third Payment)</nb-card-header>
+                  <nb-card-body>
+                    <div *ngIf="alerttab5 == 'false'"> 
+                      <div *ngIf="thirdpaymentdetails?.third_payment_value == 'false'">
+                        <div class="row">
+                          <div class="col-md-4">
+
+                          </div>
+                          <div class="col-md-4">
+                            <button nbButton shape="rectangle" hero status="primary" (click)="onlinethirdpayment();" style="margin-top: 20px;">Proceed For Payment</button>
+                          </div>
+                          <div class="col-md-4">
+
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf="thirdpaymentdetails?.third_payment_value == 'true'">
+                        <div *ngIf="thirdpaymentdetails?.transaction == 'exists'">
+                          <div class="row" style="margin-top: 10px;">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                              <h4 class='visahead'>Payment Details</h4>
+                            </div>
+                            <div class="col-md-4"></div>
+                          </div>
+                          <div class="row paddingForDetails">
+                            <div class="col-md-1 enrollDetailsCol1">
+                            
+                            </div>
+                            <div class="col-md-4 enrollDetailsCol1">
+                              Payment Mode
+                            </div>
+                            <div class="col-md-2 enrollDetailsCol1">
+                              :
+                            </div>
+                            <div class="col-md-4 enrollDetailsCol2">
+                              {{thirdpaymentdetails?.payment_mode}}
+                            </div>
+                          </div>
+                          <div class="row paddingForDetails">
+                            <div class="col-md-1 enrollDetailsCol1">
+                            
+                            </div>
+                            <div class="col-md-4 enrollDetailsCol1">
+                              Payment date
+                            </div>
+                            <div class="col-md-2 enrollDetailsCol1">
+                              :
+                            </div>
+                            <div class="col-md-4 enrollDetailsCol2">
+                              {{thirdpaymentdetails?.payment_date}}
+                            </div>
+                          </div>
+                          <div class="row paddingForDetails">
+                            <div class="col-md-1 enrollDetailsCol1">
+                            
+                            </div>
+                            <div class="col-md-4 enrollDetailsCol1">
+                              Currency
+                            </div>
+                            <div class="col-md-2 enrollDetailsCol1">
+                              :
+                            </div>
+                            <div class="col-md-4 enrollDetailsCol2">
+                              {{thirdpaymentdetails?.currency}}
+                            </div>
+                          </div>
+                          <div class="row paddingForDetails">
+                            <div class="col-md-1 enrollDetailsCol1">
+                            
+                            </div>
+                            <div class="col-md-4 enrollDetailsCol1">
+                              Total Amount 
+                            </div>
+                            <div class="col-md-2 enrollDetailsCol1">
+                              :
+                            </div>
+                            <div class="col-md-4 enrollDetailsCol2">
+                              {{thirdpaymentdetails?.amount}}
+                            </div>
+                          </div>
+                          <div class="row paddingForDetails">
+                            <div class="col-md-1 enrollDetailsCol1">
+                            
+                            </div>
+                            <div class="col-md-4 enrollDetailsCol1">
+                              Transaction ID
+                            </div>
+                            <div class="col-md-2 enrollDetailsCol1">
+                              :
+                            </div>
+                            <div class="col-md-4 enrollDetailsCol2">
+                              {{thirdpaymentdetails?.transaction_id}}
+                            </div>
+                          </div>
+                          <div *ngIf="thirdpaymentdetails?.payment_mode == 'offline'">
+                            <div class="row paddingForDetails">
+                              <div class="col-md-1 enrollDetailsCol1">
+                            
+                              </div>
+                              <div class="col-md-4 enrollDetailsCol1">
+                                Uploaded challan
+                              </div>
+                              <div class="col-md-2 enrollDetailsCol1">
+                                :
+                              </div>
+                              <div class="col-md-4 enrollDetailsCol2">
+                                <a (click)="downloaddoc('thirdpaymentchallan');">Download</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div *ngIf='thirdpaymentdetails?.uploaded_challan_flag == "true"'>
+                            <div class="row paddingForDetails">
+                              <div class="col-md-1 enrollDetailsCol1">
+                            
+                              </div>
+                              <div class="col-md-4 enrollDetailsCol1">
+                                Uploaded receipt
+                              </div>
+                              <div class="col-md-2 enrollDetailsCol1">
+                                :
+                              </div>
+                              <div class="col-md-4 enrollDetailsCol2">
+                                <a (click)="downloaddoc('thirdpaymentchallan');">Download</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div *ngIf="thirdpaymentdetails?.payment_mode == 'online'">
+                            <div class="row">
+                              <div class="col-md-4">
+                        
+                              </div>
+                              <div class="col-md-4">
+                                <button nbButton shape="rectangle" hero status="primary" (click)="online_receipt(thirdpaymentdetails.transaction_id,thirdpaymentdetails.id,'3');">Download Online Payment Receipt</button>
+                              </div>
+                              <div class="col-md-4">
+                              
+                              </div>
+                            </div>
+                            <div *ngIf='thirdpaymentdetails?.uploaded_challan_flag == "false"'>
+                              <div *ngIf='thirdpaymentdetails?.receipt_exists == "true"'>
+                                <div class="row">
+                                  <div class="col-md-4">
+                            
+                                  </div>
+                                  <div class="col-md-4">
+                                    <button nbButton shape="rectangle" hero status="primary" (click)="upload_online_third_receipt();">Upload Online Payment Receipt</button>
+                                  </div>
+                                  <div class="col-md-4">
+                                  
+                                  </div>
+                                </div>
+                              </div>
+                              <div *ngIf='thirdpaymentdetails?.receipt_exists == "false"'>
+                                <div class="row">
+                                  <div class="col-md-4">
+                            
+                                  </div>
+                                  <div class="col-md-4">
+                                    <button nbButton shape="rectangle" hero status="primary" (click)="upload_online_third_receipt();">Upload Online Payment Receipt</button>
+                                  </div>
+                                  <div class="col-md-4">
+                                  
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div *ngIf="thirdpaymentdetails?.payment_mode == 'online'">
+                          <div *ngIf='thirdpaymentdetails?.uploaded_challan_flag == "true"'>
+                            <div class="row">
+                              <div class="col-md-5">
+      
+                              </div>
+                              <div class="col-md-4">
+                                <button nbButton nbStepperNext style="margin-top: 20px">NEXT</button>
+                              </div>
+                              <div class="col-md-3">
+      
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div *ngIf="thirdpaymentdetails?.payment_mode == 'offline'">
+                          <div class="row">
+                            <div class="col-md-5">
+
+                            </div>
+                            <div class="col-md-4">
+                              <button nbButton nbStepperNext style="margin-top: 20px">NEXT</button>
+                            </div>
+                            <div class="col-md-3">
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf="third_not_available == 'true'">
+                        <font color='red'>
+                          Third Payment is not available yet.It will available once college is allocated
+                        </font>
+                      </div>
+                    </div>
+                    <div *ngIf="alerttab5 == 'true'">
+                      <font color='red' face="verdana" size="4">
+                        Third Payment will be available after college allocation and Document Verification!!!!!!!!!!!!
+                      </font>
+                      <br>
+                      <br>
+                      <font face="verdana" size="3">
+                          Click on below button to go on previous incomplete step
+                      </font>
+                      <br>
+                      <br>
+                      <button nbButton status="info" (click)='prevIncomp()'>GO</button>
+                    </div>       
+                  </nb-card-body>
+                </nb-card>
+              </form>
+            </nb-step>
+            <nb-step [stepControl]="FirmLetterForm" [completed]="tabcheck6" label="Download Firm Letter">
+              <form [formGroup]="FirmLetterForm" class="step-container">
+                <nb-card status="success" class="col-xl-12">
+                  <nb-card-header>Download Firm Letter</nb-card-header>
+                  <nb-card-body>
+                    <div *ngIf="alerttab6 == 'false'">
+                      <button type="button" nbButton (click)="downloadletter('Firm Letter');" status="primary">Download Firm Letter</button>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <div class="row">
+                        <h4>
+                          Click on below link to fill form for hallticket and other college requirements :-
+                        </h4>
+                      </div>
+                      <br>
+                      <div>
+                        <a href="http://mum.digitaluniversity.ac/" style="text-decoration: underline">http://mum.digitaluniversity.ac/</a>
+                      </div>
+                      <div *ngIf='showfirmnext == 0' >
+                      </div>
+                      <div *ngIf='showfirmnext == 1' style="margin-top: 50px;">
+                        <div class="row">
+                          <div class="col-md-4"></div>
+                          <div class="col-md-4">
+                            <button nbButton nbStepperPrevious>PREV</button>
+                            <button nbButton nbStepperNext>NEXT</button>
+                          </div>
+                          <div class="col-md-4"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="alerttab6 == 'true'">
+                      <font color='red' face="verdana" size="4">
+                        You can download firm letter after you made third payment and upload payment receipt !!!!!!!!!!!!
+                      </font>
+                      <br>
+                      <br>
+                      <font face="verdana" size="3">
+                          Click on below button to go on previous incomplete step
+                      </font>
+                      <br>
+                      <br>
+                      <button nbButton status="info" (click)='prevIncomp()'>GO</button>
+                    </div>   
+                  </nb-card-body>
+                </nb-card>
+              </form>
+            </nb-step>
+            <nb-step [stepControl]="MedicalUploadForm" [completed]="tabcheck7" label="Medical Certificate Upload">
+              <form [formGroup]="MedicalUploadForm" class="step-container">
+                <nb-card status="success" class="col-xl-12">
+                  <nb-card-header>Upload Medical Certificate and fill all Medical Details</nb-card-header>
+                  <nb-card-body>
+                    <div *ngIf="alerttab7 == 'false'">
+                      <div class="row">
+                          <div class="col-md-2"></div>
+                          <div class="col-md-8">
+                          <h4 class='visahead'>Medical Certificate Upload</h4>
+                        </div>
+                        <div class="col-md-2"></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p-fileUpload name="file" url="http://mu.admissiondesk.org:5000/api/myApplication/upload?userid={{userId}}&medical_document=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,m.medicalDocument,'medicalDocument')" (onSelect)="mySelect($event);this.MedicalUploadForm.controls.medicalDocument.reset();" accept="image/*" maxFileSize="1000000" formControlName="medicalDocument" class="form-control" [ngClass]="{ 'is-invalid': medicalsubmitted && m.medicalDocument.errors }" ngDefaultControl>
+                            <ng-template pTemplate="content">
+                              <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                              </ul>
+                            </ng-template>
+                          </p-fileUpload>
+                          <div *ngIf="medicalsubmitted && m.medicalDocument.errors" class="invalid-feedback">
+                            <div *ngIf="m.medicalDocument.errors.required">Medical Certificate is required</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" *ngIf="showmedicalImage == 1">
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-4">
+                          <img class="img-responsive" style= "width: 200px; height:200px;" [src]=" medicalImage | auth"/>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                          <h4 class='visahead'>Medical Details</h4>
+                        </div>
+                        <div class="col-md-4"></div>
+                      </div>
+                      <div class="row paddingForDetails">
+                        <div class="col-md-6 enrollDetailsCol1">
+                          Medical Certificate Number :
+                        </div>
+                        <div class="col-md-6 enrollDetailsCol2">
+                          <input type="text" nbInput placeholder="Medical Certificate Number" ngModel="{{medicaldetails?.medical_no}}" formControlName="medicalNumber" class="form-control" [ngClass]="{ 'is-invalid': medicalsubmitted && m.medicalNumber.errors }">
+                          <div *ngIf="medicalsubmitted && m.medicalNumber.errors" class="invalid-feedback">
+                            <div *ngIf="m.medicalNumber.errors.required">Medical Certificate Number is required</div>
+                            <div *ngIf="m.medicalNumber.errors.pattern">Medical Certificate Number should contain alphanumerics only</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row paddingForDetails">
+                        <div class="col-md-6 enrollDetailsCol1">
+                          Date of Certificate Issuance :
+                        </div>
+                        <div class="col-md-6 enrollDetailsCol2">
+                          <input nbInput [nbDatepicker]="medicalissuedate" placeholder="Date of Issuance" ngModel="{{ MedicalIssueDate }}" formControlName="medicalissuanceDate" class="form-control" [ngClass]="{ 'is-invalid': medicalsubmitted && m.medicalissuanceDate.errors }">
+                          <nb-datepicker #medicalissuedate [max]="max"></nb-datepicker>
+                          <div *ngIf="medicalsubmitted && m.medicalissuanceDate.errors" class="invalid-feedback">
+                            <div *ngIf="m.medicalissuanceDate.errors.required">Date of Certificate Issuance is required</div>
+                          </div> 
+                        </div>
+                      </div>
+                      <div class="row paddingForDetails">
+                        <div class="col-md-6 enrollDetailsCol1">
+                          Doctor Name :
+                        </div>
+                        <div class="col-md-6 enrollDetailsCol2">
+                          <input type="text" nbInput placeholder="Input Doctor Name" ngModel="{{medicaldetails?.doctor_name}}" formControlName="doctorname" class="form-control" [ngClass]="{ 'is-invalid': medicalsubmitted && m.doctorname.errors }">
+                          <div *ngIf="medicalsubmitted && m.doctorname.errors" class="invalid-feedback">
+                            <div *ngIf="m.doctorname.errors.required">Doctor Name is required</div>
+                            <div *ngIf="m.doctorname.errors.pattern">Doctor Name should contain alphanumerics only</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row paddingForDetails">
+                        <div class="col-md-6 enrollDetailsCol1">
+                          Country Code : 
+                        </div>
+                        <div class="col-md-6 enrollDetailsCol2">
+                          <nb-select placeholder="Country Code"  status="info"  ngModel="{{ doctorcountry }}" formControlName="doctorcountry" class="form-control" [ngClass]="{ 'is-invalid': medicalsubmitted && m.doctorcountry.errors }">
+                              <nb-option  value="{{country.id}}" *ngFor="let country of Countries">{{country.id}}</nb-option>
+                          </nb-select>
+                          <div *ngIf="medicalsubmitted && m.doctorcountry.errors" class="invalid-feedback">
+                            <div *ngIf="m.doctorcountry.errors.required">Mobile Country Code is required</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row paddingForDetails">
+                        <div class="col-md-6 enrollDetailsCol1">
+                            Doctor Mobile Number :
+                        </div>
+                        <div class="col-md-6 enrollDetailsCol2">
+                          <input type="text" nbInput placeholder="Mobile Number" ngModel="{{medicaldetails?.doctor_no}}" formControlName="doctormobile" class="form-control" [ngClass]="{ 'is-invalid': medicalsubmitted && m.doctormobile.errors }">
+                          <div *ngIf="medicalsubmitted && m.doctormobile.errors" class="invalid-feedback">
+                            <div *ngIf="m.doctormobile.errors.required">Mobile Number is required</div>
+                            <div *ngIf="m.doctormobile.errors.pattern">Enter valid Mobile Number</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4">
+                            <button nbButton nbStepperNext style="margin-top: 50px;" (click)="onMedicalSubmit()">NEXT</button>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="alerttab7 == 'true'">
+                      <font color='red' face="verdana" size="4">
+                        You can fill medical details after downloading firm letter !!!!!!!!!!!!
+                      </font>
+                      <br>
+                      <br>
+                      <font face="verdana" size="3">
+                          Click on below button to go on previous incomplete step
+                      </font>
+                      <br>
+                      <br>
+                      <button nbButton status="info" (click)='prevIncomp()'>GO</button>
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+              </form>
+            </nb-step>
+            <nb-step [stepControl]="RPForm" [completed]="tabcheck8" label="Resident Permit Copy and EPT">
+              <form [formGroup]="RPForm" class="step-container">
+                <nb-card status="success" class="col-xl-12">
+                  <nb-card-header>Upload R.P. Copy and fill all Details</nb-card-header>
+                  <nb-card-body>
+                    <div *ngIf="alerttab8 == 'false'">
+                      <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                          <h4 class='visahead'>Resident Permit Copy</h4>
+                        </div>
+                        <div class="col-md-2"></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <p-fileUpload name="file" url="http://mu.admissiondesk.org:5000/api/myApplication/upload?userid={{userId}}&resident_permit=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,r.rpDocument,'rpDocument')" (onSelect)="mySelect($event);this.RPForm.controls.rpDocument.reset();" accept="image/*" maxFileSize="1000000" formControlName="rpDocument" class="form-control" [ngClass]="{ 'is-invalid': rpsubmitted && r.rpDocument.errors }" ngDefaultControl>
+                            <ng-template pTemplate="content">
+                              <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                              </ul>
+                            </ng-template>
+                          </p-fileUpload>
+                          <div *ngIf="rpsubmitted && r.rpDocument.errors" class="invalid-feedback">
+                            <div *ngIf="r.rpDocument.errors.required">Resident Permit Copy is required</div>
+                          </div> 
+                        </div>
+                      </div>
+                      <div class="row" *ngIf="showRPImage == 1">
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-4">
+                          <img class="img-responsive" style= "width: 200px; height:200px;" [src]=" RPImage | auth"/>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-10 offset-2">
+                          <h4 class='visahead'>Resident Permit Details</h4>
+                        </div>
+                      </div>
+                      <div class="row paddingForDetails">
+                        <div class="col-md-6 enrollDetailsCol1">
+                          Address :
+                        </div>
+                        <div class="col-md-6 enrollDetailsCol2">
+                            <input type="text" nbInput fullWidth placeholder="Address" formControlName="address" class="form-control" ngModel="{{rpdetails?.rp_address}}" [ngClass]="{ 'is-invalid': rpsubmitted && r.address.errors }">
+                            <div *ngIf="rpsubmitted && r.address.errors" class="invalid-feedback">
+                              <div *ngIf="r.address.errors.required">Address is required</div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row paddingForDetails">
+                        <div class="col-md-6 enrollDetailsCol1">
+                          Mobile Number :
+                        </div>
+                        <div class="col-md-6 enrollDetailsCol2">
+                          <input type="text" nbInput fullWidth placeholder="Mobile Number" formControlName="rpmobile" class="form-control" ngModel="{{rpdetails?.rp_mobile}}" [ngClass]="{ 'is-invalid': rpsubmitted && r.rpmobile.errors }">
+                          <div *ngIf="rpsubmitted && r.rpmobile.errors" class="invalid-feedback">
+                            <div *ngIf="r.rpmobile.errors.required">Mobile Number is required</div>
+                            <div *ngIf="r.rpmobile.errors.pattern">Enter valid Mobile Number</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row paddingForDetails">
+                        <div class="col-md-6 enrollDetailsCol1">
+                          Email :
+                        </div>
+                        <div class="col-md-6 enrollDetailsCol2">
+                          <input type="text" nbInput fullWidth placeholder="Email" formControlName="rpemail" class="form-control" ngModel="{{rpdetails?.rp_email}}" [ngClass]="{ 'is-invalid': rpsubmitted && r.rpemail.errors }">
+                          <div *ngIf="rpsubmitted && r.rpemail.errors" class="invalid-feedback">
+                            <div *ngIf="r.rpemail.errors.required">Email is required</div>
+                            <div *ngIf="r.rpemail.errors.pattern">Enter valid Email</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-10 offset-md-1">
+                          <h4 class='visahead'>English Proficiency Test (EPT) Details</h4>
+                        </div>
+                      </div>
+                      <div class="row paddingForDetails">
+                        <div class="col-md-6 enrollDetailsCol1">
+                          Is Eligible For English Proficiency Test (EPT)? :
+                        </div>
+                        <div class="col-md-6 enrollDetailsCol2">
+                          <input type="radio" value='haveto_appear' formControlName="ept_given" [checked]="haveto_appear == 1" >Eligible
+                        </div>
+                      </div>
+                      <div class="row paddingForDetails">
+                        <div class="col-md-6 enrollDetailsCol1">
+                        </div>
+                        <div class="col-md-6 enrollDetailsCol2">
+                          <input type="radio" value='dont_haveto_appear' formControlName="ept_given" [checked]="dont_haveto_appear == 1">Not Eligible
+                        </div>
+                      </div>
+                      <div class="row paddingForDetails">
+                        <div class="col-md-6 enrollDetailsCol1">
+                          
+                        </div>
+                        <div class="col-md-6 enrollDetailsCol2">
+                          (CBSE/IB/Cambridge Board)
+                        </div>
+                      </div>
+                      <div class="row paddingForDetails">
+                        <div class="col-md-6 enrollDetailsCol1">
+                          
+                        </div>
+                        <div class="col-md-6 enrollDetailsCol2">
+                          (Don't have to appear)
+                          <div *ngIf="rpsubmitted && ept_given.invalid" style="color:red;margin-top: 5px"> 
+                            EPT required. 
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4">
+                          <button nbButton (click)="onRPSubmit(student_category)">SAVE</button>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="alerttab8 == 'true'">
+                      <font color='red' face="verdana" size="4">
+                        You can fill RP copy details after input all medical details !!!!!!!!!!!!
+                      </font>
+                      <br>
+                      <br>
+                      <font face="verdana" size="3">
+                          Click on below button to go on previous incomplete step
+                      </font>
+                      <br>
+                      <br>
+                      <button nbButton status="info" (click)='prevIncomp()'>GO</button>
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+              </form>
+            </nb-step>
+          </nb-stepper>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+  

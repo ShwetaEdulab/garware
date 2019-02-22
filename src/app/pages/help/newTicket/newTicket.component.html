@@ -1,0 +1,20 @@
+<nb-card [style.width.px]="500" [style.height.px]="500">
+    <nb-card-header>
+        {{title}} 
+        <button nbButton outline status="danger" size="xsmall" (click)="dismiss()" style="margin-left:300px;">x</button>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="col-xs-12">Subject:</div>
+        <div class="col-xs-12">
+            <input type="text" nbInput placeholder="Subject" [(ngModel)]="subject" fullWidth   shape="semi-round"/>
+        </div>
+        <div class="col-xs-12" style="margin-top:10px;">Issue:</div>
+        <div class="col-xs-12">
+            <ngx-tiny-mce   [(ngModel)]="content"></ngx-tiny-mce>
+            <!-- <textarea nbInput fullWidth  shape="round" placeholder="Issue" [(ngModel)]="content" cols="200" style="height : 200px;"></textarea> -->
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton hero status="primary" (click)="send()">Raise Ticket</button> 
+    </nb-card-footer>
+</nb-card>
