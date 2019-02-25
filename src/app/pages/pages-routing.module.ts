@@ -25,6 +25,8 @@ import { HelpComponent } from './help/help.component';
 import { ViewTicketComponent } from './help/viewTicket/viewTicket.component';
 import { PeersComponent } from './peers/peers.component';
 import { ChatComponent } from './chat/chat.component';
+import { CourseListComponent } from "./../institute/course-list/course-list.component";
+import { CourseManagementComponent } from '../institute/course-list/course-management/course-management.component';
 
 const routes: Routes = [{
   path: '',
@@ -114,14 +116,29 @@ const routes: Routes = [{
    {
     path: 'settings',
     component: SettingsComponent,
-  },   {
+  }, 
+   /*INSTITUTE Components*/
+  {
+    path: 'course-list',
+    component: CourseListComponent,
+ 
+  },
+  {
+    path: 'course-management',
+    component: CourseManagementComponent,
+ 
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
   }, {
     path: '**',
     component: NotFoundComponent,
-  }],
+  },
+ 
+  
+],
 }];
 
 @NgModule({

@@ -26,6 +26,8 @@ import { FirstSuccessModule } from "./paymentrequests/FirstSuccess.module";
 import { HelpModule } from "./help/help.module";
 import { Data } from "../shared/data";
 import { PeerModule } from "./peers/peers.module";
+import { CourseListModule } from "../institute/course-list/course-list.module";
+import { CourseManagementModule } from '../institute/course-list/course-management/course-management.module';
 const PAGES_COMPONENTS = [
   PagesComponent,
 ];
@@ -46,6 +48,7 @@ const PAGES_COMPONENTS = [
     SelectCollegeModule,
     CourseModule,
     ApplicationStepsModule,
+    CourseListModule,
     SecondCancelModule,
     SecondFailureModule,
     ThirdCancelModule,
@@ -53,6 +56,7 @@ const PAGES_COMPONENTS = [
     PreferencesModule,
     searchCourseModule,
     FirstSuccessModule,
+    CourseManagementModule,
     HelpModule,
     PeerModule,
   ],

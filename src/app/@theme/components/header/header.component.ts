@@ -19,7 +19,8 @@ export class HeaderComponent implements OnInit {
   @Input() position = 'normal';
   user = {
     id: "",
-    email:""
+    email:"",
+    role:""
   };
   notification=[];
   notification_no: any;
@@ -33,6 +34,10 @@ export class HeaderComponent implements OnInit {
     { title: 'Profile', icon: 'fa fa-user', link: '/pages/profile' },
     { title: 'Settings', icon: 'nb-gear' , link: '/pages/settings'},
     { title: 'Logout', icon: 'ion-log-out' , link: '/auth/logout'  }];
+
+    instituteMenu = [
+      { title: 'Settings', icon: 'nb-gear' , link: '/pages/settings'},
+      { title: 'Logout', icon: 'ion-log-out' , link: '/auth/logout'  }];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,

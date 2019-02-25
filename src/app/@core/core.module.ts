@@ -1,12 +1,13 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbAuthModule, NbPasswordAuthStrategy,NbAuthJWTToken } from '@nebular/auth';
+import { NbAuthModule, NbPasswordAuthStrategy,NbAuthJWTToken, NbAuthService  } from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
-import { of as observableOf } from 'rxjs';
+import { of as observableOf , Observable} from 'rxjs';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { DataModule } from './data/data.module';
 import { AnalyticsService } from './utils/analytics.service';
+import { map } from 'rxjs/operators';
 
 const socialLinks = [
   {
@@ -26,10 +27,27 @@ const socialLinks = [
   },
 ];
 
-export class NbSimpleRoleProvider extends NbRoleProvider {
-  getRole() {
-    // here you could provide any role based on any auth flow
-    return observableOf('guest');
+// export class NbSimpleRoleProvider extends NbRoleProvider {
+//   getRole() {
+//     // here you could provide any role based on any auth flow
+//     return observableOf('guest');
+//   }
+// }
+
+@Injectable()
+export class RoleProvider implements NbRoleProvider {
+
+  constructor(private authService: NbAuthService) {
+  }
+
+  getRole(): Observable<string> {
+    return this.authService.onTokenChange()
+      .pipe(
+        map((token: NbAuthJWTToken) => {
+          console.log("token.getPayload()['role']== "+token.getPayload()['role'])
+          return token.isValid() ? token.getPayload()['role'] : 'guest';
+        }),
+      );
   }
 }
 
@@ -107,20 +125,29 @@ export const NB_CORE_PROVIDERS = [
 
   NbSecurityModule.forRoot({
     accessControl: {
-      guest: {
-        view: '*',
+      // guest: {
+      //   view: '*',
+      // },
+      student: {
+        view: ['dashboard','search','profile','application','UTILITIES','downloads','faq','help','theme',],
+        //create: '',
+        // edit: '*',
+        // remove: '*',
       },
-      user: {
-        parent: 'guest',
-        create: '*',
-        edit: '*',
-        remove: '*',
+      // admin: {
+      //   view:['dashboard','studentManagement','adminApplication','adminEligibility','adminErrata','adminView','adminForeignOffice','AdminReuploadedTranscript','admindownloads','theme','help'],
+      //   //create: '*',
+      //   // edit: '*',
+      //   // remove: '*',
+      // },
+      institute:{
+        view: ['dashboard','theme','course-list'],
       },
     },
   }).providers,
 
   {
-    provide: NbRoleProvider, useClass: NbSimpleRoleProvider,
+    provide: NbRoleProvider, useClass: RoleProvider,
   },
   AnalyticsService,
 ];

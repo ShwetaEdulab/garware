@@ -43,11 +43,10 @@ import {  NbToastrModule,
  import { ForgotPasswordComponent } from './auth/Forgot-password/forgot-password.component';
  import { resetPasswordComponent } from './auth/Reset-password/reset-password.component';
  import { ResendEmailComponent } from './auth/Forgot-password/resend-email.component';
- import { RouterExtService } from './shared/identifyUrl'
+ import { RouterExtService } from './shared/identifyUrl';
  //import {DragDropModule} from '@angular/cdk/drag-drop';
 //import { DraggableModule } from './pages/cart/draggable/draggable.module';
 
- //const config: SocketIoConfig = { url: 'http://mu.admissiondesk.org:6666', options: {} };
  const config: SocketIoConfig = { url: 'http://mu.admissiondesk.org:2', options: {} };
 @NgModule({
   declarations: [AppComponent,
@@ -58,7 +57,7 @@ import {  NbToastrModule,
     TermsComponent,
     ForgotPasswordComponent,
     resetPasswordComponent,
-    ResendEmailComponent
+    ResendEmailComponent,
     ],
   imports: [
     BrowserModule,
