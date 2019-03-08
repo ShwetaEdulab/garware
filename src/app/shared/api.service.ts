@@ -339,13 +339,13 @@ getProfileCompleteness(){
 
   }
 
-  // OnlinePaymentChallan(num,transaction_id,payment_amount,payment_status,application_id,payment_date_time,enrollment_no,user_id){
-  //   try{
-  //     return this.httpClient.post(`${this.baseUrl}/api/payment/OnlinePaymentChallan`,{payment_num : num,user_id:user_id,application_no:enrollment_no,payment_amount:payment_amount,transaction_id:transaction_id,date_time:payment_date_time,status_payment:payment_status,application_id:application_id});
-  //   }catch(error) {
-  //     this.handleError("OnlinePaymentChallan : "+error);
-  //   }
-  // } 
+  OnlinePaymentChallan(num,transaction_id,payment_amount,payment_status,application_id,payment_date_time,enrollment_no,user_id){
+    try{
+      return this.httpClient.post(`${this.baseUrl}/api/payment/OnlinePaymentChallan`,{payment_num : num,user_id:user_id,application_no:enrollment_no,payment_amount:payment_amount,transaction_id:transaction_id,date_time:payment_date_time,status_payment:payment_status,application_id:application_id});
+    }catch(error) {
+      this.handleError("OnlinePaymentChallan : "+error);
+    }
+  } 
   
   searchedCollegeDetais(id,type){
     try{

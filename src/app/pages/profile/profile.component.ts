@@ -324,16 +324,43 @@ export class ProfileComponent {
     } catch (error) {
       console.error("Error from ngOnInit => " + error);
     }
-    this.api.getProfileCompleteness()
-      .subscribe((user: any) =>{
-        console.log("user['profile_completeness']="+user['data'])
-        if (user['data'] == 100) {
-          this.show = true;
-        } else {
-          this.show = false;
-        }
+    // this.api.getProfileCompleteness()
+    //   .subscribe((user: any) =>{
+    //     console.log("user['profile_completeness']="+user['data'])
+    //     if (user['data'] == 100) {
+    //       this.show = true;
+    //     } else {
+    //       this.show = false;
+    //     }
         
-       });
+    //    });
+
+    this.api.getProfileValue('Personal')
+			.subscribe(
+        (data: any) => {
+          if(data['data']['user_data']['profile_completeness'] == '100'){
+            if(this.route.snapshot.paramMap.has("selectedIndex") || this.route.snapshot.queryParamMap.has("selectedIndex") || this.route.snapshot.queryParamMap.has("degree")){
+                this.show = false;
+              // This route comes from pages.component.ts
+              if(this.route.snapshot.paramMap.get("selectedIndex")){
+                this.stepper.selectedIndex = parseInt(this.route.snapshot.paramMap.get("selectedIndex"));
+              }
+              // This route comes from edit page when the user has errata.
+              if (this.route.snapshot.queryParamMap.get('selectedIndex') != null) {
+                this.stepper.selectedIndex = parseInt(this.route.snapshot.queryParamMap.get('selectedIndex')); //this.route.snapshot.queryParamMap.get('selectedIndex');
+              } 
+              if(this.route.snapshot.queryParamMap.get("degree") == "Master's" || this.route.snapshot.queryParamMap.get("degree") == "Post graduate diplomas"){		 
+                this.show = false;
+                this.stepper.selectedIndex = 2;
+                this.alertflagEducation = true;
+              }
+            }else{
+              this.show = true;
+            }
+          }else{
+            this.show = false;
+          }
+		  });
    
     if(this.route.snapshot.queryParamMap.get("degree") == "Master's")
     { 
@@ -914,6 +941,7 @@ export class ProfileComponent {
       this.country_birth = data['data']['country_birth'];
       this.appearance = data['data']['appearance'];
       this.degreeCheck = data['data']['degreeCheck'];
+      console.log("this.degreeCheck=======>"+this.degreeCheck);
       this.preferences = data['data']['preferences'];
       this.Photo = data['data']['photo'];
       this.Sign = data['data']['sign'];
@@ -1114,6 +1142,7 @@ export class ProfileComponent {
     var check_validation;
     var validation_messages;
     var alternate_message_show;
+    var date_message_show = false;
     this.firstForm.controls.fullNameCtrl.markAsDirty();
     this.firstForm.controls.surnameCtrl.markAsDirty();
     this.firstForm.controls.nationalityCtrl.markAsDirty();
@@ -1152,9 +1181,15 @@ export class ProfileComponent {
 			}
     }
     if (!this.firstForm.valid){
-      this.errorflag = 1;
-      this.errortext = "Please fill all mandatory fields";
-      this.timer();
+      if(date_message_show)
+				this.errortext = this.errortext;
+      else
+        this.errorflag = 1;
+				this.errortext = "Please fill all mandatory fields";
+			  this.timer();
+      // this.errorflag = 1;
+      // this.errortext = "Please fill all mandatory fields";
+      // this.timer();
     }
 
     if (this.firstForm.controls.permCountryCtrl.value === null || this.firstForm.controls.permCountryCtrl.value === '' || this.firstForm.controls.permCountryCtrl.value === undefined) {
@@ -1356,6 +1391,47 @@ export class ProfileComponent {
 		// 		}
 		// 	}
     // }
+
+    if( this.countryofbirth != 154 || this.countryofbirth != 25){
+      var passExpiryDate = new Date(this.firstForm.controls.passExpiryCtrl.value);
+      var passIssueDate = new Date(this.firstForm.controls.passIssueCtrl.value);
+      var expiryDay = passExpiryDate.getDay();
+      var expiryMonnth = passExpiryDate.getMonth();
+      var expiryYear = passExpiryDate.getFullYear();
+      var issueDay = passIssueDate.getDay();
+      var issueMonnth = passIssueDate.getMonth();
+      var issueYear = passIssueDate.getFullYear();
+      if((expiryYear - issueYear) > 10){
+        console.log("(expiryYear - issueYear) > 10");
+        this.firstForm.controls.passExpiryCtrl.markAsPending();
+        this.firstForm.controls.passExpiryCtrl.markAsTouched();
+        date_message_show = true;
+        check_validation = false;
+        this.errorflag = 1;
+        this.errortext = "Passport Issue and expiry date difference should not be greater than 10 years.";
+      }else if((expiryYear - issueYear) == 10){
+        console.log("(expiryYear - issueYear) == 10");
+        if((expiryMonnth - issueMonnth) > 0){
+          console.log("(expirymonth - issuemonth) > 0"); 
+            date_message_show = true;
+          this.firstForm.controls.passExpiryCtrl.markAsPending();
+          this.firstForm.controls.passExpiryCtrl.markAsDirty();
+          check_validation = false;
+          this.errorflag = 1;
+          this.errortext = "Passport Issue and expiry date difference should not be greater than 10 years.";
+        }else if((expiryMonnth - issueMonnth) == 0){
+          if((expiryDay - issueDay) > -1){
+            console.log("(expiryday - issueday) > -1");
+            date_message_show = true;
+            check_validation = false;
+            this.errorflag = 1;
+            this.firstForm.controls.passExpiryCtrl.markAsPending();
+            this.firstForm.controls.passExpiryCtrl.markAsDirty();
+            this.errortext = "Passport Issue and expiry date difference should not be greater than 10 years.";
+          }
+        }
+      }
+    }
 	  
 
     var profile_data = {
@@ -1450,7 +1526,7 @@ export class ProfileComponent {
     this.secondForm.controls.citizenshipCtrl.markAsDirty();
     this.secondForm.controls.guardianCountryCodeCtrl.markAsDirty();
     this.secondForm.controls.guardianMobileCtrl.markAsDirty();
-    var check_validation;
+    var check_validation = false;
     var validation_messages;
 
     var guardian_data = {
@@ -1855,6 +1931,7 @@ export class ProfileComponent {
               this.degree.degree_coll_name = data.degreeCollege;
               this.degree.degree_result_date = data.degreeResultDate;
               this.degree.degree_marks = data.degreeMarks;
+              this.buildForm5();
             }
             this.eduerrorflag = 0;
             //this.next_disable();
@@ -2214,7 +2291,7 @@ export class ProfileComponent {
 		var extension = imgArr[imgArr.length - 1].trim();
 		if ($event.files[0].size > maxFileSize) {
 			this.confirmationService.confirm({
-				message: 'Maximum file size should be 5 MB.',
+				message: 'Maximum file size should be 2 MB.',
 				header: 'Invalid File Size',
 				icon: 'pi pi-info-circle',
 				rejectVisible : false,

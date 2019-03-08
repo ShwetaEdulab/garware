@@ -82,21 +82,21 @@ export class FirstSuccessComponent  {
 
   async pdfChallan(){
     console.log('pdfChallan');
-    // var generatereceipt = await this.api.OnlinePaymentChallan(this.data.storage.transaction_id,this.data.storage.payment_amount,this.data.storage.payment_status,this.data.storage.application_id,this.data.storage.payment_date_time,this.data.storage.enrollment_no,this.data.storage.user_id);
-    // generatereceipt.subscribe(
-    //   data => {
-    //     var value = data['data'].split('/').pop();
-    //     this.api.downloadFiles(value)
-    //       .subscribe(data => {
-    //        saveAs(data, value);
-    //       });
+    var generatereceipt = await this.api.OnlinePaymentChallan('1',this.data.storage.transaction_id,this.data.storage.payment_amount,this.data.storage.payment_status,this.data.storage.application_id,this.data.storage.payment_date_time,this.data.storage.enrollment_no,this.data.storage.user_id);
+    generatereceipt.subscribe(
+      data => {
+        var value = data['data'].split('/').pop();
+        this.api.downloadFiles(value)
+          .subscribe(data => {
+           saveAs(data, value);
+          });
 
-    //       this.ngOnInit();
-    //   },
-    //   error => {
-    //       console.error("Error", error);
-    //   }
-    // ); 
+          this.ngOnInit();
+      },
+      error => {
+          console.error("Error", error);
+      }
+    ); 
   }
   redirect(){
     this.router.navigateByUrl('/pages/application');

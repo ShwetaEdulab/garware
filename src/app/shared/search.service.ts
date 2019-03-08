@@ -3,10 +3,12 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { Colleges } from './Colleges';
+import { config } from '../../../config';
 
 @Injectable()
 export class SearchService {
-    private baseUrl = 'http://mu.admissiondesk.org:5000';
+    private baseUrl = config.serverUrl;
+   // private baseUrl = 'http://93.104.211.51:5000';
   
     constructor(public http: HttpClient) {
       

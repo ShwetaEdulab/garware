@@ -28,10 +28,11 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-//import {MatIconModule} from '@angular/material/icon';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDatepickerModule, MatNativeDateModule} from '@angular/material';
 
 
 import { CourseManagementComponent } from './course-management.component';
@@ -58,7 +59,7 @@ import { CourseManagementComponent } from './course-management.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    //MatIconModule,
+    MatIconModule,
     NbActionsModule,
     MatCheckboxModule,
     NbPopoverModule,
@@ -69,6 +70,8 @@ import { CourseManagementComponent } from './course-management.component';
     NbRadioModule ,
     NbDialogModule,
     NbCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ]
 })
 export class CourseManagementModule { }

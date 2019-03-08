@@ -20,7 +20,7 @@
         <nb-card-header>Your Profile is Completed</nb-card-header>
         <nb-card-body>
           <div class="col-md-12" style="text-align: center;">
-            <img src="https://mu.admissiondesk.org/uiserver/front_assets/img/success.png" style="height:250px; width:250px;">
+            <img src="http://93.104.211.51:5000/front_assets/img/success.png" style="height:250px; width:250px;">
             <div class="col-md-12" style="text-align: center; margin-top: 30px;">
               <button class="col-md-2" nbButton hero status="primary" (click)="Edit()">Edit</button>
             </div>
@@ -819,7 +819,7 @@
                         <div *ngIf="Photo?.filename == undefined || Photo?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="passportSizePhotoCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Photo"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'1')"
                             (onUpload)="onUpload($event,this.fifthForm.controls.passportSizePhotoCtrl,'1')" 
                             (onSelect)="onSelect($event,'image');this.fifthForm.controls.passportSizePhotoCtrl.reset();"
@@ -869,7 +869,7 @@
                         <div *ngIf="Sign?.filename==undefined || Sign?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="studSignCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Sign"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'2')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.studSignCtrl,'2')"
                             (onSelect)="onSelect($event,'image');this.fifthForm.controls.studSignCtrl.reset();"
@@ -919,7 +919,7 @@
                         <div *ngIf="Passport?.filename==undefined || Passport?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl formControlName="studPassportCtrl" [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
                             mode="basic" auto="true" chooseLabel="Browse" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Passport"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'3')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.studPassportCtrl,'3')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.studPassportCtrl.reset();"
@@ -970,7 +970,7 @@
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl formControlName="countryIdCardCtrl" [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
                             mode="basic" auto="true" chooseLabel="Browse" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Country Id Card"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'4')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.countryIdCardCtrl,'4')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.countryIdCardCtrl.reset();"
@@ -1022,7 +1022,7 @@
                         <div *ngIf="AdmitCard?.filename==undefined || AdmitCard?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="admitCardCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Admit Card"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'5')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.admitCardCtrl,'5')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.admitCardCtrl.reset();"
@@ -1073,7 +1073,7 @@
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="gradeXmarkCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=SSC Certificate"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'26')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.gradeXmarkCtrl,'26')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.gradeXmarkCtrl.reset();"
@@ -1125,7 +1125,7 @@
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="gradeXIImarkCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=HSC Certificate"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'6')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.gradeXIImarkCtrl,'6')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.gradeXIImarkCtrl.reset();"
@@ -1175,7 +1175,7 @@
                         <div *ngIf="SchoolPassingCertificate?.filename==undefined || SchoolPassingCertificate?.lock_transcript == false"
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload name="file" mode="basic" auto="true" [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=School Passing Certificate"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'7')" 
                             (onUpload)="onUpload($event,'','7')"
                             (onError)="onErrorFileUpload($event,'7')"
@@ -1224,7 +1224,7 @@
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="birthCertificateCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Birth Certificate"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'8')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.birthCertificateCtrl,'8')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.birthCertificateCtrl.reset();"
@@ -1274,7 +1274,7 @@
                         <div *ngIf="MigrationCertificate?.filename==undefined || MigrationCertificate?.lock_transcript == false"
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload name="file" mode="basic" auto="true" [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Migration Certificate"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'9')" 
                             (onUpload)="onUpload($event,'','9')"
                             (onError)="onErrorFileUpload($event,'9')"
@@ -1320,7 +1320,7 @@
                         <div *ngIf="GapCertificate?.filename==undefined || GapCertificate?.lock_transcript == false"
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload name="file" mode="basic" auto="true" [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Gap Certificate"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'10')" 
                             (onUpload)="onUpload($event,'','10')"
                             (onError)="onErrorFileUpload($event,'10')"
@@ -1369,7 +1369,7 @@
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="firstYearMarksheetCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=First Year Certificate"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'11')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.firstYearMarksheetCtrl,'11')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.firstYearMarksheetCtrl.reset();"
@@ -1420,7 +1420,7 @@
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="secondYearMarksheetCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Second Year Certificate"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'12')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.secondYearMarksheetCtrl,'12')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.secondYearMarksheetCtrl.reset();"
@@ -1471,7 +1471,7 @@
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="graduationMarksheetCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Graduation Certificate"
-                            maxFileSize="5000000"
+                            maxFileSize="2000000"
                             (onBeforeSend)="onBeforeSend($event,'13')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.graduationMarksheetCtrl,'13')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.graduationMarksheetCtrl.reset();"
@@ -1522,7 +1522,7 @@
                       <div class="row">
                         <div *ngIf="Convocation?.filename==undefined || Convocation?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload name="file" mode="basic" [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" auto="true" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Convocation Certificate"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'14')" 
                             (onUpload)="onUpload($event,null,'14')"
                             (onError)="onErrorFileUpload($event,'14')"
@@ -1568,7 +1568,7 @@
                         <div *ngIf="PassingCertificate?.filename==undefined || PassingCertificate?.lock_transcript == false"
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload name="file" mode="basic" [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" auto="true" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Passing Certificate"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'15')" 
                             (onUpload)="onUpload($event,null,'15')"
                             (onError)="onErrorFileUpload($event,'15')"
@@ -1614,7 +1614,7 @@
                           <div *ngIf="Pio?.filename==undefined || Pio?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
                             <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                               chooseLabel="Browse" formControlName="pioCardCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=PIO"
-                              maxFileSize="5000000" 
+                              maxFileSize="2000000" 
                               (onBeforeSend)="onBeforeSend($event,'16')" 
                               (onUpload)="onUpload($event,this.fifthForm.controls.pioCardCtrl,'16');"
                               (onSelect)="onSelect($event);this.fifthForm.controls.pioCardCtrl.reset();"
@@ -1664,7 +1664,7 @@
                           <div *ngIf="Oci?.filename==undefined || Oci?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
                             <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                               chooseLabel="Browse" formControlName="ociCardCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=OCI"
-                              maxFileSize="5000000" 
+                              maxFileSize="2000000" 
                               (onBeforeSend)="onBeforeSend($event,'17')" 
                               (onUpload)="onUpload($event,this.fifthForm.controls.ociCardCtrl,'17');"
                               (onSelect)="onSelect($event);this.fifthForm.controls.ociCardCtrl.reset();"
@@ -1717,7 +1717,7 @@
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="passport_of_sponsor_parentCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Passport of Sponser Parent"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'18')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.passport_of_sponsor_parentCtrl,'18');"
                             (onSelect)="onSelect($event);this.fifthForm.controls.passport_of_sponsor_parentCtrl.reset();"
@@ -1768,7 +1768,7 @@
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="resident_permitCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Visa of Sponser Parent"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'19')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.resident_permitCtrl,'19');"
                             (onSelect)="onSelect($event);this.fifthForm.controls.resident_permitCtrl.reset();"
@@ -1819,7 +1819,7 @@
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="NRI_certificate_sponsor_parentCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=NRI Certificate of Sponser"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'20')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.NRI_certificate_sponsor_parentCtrl,'20');"
                             (onSelect)="onSelect($event);this.fifthForm.controls.NRI_certificate_sponsor_parentCtrl.reset();"
@@ -1870,7 +1870,7 @@
                         <div *ngIf="WorkPermit?.filename==undefined || WorkPermit?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="work_permit_sponsor_parentCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Work Permit"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'21')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.work_permit_sponsor_parentCtrl,'21')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.work_permit_sponsor_parentCtrl.reset();"
@@ -1921,7 +1921,7 @@
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="employment_letter_sponsor_parentCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Employment Letter"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'22')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.employment_letter_sponsor_parentCtrl,'22')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.employment_letter_sponsor_parentCtrl.reset();"
@@ -1972,7 +1972,7 @@
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="residence_proof_sponsor_parentCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Residence Proof"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'23')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.residence_proof_sponsor_parentCtrl,'23')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.residence_proof_sponsor_parentCtrl.reset();"
@@ -2026,7 +2026,7 @@
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="six_month_bank_state_sponsor_parentCtrl" name="file"
                             url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Bank Statement"
-                            maxFileSize="5000000" 
+                            maxFileSize="2000000" 
                             (onBeforeSend)="onBeforeSend($event,'24')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.six_month_bank_state_sponsor_parentCtrl,'24')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.six_month_bank_state_sponsor_parentCtrl.reset();"
@@ -2076,7 +2076,7 @@
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" formControlName="sponsership_letter_from_sponsor_parentCtrl"
                             mode="basic" auto="true" chooseLabel="Browse" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Sponsership Letter"
-                            maxFileSize="5000000"
+                            maxFileSize="2000000"
                             (onBeforeSend)="onBeforeSend($event,'25')" 
                             (onUpload)="onUpload($event,this.fifthForm.controls.sponsership_letter_from_sponsor_parentCtrl,'25')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.sponsership_letter_from_sponsor_parentCtrl.reset();"
