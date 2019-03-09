@@ -122,8 +122,9 @@ constructor(protected ref: NbDialogRef<Secondpaymentdialog>,
     var secondpayment = await this.api.secondpaymentrequest(this.applicationId,this.courseID);
     secondpayment.subscribe(
         data => {
-          console.log('response url==>'+data['data']);
-          window.location.assign(data['data']);
+          //console.log('response url==>'+data['data']);
+          //window.location.assign(data['data']);
+          this.ref.close();
         },
         error => {
             console.log("Error", error);

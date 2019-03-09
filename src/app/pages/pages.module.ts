@@ -28,6 +28,17 @@ import { Data } from "../shared/data";
 import { PeerModule } from "./peers/peers.module";
 import { CourseListModule } from "../institute/course-list/course-list.module";
 import { CourseManagementModule } from '../institute/course-list/course-management/course-management.module';
+
+//Admin
+import { AdminApplicationModule } from "../admin/application/application.module";
+import { AdminEligibilityModule } from "../admin/eligibility/eligibility.module";
+import { AdminViewModule } from '../admin/view/view.module';
+import { AdminErrataModule } from '../admin/errata/errata.module';
+import { AdminForeignOfficeModule } from '../admin/foreign_office/foreignoffice.module';
+import { AdminReuploadedTranscriptModule } from '../admin/re_Uploaded_Transcript/re_Uploaded_Transcript.module';
+
+
+
 const PAGES_COMPONENTS = [
   PagesComponent,
 ];
@@ -59,6 +70,13 @@ const PAGES_COMPONENTS = [
     CourseManagementModule,
     HelpModule,
     PeerModule,
+    /*########### Admin Modules ############*/
+    AdminApplicationModule,
+    AdminEligibilityModule,
+    AdminViewModule,
+    AdminErrataModule,
+    AdminForeignOfficeModule,
+    AdminReuploadedTranscriptModule,
   ],
   providers: [Data],
   declarations: [

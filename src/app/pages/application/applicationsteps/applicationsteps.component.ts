@@ -12,6 +12,9 @@ import { Secondpaymentdialog } from './dialog/Secondpaymentdialog';
 import { Thirdpaymentdialog } from './dialog/Thirdpaymentdialog';
 import { uploadreceiptdialog } from './dialog/uploadreceiptdialog';
 import { uploadthirdreceiptdialog } from './dialog/uploadthirdreceiptdialog';
+import { config } from '../../../../../config';
+
+
 @Component({
   selector: 'applicationsteps',
   styleUrls: ['./applicationsteps.component.scss'],
@@ -19,6 +22,7 @@ import { uploadthirdreceiptdialog } from './dialog/uploadthirdreceiptdialog';
 })
 export class ApplicationStepsComponent implements OnInit {
   @ViewChild('stepper') stepper: NbStepperComponent;
+  serverUrl = config.serverUrl;
   applicationId;
   id : any;
   courseID;
@@ -450,12 +454,26 @@ export class ApplicationStepsComponent implements OnInit {
             this.visaForm.get('passDocument').disable();
             this.visadetails = data['data']['visa_details'];
             this.visacountry = ""+data['data']['visa_details']['place_issue'];
-            this.visaissuedate1 = ""+data['data']['visa_details']['issue_date'];
-            this.visaissuedatedetails = this.visaissuedate1.split("/");
-            this.visaissuedate = this.visaissuedatedetails[2] +'-'+ this.visaissuedatedetails[1] +'-'+ this.visaissuedatedetails[0];
-            this.visaexpirydate1 = ""+data['data']['visa_details']['expiry_date'];
-            this.visaexpirydatedetails = this.visaexpirydate1.split("/");
-            this.visaexpirydate = this.visaexpirydatedetails[2] +'-'+ this.visaexpirydatedetails[1] +'-'+ this.visaexpirydatedetails[0];
+            if(data['data']['visa_details']['issue_date'] == null || data['data']['visa_details']['issue_date']==undefined||data['data']['visa_details']['issue_date']==''){
+              this.visaissuedate = null
+            }else{
+              this.visaissuedate1 = ""+data['data']['visa_details']['issue_date'];
+              this.visaissuedatedetails = this.visaissuedate1.split("/");
+              this.visaissuedate = this.visaissuedatedetails[2] +'-'+ this.visaissuedatedetails[1] +'-'+ this.visaissuedatedetails[0];
+            }
+            if(data['data']['visa_details']['expiry_date'] == null || data['data']['visa_details']['expiry_date']==undefined||data['data']['visa_details']['expiry_date']==''){
+              this.visaexpirydate = null
+            }else{
+              this.visaexpirydate1 = ""+data['data']['visa_details']['expiry_date'];
+              this.visaexpirydatedetails = this.visaexpirydate1.split("/");
+              this.visaexpirydate = this.visaexpirydatedetails[2] +'-'+ this.visaexpirydatedetails[1] +'-'+ this.visaexpirydatedetails[0];
+            }
+            // this.visaissuedate1 = ""+data['data']['visa_details']['issue_date'];
+            // this.visaissuedatedetails = this.visaissuedate1.split("/");
+            // this.visaissuedate = this.visaissuedatedetails[2] +'-'+ this.visaissuedatedetails[1] +'-'+ this.visaissuedatedetails[0];
+            // this.visaexpirydate1 = ""+data['data']['visa_details']['expiry_date'];
+            // this.visaexpirydatedetails = this.visaexpirydate1.split("/");
+            // this.visaexpirydate = this.visaexpirydatedetails[2] +'-'+ this.visaexpirydatedetails[1] +'-'+ this.visaexpirydatedetails[0];
           }
         }
 
@@ -562,14 +580,18 @@ export class ApplicationStepsComponent implements OnInit {
           this.MedicalUploadForm.controls.medicalDocument.patchValue({file: data['data']['medical_image_name']});
         }
         this.medicaldetails = data['data']['medical_details'];
-        if(this.medicaldetails != null){
-          this.medicalissuedate1 = ""+data['data']['medical_details']['medical_issue'];
-          if(this.medicalissuedate1 != "null"){
-            this.medicalissuedatedetails = this.medicalissuedate1.split("/");
-            this.MedicalIssueDate = this.medicalissuedatedetails[2] +'-'+ this.medicalissuedatedetails[1] +'-'+ this.medicalissuedatedetails[0];
-          }
-          if(this.doctorcountry != null){
-            this.doctorcountry = ""+data['data']['medical_details']['doctor_country'];
+        if(data['data']['medical_details']['medical_issue'] == null || data['data']['medical_details']['medical_issue'] == undefined || data['data']['medical_details']['medical_issue'] ==''){
+          this.MedicalIssueDate = null
+        }else{
+          if(this.medicaldetails != null){
+            this.medicalissuedate1 = ""+data['data']['medical_details']['medical_issue'];
+            if(this.medicalissuedate1 != "null"){
+              this.medicalissuedatedetails = this.medicalissuedate1.split("/");
+              this.MedicalIssueDate = this.medicalissuedatedetails[2] +'-'+ this.medicalissuedatedetails[1] +'-'+ this.medicalissuedatedetails[0];
+            }
+            if(this.doctorcountry != null){
+              this.doctorcountry = ""+data['data']['medical_details']['doctor_country'];
+            }
           }
         }
         
@@ -810,14 +832,29 @@ export class ApplicationStepsComponent implements OnInit {
       context: {
        title: 'This is a title passed to the dialog component',
       },
-   });
+   }).onClose
+   .subscribe(
+     (data: any) => {
+      this.ApplicationFormStep();
+      //  if (data !== undefined) {
+      //    this.buildForm5();
+      //  }
+       err => console.error(err)
+     })
   }
+
   onlinethirdpayment(){
     this.dialogService.open(Thirdpaymentdialog, {
       context: {
        title: this.thirdpaymentdetails.college_third_payment,
       },
-   });
+   }).onClose
+   .subscribe(
+     (data: any) => {
+      this.ThirdPaymentStep();
+      this.FirmLetterStep();
+       err => console.error(err)
+     });
   }
   
   async online_receipt(transaction_id,user_id,pay_num){
@@ -829,8 +866,6 @@ export class ApplicationStepsComponent implements OnInit {
           .subscribe(data => {
            saveAs(data, value);
           });
-
-          this.ngOnInit();
       },
       error => {
           console.error("Error", error);

@@ -27,7 +27,7 @@ template: `
   </nb-card-header>
   <form [formGroup]="ThirdUploadForm">
     <nb-card-body>
-      <p-fileUpload name="file" url="http://mu.admissiondesk.org:5000/api/myApplication/upload?userid={{userId}}&third_payment=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,t.ThirdDocument)" (onSelect)="mySelect($event);this.ThirdUploadForm.controls.ThirdDocument.reset();" accept="application/pdf,image/*" maxFileSize="1000000" formControlName="ThirdDocument" class="form-control" [ngClass]="{ 'is-invalid': thirdsubmitted && t.ThirdDocument.errors }" ngDefaultControl>
+      <p-fileUpload name="file" url="http://93.104.211.51:5000/api/myApplication/upload?userid={{userId}}&third_payment=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,t.ThirdDocument)" (onSelect)="mySelect($event);this.ThirdUploadForm.controls.ThirdDocument.reset();" accept="application/pdf,image/*" maxFileSize="1000000" formControlName="ThirdDocument" class="form-control" [ngClass]="{ 'is-invalid': thirdsubmitted && t.ThirdDocument.errors }" ngDefaultControl>
         <ng-template pTemplate="content">
           <ul *ngIf="uploadedFiles.length">
             <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>

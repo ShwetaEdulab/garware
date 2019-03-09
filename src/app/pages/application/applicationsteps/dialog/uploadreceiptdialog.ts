@@ -29,7 +29,7 @@ template: `
   </nb-card-header>
   <form [formGroup]="SecondUploadForm">
     <nb-card-body>
-      <p-fileUpload name="file" url="http://mu.admissiondesk.org:5000/api/myApplication/upload?userid={{userId}}&second_payment=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,s.SecondDocument)" (onSelect)="mySelect($event);this.SecondUploadForm.controls.SecondDocument.reset();" accept="application/pdf,image/*" maxFileSize="1000000" formControlName="SecondDocument" class="form-control" [ngClass]="{ 'is-invalid': secondsubmitted && s.SecondDocument.errors }" ngDefaultControl>
+      <p-fileUpload name="file" url="http://93.104.211.51:5000/api/myApplication/upload?userid={{userId}}&second_payment=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,s.SecondDocument)" (onSelect)="mySelect($event);this.SecondUploadForm.controls.SecondDocument.reset();" accept="application/pdf,image/*" maxFileSize="1000000" formControlName="SecondDocument" class="form-control" [ngClass]="{ 'is-invalid': secondsubmitted && s.SecondDocument.errors }" ngDefaultControl>
         <ng-template pTemplate="content">
           <ul *ngIf="uploadedFiles.length">
             <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>

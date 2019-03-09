@@ -31,52 +31,34 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   
   /**Admin Menus*/
-  // {
-  //   title: 'Student Management',
-  //   icon: 'fas fa-user-graduate',
-  //   link: '/pages/studentManagement',
-  //   data: {
-  //     permission: 'view',
-  //     resource: 'studentManagement'
-  //   },
-  // },
-  // {
-  //   title: 'Admin Application',
-  //   icon: 'ion-filing',
-  //   link: '/pages/adminApplication',
-  //   data: {
-  //     permission: 'view',
-  //     resource: 'adminApplication'
-  //   },
-  // },
+  {
+    title: 'Admin Application',
+    icon: 'ion-filing',
+    link: '/pages/adminApplication',
+    data: {
+      permission: 'view',
+      resource: 'adminApplication'
+    },
+  },
 
-  // {
-  //   title: 'Eligiblity',
-  //   icon: 'ion-clipboard',
-  //   link: '/pages/adminEligibility',
-  //   data: {
-  //     permission: 'view',
-  //     resource: 'adminEligibility'
-  //   },
-  // },
-  // {
-  //   title: 'Foreign Office',
-  //   icon: 'ion-planet',
-  //   link: '/pages/adminForeignOffice',
-  //   data: {
-  //     permission: 'view',
-  //     resource: 'adminForeignOffice'
-  //   },
-  // },
-  // {
-  //   title: 'Downloads',
-  //   icon: 'fas fa-download',
-  //   link: '/pages/AdminDownload',
-  //   data: {
-  //     permission: 'view',
-  //     resource: 'admindownloads'
-  //   },
-  // },
+  {
+    title: 'Eligiblity',
+    icon: 'ion-clipboard',
+    link: '/pages/adminEligibility',
+    data: {
+      permission: 'view',
+      resource: 'adminEligibility'
+    },
+  },
+  {
+    title: 'Foreign Office',
+    icon: 'ion-planet',
+    link: '/pages/adminForeignOffice',
+    data: {
+      permission: 'view',
+      resource: 'adminForeignOffice'
+    },
+  },
 
   {
     title: 'My Application',

@@ -34,7 +34,7 @@
                         <div class="row">
                           <div class="col-md-12">
   
-                             <p-fileUpload name="file" url="http://mu.admissiondesk.org:5000/api/myApplication/upload?userid={{userId}}&visa_document=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,this.visaForm.controls.visaDocument,'visaDocument')" (onSelect)="mySelect($event);this.visaForm.controls.visaDocument.reset();" accept="image/*" maxFileSize="1000000" formControlName="visaDocument" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.visaDocument.errors }" ngDefaultControl>
+                             <p-fileUpload name="file" url="{{serverUrl}}/api/myApplication/upload?userid={{userId}}&visa_document=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,this.visaForm.controls.visaDocument,'visaDocument')" (onSelect)="mySelect($event);this.visaForm.controls.visaDocument.reset();" accept="image/*" maxFileSize="1000000" formControlName="visaDocument" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.visaDocument.errors }" ngDefaultControl>
                               <ng-template pTemplate="content">
                                 <ul *ngIf="uploadedFiles.length">
                                   <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
@@ -130,7 +130,7 @@
                         </div>
                         <div class="row" style="margin-bottom: 100px">
                           <div class="col-md-12">
-                            <p-fileUpload name="file" url="http://mu.admissiondesk.org:5000/api/myApplication/upload?userid={{userId}}&pass_document=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,this.visaForm.controls.passDocument,'passDocument')" (onSelect)="mySelect($event);this.visaForm.controls.passDocument.reset();" accept="application/pdf,image/*" maxFileSize="1000000" formControlName="passDocument" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.passDocument.errors }" ngDefaultControl>
+                            <p-fileUpload name="file" url="{{serverUrl}}/api/myApplication/upload?userid={{userId}}&pass_document=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,this.visaForm.controls.passDocument,'passDocument')" (onSelect)="mySelect($event);this.visaForm.controls.passDocument.reset();" accept="application/pdf,image/*" maxFileSize="1000000" formControlName="passDocument" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.passDocument.errors }" ngDefaultControl>
                               <ng-template pTemplate="content">
                                 <ul *ngIf="uploadedFiles.length">
                                   <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
@@ -171,7 +171,7 @@
                         </div>
                         <div class="row" style="margin-bottom: 100px">
                           <div class="col-md-12">
-                            <p-fileUpload name="file" url="http://mu.admissiondesk.org:5000/api/myApplication/upload?userid={{userId}}&countryId_document=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,this.visaForm.controls.countryDocument,'countryDocument')" (onSelect)="mySelect($event);this.visaForm.controls.countryDocument.reset();" accept="application/pdf,image/*" maxFileSize="1000000" formControlName="countryDocument" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.countryDocument.errors }" ngDefaultControl>
+                            <p-fileUpload name="file" url="{{serverUrl}}/api/myApplication/upload?userid={{userId}}&countryId_document=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,this.visaForm.controls.countryDocument,'countryDocument')" (onSelect)="mySelect($event);this.visaForm.controls.countryDocument.reset();" accept="application/pdf,image/*" maxFileSize="1000000" formControlName="countryDocument" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.countryDocument.errors }" ngDefaultControl>
                               <ng-template pTemplate="content">
                                 <ul *ngIf="uploadedFiles.length">
                                   <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
@@ -829,7 +829,7 @@
                       <br>
                       <br>
                       <br>
-                      <div class="row">
+                      <!-- <div class="row">
                         <h4>
                           Click on below link to fill form for hallticket and other college requirements :-
                         </h4>
@@ -837,7 +837,7 @@
                       <br>
                       <div>
                         <a href="http://mum.digitaluniversity.ac/" style="text-decoration: underline">http://mum.digitaluniversity.ac/</a>
-                      </div>
+                      </div> -->
                       <div *ngIf='showfirmnext == 0' >
                       </div>
                       <div *ngIf='showfirmnext == 1' style="margin-top: 50px;">
@@ -883,7 +883,7 @@
                       </div>
                       <div class="row">
                         <div class="col-md-12">
-                          <p-fileUpload name="file" url="http://mu.admissiondesk.org:5000/api/myApplication/upload?userid={{userId}}&medical_document=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,m.medicalDocument,'medicalDocument')" (onSelect)="mySelect($event);this.MedicalUploadForm.controls.medicalDocument.reset();" accept="image/*" maxFileSize="1000000" formControlName="medicalDocument" class="form-control" [ngClass]="{ 'is-invalid': medicalsubmitted && m.medicalDocument.errors }" ngDefaultControl>
+                          <p-fileUpload name="file" url="{{serverUrl}}/api/myApplication/upload?userid={{userId}}&medical_document=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,m.medicalDocument,'medicalDocument')" (onSelect)="mySelect($event);this.MedicalUploadForm.controls.medicalDocument.reset();" accept="image/*" maxFileSize="1000000" formControlName="medicalDocument" class="form-control" [ngClass]="{ 'is-invalid': medicalsubmitted && m.medicalDocument.errors }" ngDefaultControl>
                             <ng-template pTemplate="content">
                               <ul *ngIf="uploadedFiles.length">
                                 <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
@@ -1018,7 +1018,7 @@
                       </div>
                       <div class="row">
                         <div class="col-md-12">
-                          <p-fileUpload name="file" url="http://mu.admissiondesk.org:5000/api/myApplication/upload?userid={{userId}}&resident_permit=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,r.rpDocument,'rpDocument')" (onSelect)="mySelect($event);this.RPForm.controls.rpDocument.reset();" accept="image/*" maxFileSize="1000000" formControlName="rpDocument" class="form-control" [ngClass]="{ 'is-invalid': rpsubmitted && r.rpDocument.errors }" ngDefaultControl>
+                          <p-fileUpload name="file" url="{{serverUrl}}/api/myApplication/upload?userid={{userId}}&resident_permit=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,r.rpDocument,'rpDocument')" (onSelect)="mySelect($event);this.RPForm.controls.rpDocument.reset();" accept="image/*" maxFileSize="1000000" formControlName="rpDocument" class="form-control" [ngClass]="{ 'is-invalid': rpsubmitted && r.rpDocument.errors }" ngDefaultControl>
                             <ng-template pTemplate="content">
                               <ul *ngIf="uploadedFiles.length">
                                 <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>

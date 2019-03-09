@@ -27,7 +27,14 @@ import { PeersComponent } from './peers/peers.component';
 import { ChatComponent } from './chat/chat.component';
 import { CourseListComponent } from "./../institute/course-list/course-list.component";
 import { CourseManagementComponent } from '../institute/course-list/course-management/course-management.component';
+//Admin
 
+import { AdminApplicationComponent } from '../admin/application/application.component';
+import { AdminEligibilityComponent } from '../admin/eligibility/eligibility.component';
+import { AdminViewComponent } from '../admin/view/view.component';
+import { AdminErrataComponent } from '../admin/errata/errata.component';
+import { AdminForeignOfficeComponent } from '../admin/foreign_office/foreignoffice.component';
+import { AdminReuploadedTranscriptComponent } from '../admin/re_Uploaded_Transcript/re_Uploaded_Transcript.component';
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
@@ -127,6 +134,37 @@ const routes: Routes = [{
     path: 'course-management',
     component: CourseManagementComponent,
  
+  },
+  /*Admin Components*/
+   {
+    path: 'adminApplication',
+    component: AdminApplicationComponent,
+
+  },
+  {
+    path: 'adminEligibility',
+    component: AdminEligibilityComponent,
+
+  }, 
+  {
+    path: 'adminView',
+    component: AdminViewComponent,
+
+  }, 
+  {
+    path: 'adminErrata',
+    component: AdminErrataComponent,
+
+  }, 
+  {
+    path: 'adminForeignOffice',
+    component: AdminForeignOfficeComponent,
+
+  }, 
+  {
+    path: 'AdminReuploadedTranscript',
+    component: AdminReuploadedTranscriptComponent,
+
   },
   {
     path: '',

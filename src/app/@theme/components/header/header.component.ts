@@ -39,6 +39,10 @@ export class HeaderComponent implements OnInit {
       { title: 'Settings', icon: 'nb-gear' , link: '/pages/settings'},
       { title: 'Logout', icon: 'ion-log-out' , link: '/auth/logout'  }];
 
+      adminMenu = [    
+        { title: 'Settings', icon: 'nb-gear' , link: '/pages/settings'},
+        { title: 'Logout', icon: 'ion-log-out' , link: '/auth/logout'  }];
+
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private userService: UserService,
