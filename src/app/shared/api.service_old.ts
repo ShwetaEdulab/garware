@@ -13,7 +13,6 @@ import { NbThemeService } from '@nebular/theme';
   providedIn: 'root'
 })
 export class ApiService {
-  //private baseUrl = 'http://mu.admissiondesk.org:5000';
   private baseUrl = 'http://93.104.211.51:5000';
   constructor(private httpClient : HttpClient,
     public authService : NbAuthService,

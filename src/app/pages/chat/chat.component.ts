@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { NbToastrService } from '@nebular/theme';
-import { Router  } from '@angular/router';
+import { NbToastrService, NbThemeService } from '@nebular/theme';
 import { UserService } from '../../@core/data/users.service';
 import { ApiService } from '../../shared/api.service';
 import { SupportapiService } from '../../shared/supportapi.service';
-import * as io from 'socket.io-client';
 import {Location} from '@angular/common';
 
 @Component({
@@ -14,31 +12,33 @@ import {Location} from '@angular/common';
 })
 
 export class ChatComponent  {
-    chats = [];
-    requester;
+    chats;
+    show = false;
+    show1 = false;
     participants = [];
-    chat = {id:"",fullname:"",lastOnline:"",message:""}
-    chat_id;
-    localChat;
-    user = {email:""};
+    users = [];
     flag = 0;
     messages = [];
-    owner;
-    parter;
     socket;
+    admin;
+    owner;
+    chatPartner;
+    student;
+    user = {role :"",email:""};
+    user1;
     constructor(private toastrService: NbToastrService,
-        private router: Router,
+        public themeService : NbThemeService,
         private userService: UserService,
         protected api : ApiService,
         private supportapi : SupportapiService,
         private _location: Location,
     ) { 
-        this.socket = io.connect("http://mu.admissiondesk.org:90/", {
-            reconnection: true
-        });
-        this.socket.on('connect', function () {
-           // console.log('connected to http://mu.admissiondesk.org:90/'); 
-        });
+        // this.socket = io.connect("http://mu.admissiondesk.org:90/", {
+        //     reconnection: true
+        // });
+        // this.socket.on('connect', function () {
+        //    // console.log('connected to http://mu.admissiondesk.org:90/'); 
+        // });
 
         
         
@@ -46,134 +46,115 @@ export class ChatComponent  {
     }
     
     ngOnInit(){
-        this.api.getTheme();
-        this.userService.onUserChange().subscribe((user: any) => this.user = user);
-        var response = this.supportapi.getUsers();
-        response.subscribe(
-            data =>{
-                data['users'].forEach(element => {
-                    if(element.role == "admin"){
-                        this.chat.fullname= element.fullname;
-                        var email = element.email;
-                        this.participants.push( element._id );
-                        this.parter = element._id;
-                        var chatResponse =  this.supportapi.getChats();
-                        chatResponse.subscribe(
-                            chatData => {
-                                this.localChat = chatData['conversations'];
-                                this.localChat.forEach(chatElement => {
-                                    if(chatElement['p'][1] != null){
-                                        if(chatElement['p'][1].email == this.user.email && chatElement['p'][0].email == email){   
-                                            this.chat.id = chatElement.cId;
-                                            this.chat.lastOnline =  new Date(chatElement['messages'][0]['owner'].lastOnline).toLocaleDateString() + " at " +new Date(chatElement['messages'][0]['owner'].lastOnline).toLocaleTimeString();
-                                            if(chatElement['messages'][0]['owner'].email == this.user.email)
-                                                this.chat.message = "You : ";
-                                            else
-                                            this.chat.message = chatElement['messages'][0]['owner'].fullname + " : ";
-                                            this.chat.message += chatElement['messages'][0].body;
-                                            this.chats.push(this.chat);
-                                        }
-                                    }
-                                });
-                                if(this.chats.length == 0){
-                                    this.chats.push(this.chat);
-                                }
-                            },
-                            error => {
-                                console.error("ngOnInit view all tickets : ", error);
-                            }
-                        ); 
-                    }
-                    if(element.email == this.user.email)
-                    {
-                        this.requester = element._id;
-                        this.owner = element._id;
-                        this.participants.push( element._id );
+        this.api.getTheme().subscribe((data: any) => {
+        if(data['data']){
+          this.themeService.changeTheme(data['data']);
+        }else{
+          this.themeService.changeTheme('default');
+        }
+    });
+
+    this.userService.onUserChange()
+    .subscribe((user: any) => this.user = user);
+    var response = this.supportapi.getChatUsersList();
+    response.subscribe(
+        data =>{
+            if(this.user.role == "admin" ){
+                this.users = data['users']['student'];
+                this.admin = data['users']['admin'];
+                this.student = this.users;
+                this.admin.forEach(element => {
+                    if(element.email != this.user.email){
+                        element.lastOnline = "";
+                        this.users.push(element);
                     }
                 });
+                
+            }else if(this.user.role == "student"){
+                this.users = data['users']['admin'];
+                this.admin = this.users;
+                this.student = data['users']['student'];
+                this.show1 = true;
             }
-        )
-        this.socket.on('chatMessage', data => {
-            if(data.type == 's'){
-                this.messages.push({
-                    text : data.message,
-                    sender :data.fromUser.fullname,
-                    reply : "false",
-                    date : new Date()
-                })
-            }else if(data.type == 'r'){
-                this.messages.push({
-                    text : data.message,
-                    sender :"You",
-                    reply : "true",
-                    date : new Date()
-                })
-            }
-        });
+        })
+        
     }
 
     backClicked(){
         this._location.back();
     }
 
-    viewTicket(cId){
-        this.chat_id = cId;
-        this.flag = 1;
-        if(this.chat_id){
-            this.localChat.forEach(element =>{
-                if(element.cId == this.chat_id){
-                    element['messages'].forEach(msg =>{
-                        if(msg.owner.email == this.user.email){
-                            this.owner = msg.owner._id;
-                            this.messages.push({
-                                text : msg.body,
-                                sender : "You",
-                                reply : "true",
-                                date : new Date(msg.createdAt)
-                            })
-                        }else{
-                            this.parter = msg.owner._id;
-                            this.messages.push({
-                                text : msg.body,
-                                sender : msg.owner.fullname,
-                                reply : "false",
-                                date : new Date(msg.createdAt)
-                            })
-                        }
-                    })
+    viewChats(user){
+        this.user1 = user.fullname;
+        var requester;
+        var participants = [];
+        if(this.user.role == "admin"){
+            this.admin.forEach(element => {
+                if(element.email == this.user.email){
+                    this.owner = element.id;
+                    requester = element.id;
+                    participants.push(element.id);
+                    participants.push(user.id);
                 }
-            })
-            this.messages.reverse();
-        }else{
-            var response =  this.supportapi.startConversation(this.requester, this.participants);
-            response.subscribe( data => {
-               
-                this.chat_id = data['conversation']._id;
-
+            });
+        }else if(this.user.role == "student"){
+            this.student.forEach(element => {
+                if(element.email == this.user.email){
+                    this.owner = element.id;
+                    requester = element.id;
+                    participants.push(element.id);
+                    participants.push(user.id);
+                }
             });
         }
+
+       var response = this.supportapi.getChats(requester,participants);
+        response.subscribe(data =>{
+            if(data['status'] == 200){
+                this.chats = data['chats'];
+                if( this.chats.messages !=null || this.chats.messages !='' || this.chats.messages !=undefined )
+                {
+                    this.messages =  this.chats.messages;
+                    this.messages.reverse();
+                }
+                
+                this.flag = 1;
+            }
+        });
     }
 
     sendMessage(event){
-        var response =  this.supportapi.sendMessage(this.chat_id, this.owner, event.message);
+        var response =  this.supportapi.sendMessage(this.chats.cId, this.owner, event.message);
         response.subscribe(
             data =>{
-               
-                var messageId = data['message']._id;
-                this.socket.emit('chatMessage',{
-                    conversation: this.chat_id,
-                    to: this.parter,
-                    from: this.owner,
-                    type: 's',
-                    messageId: messageId,
-                    message: event.message
-                });
                 this.toastrService.show(
                     status || 'Success',       
                     `Comment added successfully ! ! `, 
                 );
+                var message = {
+                    text : event.message,
+                    sender : "You",
+                    reply : "true",
+                    date : new Date()
+                }
+                this.messages.push(message);
             }
         )
-        
+    }
+
+    chatList(){
+        this.show = true;
+    }
+
+    searchPartner(){
+        this.users = [];
+        if(this.user.role == "admin" ){
+            this.student.forEach(single => {
+                if(single.fullname.toLowerCase() == this.chatPartner.toLowerCase()){
+                    this.users.push(single);
+                }
+            });
+        }
+        this.show1 = true;
     }
 }

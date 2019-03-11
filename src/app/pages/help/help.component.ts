@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NbDialogService } from '@nebular/theme';
-import { Router  } from '@angular/router';
+import { NbDialogService, NbThemeService } from '@nebular/theme';
+import { Router,ActivatedRoute} from '@angular/router';
 import { UserService } from '../../@core/data/users.service';
 import { ApiService } from '../../shared/api.service';
 import { SupportapiService } from '../../shared/supportapi.service';
@@ -12,45 +12,49 @@ import { NewTicketComponent } from './newTicket/newTicket.component';
 })
 
 export class HelpComponent  {
-  user = { email: '' }; 
   tickets;
   show = false;
-
+  p: number = 1;
+  user = {role :""};
+  length;
+  
   constructor(private dialogService: NbDialogService,
     private router: Router,
     private userService: UserService,
     protected api : ApiService,
-    private supportapi : SupportapiService) { }
+    private supportapi : SupportapiService,
+    public themeService : NbThemeService,
+    private route: ActivatedRoute) { }
     
   ngOnInit(){
-    this.api.getTheme();
-    this.userService.onUserChange().subscribe((user: any) => this.user = user);
-    var response =  this.supportapi.getUser(this.user.email);
-    response.subscribe(
+     this.api.getTheme().subscribe((data: any) => {
+        if(data['data']){
+          this.themeService.changeTheme(data['data']);
+        }else{
+          this.themeService.changeTheme('default');
+        }
+      });
+      this.userService.onUserChange()
+      .subscribe((user: any) => this.user = user);
+      var response =  this.supportapi.getUserTickets();
+      response.subscribe(
       data => {
-        var response =  this.supportapi.getTickets(data['user']._id);
-        response.subscribe(
-          data => {
-            if(data['data']){
-              this.show = true;
-              this.tickets = data['data']['recentTickets'];
-              this.tickets.forEach(element => {
-                element.date = new Date(element.date).toUTCString();
-              });
-            }else {
-              this.show = false;
-            }
-          },
-          error => {
-            
-            console.error("ngOnInit view all tickets : ", error);
-          }
-        );  
+        if(data['data']){
+          this.show = true;
+          this.tickets = data['data'];
+          this.length = this.tickets.length;
+        }else{
+          this.show = false;
+          this.length = 0;
+        }
       },
       error => {
-        console.error("ngOnInit get user : ", error);
+        console.error("ngOnInit getUserTickets : ", error);
       }
     );  
+    if(this.route.snapshot.queryParamMap.get('userEmail')){
+      this.createTicket();
+    }
   }
 
   viewTicket(uid){
@@ -60,9 +64,31 @@ export class HelpComponent  {
   createTicket(){
     this.dialogService.open(NewTicketComponent, {
       context: {
-        title: 'Raise Ticket',
-        userEmail : this.user.email
+        title : 'Raise Ticket',
+        userEmail : this.route.snapshot.queryParamMap.get('userEmail')
       },
+    }).onClose.subscribe( data =>{
+      this.reload_data();
+      //this.router.navigate(['pages/help']);
     });
+  }
+
+  reload_data(){
+    var response =  this.supportapi.getUserTickets();
+    response.subscribe(
+    data => {
+      if(data['data']){
+        this.show = true;
+        this.tickets = data['data'];
+        this.length = this.tickets.length;
+      }else{
+        this.show = false;
+        this.length = 0;
+      }
+    },
+    error => {
+      console.error("reload_data getUserTickets : ", error);
+    }
+  );  
   }
 }

@@ -57,7 +57,6 @@ export class ApplicationStepsComponent implements OnInit {
   MedicalIssueDate;
   document_type;
   imagevalue;
-  baseURL = "http://mu.admissiondesk.org:5000"
   secondpaymentdata;
   showonline;
   transdetails;

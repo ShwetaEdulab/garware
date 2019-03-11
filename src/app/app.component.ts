@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
 
     if(title == 'FAQ'){
       
-      window.location.href = 'http://mu.admissiondesk.org:5555/faq.html';
+      window.location.href = 'http://93.104.211.51:5000/faq.html';
     }
  
     // if ( title === 'Logout' ) {

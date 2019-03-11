@@ -69,7 +69,7 @@ export const NB_CORE_PROVIDERS = [
           requireValidToken: false,
         },
         
-        //baseEndpoint: 'http://mu.admissiondesk.org:5000/api/auth/',
+
         baseEndpoint: 'http://93.104.211.51:5000/api/auth/',
         logout: {
           redirect: {

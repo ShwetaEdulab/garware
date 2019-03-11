@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NbDialogRef, NbToastrService} from '@nebular/theme';
+import { NbDialogRef, NbToastrService, NbThemeService} from '@nebular/theme';
 import { ApiService } from '../../../shared/api.service'
 import { Router  } from '@angular/router';
-import { SupportapiService } from '../../../shared/supportapi.service'
+import { SupportapiService } from '../../../shared/supportapi.service';
+import { UserService } from '../../../@core/data/users.service';
 
 @Component({
     selector: 'nb-dialog',
@@ -13,50 +14,51 @@ import { SupportapiService } from '../../../shared/supportapi.service'
 export class NewTicketComponent implements OnInit {
     @Input() title : string;
     @Input() userEmail :string;
-    @Input() button :string;
     subject;
     content = "";
-    user;
-    type;
-    priority;
+    owner;
+    user={email:"",role:""};
+    groups; 
+    group;
   
     constructor(protected ref: NbDialogRef<NewTicketComponent>,
       private api : ApiService,
       private supportapi : SupportapiService,
       private toastrService: NbToastrService,
-      private router: Router,) { }
+      private userService: UserService,
+      public themeService : NbThemeService) { }
   
     ngOnInit() {
-      this.api.getTheme();
+       this.api.getTheme().subscribe((data: any) => {
+        if(data['data']){
+          this.themeService.changeTheme(data['data']);
+        }else{
+          this.themeService.changeTheme('default');
+        }
+      });
 
-      var response =  this.supportapi.getUser(this.userEmail);
-      response.subscribe(
-        data => {
-  
-          this.user = data;
-        },
-        error => {
-            console.error("ngOnInit get user : ", error);
+      this.userService.onUserChange()
+      .subscribe((user: any) => this.user = user);
+      var response =  this.supportapi.getGroups();
+      response.subscribe(data => {
+        this.groups = data['data'];
+        this.owner = data['owner'];
+        if(this.user.role == "student"){
+          this.groups.forEach(grp => {
+              if(grp.name == this.user.email){
+                this.group = grp.id
+              }
+          });
+        } else if(this.user.role == "admin" || this.user.role == "sub-admin"){
+            if(this.userEmail){
+              this.groups.forEach(grp => {
+                if(grp.name == this.userEmail){
+                  this.group = grp.id
+                }
+              });
+            } 
         }
-      );  
-      var response1 =  this.supportapi.getTypes();
-      response1.subscribe(
-        data => {
-          this.type = data[0]._id;
-        },
-        error => {
-            console.error("ngOnInit get type: ", error);
-        }
-      );  
-      var response2 =  this.supportapi.getPriority();
-      response2.subscribe(
-        data => {
-          this.priority= data['priorities'][0]._id;
-        },
-        error => {
-            console.error("ngOnInit get priority : ", error);
-        }
-      );  
+      })
     }
     
     dismiss() {
@@ -64,15 +66,21 @@ export class NewTicketComponent implements OnInit {
       }
   
     send(){
-      var response =  this.supportapi.createTicket(this.subject,this.content,this.user['user']._id,this.user['groups'][0],this.type,this.priority);
+      var response =  this.supportapi.createTicket(this.subject,this.content,this.group,this.owner);
       response.subscribe(
         data => {
-          this.toastrService.show(
-            status || 'Success',       
-            `Ticket Created susccessfully ! ! `, 
-          );
-         
-          this.dismiss();
+          if(data['status'] == 200){
+            this.toastrService.show(
+              status || 'Success',       
+              `Ticket Created susccessfully ! ! `, 
+            );
+            this.ref.close();
+          }else{
+            this.toastrService.show(
+              status || 'Denger',       
+              `Ticket Not Created  ! ! `, 
+            );
+          }
         },
         error => {
           console.error("createTicket : ", error);

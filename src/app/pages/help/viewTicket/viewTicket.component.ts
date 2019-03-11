@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Router,ActivatedRoute} from '@angular/router';
 import { UserService } from '../../../@core/data/users.service';
-import { NbToastrService } from '@nebular/theme';
+import { NbToastrService, NbThemeService } from '@nebular/theme';
 import {Location} from '@angular/common';
 import { SupportapiService } from '../../../shared/supportapi.service';
+import { ApiService } from '../../../shared/api.service';
 //import { CommentComponent } from '../comment/comment.component';
 
 @Component({
@@ -17,38 +18,48 @@ export class ViewTicketComponent{
     comments;
     today;
     comment="";
-    user = { email: '' };
-
+    user = {email :"",name:"",role:""};
+    ticketStatus;
+    statusFlag : boolean = true;
+    status = [{name:"New", value:0},{name:"Open", value:1},{name:"Pending", value:2},{name:"Closed", value:3}];
     constructor(private toastrService: NbToastrService,
         private router: Router,
         private route : ActivatedRoute,
         private userService: UserService,
         private supportapi : SupportapiService,
-        private _location: Location,){
+        private _location: Location,
+        private api : ApiService,
+        public themeService : NbThemeService){
 
         }
     
     ngOnInit(){
+        this.api.getTheme().subscribe((data: any) => {
+            if(data['data']){
+              this.themeService.changeTheme(data['data']);
+            }else{
+              this.themeService.changeTheme('default');
+            }
+          });
+        this.userService.onUserChange()
+        .subscribe((user: any) => this.user = user);
         this.comment="";
         var uid = this.route.snapshot.queryParamMap.get('ticket_uid');
-        this.today = new Date().toUTCString();
-        this.userService.onUserChange().subscribe((user: any) => this.user = user);
+        this.today = new Date().toUTCString();        
         var response =  this.supportapi.getSingleTicket(uid);
         response.subscribe(
             data => {
-                this.ticketData = data['ticket'];
-                this.ticketData.issue = this.ticketData.issue.replace(/<[^>]*>/g, '');
-                this.comments = this.ticketData['comments'];
-                this.comments.forEach(element => {
-                    element.comment = element.comment.replace(/<[^>]*>/g, '');
-                    element.date = new Date(element.date).toUTCString();
-                });
-              
+                this.ticketData = data['data'];   
+                this.ticketStatus = this.ticketData.status;                
+                this.comments = this.ticketData['comments'];                           
             },
             error => {
-                console.error("ngOnInit get user : ", error);
+                console.error("ngOnInit get Single Ticket : ", error);
             }
         );
+        if(this.user.role == "admin"){
+          this.statusFlag = false;
+        }
     }
 
     backClicked(){
@@ -56,7 +67,7 @@ export class ViewTicketComponent{
     }
 
     writeComment(){
-        var response =  this.supportapi.commentOnTicket(this.ticketData._id,this.ticketData.owner._id,this.comment);
+      var response =  this.supportapi.commentOnTicket(this.ticketData.ticket_id,this.comment);
         response.subscribe(
         data => {
           this.toastrService.show(
@@ -68,6 +79,19 @@ export class ViewTicketComponent{
         },
         error => {
           console.error("commentOnTicket : ", error);
+        }
+      ); 
+    }
+
+    changeStatus(event){
+      console.log(event.value);
+      var response =  this.supportapi.updateStatus(this.ticketData.ticket_id,event.value);
+        response.subscribe(
+        data => {
+          
+        },
+        error => {
+          console.error("changeStatus : ", error);
         }
       ); 
     }

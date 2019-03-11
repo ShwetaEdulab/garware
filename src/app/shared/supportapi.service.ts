@@ -6,167 +6,91 @@ import { config } from '../../../config';
   providedIn: 'root'
 })
 export class SupportapiService {
-  // private baseUrl = 'http://mu.admissiondesk.org:5000';
   private baseUrl = 'http://93.104.211.51:5000';
-  private supportBaseUrl = 'http://mu.admissiondesk.org:90';
   constructor(private httpClient : HttpClient) { }
 
-  async checkSupportUser(email,name){
+  getUserTickets(){
     try{
-      return await this.httpClient.post(`${this.baseUrl}/api/support/checkSupportUser`,{"email":email,"name" : name });
-      
-    }catch(error) {
-      this.handleError("checkSupportUser : "+error);
-    }
-
-  }
-
-  getUser(userEmail){
-    try{
-
-      let headers = new HttpHeaders();
-      headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('accesstoken', config.trudesk_key);
-      //return  this.httpClient.get(`http://localhost:8118/api/v1/tickets`,{headers : headers});
-      return  this.httpClient.get(`${this.supportBaseUrl}/api/v1/users/` + userEmail,{headers : headers});
-
-    }catch(error) {
-      this.handleError("getUser : "+error);
+      return  this.httpClient.get(`${this.baseUrl}/api/support/getUserTickets`);
+    }catch(error){
+      this.handleError("getUserTickets : "+error);
     }
   }
-  getTypes(){
-    try{
-
-      let headers = new HttpHeaders();
-      headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('accesstoken', config.trudesk_key);
-      //return  this.httpClient.get(`http://localhost:8118/api/v1/tickets`,{headers : headers});
-      return  this.httpClient.get(`${this.supportBaseUrl}/api/v1/tickets/types`,{headers : headers});
-
-    }catch(error) {
-      this.handleError("getTypes : "+error);
-    }
-  }
-
-  getPriority(){
-    try{
-
-      let headers = new HttpHeaders();
-      headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('accesstoken', config.trudesk_key);
-      //return  this.httpClient.get(`http://localhost:8118/api/v1/tickets`,{headers : headers});
-      return  this.httpClient.get(`${this.supportBaseUrl}/api/v1/tickets/priorities`,{headers : headers});
-
-    }catch(error) {
-      this.handleError("getPriority : "+error);
-    }
-  }
-
-  getTickets(user_id){
-    try{
-
-      let headers = new HttpHeaders();
-      headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('accesstoken', config.trudesk_key);
-      //return  this.httpClient.get(`http://localhost:8118/api/v1/tickets/user/`+user_id,{headers : headers});
-      return  this.httpClient.get(`${this.supportBaseUrl}/api/v1/tickets/user/`+user_id,{headers : headers});
-    }catch(error) {
-      this.handleError("getTickets : "+error);
-    }
-
-    
-  }
+ 
 
   getSingleTicket(uid){
     try{
-
-      let headers = new HttpHeaders();
-      headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('accesstoken', config.trudesk_key);
-      return  this.httpClient.get(`${this.supportBaseUrl}/api/v1/tickets/`+uid,{headers : headers});
+      return  this.httpClient.get(`${this.baseUrl}/api/support/getSingleTicket/${uid}`);
     }catch(error) {
       this.handleError("getSingleTicket : "+error);
     }   
   }
 
-
-  commentOnTicket(uid,user_id,comment){
-    try{
-      let headers = new HttpHeaders();
-      headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('accesstoken', config.trudesk_key);
-      //return  this.httpClient.get(`http://localhost:8118/api/v1/tickets`,{headers : headers});
-      return  this.httpClient.post(`${this.supportBaseUrl}/api/v1/tickets/addcomment`,{"comment":comment,"ownerId":user_id,"_id":uid},{headers : headers});
-    }catch(error) {
-      this.handleError("commentOnTicket : "+error);
-    }
-  }
-
-  //create new ticket
-  createTicket(subject,issue,user,group,type,priority){
-    try{
-
-      let headers = new HttpHeaders();
-      headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('accesstoken', config.trudesk_key);
-      //return  this.httpClient.get(`http://localhost:8118/api/v1/tickets`,{headers : headers});
-      return  this.httpClient.post(`${this.supportBaseUrl}/api/v1/tickets/create`,{"subject":subject,"owner":user,"group":group,"type":type,"issue":issue,"priority":priority},{headers : headers});
-
-    }catch(error) {
-      this.handleError("getPriority : "+error);
-    }
-  }
-
-    //chat
-    getChats(){
+    commentOnTicket(ticket_id,comment){
       try{
+        return  this.httpClient.post(`${this.baseUrl}/api/support/addcomment`,{"comment":comment,"ticket_id":ticket_id});
+      }catch(error) {
+        this.handleError("commentOnTicket : "+error);
+      }
+    }
+
+    getGroups(){
+      try{
+        return  this.httpClient.get(`${this.baseUrl}/api/support/getGroups`);
+      }catch(error) {
+        this.handleError("getSingleTicket : "+error);
+      } 
+    }
+    createTicket(subject,issue,group,owner){
+      try{
+       return  this.httpClient.post(`${this.baseUrl}/api/support/createTicket`,{"subject":subject,"issue":issue,"group":group,"owner":owner});
   
+      }catch(error) {
+        this.handleError("getPriority : "+error);
+      }
+    }
+  
+      //chat
+     getChatUsersList(){
+      try{
         let headers = new HttpHeaders();
         headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('accesstoken', config.trudesk_key);
-        return  this.httpClient.get(`${this.supportBaseUrl}/api/v1/messages`,{headers : headers});
+        //return  this.httpClient.get(`http://localhost:8118/api/v1/tickets`,{headers : headers});
+        return  this.httpClient.get(`${this.baseUrl}/api/support/getChatUsersList`,{headers : headers});
+  
+      }catch(error) {
+        this.handleError("getChatUsersList : "+error);
+      }
+     }
+
+     getChats(requester,participants){
+      try{
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('accesstoken', config.trudesk_key);
+        //return  this.httpClient.get(`http://localhost:8118/api/v1/tickets`,{headers : headers});
+        return  this.httpClient.get(`${this.baseUrl}/api/support/getChats?requester=${requester}&participants=${participants}`,{headers : headers});
+  
       }catch(error) {
         this.handleError("getChats : "+error);
-      }   
+      }
     }
-  
-    //send message
+
     sendMessage(chat_id, owner, message){
       try{
-        let headers = new HttpHeaders();
-        headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('accesstoken', config.trudesk_key);
-        return  this.httpClient.post(`${this.supportBaseUrl}/api/v1/messages/send`,{'cId':chat_id,'owner':owner,'body':message},{headers : headers});
+        return  this.httpClient.post(`${this.baseUrl}/api/support/sendMessage`,{'cId':chat_id,'owner':owner,'body':message});
       }catch(error) {
         this.handleError("sendMessage : "+error);
       }  
     }
 
-    registerUser(username, password, confirmPasswd, fullname, email){
+    updateStatus(ticket_id, status){
       try{
-        let headers = new HttpHeaders();
-        headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('accesstoken', config.trudesk_key);
-        //return  this.httpClient.get(`http://localhost:8118/api/v1/users/create`,{"aUsername":username,"aPass":password,"aPassConfirm":confirmPasswd,"aFullname":fullname,"aEmail":email,"aRole":"user"},{headers : headers});
-        return  this.httpClient.post(`${this.supportBaseUrl}/api/v1/users/create`,{"aUsername":username,"aPass":password,"aPassConfirm":confirmPasswd,"aFullname":fullname,"aEmail":email,"aRole":"user","aGrps":[]},{headers : headers});
+        return  this.httpClient.put(`${this.baseUrl}/api/support/updateStatus`,{'ticket_id':ticket_id,'status':status});
       }catch(error) {
-        this.handleError("registerUser : "+error);
-      }
-    }
-  
-    getUsers(){
-      try{
-  
-        let headers = new HttpHeaders();
-        headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('accesstoken', config.trudesk_key);
-        //return  this.httpClient.get(`http://localhost:8118/api/v1/tickets`,{headers : headers});
-        return  this.httpClient.get(`${this.supportBaseUrl}/api/v1/users`,{headers : headers});
-  
-      }catch(error) {
-        this.handleError("getUsers : "+error);
-      }
+        this.handleError("updateStatus : "+error);
+      }  
     }
 
-        //start new conversation
-        startConversation(requester, participants){
-          try{
-            let headers = new HttpHeaders();
-            headers = headers.set('Content-Type', 'application/json; charset=utf-8').set('accesstoken', config.trudesk_key);
-            return  this.httpClient.post(`${this.supportBaseUrl}/api/v1/messages/conversation/start`,{'requester':requester,'participants':participants},{headers : headers});
-          }catch(error) {
-            this.handleError("startConversation : "+error);
-          }
-        }
 
   private handleError(error){
     console.error(error);

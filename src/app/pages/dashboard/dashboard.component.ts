@@ -55,51 +55,114 @@ export class DashboardComponent {
   
     this.userService.onUserChange()
       .subscribe((user: any) => this.user = user);
-     var cart = await this.api.getCartValue();
-    this.cartValue = cart['data']['course'];
-    if(this.cartValue.length > 0){
-      this.cartCheck = true;  
-      setInterval(() => {
-        this.setOrientation();
-        this.stepper.selectedIndex = 0;
-      },1000);
-    }else{
-      this.cartCheck = false;
-    }
-    var applications = await  this.api.getApplicationLength();
-    applications.subscribe(data =>{
-      this.application = data['data'];
-      this.length = data['length'];
-      if(this.length == 1){
-        this.ucaFlag = true;
-        this.setOrientation();
-        this.applicationID = this.application.id;
-        this.courseID = this.application.course_id;
-        if(this.application.provisional_letter_exists == true){
-          this.stepper.selectedIndex = 2;
-        }
-        if(this.application.visa_document_exists == true){
-          this.stepper.selectedIndex = 3;
-        }
-        if(this.application.collegeName){
-          this.stepper.selectedIndex = 4;
-        }
-        if(this.application.final_letter_exists == true){
-          this.stepper.selectedIndex = 5;
-        }
-      }else if(this.length > 1 ){
-        this.ucaFlag = true;
-        this.setOrientation();
-        this.applicationData = data['data'];
-        this.stepper.selectedIndex = 1;
-        this.applicationData.forEach(element => {
-          if(element.status == "accept"){
-            this.status = true;
-          }
-        });
-      }
 
-    }); 
+      var cart = await this.api.getCartValue();
+        this.cartValue = cart['data']['course'];
+        if(this.cartValue.length > 0){
+          this.cartCheck = true;  
+          setTimeout(() => {
+            this.setOrientation();
+            this.stepper.selectedIndex = 0;
+          },1000);
+        }else{
+          this.cartCheck = false;
+        }
+        var applications = await  this.api.getApplicationLength();
+        applications.subscribe(data =>{
+          this.application = data['data'];
+          this.length = data['length'];
+          if(this.length == 1){
+            this.ucaFlag = true;
+        
+          this.applicationID = this.application.id;
+          this.courseID = this.application.course_id;
+          if(this.application.provisional_letter_exists == true){
+            setTimeout(() => {
+              this.setOrientation();
+              this.stepper.selectedIndex = 2;
+            },1000);
+          }
+          if(this.application.visa_document_exists == true){
+            setTimeout(() => {
+              this.setOrientation();
+              this.stepper.selectedIndex = 3;
+            },1000);
+          }
+          if(this.application.collegeName){
+            setTimeout(() => {
+              this.setOrientation();
+              this.stepper.selectedIndex = 4;
+            },1000);
+          }
+          if(this.application.final_letter_exists == true){
+            setTimeout(() => {
+              this.setOrientation();
+              this.stepper.selectedIndex = 5;
+            },1000);
+          }
+          }else if(this.length > 1 ){
+          this.ucaFlag = true;
+          
+          this.applicationData = data['data'];
+          setTimeout(() => {
+            this.setOrientation();
+            this.stepper.selectedIndex = 1;
+          },1000);
+          this.applicationData.forEach(element => {
+            if(element.status == "accept"){
+              this.status = true;
+            }
+          });
+          }
+
+        }); 
+
+
+    //  var cart = await this.api.getCartValue();
+    // this.cartValue = cart['data']['course'];
+    // if(this.cartValue.length > 0){
+    //   this.cartCheck = true;  
+    //   setInterval(() => {
+    //     this.setOrientation();
+    //     this.stepper.selectedIndex = 0;
+    //   },1000);
+    // }else{
+    //   this.cartCheck = false;
+    // }
+    // var applications = await  this.api.getApplicationLength();
+    // applications.subscribe(data =>{
+    //   this.application = data['data'];
+    //   this.length = data['length'];
+    //   if(this.length == 1){
+    //     this.ucaFlag = true;
+    //     this.setOrientation();
+    //     this.applicationID = this.application.id;
+    //     this.courseID = this.application.course_id;
+    //     if(this.application.provisional_letter_exists == true){
+    //       this.stepper.selectedIndex = 2;
+    //     }
+    //     if(this.application.visa_document_exists == true){
+    //       this.stepper.selectedIndex = 3;
+    //     }
+    //     if(this.application.collegeName){
+    //       this.stepper.selectedIndex = 4;
+    //     }
+    //     if(this.application.final_letter_exists == true){
+    //       this.stepper.selectedIndex = 5;
+    //     }
+    //   }else if(this.length > 1 ){
+    //     this.ucaFlag = true;
+    //     this.setOrientation();
+    //     this.applicationData = data['data'];
+    //     this.stepper.selectedIndex = 1;
+    //     this.applicationData.forEach(element => {
+    //       if(element.status == "accept"){
+    //         this.status = true;
+    //       }
+    //     });
+    //   }
+
+    // }); 
   } 
 
 
