@@ -4,11 +4,13 @@ import { ApiService } from '../../shared/api.service';
 import { NbSearchService } from '@nebular/theme';
 import { NbDialogService } from '@nebular/theme';
 import {PeerComponent } from './peer.component';
+import { HeaderComponent } from '../../@theme/components/header/header.component';
 
 @Component({
     selector: 'college',
     templateUrl: './collegeinfo.component.html',
     styleUrls: ['./collegeinfo.scss'],
+    providers:[HeaderComponent],
   })
   export class CollegeinfoComponent {
     constructor(private router : Router,
@@ -16,6 +18,7 @@ import {PeerComponent } from './peer.component';
       private api : ApiService,
       private searchService : NbSearchService,
       private dialogService: NbDialogService,
+      private comp: HeaderComponent,
     ) {
     }
     courseid ;

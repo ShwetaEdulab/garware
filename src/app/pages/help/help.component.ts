@@ -5,10 +5,12 @@ import { UserService } from '../../@core/data/users.service';
 import { ApiService } from '../../shared/api.service';
 import { SupportapiService } from '../../shared/supportapi.service';
 import { NewTicketComponent } from './newTicket/newTicket.component';
+import { HeaderComponent } from '../../@theme/components/header/header.component';
 @Component({
     selector: 'help',
     styleUrls: ['./help.component.scss'],
     templateUrl: './help.component.html',
+    providers:[HeaderComponent],
 })
 
 export class HelpComponent  {
@@ -24,7 +26,8 @@ export class HelpComponent  {
     protected api : ApiService,
     private supportapi : SupportapiService,
     public themeService : NbThemeService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private comp: HeaderComponent,) { }
     
   ngOnInit(){
      this.api.getTheme().subscribe((data: any) => {

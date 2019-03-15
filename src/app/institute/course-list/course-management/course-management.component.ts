@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ElementRef, ComponentFactoryResolver, ViewChild, ComponentRef, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormControl, FormBuilder,
   FormGroup,
   Validators, } from '@angular/forms';
@@ -16,7 +16,6 @@ import { curriculumComponent } from '../dialog/curriculumcomponent';
   styleUrls: ['./course-management.component.scss']
 })
 export class CourseManagementComponent implements OnInit {
-  //@ViewChild("divMessages", {read: ElementRef}) private divMessages: ElementRef;
   @ViewChild('viewContainerRef', { read: ViewContainerRef }) VCR: ViewContainerRef;
   index: number = 0;
   componentsReferences = [];
@@ -38,6 +37,7 @@ export class CourseManagementComponent implements OnInit {
   };
   facultyValues = [];
   tab_type;
+  courseCheck = true;
   saveData = false;
   public filterText: string;
   public filterPlaceholder: string;
@@ -59,15 +59,12 @@ export class CourseManagementComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //console.log("serverUrl========"+this.serverUrl)
     this.userService.onUserChange()
     .subscribe(
       (user: any) => {
         this.collegeId = user['collegeId'];
-        console.log("this.collegeId=======>"+this.collegeId);
     });
     this.courseID = this.route.snapshot.queryParamMap.get('courseId');
-    console.log("this.courseID=========>"+this.courseID);
     this.courseOverview();
 
   }
@@ -84,6 +81,7 @@ export class CourseManagementComponent implements OnInit {
       NRIseatsCtrl : [''],
       PIOseatsCtrl : [''],
       OCIseatsCtrl : [''],
+      TotalseatsCtrl : [''],
       courseFeeCtrl : [''],
       bankNameCtrl : [''],
       branchNameCtrl : [''],
@@ -98,9 +96,12 @@ export class CourseManagementComponent implements OnInit {
     });
 
     this.instituteApi.courseList(this.courseID).subscribe(data=>{
+      //courseCheck
+      if(data['data']['courseId'] != ''){
+        this.courseCheck = false;
+      }
       this.degreeNameValues = data['data']['degrees'];
       this.courseOverviewValues = data['data']['course_overview'];
-      console.log("this.courseOverviewValues============>"+JSON.stringify(this.courseOverviewValues));
       var duration_from1 = data['data']['course_overview']['duration_from'];
       var duration_to1 = data['data']['course_overview']['duration_to'];
       this.course_from = duration_from1 ? new Date(data['data']['course_overview']['duration_from']) : null;
@@ -111,16 +112,11 @@ export class CourseManagementComponent implements OnInit {
       this.intake_to = intake_to1 ? new Date(data['data']['course_overview']['intake_to']) : null;
       this.degreeName = data['data']['course_overview']['degree'];
       this.facultyValues = data['data']['faculties'];
-      //console.log("this.facultyValues======>"+this.facultyValues);
-      //console.log("this.facultyValues======>"+this.facultyValues.length);
-
       this.curriculumValues = data['data']['academics_fees'];
-      console.log("this.curriculumValues============>"+JSON.stringify(this.curriculumValues));
     })
   }
 
   saveCourseOverview(){
-    console.log("this.courseOverviewForm.valid========>"+this.courseOverviewForm.valid);
     this.courseOverviewForm.controls.courseNameCtrl.markAsDirty();
     this.courseOverviewForm.controls.courseSpecializationCtrl.markAsDirty();
     this.courseOverviewForm.controls.fromDateCtrl.markAsDirty();
@@ -130,7 +126,6 @@ export class CourseManagementComponent implements OnInit {
     this.courseOverviewForm.controls.femalepopulationCtrl.markAsDirty();
     this.courseOverviewForm.controls.malepopulationCtrl.markAsDirty();
     if(this.courseOverviewForm.valid){
-      console.log("this.courseOverviewForm.valid========>true*****");
       var overview_data = {
         DegreeName : this.courseOverviewForm.controls.degreeNameCtrl.value,
         CourseName : this.courseOverviewForm.controls.courseNameCtrl.value,
@@ -142,6 +137,7 @@ export class CourseManagementComponent implements OnInit {
         NRIseats : this.courseOverviewForm.controls.NRIseatsCtrl.value,
         PIOseats : this.courseOverviewForm.controls.PIOseatsCtrl.value,
         OCIseats : this.courseOverviewForm.controls.OCIseatsCtrl.value,
+        totalseats : this.courseOverviewForm.controls.TotalseatsCtrl.value,
         CourseFee : this.courseOverviewForm.controls.courseFeeCtrl.value,
         BankName : this.courseOverviewForm.controls.bankNameCtrl.value,
         BranchName : this.courseOverviewForm.controls.branchNameCtrl.value,
@@ -158,9 +154,6 @@ export class CourseManagementComponent implements OnInit {
       .subscribe(
         (data: any) => {
           if(data['status']== 200){
-            console.log("Course Details save successfully");
-            //console.log("data['data']======>"+data['data']);
-            //console.log("data['data']['courseId']======>"+data['data']['courseId']);
             this.courseID = data['data']['courseId'];
             this.saveData = true;
           }
@@ -168,7 +161,6 @@ export class CourseManagementComponent implements OnInit {
         });
    
     }else{
-      console.log("this.courseOverviewForm.valid========>false*****");
     }
   }
 
@@ -183,9 +175,6 @@ export class CourseManagementComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.courseOverview();
-          // if (data !== undefined) {
-          //   this.buildForm5();
-          // }
           // err => console.error(err)
         })
   }
@@ -195,7 +184,6 @@ export class CourseManagementComponent implements OnInit {
       .subscribe(
         (data: any) => {
           if(data['status']== 200){
-            console.log("data['data']======>"+data['data']);
             this.refreshFaculty();
           }
           err => console.error(err)
@@ -205,7 +193,6 @@ export class CourseManagementComponent implements OnInit {
   refreshFaculty(){
     this.instituteApi.courseList(this.courseID).subscribe(data=>{
       this.facultyValues = data['data']['faculties'];
-      console.log("this.facultyValues==== refreshFaculty =======>"+JSON.stringify(this.facultyValues));
     })
 
   }
@@ -216,7 +203,6 @@ export class CourseManagementComponent implements OnInit {
   
   //Course Curriculum
   addCurriculum(id){
-    console.log("id===========>"+id);
     this.dialogService.open(curriculumComponent, {
       context: {
         courseID: this.courseID,
@@ -232,12 +218,10 @@ export class CourseManagementComponent implements OnInit {
   refreshCurriculum(){
     this.instituteApi.courseList(this.courseID).subscribe(data=>{
       this.curriculumValues = data['data']['academics_fees'];
-      console.log("this.curriculumValues==== refreshCurriculum =======>"+JSON.stringify(this.curriculumValues));
     })
   }
 
   deleteCurriculum(id){
-    console.log("id=======>"+id);
     this.instituteApi.deleteCurriculum(this.collegeId,this.courseID,id).subscribe(data=>{
       if(data['status'] == 200){
         this.refreshCurriculum();

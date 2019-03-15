@@ -4,11 +4,13 @@ import { UserService } from '../../@core/data/users.service';
 import { ApiService } from '../../shared/api.service';
 import { SupportapiService } from '../../shared/supportapi.service';
 import {Location} from '@angular/common';
+import { HeaderComponent } from '../../@theme/components/header/header.component';
 
 @Component({
     selector: 'chat',
     styleUrls: ['./chat.component.scss'],
     templateUrl: './chat.component.html',
+    providers:[HeaderComponent],
 })
 
 export class ChatComponent  {
@@ -32,17 +34,8 @@ export class ChatComponent  {
         protected api : ApiService,
         private supportapi : SupportapiService,
         private _location: Location,
-    ) { 
-        // this.socket = io.connect("http://mu.admissiondesk.org:90/", {
-        //     reconnection: true
-        // });
-        // this.socket.on('connect', function () {
-        //    // console.log('connected to http://mu.admissiondesk.org:90/'); 
-        // });
-
-        
-        
-        
+        private comp: HeaderComponent,
+    ) {  
     }
     
     ngOnInit(){

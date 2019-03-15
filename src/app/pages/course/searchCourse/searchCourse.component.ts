@@ -4,11 +4,13 @@ import { ApiService } from '../../../shared/api.service';
 import { NbSearchService } from '@nebular/theme';
 import { FormControl } from '@angular/forms';
 import {Location} from '@angular/common';
+import { HeaderComponent } from '../../../@theme/components/header/header.component';
 
 @Component({
   selector: 'searchCourse',
   styleUrls: ['./searchCourse.component.scss'],
   templateUrl: './searchCourse.component.html',
+  providers:[HeaderComponent],
 })
 export class searchCourseComponent  {
   myControl = new FormControl();
@@ -28,7 +30,9 @@ public filterInput = new FormControl();
     private route: ActivatedRoute,
     protected api : ApiService,
     private searchService : NbSearchService,
-    private _location: Location,) {
+    private _location: Location,
+    private comp: HeaderComponent,
+  ) {
 
   }
   ngOnInit(){

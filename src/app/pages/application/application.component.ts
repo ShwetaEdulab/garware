@@ -3,11 +3,13 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../@core/data/users.service';
 import { ApiService } from '../../shared/api.service';
+import { HeaderComponent } from '../../@theme/components/header/header.component';
 
 @Component({
   selector: 'application',
   styleUrls: ['./application.component.scss'],
   templateUrl: './application.component.html',
+  providers:[HeaderComponent],
 })
 export class ApplicationComponent  {
   id : any;
@@ -20,7 +22,9 @@ export class ApplicationComponent  {
   constructor(
     private router : Router,
     private apiservice : ApiService,
-    private userService: UserService,) {
+    private userService: UserService,
+    private comp: HeaderComponent,
+  ) {
 
   }
   async ngOnInit() {

@@ -15,10 +15,12 @@ import {
   NbSearchService
 } from '@nebular/theme';
 import { SocketService } from '../../shared/socket.service';
+import { HeaderComponent } from '../../@theme/components/header/header.component';
 @Component({
   selector: 'selectcollege',
   styleUrls: ['./selectcollege.component.scss'],
   templateUrl: './selectcollege.component.html',
+  providers:[HeaderComponent],
 })
 export class SelectCollegeComponent {
   loading = true;
@@ -47,6 +49,7 @@ export class SelectCollegeComponent {
     public http: HttpClient, 
     protected api: ApiService,
     private socket : SocketService,
+    private comp: HeaderComponent,
     ) {}
   async ngOnInit() {
     this.api.getTheme();

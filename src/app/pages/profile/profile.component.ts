@@ -324,16 +324,6 @@ export class ProfileComponent {
     } catch (error) {
       console.error("Error from ngOnInit => " + error);
     }
-    // this.api.getProfileCompleteness()
-    //   .subscribe((user: any) =>{
-    //     console.log("user['profile_completeness']="+user['data'])
-    //     if (user['data'] == 100) {
-    //       this.show = true;
-    //     } else {
-    //       this.show = false;
-    //     }
-        
-    //    });
 
     this.api.getProfileValue('Personal')
 			.subscribe(
@@ -433,7 +423,6 @@ export class ProfileComponent {
   }
 
   public checktabs(tab_index){
-    console.log("INSIDE CHECKTABS !!!!!!!!!!" );
    this.next_disable();
 
     //todo also for 0
@@ -632,7 +621,6 @@ export class ProfileComponent {
           this.passportCountry = data['data']['user_data']['country_of_issuance'];
           this.selectedGender = data['data']['user_data']['gender'];
           this.countryofbirth = data['data']['user_data']['country_birth'];
-          console.log("cob "+ this.countryofbirth);
           err => console.log(err)
         });
 
@@ -665,34 +653,8 @@ export class ProfileComponent {
     });
 
   }
-//,{validator: this.dateLessThan('passIssueCtrl', 'passExpiryCtrl')}
-//   dateLessThan(from: string, to: string) {
-//     console.log("1111111111")
-//     return (group: FormGroup): {[key: string]: any} => {
-//       console.log("22222222222")
-//       let f = group.controls[from];
-//       console.log("f============>"+f);
-//       console.log("f.value============>"+f.value);
-//       let t = group.controls[to];
-//       console.log("t============>"+t);
-//       console.log("t.value============>"+t.value);
-//       if (f.value > t.value) {
-//         console.log("3333333333333")
-//         return {
-//           dates: "Date from should be less than Date to"
-//         };
-//       }
-//       return {};
-//     }
-// }
 
   private buildForm2(): void {
-
-
-
-
-
-
     this.secondForm = this.fb.group({
       guardianNameCtrl2: ['', [Validators.required, Validators.maxLength(70), Validators.minLength(3)]],
       relationCtrl: ['', [Validators.required, Validators.maxLength(70), Validators.minLength(3)]],
@@ -941,7 +903,6 @@ export class ProfileComponent {
       this.country_birth = data['data']['country_birth'];
       this.appearance = data['data']['appearance'];
       this.degreeCheck = data['data']['degreeCheck'];
-      console.log("this.degreeCheck=======>"+this.degreeCheck);
       this.preferences = data['data']['preferences'];
       this.Photo = data['data']['photo'];
       this.Sign = data['data']['sign'];
@@ -1354,43 +1315,6 @@ export class ProfileComponent {
 			this.firstForm.controls.passIssueCtrl.markAsDirty();
 			this.firstForm.controls.passExpiryCtrl.markAsDirty();      
       }
-    
-    // if( this.countryofbirth != 154 || this.countryofbirth != 25){
-    //   this.convertpassIssue("'"+this.firstForm.controls.passIssueCtrl.value+"'",);
-    //   this.convertpassExpiry("'"+this.firstForm.controls.passExpiryCtrl.value+"'");
-    //  // console.log("passIssueDatepassIssueDatepassIssueDate"+this.passIssueDate)
-    //   //console.log("passExpiryDatepassExpiryDatepassExpiryDate"+this.passExpiryDate)
-    //   var pass = this.passIssueDate.split("-");
-    //   var issueday = pass[2];
-		// 	var issuemonth = pass[1];
-    //   var issueyear = pass[0];
-    //   var expiry = this.passExpiryDate.split("-");
-    //   var expiryday = expiry[2];
-		// 	var expirymonth = expiry[1];
-    //   var expiryyear = expiry[0];
-      
-    //   if((expiryyear - issueyear) > 10){
-    //     console.log("(expiryyear - issueyear) > 10");
-    //     check_validation = false;
-    //     this.errorflag = 1;
-    //     this.errortext = "Date difference should not be greater than 10 years.";
-    //   }else if((expiryyear - issueyear) == 10){
-    //     console.log("(expiryyear - issueyear) == 10");
-		// 		if((expirymonth - issuemonth) > 0){
-    //       console.log("(expirymonth - issuemonth) > 0"); 
-    //       check_validation = false;
-    //       this.errorflag = 1;
-    //       this.errortext = "Date difference should not be greater than 10 years.";
-		// 		}else if((expirymonth - issuemonth) == 0){
-		// 			if((expiryday - issueday) > -1){
-    //         console.log("(expiryday - issueday) > -1");
-    //         check_validation = false;
-    //         this.errorflag = 1;
-    //         this.errortext = "Date difference should not be greater than 10 years.";
-		// 			}
-		// 		}
-		// 	}
-    // }
 
     if( this.countryofbirth != 154 || this.countryofbirth != 25){
       var passExpiryDate = new Date(this.firstForm.controls.passExpiryCtrl.value);
@@ -1402,7 +1326,6 @@ export class ProfileComponent {
       var issueMonnth = passIssueDate.getMonth();
       var issueYear = passIssueDate.getFullYear();
       if((expiryYear - issueYear) > 10){
-        console.log("(expiryYear - issueYear) > 10");
         this.firstForm.controls.passExpiryCtrl.markAsPending();
         this.firstForm.controls.passExpiryCtrl.markAsTouched();
         date_message_show = true;
@@ -1410,10 +1333,8 @@ export class ProfileComponent {
         this.errorflag = 1;
         this.errortext = "Passport Issue and expiry date difference should not be greater than 10 years.";
       }else if((expiryYear - issueYear) == 10){
-        console.log("(expiryYear - issueYear) == 10");
-        if((expiryMonnth - issueMonnth) > 0){
-          console.log("(expirymonth - issuemonth) > 0"); 
-            date_message_show = true;
+        if((expiryMonnth - issueMonnth) > 0){ 
+          date_message_show = true;
           this.firstForm.controls.passExpiryCtrl.markAsPending();
           this.firstForm.controls.passExpiryCtrl.markAsDirty();
           check_validation = false;
@@ -1421,7 +1342,6 @@ export class ProfileComponent {
           this.errortext = "Passport Issue and expiry date difference should not be greater than 10 years.";
         }else if((expiryMonnth - issueMonnth) == 0){
           if((expiryDay - issueDay) > -1){
-            console.log("(expiryday - issueday) > -1");
             date_message_show = true;
             check_validation = false;
             this.errorflag = 1;
@@ -1473,7 +1393,6 @@ export class ProfileComponent {
 
     if (check_validation) {
       this.alertflag = 0;
-      console.log("check_validationcheck_validationcheck_validation"+check_validation);
       this.api.setProfileValues(profile_data, 'Personal')
         .subscribe(
           (data: any) => {
@@ -1735,10 +1654,8 @@ export class ProfileComponent {
   onThirdSubmit() {
     if(this.edudegreecheck == null || this.edudegreecheck == "Bachelor's" ){
       if(this.hsc.college_university == '' || this.hsc == null || this.cbse.university == '' || this.cbse == null){
-        //console.log("ADD HSC DEGREE")
         this.eduerrorflag = 1;
-        this.eduerrortext = "Please fill all mandatory fields( cbse & hsc )";
-        //this.HSCDEGREEValidation = true;	
+        this.eduerrortext = "Please fill all mandatory fields( cbse & hsc )";	
       }else if(this.hsc.college_university != '' && this.hsc != null && this.cbse.university != '' && this.cbse != null){
         this.api.getcheckTabs().subscribe((data: any) => {
         });
@@ -2042,7 +1959,6 @@ export class ProfileComponent {
   }
 
   onBeforeSend(event, LoadNo) {
-    console.log("LoadNo----->"+LoadNo);
     if(LoadNo == '1'){
       this.loading1 = true;
     }else if(LoadNo == '2'){
@@ -2333,7 +2249,6 @@ export class ProfileComponent {
     try {
       this.api.setProfileCompleteness('100').subscribe(
         data => {
-          console.log("Done");
         },
         error => {
           console.error("Error", error);
@@ -2659,7 +2574,6 @@ export class ProfileComponent {
   }
 
   setMobileCountryCode(event: any){
-		console.log("setMobileCountryCode");
 		this.Countries.forEach(element => {
 			if(element.id == event){
 				this.guardian_info.mobile_country_code = element.phonecode;

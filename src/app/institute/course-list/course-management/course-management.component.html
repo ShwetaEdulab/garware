@@ -79,26 +79,33 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-xl-3">Intake Seats Category Wise:</div>
-            <div class="col-xl-3">
+            <div class="col-xl-4">Intake Seats Category Wise:</div>
+            <div class="col-xl-2">
               <div class="form-group">
                 <label>NRI Seats</label><br>
                 <input type="text"  class="form-control" ngModel="{{courseOverviewValues?.NRI_seats}}" formControlName="NRIseatsCtrl"
                 placeholder="NRI Seats">
               </div>
             </div>
-            <div class="col-xl-3">
+            <div class="col-xl-2">
               <div class="form-group">
                 <label>PIO Seats</label><br>
                 <input type="text"  class="form-control" ngModel="{{courseOverviewValues?.PIO_seats}}" formControlName="PIOseatsCtrl"
                 placeholder="PIO Seats">
               </div>
             </div>
-            <div class="col-xl-3">
+            <div class="col-xl-2">
               <div class="form-group">
                 <label>OCI Seats</label><br>
                 <input type="text"  class="form-control" ngModel="{{courseOverviewValues?.COI_GulfSouth_seats}}" formControlName="OCIseatsCtrl"
                 placeholder="OCI Seats">
+              </div>
+            </div>
+            <div class="col-xl-2">
+              <div class="form-group">
+                <label>Total Seats</label><br>
+                <input type="text"  class="form-control" ngModel="{{courseOverviewValues?.seats}}" formControlName="TotalseatsCtrl"
+                placeholder="Total Seats">
               </div>
             </div>
           </div>
@@ -238,7 +245,7 @@
           </div>
         </div>
       </p-tabPanel>
-      <p-tabPanel header="Course Curriculum">
+      <p-tabPanel header="Course Curriculum" [disabled]="courseCheck">
         <div class="modal-header">
           <div class="popupTitle"></div>
           <button type="button" nbButton shape="semi-round" size="small" (click)="addCurriculum(null);">Add New</button>
@@ -287,7 +294,7 @@
           </div>
         </div>
       </p-tabPanel>
-      <p-tabPanel header="Faculty">
+      <p-tabPanel header="Faculty" [disabled]="courseCheck">
         <div class="modal-header">               
           <div class="popupTitle"><h4>List of faculties</h4></div>
           <button nbButton shape="semi-round" size="small" outline (click)="addFaculty();">Add New</button>

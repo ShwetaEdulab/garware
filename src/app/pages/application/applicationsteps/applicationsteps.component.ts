@@ -1,11 +1,11 @@
 
-import { Component , OnInit , Input, ViewChild } from '@angular/core';
+import { Component , OnInit , ViewChild } from '@angular/core';
 import { Router , ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../shared/api.service';
 import { CountriesService } from '../../../@core/data/countries.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDateService , NbDialogService, NbStepperComponent } from '@nebular/theme';
-import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
+import { NbAuthService, } from '@nebular/auth';
 import { UserService } from '../../../@core/data/users.service';
 import { saveAs } from 'file-saver';
 import { Secondpaymentdialog } from './dialog/Secondpaymentdialog';
@@ -13,12 +13,14 @@ import { Thirdpaymentdialog } from './dialog/Thirdpaymentdialog';
 import { uploadreceiptdialog } from './dialog/uploadreceiptdialog';
 import { uploadthirdreceiptdialog } from './dialog/uploadthirdreceiptdialog';
 import { config } from '../../../../../config';
+import { HeaderComponent } from '../../../@theme/components/header/header.component';
 
 
 @Component({
   selector: 'applicationsteps',
   styleUrls: ['./applicationsteps.component.scss'],
   templateUrl: './applicationsteps.component.html',
+  providers:[HeaderComponent],
 })
 export class ApplicationStepsComponent implements OnInit {
   @ViewChild('stepper') stepper: NbStepperComponent;
@@ -124,7 +126,9 @@ export class ApplicationStepsComponent implements OnInit {
     protected dateService: NbDateService<Date>,
     private authService: NbAuthService,
     private userService: UserService,
-    private dialogService: NbDialogService) {
+    private dialogService: NbDialogService,
+    private comp: HeaderComponent,
+  ) {
     this.min = this.dateService.today();
     this.max = this.dateService.today();
   }
@@ -579,7 +583,7 @@ export class ApplicationStepsComponent implements OnInit {
           this.MedicalUploadForm.controls.medicalDocument.patchValue({file: data['data']['medical_image_name']});
         }
         this.medicaldetails = data['data']['medical_details'];
-        if(data['data']['medical_details']['medical_issue'] == null || data['data']['medical_details']['medical_issue'] == undefined || data['data']['medical_details']['medical_issue'] ==''){
+        if(data['data']['medical_details'] == null || data['data']['medical_details'] == undefined || data['data']['medical_details'] ==''){
           this.MedicalIssueDate = null
         }else{
           if(this.medicaldetails != null){

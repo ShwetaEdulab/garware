@@ -18,6 +18,7 @@ export class InstituteApiService {
     public themeService : NbThemeService) { 
     }
 
+  //Course Listing Starts Here//
   getCourseList(){
     try{
       return this.httpClient.get(`${this.baseUrl}/institute_api/course-listing`);
@@ -121,6 +122,20 @@ export class InstituteApiService {
       this.handleError("getApplication : "+JSON.stringify(error));
     }
   }
+
+  //Course Listing Ends Here//
+
+  //Applicaton Starts Here//
+  getApplication(tab){
+    try{
+      return this.httpClient.get(`${this.baseUrl}/institute_api/application`);
+    }catch(error) {
+      this.handleError("getApplication : "+JSON.stringify(error));
+    }
+
+  }
+
+  //Applicaton Ends Here//
 
 
 

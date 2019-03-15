@@ -1,9 +1,7 @@
-import { Component, Input, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef,} from '@angular/core';
-import { NbDialogRef, NbThemeService, NbToastrService } from '@nebular/theme';
+import { Component, Input,} from '@angular/core';
+import { NbDialogRef, NbThemeService, } from '@nebular/theme';
 import { ApiService } from '../../../shared/api.service';
-import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
 import { UserService } from '../../../@core/data/users.service';
-import { config } from '../../../../../config';
 import {ConfirmationService} from 'primeng/api';
 import { FormBuilder, FormGroup,Validators, FormArray, FormControl } from '@angular/forms';
 import { InstituteApiService } from '../../../shared/instituteapi.service';
@@ -11,7 +9,7 @@ import { InstituteApiService } from '../../../shared/instituteapi.service';
 @Component({
 selector: 'nb-dialog',
 template: `
-<nb-card [style.height.px]="700">
+<nb-card [style.overflow]="'auto'" [style.height.px]="'600'">
   <nb-card-header>
     <div class="modal-header">               
       <div class="popupTitle"><h4>Add Academics</h4></div>
@@ -19,7 +17,49 @@ template: `
     </div>
   </nb-card-header>
   <nb-card-body>
-  </nb-card-body>
+    <form [formGroup]="myForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-8">
+          <label>Select Semester<span style="color:red;">*</span></label>
+          <mat-form-field>
+            <mat-select [(ngModel)]="semesterName" name="selectedsemester" formControlName="selectedsemesterCtrl">
+              <mat-option *ngFor="let semesterValue of semesterValues" [value]="semesterValue">
+                {{semesterValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-4">
+          <button type="button" size="xsmall" nbButton (click)="addSubject()">Add Subject</button>
+        </div>
+      </div>
+      <fieldset formArrayName="items">
+        <h6>Subjects</h6>
+        <span *ngIf="subjecterror == true"  style="color:red;">
+          Please add the subject.
+        </span>
+        <div class="form-group row" *ngFor="let item of myForm.get('items')['controls']; let i=index" [formGroup]="item">
+          <div class="col-xl-8">
+            <label [attr.for]="'name'+i">Name{{i+1}}</label>
+            <input type="text" class="form-control" [attr.id]="'name'+i" formControlName="name" placeholder="Enter subjects">
+          </div>
+          <div class="col-xl-2" py-1>
+            <label></label><br>
+            <button type="button" nbButton outline status="danger" (click)="myForm.get('items').removeAt(i)">-</button>
+          </div>
+        </div>
+      </fieldset>
+      <div class="form-group row">
+        <div class="col-xl-12">
+          
+        </div>
+      </div>
+      <hr>
+      <div class="form-group">
+        <input type="submit" class="form-control" value="Submit">
+      </div>
+    </form>
+    </nb-card-body>
   <nb-card-footer>
   </nb-card-footer>
 </nb-card>
@@ -81,7 +121,7 @@ semesterName;
     this.myForm = this.fb.group({
       selectedsemesterCtrl : ['', [Validators.required,]],
       items: this.fb.array(
-        [ ], // this.buildItem('')ItemsValidator.minQuantitySum(300)
+        [ ],
       )
     })
 
@@ -92,24 +132,15 @@ semesterName;
     });
 
     if(this.currId!=null){
-      console.log("this.currId=====>"+this.currId);
       this.instituteApi.getCurriculum(this.currId,this.courseID,this.collegeId).subscribe(
         (data: any) => {
           if(data['status']== 200){
-           // console.log("Course Details save successfully");
-            console.log("this.data============>"+JSON.stringify(data['data']));
-            //console.log("JSON.parse(this.subjects)============>"+JSON.parse(data['data']['subjects'])); 
             this.semesterName = data['data']['name'];
             var subjects = JSON.parse(data['data']['subjects']);
             var subjects_length = JSON.parse(data['data']['subjects']).length;
-            //console.log("subjects_length========>"+subjects_length);
             this.multiple_subjects = subjects;
             subjects.forEach(subject =>{
-              //console.log("subject=======>"+subject);
-              this.singleSubject = subject;
-              //console.log("this.singleSubject========>"+this.singleSubject)
-              let element : HTMLElement = document.getElementById('subAdd') as HTMLElement;
-              element.click();
+              (<FormArray>this.myForm.controls['items']).push(this.buildItem(subject));
             })
           }
           err => console.error(err)
@@ -118,9 +149,6 @@ semesterName;
   }
 
   submit() {
-    console.log("this.myForm.value: ", this.myForm.value);
-    console.log("this.myForm.value.items ", this.myForm.value.items.length);
-    console.log("this.myForm.valid: ", this.myForm.valid);
     if(this.myForm.valid && this.myForm.value.items.length > 0){
       var semester = this.myForm.value.selectedsemesterCtrl;
       var subjects_values = this.myForm.value.items;
@@ -132,7 +160,6 @@ semesterName;
       this.instituteApi.addUpdateCurriculum(this.collegeId,this.courseID,semester,all_subject_array,this.currId).subscribe(
         (data: any) => {
           if(data['status']== 200){
-            console.log("Course Details save successfully");
             this.ref.close();
           }
           err => console.error(err)
@@ -144,19 +171,14 @@ semesterName;
     }
   }
 
-  buildItem(val: string) {
-    console.log("11111111111111");
-    return new FormGroup({
-      name: new FormControl(val, Validators.required),
-      //quantity: new FormControl(100)
-    })
+  addSubject(){
+    var value = '';
+    (<FormArray>this.myForm.controls['items']).push(this.buildItem(value));
   }
 
-  buildItemNew(val) {
-    console.log("val=========?"+val);
-    var subjects = this.multiple_subjects;
+  buildItem(val: string) {
     return new FormGroup({
-      name: new FormControl(''+val, Validators.required),
+      name: new FormControl(val, Validators.required),
     })
   }
 

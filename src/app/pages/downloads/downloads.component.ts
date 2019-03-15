@@ -4,10 +4,12 @@ import { Router , ActivatedRoute } from '@angular/router';
 import { NbAuthService } from '@nebular/auth';
 import { ApiService } from '../../shared/api.service';
 import { saveAs } from 'file-saver';
+import { HeaderComponent } from '../../@theme/components/header/header.component';
 @Component({
   selector: 'downloads',
   styleUrls: ['./downloads.component.scss'],
   templateUrl: './downloads.component.html',
+  providers:[HeaderComponent],
 })
 export class DownloadsComponent  {
   transcriptdata;
@@ -34,7 +36,8 @@ export class DownloadsComponent  {
   show3 = true;
   constructor(private authService: NbAuthService,
     public http: HttpClient,
-     protected api : ApiService, 
+     protected api : ApiService,
+     private comp: HeaderComponent,
      ) {
   }
   ngOnInit() {

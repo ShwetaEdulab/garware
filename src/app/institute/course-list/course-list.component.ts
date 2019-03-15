@@ -34,9 +34,6 @@ export class CourseListComponent implements OnInit {
     });
 
     this.instituteApi.getCourseList().subscribe(data=>{
-      // console.log("data['data']========"+data['data'])
-      // console.log("data['data']['degrees']========"+data['data']['degrees'])
-      // console.log("data['data']========"+JSON.stringify(data['data']))
       this.searchdegrees = data['data']['degrees'];
    
     })
@@ -45,24 +42,17 @@ export class CourseListComponent implements OnInit {
   
 
   getcourse(name){
-    console.log("namenamenamenamenamename"+name);
     this.degreename = name
     this.instituteApi.getCourse(name)
     .subscribe(data => {
-      console.log("data['data']==========>"+data['data']);
-      console.log("data['data']========"+JSON.stringify(data['data']))
       this.searchCourse =  data['data']['courseObj'];
 
     });
   }
 
   getspecialization(name){
-    console.log("namenamenamenamenamename"+name);
-    console.log("this.cournamethis.cournamethis.courname"+this.degreename);
     this.instituteApi.getspecialization(name,this.degreename)
     .subscribe(data => {
-      console.log("data['data']==========>"+data['data']);
-      console.log("data['data']========"+JSON.stringify(data['data']))
       this.searchspecializaion =  data['data']['specialization'];
     });
   }
@@ -79,7 +69,6 @@ export class CourseListComponent implements OnInit {
       this.instituteApi.getCourseId(degreename,coursename,specialization)
       .subscribe(data => {
         if(data['status'] == '200'){
-          //console.log("data['data']========"+JSON.stringify(data['data']))
           var res_data = data['data'][0];
           this.router.navigate(['pages/course-management'],{queryParams:{courseId:res_data.id, name:res_data.name, specialization: res_data.specialization}});
         }

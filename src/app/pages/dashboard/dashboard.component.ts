@@ -4,12 +4,14 @@ import { FormGroup } from '@angular/forms';
 import { NbDateService, NbStepperComponent } from '@nebular/theme';
 import { ApiService } from '../../shared/api.service';
 import { Router } from '@angular/router';
+import { HeaderComponent } from '../../@theme/components/header/header.component';
 
 
 @Component({
   selector: 'Dashboard',
   templateUrl: './Dashboard.component.html',
   styleUrls: ['./Dashboard.component.scss'],
+  providers:[HeaderComponent],
 })
 export class DashboardComponent {
   @HostListener('window:resize', ['$event'])
@@ -42,6 +44,7 @@ export class DashboardComponent {
     protected dateService: NbDateService<Date>,
     protected api : ApiService,
     protected router : Router,
+    private comp: HeaderComponent,
   ) {
       this.min = this.dateService.addMonth(this.dateService.today(), -1);
       this.max = this.dateService.addMonth(this.dateService.today(), 1);

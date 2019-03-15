@@ -3,11 +3,13 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../shared/api.service';
 import { NbDateService, NbDialogService } from '@nebular/theme';
 import { Firstpaymentdialog } from './dialog/Firstpaymentdialog';
+import { HeaderComponent } from '../../@theme/components/header/header.component';
 
 @Component({
   selector: 'cart',
   styleUrls: ['./cart.component.scss'],
   templateUrl: './cart.component.html',
+  providers:[HeaderComponent],
   
 })
 export class CartComponent  {
@@ -18,7 +20,8 @@ export class CartComponent  {
   constructor(private router : Router,
     private api : ApiService,
     protected dateService: NbDateService<Date>,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
+    private comp: HeaderComponent,
 ) {
    
   }

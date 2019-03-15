@@ -135,7 +135,7 @@ export const NB_CORE_PROVIDERS = [
         // remove: '*',
       },
       admin: {
-        view:['adminApplication','adminEligibility','adminErrata','adminView','adminForeignOffice','AdminReuploadedTranscript','theme','help'],
+        view:['dashboard','adminApplication','adminEligibility','adminErrata','adminView','adminForeignOffice','AdminReuploadedTranscript','theme','help'],
         //create: '*',
         // edit: '*',
         // remove: '*',
@@ -147,7 +147,7 @@ export const NB_CORE_PROVIDERS = [
       //   // remove: '*',
       // },
       institute:{
-        view: ['dashboard','theme','course-list'],
+        view: ['dashboard','theme','course-list','institute-application'],
       },
     },
   }).providers,

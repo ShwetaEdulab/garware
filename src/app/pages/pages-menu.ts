@@ -105,9 +105,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
 
    /**Institute Menus*/
+  //  {
+  //   title: 'Applications',
+  //   icon: 'ion-filing',
+  //   link: '/pages/institute-application',
+  //   data: {
+  //     permission: 'view',
+  //     resource: 'institute-application'
+  //   },
+  // },
    {
     title: 'course-list',
-    icon: 'ion-filing',
+    icon: 'nb-compose',
     link: '/pages/course-list',
     data: {
       permission: 'view',

@@ -25,10 +25,13 @@ import { HelpComponent } from './help/help.component';
 import { ViewTicketComponent } from './help/viewTicket/viewTicket.component';
 import { PeersComponent } from './peers/peers.component';
 import { ChatComponent } from './chat/chat.component';
+
+//Institute
 import { CourseListComponent } from "./../institute/course-list/course-list.component";
 import { CourseManagementComponent } from '../institute/course-list/course-management/course-management.component';
-//Admin
+import { InstituteApplicationComponent } from './../institute/institute-application/institute-application.component';
 
+//Admin
 import { AdminApplicationComponent } from '../admin/application/application.component';
 import { AdminEligibilityComponent } from '../admin/eligibility/eligibility.component';
 import { AdminViewComponent } from '../admin/view/view.component';
@@ -133,6 +136,11 @@ const routes: Routes = [{
   {
     path: 'course-management',
     component: CourseManagementComponent,
+ 
+  },
+  {
+    path: 'institute-application',
+    component: InstituteApplicationComponent,
  
   },
   /*Admin Components*/

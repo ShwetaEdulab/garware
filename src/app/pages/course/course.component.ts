@@ -15,6 +15,7 @@ import {
   NbAuthService,
   NbAuthJWTToken
 } from '@nebular/auth';
+import { HeaderComponent } from '../../@theme/components/header/header.component';
 
 @Component({
   selector: 'course',
@@ -31,13 +32,16 @@ import {
     justify-content: flex-end;
   }
 `],
+providers:[HeaderComponent],
 })
 export class CourseComponent {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private api: ApiService,
     private searchService: NbSearchService,
-    private authService: NbAuthService, ) {
+    private authService: NbAuthService,
+    private comp: HeaderComponent,
+  ) {
 
   }
   loading = true;

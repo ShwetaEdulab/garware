@@ -7,10 +7,12 @@ import { ApiService } from '../../shared/api.service';
 import { Observable } from 'rxjs';
 import {Data} from '../../shared/data';
 import { RouterExtService } from '../../shared/identifyUrl';
+import { HeaderComponent } from '../../@theme/components/header/header.component';
 @Component({
   selector: 'search',
   styleUrls: ['./search.component.scss'],
   templateUrl: './search.component.html',
+  providers:[HeaderComponent],
 })
 export class SearchComponent  {
   myControl = new FormControl();
@@ -46,7 +48,9 @@ export class SearchComponent  {
               private fb: FormBuilder,
               private route : ActivatedRoute,
               private data : Data,
-              private routerExtService : RouterExtService) {
+              private routerExtService : RouterExtService,
+              private comp: HeaderComponent,
+            ) {
    
   }
 

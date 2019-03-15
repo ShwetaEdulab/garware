@@ -120,7 +120,6 @@ constructor(
   {}
 
   ngOnInit() {
-    console.log("courseIDcourseIDcourseIDcourseID==========<>"+this.courseID);
     this.api.getTheme().subscribe((data: any) => {
       if(data['data']){
         this.themeService.changeTheme(data['data']);
@@ -191,15 +190,12 @@ constructor(
 
       var json = JSON.parse(event.xhr.response);
       var yourData = json.data; // or json["Data"]
-      console.log("yourDatayourDatayourData=========>"+yourData);
-			var yourStatus = json.status; // or json["Data"]
+      var yourStatus = json.status; // or json["Data"]
 			var yourMessage = json.message; // or json["Data"]
-      console.log("yourData=========<>"+yourData);
       if (yourStatus == 200) {
         this.upload = true;
         this.uploadedFacultyImage = yourData.pic;
         this.profilepicID =  yourData.id;
-        console.log("this.profilepicID onupload========>"+this.profilepicID);
         if(this.upload && this.datasave){
           this.ref.close();
         }
@@ -250,7 +246,6 @@ constructor(
       .subscribe(
         (data: any) => {
           if(data['status']== 200){
-            console.log("faculty Data save successfully");
             this.datasave = true;
             this.profilepicID = data['data']['id'];
             if(this.upload && this.datasave){
