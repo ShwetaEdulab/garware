@@ -168,6 +168,7 @@ export class CourseManagementComponent implements OnInit {
 
   addFaculty(){
     this.dialogService.open(facultyComponent, {
+      closeOnBackdropClick : false,
       context: {
         courseID: this.courseID,
       },
@@ -204,6 +205,7 @@ export class CourseManagementComponent implements OnInit {
   //Course Curriculum
   addCurriculum(id){
     this.dialogService.open(curriculumComponent, {
+      closeOnBackdropClick : false,
       context: {
         courseID: this.courseID,
         currId : id

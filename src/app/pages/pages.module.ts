@@ -33,6 +33,7 @@ import { CourseListModule } from "../institute/course-list/course-list.module";
 import { CourseManagementModule } from '../institute/course-list/course-management/course-management.module';
 
 //Admin
+import { AdminDashboardModule } from '../admin/admin-dashboard/admin-dashboard.module';
 import { AdminApplicationModule } from "../admin/application/application.module";
 import { AdminEligibilityModule } from "../admin/eligibility/eligibility.module";
 import { AdminViewModule } from '../admin/view/view.module';
@@ -75,6 +76,7 @@ const PAGES_COMPONENTS = [
     HelpModule,
     PeerModule,
     /*########### Admin Modules ############*/
+    AdminDashboardModule,
     AdminApplicationModule,
     AdminEligibilityModule,
     AdminViewModule,

@@ -8,6 +8,7 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 import { DataModule } from './data/data.module';
 import { AnalyticsService } from './utils/analytics.service';
 import { map } from 'rxjs/operators';
+import { config } from '../../../config';
 
 const socialLinks = [
   {
@@ -44,7 +45,7 @@ export class RoleProvider implements NbRoleProvider {
     return this.authService.onTokenChange()
       .pipe(
         map((token: NbAuthJWTToken) => {
-          console.log("token.getPayload()['role']== "+token.getPayload()['role'])
+          //console.log("token.getPayload()['role']== "+token.getPayload()['role'])
           return token.isValid() ? token.getPayload()['role'] : 'guest';
         }),
       );
@@ -70,7 +71,7 @@ export const NB_CORE_PROVIDERS = [
         },
         
 
-        baseEndpoint: 'http://93.104.211.51:5000/api/auth/',
+        baseEndpoint: config.serverUrl+'/api/auth/',
         logout: {
           redirect: {
             success: '/auth/login',
@@ -135,7 +136,7 @@ export const NB_CORE_PROVIDERS = [
         // remove: '*',
       },
       admin: {
-        view:['dashboard','adminApplication','adminEligibility','adminErrata','adminView','adminForeignOffice','AdminReuploadedTranscript','theme','help'],
+        view:['adminDashboard','adminApplication','adminEligibility','adminErrata','adminView','adminForeignOffice','AdminReuploadedTranscript','theme','help'],
         //create: '*',
         // edit: '*',
         // remove: '*',

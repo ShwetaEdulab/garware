@@ -1,10 +1,12 @@
 import { Component, ViewChild, HostListener } from '@angular/core';
 import { UserService } from '../../@core/data/users.service';
-import { FormGroup } from '@angular/forms';
-import { NbDateService, NbStepperComponent } from '@nebular/theme';
+import { FormGroup, FormControl } from '@angular/forms';
+import { NbDateService, NbStepperComponent, NbThemeService } from '@nebular/theme';
 import { ApiService } from '../../shared/api.service';
+import { InstituteApiService } from '../../shared/instituteapi.service';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../../@theme/components/header/header.component';
+import { NbAuthJWTToken,NbAuthService } from '@nebular/auth';
 
 
 @Component({
@@ -29,7 +31,7 @@ export class DashboardComponent {
   max: Date;
   alertFlag = 0;
   selectedItem ;
-  user = { name : "",id:""};
+  user = { name : "",id:"",role:""};
   firstForm: FormGroup;
   courseID;
   length;
@@ -39,12 +41,20 @@ export class DashboardComponent {
   colleges;
   alert: number =0;
   ucaFlag = false;
+  coursedata;
+  public filterText: string;
+  public filterPlaceholder: string;
+  public filterInput = new FormControl();
 
-  constructor(private userService: UserService,
+  constructor(
+    private userService: UserService,
+    private instituteApi :InstituteApiService,
     protected dateService: NbDateService<Date>,
     protected api : ApiService,
     protected router : Router,
     private comp: HeaderComponent,
+    public themeService : NbThemeService,
+    private authService : NbAuthService
   ) {
       this.min = this.dateService.addMonth(this.dateService.today(), -1);
       this.max = this.dateService.addMonth(this.dateService.today(), 1);
@@ -53,13 +63,30 @@ export class DashboardComponent {
     }
   
   async ngOnInit() {
-    this.api.getTheme();
+    this.filterText = "";
+    this.filterPlaceholder = "Search";
+
+    this.authService.onTokenChange()
+    .subscribe((token: NbAuthJWTToken) => {
+      //console.log("token.getPayload()['role']==========>"+token.getPayload()['role']);
+        if(token.getPayload()['role'] == "admin"){
+          this.router.navigate(['auth/adminOtp'])
+        }
+    });
+
+    this.api.getTheme().subscribe((data: any) => {
+      if(data['data']){
+        this.themeService.changeTheme(data['data']);
+      }else{
+        this.themeService.changeTheme('default');
+      }
+    });
 
   
     this.userService.onUserChange()
       .subscribe((user: any) => this.user = user);
-
-      var cart = await this.api.getCartValue();
+      if(this.user.role == 'student'){
+        var cart = await this.api.getCartValue();
         this.cartValue = cart['data']['course'];
         if(this.cartValue.length > 0){
           this.cartCheck = true;  
@@ -118,54 +145,23 @@ export class DashboardComponent {
           });
           }
 
-        }); 
+        });
 
+      }else if(this.user.role == 'institute'){
+        var applications = await  this.instituteApi.getDashboardData();
+        applications.subscribe(data =>{
+        this.coursedata = data['data']['courses'];
+        //console.log("data['data']['courses']================>"+data['data']['courses'].length)
+        });
 
-    //  var cart = await this.api.getCartValue();
-    // this.cartValue = cart['data']['course'];
-    // if(this.cartValue.length > 0){
-    //   this.cartCheck = true;  
-    //   setInterval(() => {
-    //     this.setOrientation();
-    //     this.stepper.selectedIndex = 0;
-    //   },1000);
-    // }else{
-    //   this.cartCheck = false;
-    // }
-    // var applications = await  this.api.getApplicationLength();
-    // applications.subscribe(data =>{
-    //   this.application = data['data'];
-    //   this.length = data['length'];
-    //   if(this.length == 1){
-    //     this.ucaFlag = true;
-    //     this.setOrientation();
-    //     this.applicationID = this.application.id;
-    //     this.courseID = this.application.course_id;
-    //     if(this.application.provisional_letter_exists == true){
-    //       this.stepper.selectedIndex = 2;
-    //     }
-    //     if(this.application.visa_document_exists == true){
-    //       this.stepper.selectedIndex = 3;
-    //     }
-    //     if(this.application.collegeName){
-    //       this.stepper.selectedIndex = 4;
-    //     }
-    //     if(this.application.final_letter_exists == true){
-    //       this.stepper.selectedIndex = 5;
-    //     }
-    //   }else if(this.length > 1 ){
-    //     this.ucaFlag = true;
-    //     this.setOrientation();
-    //     this.applicationData = data['data'];
-    //     this.stepper.selectedIndex = 1;
-    //     this.applicationData.forEach(element => {
-    //       if(element.status == "accept"){
-    //         this.status = true;
-    //       }
-    //     });
-    //   }
+        this.filterInput
+        .valueChanges
+        .debounceTime(200)
+        .subscribe(term => {
+        this.filterText = term;
+      });
 
-    // }); 
+      }
   } 
 
 

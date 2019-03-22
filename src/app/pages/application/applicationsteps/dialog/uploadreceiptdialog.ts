@@ -77,7 +77,7 @@ constructor(protected ref: NbDialogRef<uploadreceiptdialog>,
   if (this.SecondUploadForm.invalid) {
     return;
   }else{
-    console.log('in success');
+    //console.log('in success');
     this.ref.close(value);
   }
   

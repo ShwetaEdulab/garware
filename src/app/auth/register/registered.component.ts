@@ -36,7 +36,6 @@ import { NbDialogService } from '@nebular/theme';
             }
         
             Ok(){
-                console.log("this.user_id===== Ok ========>"+this.user_id);
                 this.dialogService.open(OtpComponent, {
                     context: {
                      email: this.email,

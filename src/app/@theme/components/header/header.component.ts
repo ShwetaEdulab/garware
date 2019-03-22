@@ -94,7 +94,6 @@ export class HeaderComponent implements OnInit {
         });
         
         this.socket.on('new_msg', (data) => {
-        console.log("data.msg NEW----->"+data);
           this.ReloadNotification();
         });
       }

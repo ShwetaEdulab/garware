@@ -122,8 +122,8 @@ otpValidation;
 		}
 	
 		update_number_otp(){
-			console.log("update_number_otpupdate_number_otpupdate_number_otp");
-			console.log("this.user_id===== update_number_otp ========>"+this.user_id);
+			//console.log("update_number_otpupdate_number_otpupdate_number_otp");
+		//	console.log("this.user_id===== update_number_otp ========>"+this.user_id);
 			var data={
 				phone_code: this.phone_code,
 				mobile:this.mobile,

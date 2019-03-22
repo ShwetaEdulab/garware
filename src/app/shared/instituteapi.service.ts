@@ -132,10 +132,21 @@ export class InstituteApiService {
     }catch(error) {
       this.handleError("getApplication : "+JSON.stringify(error));
     }
-
   }
 
   //Applicaton Ends Here//
+
+
+  //Dashboard Starts Here//
+  async getDashboardData(){
+    try{
+       return await this.httpClient.get(`${this.baseUrl}/institute_api/dashboard`);     
+    }catch(error) {
+      this.handleError("getApplicationLength : "+error);
+    }
+  }
+
+  //Dashboard Ends Here//
 
 
 

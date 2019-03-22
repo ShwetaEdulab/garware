@@ -37,6 +37,13 @@ import {
   ProfileCompleteness
 } from './profileCompleteness/profileCompleteness.component';
 import {MatSelectModule} from '@angular/material/select';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import { SharedModule } from '../../pages/shared-authpipe.module';
+
+
 @NgModule({
   imports: [
     ThemeModule,
@@ -50,7 +57,12 @@ import {MatSelectModule} from '@angular/material/select';
     NbInputModule,
     NbButtonModule,
     MatSelectModule,
-    NbAlertModule
+    NbAlertModule,
+    NgxPaginationModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    SharedModule,
   ],
   declarations: [
     DashboardComponent,

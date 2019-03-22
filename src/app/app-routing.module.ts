@@ -11,6 +11,8 @@ import { OTPComponent } from './auth/otp/otp.component';
 import { changePasswordComponent } from "./auth/changePassword/changePassword.component";
 import { ForgotPasswordComponent } from './auth/Forgot-password/forgot-password.component'
 import { resetPasswordComponent } from './auth/Reset-password/reset-password.component';
+import { AdminOtpComponent } from './admin/admin-otp/admin-otp.component';
+import { InstituteRegisterComponent } from './auth/institute-register/institute-register.component';
 
 const routes: Routes = [
   { path: 'pages',canActivate: [AuthGuard], loadChildren: 'app/pages/pages.module#PagesModule' },
@@ -49,6 +51,15 @@ const routes: Routes = [
       {
         path: 'changePassword',
         component: changePasswordComponent,
+      },
+      {
+        path: 'adminOtp',
+        component: AdminOtpComponent,
+    
+      },
+      {
+        path: 'instituteRegister',
+        component: InstituteRegisterComponent,
       },
     ],
   },

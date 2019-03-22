@@ -32,6 +32,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
   
   /**Admin Menus*/
   {
+    title: 'Dashboard',
+    icon: 'nb-compose',
+    link: '/pages/adminDashboard',
+    data: {
+      permission: 'view',
+      resource: 'adminDashboard'
+    },
+  },
+  {
     title: 'Admin Application',
     icon: 'ion-filing',
     link: '/pages/adminApplication',
@@ -105,15 +114,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
 
    /**Institute Menus*/
-  //  {
-  //   title: 'Applications',
-  //   icon: 'ion-filing',
-  //   link: '/pages/institute-application',
-  //   data: {
-  //     permission: 'view',
-  //     resource: 'institute-application'
-  //   },
-  // },
+   {
+    title: 'Applications',
+    icon: 'ion-filing',
+    link: '/pages/institute-application',
+    data: {
+      permission: 'view',
+      resource: 'institute-application'
+    },
+  },
    {
     title: 'course-list',
     icon: 'nb-compose',

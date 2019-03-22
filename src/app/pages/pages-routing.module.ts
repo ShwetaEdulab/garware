@@ -32,6 +32,7 @@ import { CourseManagementComponent } from '../institute/course-list/course-manag
 import { InstituteApplicationComponent } from './../institute/institute-application/institute-application.component';
 
 //Admin
+import { AdminDashboardComponent } from '../admin/admin-dashboard/admin-dashboard.component';
 import { AdminApplicationComponent } from '../admin/application/application.component';
 import { AdminEligibilityComponent } from '../admin/eligibility/eligibility.component';
 import { AdminViewComponent } from '../admin/view/view.component';
@@ -144,6 +145,11 @@ const routes: Routes = [{
  
   },
   /*Admin Components*/
+  {
+    path: 'adminDashboard',
+    component: AdminDashboardComponent,
+  
+  },
    {
     path: 'adminApplication',
     component: AdminApplicationComponent,

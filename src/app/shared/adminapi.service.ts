@@ -556,16 +556,15 @@ getTotal(tab_type){
   }
 }
 
-profile_completeness(){
+profile_completeness(year){
   try{
-    return this.httpClient.get(`${this.baseUrl}/admin_api/Dashboard`);
+    return this.httpClient.get(`${this.baseUrl}/admin_api/Dashboard?year=`+year);
   }catch(error) {
       this.handleError("profile_completeness : "+JSON.stringify(error));
   }
 }
 
 getStudentEducationDetails(user_id){
-  console.log('user_id=====>'+user_id)
   try{
       return this.httpClient.post(`${this.baseUrl}/admin_api/foreignoffice/getEducationalDetail`,{
           user_id : user_id,             
@@ -576,7 +575,6 @@ getStudentEducationDetails(user_id){
 }
 
 studentDeallocateCollege(id,userid,collegename){
-  console.log('user_id=====>'+userid)
   try{
       return this.httpClient.post(`${this.baseUrl}/admin_api/foreignoffice/deallocateCollege`,{
           user_id : userid,             
@@ -589,7 +587,6 @@ studentDeallocateCollege(id,userid,collegename){
 }
 
 studentPreferencesList(user_id,course_id,application_id){
-  console.log('user_id=====>'+user_id)
   try{
       return this.httpClient.post(`${this.baseUrl}/admin_api/foreignoffice/collegeListView`,{
           applicationId : application_id,
@@ -602,7 +599,6 @@ studentPreferencesList(user_id,course_id,application_id){
 }
 
 addMoreCollegesList(user_id,course_id,application_id,specialization){
-  console.log('user_id=====>'+user_id)
   try{
       return this.httpClient.post(`${this.baseUrl}/admin_api/foreignoffice/addAnotherColleges`,{
           applicationId : application_id,
@@ -658,7 +654,6 @@ generateFirmLetter(userid,specialization,id,collegeFees,course_id){
   }
 }
 collegeAllocation(college_name,application_id){
-  console.log('application_id=============>'+application_id)
   try{
       return this.httpClient.post(`${this.baseUrl}/admin_api/foreignoffice/selectedCollege`,{
           applicationId : application_id,

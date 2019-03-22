@@ -6,7 +6,7 @@
     </div>
   </nb-card-header>
   <nb-card-body>
-    <p-tabView>
+    <p-tabView (onChange)="getApplicationDetails($event)">
       <p-tabPanel header = "Application Requested">
         <h5>Application Requested</h5>
       </p-tabPanel>

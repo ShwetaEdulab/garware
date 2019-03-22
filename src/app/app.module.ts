@@ -44,8 +44,8 @@ import {  NbToastrModule,
  import { resetPasswordComponent } from './auth/Reset-password/reset-password.component';
  import { ResendEmailComponent } from './auth/Forgot-password/resend-email.component';
  import { RouterExtService } from './shared/identifyUrl';
-//import {DragDropModule} from '@angular/cdk/drag-drop';
-//import { DraggableModule } from './pages/cart/draggable/draggable.module';
+ import { AdminOtpModule } from './admin/admin-otp/admin-otp.module';
+import { InstituteRegisterComponent } from './auth/institute-register/institute-register.component';
 
 const config: SocketIoConfig = { url: 'http://93.104.211.51:2', options: {} };
 //const socketconfig: SocketIoConfig = { url: 'http://93.104.211.51', options: {reconnection: true,transports: ['websocket'],secure: true} };
@@ -59,6 +59,7 @@ const config: SocketIoConfig = { url: 'http://93.104.211.51:2', options: {} };
     ForgotPasswordComponent,
     resetPasswordComponent,
     ResendEmailComponent,
+    InstituteRegisterComponent,
     ],
   imports: [
     BrowserModule,
@@ -85,6 +86,7 @@ const config: SocketIoConfig = { url: 'http://93.104.211.51:2', options: {} };
    MatSelectModule,
    OTPModule,
    SocketIoModule.forRoot(config),
+   AdminOtpModule
    //DraggableModule,
     //DragDropModule,
 
