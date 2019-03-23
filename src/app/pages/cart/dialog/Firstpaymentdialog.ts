@@ -53,12 +53,6 @@ template: `
       </div>
     </div>
     <div class="row" style="margin-bottom:7px">
-      <div class="col-md-3">Country</div>
-      <div class="col-md-9"> 
-        <input type="text" nbInput fullWidth placeholder="Country" ngModel="{{user_data?.country_id}}" [readonly]="true">
-      </div>
-    </div>
-    <div class="row" style="margin-bottom:7px">
       <div class="col-md-3">Telephone</div>
       <div class="col-md-9"> 
         <input type="text" nbInput fullWidth placeholder="Telephone" ngModel="{{user_data?.mobile}}" [readonly]="true">
@@ -91,6 +85,7 @@ template: `
 })
 export class Firstpaymentdialog {
 @Input() title: string;
+@Input() eligibilityFee: string;
 user_data;
 amount;
 applicationId;
@@ -111,7 +106,8 @@ constructor(protected ref: NbDialogRef<Firstpaymentdialog>,
       .subscribe(
         (data: any) => {  
           this.user_data =  data['data']['user_data'];
-          this.amount = 'INR 3399';
+          //this.amount = 'INR 3399';
+          this.amount = 'INR '+this.eligibilityFee;
           err => console.log(err)
       });
   }
@@ -121,7 +117,8 @@ constructor(protected ref: NbDialogRef<Firstpaymentdialog>,
     this.applicationId = this.route.snapshot.queryParamMap.get('appId');
     this.courseID = this.route.snapshot.queryParamMap.get('courseID');
     //console.log('this.applicationId====>'+this.applicationId+'@@@@@@@@@this.courseID===========>'+this.courseID);
-    var firstpayment = await this.api.firstpaymentrequest(this.applicationId,this.courseID);
+    //console.log("this.eligibilityFee==========>"+this.eligibilityFee);
+    var firstpayment = await this.api.firstpaymentrequest(this.applicationId,this.courseID,this.eligibilityFee);
     firstpayment.subscribe(
         data => {
           //console.log('response url==>'+data['data']['transaction_id']);

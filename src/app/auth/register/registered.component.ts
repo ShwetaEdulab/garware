@@ -37,6 +37,7 @@ import { NbDialogService } from '@nebular/theme';
         
             Ok(){
                 this.dialogService.open(OtpComponent, {
+                    closeOnBackdropClick : false,
                     context: {
                      email: this.email,
                      password:this.password,

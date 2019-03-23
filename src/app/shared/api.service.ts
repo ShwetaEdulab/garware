@@ -313,9 +313,9 @@ getProfileCompleteness(){
 
   //Payment gateway routes
 
-  firstpaymentrequest(appId,couser_id){
+  firstpaymentrequest(appId,couser_id,eligibilityFee){
     try{
-      return this.httpClient.post(`${this.baseUrl}/api/payment/firstpaymentrequest`,{"appid":appId,"courseId":couser_id});     
+      return this.httpClient.post(`${this.baseUrl}/api/payment/firstpaymentrequest`,{"appid":appId,"courseId":couser_id,"eligibilityFee":eligibilityFee});     
     }catch(error) {
       this.handleError("firstpaymentrequest : "+error);
     }

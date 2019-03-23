@@ -59,10 +59,11 @@ export class CartComponent  {
     this.router.navigate(['/pages/preferences'],{queryParams:{courseId:courseId}})
   }
 
-  paymentProcess(courseId){
+  paymentProcess(courseId,fee){
     this.dialogService.open(Firstpaymentdialog, {
       context: {
        title: '',
+       eligibilityFee: fee ,
       },
    });
   }

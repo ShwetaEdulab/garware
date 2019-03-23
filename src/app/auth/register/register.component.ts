@@ -83,10 +83,8 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
         StateCtrl:['', [ Validators.required, Validators.maxLength(30),Validators.minLength(2)]],
         PostCodeCtrl:['', [ Validators.required, Validators.pattern(this.postalValidate), Validators.maxLength(10),Validators.minLength(5)]],
         dobCtrl:['', Validators.required],
-        phonecodeCtrl:['',Validators.required ],
+        phonecodeCtrl:[''],
         phoneCtrl:['', [ Validators.required, Validators.pattern(this.mobileValidate)]],
-        CountryCtrl:['', Validators.required],
-        CountryOriginCtrl:['', Validators.required],
         captchaCtrl:['', Validators.required],
       });
     }
@@ -172,6 +170,7 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
 		}
 	}
     onSubmit(duration,status){
+		console.log("form error========>"+JSON.stringify(this.RegisterForm.value))					
 		var check_validation;
     this.RegisterForm.controls.genderCtrl.markAsDirty();     
 		this.RegisterForm.controls.emailCtrl.markAsDirty();
@@ -183,13 +182,11 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
 		this.RegisterForm.controls.AddCtrl.markAsDirty();
 		this.RegisterForm.controls.CityCtrl.markAsDirty();
 		this.RegisterForm.controls.StateCtrl.markAsDirty();
-		this.RegisterForm.controls.PostCodeCtrl.markAsDirty();
-		 this.RegisterForm.controls.CountryCtrl.markAsDirty();		
+		this.RegisterForm.controls.PostCodeCtrl.markAsDirty();		
 		this.RegisterForm.controls.dobCtrl.markAsDirty();    
 		this.RegisterForm.controls.phoneCtrl.markAsDirty();
-    	this.RegisterForm.controls.phonecodeCtrl.markAsDirty();
-   		this.RegisterForm.controls.CountryOriginCtrl.markAsDirty();
-    	this.RegisterForm.controls.captchaCtrl.markAsDirty();
+    //this.RegisterForm.controls.phonecodeCtrl.markAsDirty();
+    this.RegisterForm.controls.captchaCtrl.markAsDirty();
 		if(this.RegisterForm.controls.passwordCtrl.value == this.RegisterForm.controls.repasswordCtrl.value){
 			if(this.RegisterForm.valid){	
 				if(this.RegisterForm.controls.captchaCtrl.value == this.captchaText){	
@@ -200,7 +197,8 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
 						`checkcaptcha doesn't match ! ! `, {duration},{status}
 					  );	
 				}			
-			}else{						
+			}else{
+				console.log("form error========>"+JSON.stringify(this.RegisterForm.value))					
 				check_validation = false;
 				this.alertflag = 1;
 				this.validation_messages =  "Fill in the all required details !";
@@ -216,6 +214,7 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
 		if(check_validation){
 			this.alertflag = 0;
 				this.dialogService.open(TermsComponent, {
+					closeOnBackdropClick : false,
 					context: {
 						userName : this.RegisterForm.controls.firstNameCtrl.value,
 						Surname: this.RegisterForm.controls.LastNameCtrl.value,
@@ -224,14 +223,12 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
 						userDob : this.RegisterForm.controls.dobCtrl.value,
 						userEmail : this.RegisterForm.controls.emailCtrl.value,
 						student_category : this.RegisterForm.controls.categoryCtrl.value,
-						userCountryCode : this.RegisterForm.controls.phonecodeCtrl.value,
+						userCountryCode : '91',
 						userContactNo : this.RegisterForm.controls.phoneCtrl.value,
 						userAddress : this.RegisterForm.controls.AddCtrl.value,
 						userCity: this.RegisterForm.controls.CityCtrl.value,
 						userState : this.RegisterForm.controls.StateCtrl.value,
 						postal_code : this.RegisterForm.controls.PostCodeCtrl.value,
-						Country:this.RegisterForm.controls.CountryCtrl.value,
-						CountryOfOrigin:this.RegisterForm.controls.CountryOriginCtrl.value,
 					},
 				});
 		  }else{

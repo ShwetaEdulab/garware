@@ -44,7 +44,7 @@
           <h6>(<span style="color:red;">Mandatory fields are marked with an *.</span>)</h6>
           <form [formGroup]="firstForm" class="step-container">
             <div class="row">
-              <div class="col-xl-3">
+              <div class="col-xl-4">
                 <div class="form-group">
                   <label for="inputFirstName">Full Name <span style="color:red;">*</span></label>
                   <input type="text" disabled class="form-control" ngModel="{{profile_info?.name}}" id="inputFirstName"
@@ -52,7 +52,7 @@
                     placeholder="First Name">
                 </div>
               </div>
-              <div class="col-xl-3">
+              <div class="col-xl-4">
                 <div class="form-group">
                   <label for="inputLastName">Surname <span style="color:red;">*</span></label>
                   <input type="text" disabled class="form-control" ngModel="{{profile_info?.surname}}" id="inputLastName"
@@ -60,7 +60,7 @@
                     placeholder="Last Name">
                 </div>
               </div>
-              <div class="col-xl-3">
+              <div class="col-xl-4">
                 <label for="inputGender">Gender <span style="color:red;">*</span></label>
                 <nb-select placeholder="Gender" ngModel="{{ selectedGender }}" formControlName="genderCtrl"
                   [(selected)]="selectedGender" outline status="success">
@@ -69,14 +69,14 @@
                 </nb-select>
               </div>
 
-              <div class="col-xl-3">
+              <!-- <div class="col-xl-3">
                 <div class="form-group">
                   <label for="inputNationality">Nationality <span style="color:red;">*</span></label>
                   <input type="text" ngModel="{{profile_info?.citizenship}}" class="form-control" id="inputNationality"
                     formControlName="nationalityCtrl" [ngClass]="{'form-control-danger': firstForm.controls.nationalityCtrl.invalid && (firstForm.controls.nationalityCtrl.dirty || firstForm.controls.nationalityCtrl.touched)}"
                     placeholder="Nationality">
                 </div>
-              </div>
+              </div> -->
             </div>
             <div class="row">
               <div class="col-xl-3">
@@ -93,7 +93,7 @@
                     placeholder="Email">
                 </div>
               </div>
-              <div class="col-xl-2">
+              <!-- <div class="col-xl-2">
                 <label for="inputCountry">Country <span style="color:red;">*</span></label>
                 <mat-form-field style="width:135px;">
                   <mat-select [(ngModel)]="Country_id_personal" name="selectedCountry"   formControlName="countryidCtrl"   (ngModelChange)="onValueChange_PhoneCode($event)">
@@ -103,8 +103,8 @@
                   </mat-select>
                 </mat-form-field>
                 <span *ngIf="countryValidation===false" style="color:red;">Please select country</span> 
-            </div>
-            <div class="col-xl-2">
+            </div> -->
+            <div class="col-xl-3">
                 <label for="inputCountryCode">Country Code <span style="color:red;">*</span></label>
                 <div class="input-group">
                     <div class="dropdown input-group-prepend input-group-btn" ngbDropdown>
@@ -112,7 +112,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-2">
+            <div class="col-xl-3">
                 <label for="inputMobile">Mobile number <span style="color:red;">*</span></label>
                 <div class="input-group">
                     <input type="text" class="form-control"  ngModel="{{profile_info?.mobile}}" formControlName="phoneCtrl" nbInput placeholder="Mobile number" [ngClass]="{'form-control-danger': firstForm.controls.phoneCtrl.invalid && (firstForm.controls.phoneCtrl.dirty ||  firstForm.controls.phoneCtrl.touched)}">
@@ -120,7 +120,7 @@
             </div>
             </div>
             <div class="row">
-              <div class="col-xl-4">
+              <div class="col-xl-5">
                 <div class="form-group">
                   <label for="inputPermAdd">Permanent Address <span style="color:red;">*</span></label>
                   <textarea ngModel="{{profile_info?.address1}}" class="form-control" id="inputPermAdd" formControlName="permAddCtrl"
@@ -128,7 +128,7 @@
                     placeholder="Permanent Address"></textarea>
                 </div>
               </div>
-              <div class="col-xl-2">
+              <div class="col-xl-3">
                 <div class="form-group">
                   <label for="inputCity">City <span style="color:red;">*</span></label>
                   <input ngModel="{{profile_info?.city}}" type="text" class="form-control" id="inputCity"
@@ -152,7 +152,7 @@
                     placeholder="Postal Code">
                 </div>
               </div>
-              <div class="col-xl-2">
+              <!-- <div class="col-xl-2">
                 <label for="inputPermCountry">Country <span style="color:red;">*</span></label>
                 <mat-form-field style="width:135px;">
                   <mat-select [(ngModel)]="permCountry" name="permCountry" formControlName="permCountryCtrl">
@@ -162,10 +162,10 @@
                   </mat-select>
                 </mat-form-field>
                 <span *ngIf="permcountryValidation===false" style="color:red;">Please select country</span> 
-              </div>
+              </div> -->
             </div>
             <div class="row">
-              <div class="col-xl-4">
+              <div class="col-xl-5">
                 <div class="form-group">
                   <label for="inputAlterAdd">Alternate Address(Optional)</label>
                   <textarea ngModel="{{profile_info?.address2}}" class="form-control" id="inputAlterAdd"
@@ -173,7 +173,7 @@
                     placeholder="Alternate Address"></textarea>
                 </div>
               </div>
-              <div class="col-xl-2">
+              <div class="col-xl-3">
                 <div class="form-group">
                   <label for="inputAlterCity">City</label>
                   <input ngModel="{{profile_info?.nationality_city}}" type="text" class="form-control" id="inputAlterCity"
@@ -197,7 +197,7 @@
                     placeholder="Postal Code">
                 </div>
               </div>
-              <div class="col-xl-2">
+              <!-- <div class="col-xl-2">
                 <label for="inputAlterCountry">Country</label>
                 <mat-form-field style="width:135px;">
                   <mat-select [(ngModel)]="altCountry" name="selectedCountry"   formControlName="altCountryCtrl">
@@ -207,9 +207,9 @@
                   </mat-select>
                 </mat-form-field>
                  <span *ngIf="altcountryValidation===false" style="color:red;">Please select country</span> 
-              </div>
+              </div> -->
             </div>
-            <h3>Passport details</h3>
+            <!-- <h3>Passport details</h3>
             <div class="row">
               <div class="col-xl-6">
                 <div class="form-group">
@@ -230,8 +230,8 @@
                 </mat-form-field>
                 <span *ngIf="passportcountryValidation===false" style="color:red;">Please select country</span> 
               </div>
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
               <div class="col-xl-6">
                 <label for="inputPassIssue">Passport - Date of Issue <span style="color:red;">*</span></label>
                 <input readonly [(ngModel)]="date_of_issuance"  class="form-control" id="inputPassIssue" [ngClass]="{'form-control-danger': firstForm.controls.passIssueCtrl.invalid && (firstForm.controls.passIssueCtrl.dirty || firstForm.controls.passIssueCtrl.touched)}"
@@ -245,7 +245,7 @@
                   nbInput placeholder="Date of Expiry" [nbDatepicker]="expirydate">
                 <nb-datepicker #expirydate [(date)]="date" [min]="max"></nb-datepicker>
               </div>
-            </div>
+            </div> -->
             <!-- <div class="row" style="padding-top: 10px;padding-left: 350px;"> -->
             <button nbButton nbStepperNext (click)="onFirstSubmit()" style="margin-top:10px;" >next</button>
             <div *ngIf="errorflag == 1" style="font-weight: 600;color: red;width:100%;outline:none;border:none;text-align: center;margin-bottom: 7px;padding: 0%">
@@ -276,7 +276,7 @@
                     id="Rtxt" class="form-control" formControlName="relationCtrl" [ngClass]="{'form-control-danger': secondForm.controls.relationCtrl.invalid && (secondForm.controls.relationCtrl.dirty || secondForm.controls.relationCtrl.touched)}">
                 </div>
               </div>
-              <div class="col-xl-4" *ngIf="countryofbirth!=154">
+              <div class="col-xl-4">
                 <div class="form-group">
                   <label for="DOBtxt">Date of Birth</label>
                   <input nbInput [(ngModel)]="guardianDOB" placeholder="Select Date of Birth" id="DOBtxt" class="form-control"
@@ -284,13 +284,13 @@
                   <nb-datepicker #formpicker></nb-datepicker>
                 </div>
               </div>
-              <div class="col-xl-4" *ngIf="countryofbirth==154">
+              <!-- <div class="col-xl-4" >
                 <div class="form-group">
                   <label for="cntxt">Citizenship number <span style="color:red;">*</span></label>
                   <input type="number" [(ngModel)]="guardianCitizenshipNumber" placeholder="Enter Citizenship Number"
                     id="cntxt" class="form-control" formControlName="guardianDOBCtrl" [ngClass]="{'form-control-danger': secondForm.controls.guardianDOBCtrl.invalid && (secondForm.controls.guardianDOBCtrl.dirty || secondForm.controls.guardianDOBCtrl.touched)}">
                 </div>
-              </div>
+              </div> -->
             </div>
             <div class="row">
               <div class="col-xl-4">
@@ -300,8 +300,22 @@
                     class="form-control" formControlName="guardianEmailCtrl" [ngClass]="{'form-control-danger': secondForm.controls.guardianEmailCtrl.invalid && (secondForm.controls.guardianEmailCtrl.dirty || secondForm.controls.guardianEmailCtrl.touched)}">
                 </div>
               </div>
-
               <div class="col-xl-4">
+                  <label for="inputCountryCode">Country Code <span style="color:red;">*</span></label>
+                  <div class="input-group">
+                      <div class="dropdown input-group-prepend input-group-btn" ngbDropdown>
+                          <input readonly class="form-control"  ngModel="{{mobile_country_code}}"  id="inputPhonecode" formControlName="guardianCountryCodeCtrl" [ngClass]="{'form-control-danger': secondForm.controls.guardianCountryCodeCtrl.invalid && (secondForm.controls.guardianCountryCodeCtrl.dirty ||  secondForm.controls.guardianCountryCodeCtrl.touched)}" nbInput placeholder="+ 91" >
+                      </div>
+                  </div>
+                </div>
+                <div class="col-xl-4">
+                    <label for="inputMobile">Mobile number <span style="color:red;">*</span></label>
+                    <div class="input-group">
+                        <input type="text" class="form-control"  ngModel="{{guardian_info?.mobile}}" formControlName="guardianMobileCtrl" nbInput placeholder="Mobile number" [ngClass]="{'form-control-danger': secondForm.controls.guardianMobileCtrl.invalid && (secondForm.controls.guardianMobileCtrl.dirty ||  secondForm.controls.guardianMobileCtrl.touched)}">
+                    </div>
+                </div>
+
+              <!-- <div class="col-xl-4">
                 <div class="form-group">
                   <label for="Ctxt">Country <span style="color:red;">*</span></label>
                   <mat-form-field>
@@ -313,30 +327,14 @@
                   </mat-form-field>
                   <span *ngIf="guardiancountryValidation===false" style="color:red;">Please select country</span> 
                 </div>
-              </div>
-              <div class="col-xl-4">
+              </div> -->
+              <!-- <div class="col-xl-4">
                 <div class="form-group">
                   <label for="Ctxt">Citizenship <span style="color:red;">*</span></label>
                   <input type="text" ngModel="{{guardian_info?.citizenship}}" placeholder="Enter citizenship" id="MNtxt" class="form-control" formControlName="citizenshipCtrl"
                     [ngClass]="{'form-control-danger': secondForm.controls.citizenshipCtrl.invalid && (secondForm.controls.citizenshipCtrl.dirty || secondForm.controls.citizenshipCtrl.touched)}">
                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xl-2">
-                <label for="inputCountryCode">Country Code <span style="color:red;">*</span></label>
-                <div class="input-group">
-                    <div class="dropdown input-group-prepend input-group-btn" ngbDropdown>
-                        <input readonly class="form-control"  ngModel="{{mobile_country_code}}"  id="inputPhonecode" formControlName="guardianCountryCodeCtrl" [ngClass]="{'form-control-danger': secondForm.controls.guardianCountryCodeCtrl.invalid && (secondForm.controls.guardianCountryCodeCtrl.dirty ||  secondForm.controls.guardianCountryCodeCtrl.touched)}" nbInput placeholder="Phonecode" >
-                    </div>
-                </div>
-              </div>
-              <div class="col-xl-2">
-                  <label for="inputMobile">Mobile number <span style="color:red;">*</span></label>
-                  <div class="input-group">
-                      <input type="text" class="form-control"  ngModel="{{guardian_info?.mobile}}" formControlName="guardianMobileCtrl" nbInput placeholder="Mobile number" [ngClass]="{'form-control-danger': secondForm.controls.guardianMobileCtrl.invalid && (secondForm.controls.guardianMobileCtrl.dirty ||  secondForm.controls.guardianMobileCtrl.touched)}">
-                  </div>
-              </div>
+              </div> -->
             </div>
             <br>
             <br>
@@ -405,7 +403,7 @@
                       formControlName="perm_guardian_state" class="form-control" [ngClass]="{'form-control-danger': secondForm.controls.perm_guardian_state.invalid && (secondForm.controls.perm_guardian_state.dirty  || secondForm.controls.perm_guardian_state.touched)}">
                   </div>
                 </div>
-                <div class="col-xl-4">
+                <!-- <div class="col-xl-4">
                   <div class="form-group">
                       <label for="PermCountry">Country <span style="color:red;">*</span></label>
                     <nb-select disabled ngModel="{{permCountry_guardian}}" placeholder="Select country" status="success"
@@ -413,7 +411,7 @@
                       <nb-option value="{{country.id}}" *ngFor="let country of Countries;">{{country.name}}</nb-option>
                     </nb-select>
                   </div>
-                </div>
+                </div> -->
                 <!-- <div class="col-xl-4">
                   <div class="form-group">
                     <input [readonly]="true" type="text" ngModel="{{profile_info?.citizenship}}" formControlName="perm_guardian_citizenship"
@@ -455,7 +453,7 @@
                       formControlName="alt_guardian_state" class="form-control" [ngClass]="{'form-control-danger': secondForm.controls.alt_guardian_state.invalid && (secondForm.controls.alt_guardian_state.dirty  || secondForm.controls.alt_guardian_state.touched)}">
                   </div>
                 </div>
-                <div class="col-xl-4">
+                <!-- <div class="col-xl-4">
                   <div class="form-group">
                       <label for="Country">Country<span style="color:red;">*</span></label>
                     <nb-select disabled ngModel="{{altCountry_guardian}}" formControlName="alt_guardian_country"
@@ -463,7 +461,7 @@
                       <nb-option value="{{country.id}}" *ngFor="let country of Countries">{{country.name}}</nb-option>
                     </nb-select>
                   </div>
-                </div>
+                </div> -->
                 <!-- <div class="col-xl-4">
                   <div class="form-group">
                     <input [readonly]="true" ngModel="{{profile_info?.citizenship}}" type="text" formControlName="alt_guardian_citizenship"
@@ -502,7 +500,7 @@
                       formControlName="other_guardian_state" class="form-control" [ngClass]="{'form-control-danger': secondForm.controls.other_guardian_state.invalid && (secondForm.controls.other_guardian_state.dirty  || secondForm.controls.other_guardian_state.touched)}">
                   </div>
                 </div>
-                <div class="col-xl-4">
+                <!-- <div class="col-xl-4">
                   <div class="form-group">
                       <label for="Country">Country<span style="color:red;">*</span></label>
                       <mat-form-field>
@@ -514,7 +512,7 @@
                       </mat-form-field>
                     <span *ngIf="guardianOtherCountryValidation===false" style="color:red;">Please select country</span> 
                   </div>
-                </div>
+                </div> -->
                 <!-- <div class="col-xl-4">
                   <div class="form-group">
                     <input ngModel="{{guardian_other_address_values?.citizenship}}" type="text" placeholder="Enter citizenship"
@@ -541,7 +539,7 @@
             <!-- <form [formGroup]="thirdForm" class="step-container">      -->
               <form [formGroup]="thirdForm" class="step-container">
                 <input type="hidden" ngModel="{{hsc?.college_university}}" id="hscUniversity" formControlName="hscUniversityCtrl">
-                <input type="hidden" ngModel="{{cbse?.university}}" id="cbseUniversity" formControlName="cbseUniversityCtrl">
+                <!-- <input type="hidden" ngModel="{{cbse?.university}}" id="cbseUniversity" formControlName="cbseUniversityCtrl"> -->
                 <input type="hidden" ngModel="{{degree.degree_university}}" id="degreeUniversity" formControlName="degreeUniversityCtrl">
               </form>
             <table class="table">
@@ -557,7 +555,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <!-- <tr>
                   <td>CBSE / ICSE / Grade Xth<span style="color:red;">*</span></td>
                   <td ngModel="{{cbse?.university}}" ngDefaultControl>{{cbse?.university}}</td>
                   <td ngModel="{{cbse?.school_name}}" ngDefaultControl>{{cbse?.school_name}}</td>
@@ -565,7 +563,7 @@
                   <td ngModel="{{cbse?.school_marks}}" ngDefaultControl>{{cbse?.school_marks}}</td>
                   <td><button nbButton (click)="open(1)">Edit</button></td>
                   <td><button nbButton (click)="delete_education_details('cbse')">Delete</button></td>
-                </tr>
+                </tr> -->
                 <tr>
                   <td>PRE-BOARD Exam /Grade XII<span style="color:red;">*</span></td>
                   <td ngModel="{{hsc?.college_university}}" ngDefaultControl>{{hsc?.college_university}}</td>
@@ -793,13 +791,13 @@
         </nb-step>
         <nb-step [completed]="tabcheck5" [stepControl]="fifthForm" label="5th step">
           <div class="row"><h3>Transcript Upload   </h3><span style="color:red; font-size: x-large;">  ( * indicates required transcript )</span></div>
-          <form [formGroup]="fifthForm" (ngSubmit)="onFifthSubmit(profile_info?.student_category)" class="step-container"
+          <form [formGroup]="fifthForm" class="step-container"
             validate-non-visible-controls>
             <ng-template #templateRef>
-              <span>Please upload your transcript in .jpeg or .jpg or .png formats only and max image size should be 5 MB.</span>
+              <span>Please upload your transcript in .jpeg or .jpg or .png formats only and max image size should be 2 MB.</span>
             </ng-template>
             <ng-template #templateRef1>
-              <span>Please upload your transcript in .jpeg or .jpg or .png or .pdf formats only and max image size should be 5 MB.</span>
+              <span>Please upload your transcript in .jpeg or .jpg or .png or .pdf formats only and max image size should be 2 MB.</span>
             </ng-template>
             <div>
               <div class="row">
@@ -845,10 +843,6 @@
                           <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
                             document.Please remove this document and upload correct document</span>
                         </div>
-                      </div>
-                      <div *ngIf="fifthForm.controls.passportSizePhotoCtrl.invalid && (fifthForm.controls.passportSizePhotoCtrl.dirty || fifthForm.controls.passportSizePhotoCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
                       </div>
                     </nb-card-body>
                   </nb-card>
@@ -896,222 +890,61 @@
                             document.Please remove this document and upload correct document</span>
                         </div>
                       </div>
-                      <div *ngIf="fifthForm.controls.studSignCtrl.invalid && (fifthForm.controls.studSignCtrl.dirty || fifthForm.controls.studSignCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
-                      </div>
                     </nb-card-body>
                   </nb-card>
                 </div>
-                <div *ngIf="!(country_birth == '154' || country_birth == '25')" class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading3" nbSpinnerStatus="danger"
+                <div class="col-xl-4">
+                  <nb-card accent="primary" status="warning" [nbSpinner]="loading10" nbSpinnerStatus="danger"
                     nbSpinnerSize="xlarge">
-                    <nb-card-header>Student's Passport<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="It is an official document issued by a government, certifying the holder's identity and citizenship and entitling them to travel under its protection to and from foreign countries.It is a mandatory document to be able to travel outside your country.You are expected to scan the first page of your passport which contains all your details and your photograph and also the last page if it contains any details and upload it in the prescribed format.In case you do not hold a passport, kindly apply for the same and only upon its arrival can you proceed with this process."
+                    <nb-card-header>Experience Certificate
+                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 2 MB."
                         nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="Passport?.filename == undefined && (SamplePassport != null || SamplePassport != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SamplePassport,profile_info?.country_birth)"
-                        style=" margin-top:10px;">Sample</button>
-                        <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
+                      <button type='button' *ngIf="ExperienceCertificate?.filename == undefined && (SampleExperienceCertificate != null || SampleExperienceCertificate != undefined )"
+                        nbButton hero status="primary" class="col-sm-12 col-xs-12" class="col-sm-12 col-xs-12" size="xsmall"
+                        (click)="sampleDownload(SampleExperienceCertificate,profile_info?.country_birth)" style=" margin-top:10px;">Sample</button>
+                        <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef" nbPopoverMode="hover"></nb-badge>
                     </nb-card-header>
                     <nb-card-body class="form-control">
                       <div class="row">
-                        <div *ngIf="Passport?.filename==undefined || Passport?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload ngDefaultControl formControlName="studPassportCtrl" [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
-                            mode="basic" auto="true" chooseLabel="Browse" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Passport"
+                        <div *ngIf="ExperienceCertificate?.filename==undefined || ExperienceCertificate?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
+                          <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
+                            chooseLabel="Browse" formControlName="experienceCertificateCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Experience Certificate"
                             maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'3')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.studPassportCtrl,'3')"
-                            (onSelect)="onSelect($event);this.fifthForm.controls.studPassportCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'3')">
+                            (onBeforeSend)="onBeforeSend($event,'10')" 
+                            (onUpload)="onUpload($event,this.fifthForm.controls.studSignCtrl,'10')"
+                            (onSelect)="onSelect($event,'image');this.fifthForm.controls.studSignCtrl.reset();"
+                            (onError)="onErrorFileUpload($event,'10')">
                           </p-fileUpload>
                         </div>
-                        <div *ngIf="Passport?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(Passport?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="Passport?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" Passport?.filename | auth" />
+                        <div *ngIf="ExperienceCertificate?.filename!=undefined" class="row">
+                          <div (click)="imagePopup(ExperienceCertificate?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="ExperienceCertificate?.type!='pdf'">
+                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" ExperienceCertificate?.filename | auth" />
                           </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="Passport?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(Passport?.filename)"
+                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="ExperienceCertificate?.type=='pdf'">
+                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(ExperienceCertificate?.filename)"
                               status="success">Download</button>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Passport',profile_info?.id,Passport?.transcriptId,'3')"
+                            <button nbButton type='button' size="small" (click)="deleteTranscript('Experience Certificate',profile_info?.id,ExperienceCertificate?.transcriptId,'2')"
                               status="success">Delete</button>
                           </div>
                         </div>
                       </div>
-                      <div *ngIf="Passport?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="Passport?.lock_transcript == false">
+                      <div *ngIf="ExperienceCertificate?.filename!=undefined" class="row">
+                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="ExperienceCertificate?.lock_transcript == false">
                           <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
                             document.Please remove this document and upload correct document</span>
                         </div>
-                      </div>
-                      <div *ngIf="fifthForm.controls.studPassportCtrl.invalid && (fifthForm.controls.studPassportCtrl.dirty || fifthForm.controls.studPassportCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
-                      </div>
-                    </nb-card-body>
-                  </nb-card>
-                </div>
-                <div *ngIf="(country_birth == '154' || country_birth == '25')" class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading4" nbSpinnerStatus="danger"
-                    nbSpinnerSize="xlarge">
-                    <nb-card-header>Country Id Card<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
-                        nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="CountryIdCard?.filename == undefined && (SampleCountryIdCard != null || SampleCountryIdCard != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleCountryIdCard,profile_info?.country_birth)"
-                        style=" margin-top:10px;">Sample</button>
-                        <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
-                    </nb-card-header>
-                    <nb-card-body class="form-control">
-                      <div class="row">
-                        <div *ngIf="CountryIdCard?.filename==undefined || CountryIdCard?.lock_transcript == false"
-                          class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload ngDefaultControl formControlName="countryIdCardCtrl" [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'"
-                            mode="basic" auto="true" chooseLabel="Browse" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Country Id Card"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'4')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.countryIdCardCtrl,'4')"
-                            (onSelect)="onSelect($event);this.fifthForm.controls.countryIdCardCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'4')">
-                          </p-fileUpload>
-                        </div>
-                        <div *ngIf="CountryIdCard?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(CountryIdCard?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="Passport?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" CountryIdCard?.filename | auth" />
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="Passport?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(CountryIdCard?.filename)"
-                              status="success">Download</button>
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Country Id Card',profile_info?.id,CountryIdCard?.transcriptId,'4')"
-                              status="success">Delete</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div *ngIf="CountryIdCard?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="CountryIdCard?.lock_transcript == false">
-                          <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
-                            document.Please remove this document and upload correct document</span>
-                        </div>
-                      </div>
-                      <div *ngIf="fifthForm.controls.countryIdCardCtrl.invalid && (fifthForm.controls.countryIdCardCtrl.dirty || fifthForm.controls.countryIdCardCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
                       </div>
                     </nb-card-body>
                   </nb-card>
                 </div>
               </div>
-              <div class="row">
-                <div *ngIf="(country_birth == '154' && appearance == 'appeared')" class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading5" nbSpinnerStatus="danger"
-                    nbSpinnerSize="xlarge">
-                    <nb-card-header>Admit Card<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Marksheet refers to the statement of marks issued by the authority/board, depicting a students marks obtained/achieved compared to the total number of marks obtainable/tested for.It also contains other details like the name, seat number etc.Scan the marksheet of your 12th standard or higher secondary school or whatsoever it is named as and upload it in the prescribed format."
-                        nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="AdmitCard?.filename == undefined && (SampleAdmitCard != null || SampleAdmitCard != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleAdmitCard,profile_info?.country_birth,'5')"
-                        style=" margin-top:10px;">Sample</button>
-                        <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
-                    </nb-card-header>
-                    <nb-card-body class="form-control">
-                      <div class="row">
-                        <div *ngIf="AdmitCard?.filename==undefined || AdmitCard?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
-                            chooseLabel="Browse" formControlName="admitCardCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Admit Card"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'5')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.admitCardCtrl,'5')"
-                            (onSelect)="onSelect($event);this.fifthForm.controls.admitCardCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'5')">
-                          </p-fileUpload>
-                        </div>
-                        <div *ngIf="AdmitCard?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(AdmitCard?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="AdmitCard?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" AdmitCard?.filename | auth" />
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="AdmitCard?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(AdmitCard?.filename)"
-                              status="success">Download</button>
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Admit Card',profile_info?.id,AdmitCard?.transcriptId,'5')"
-                              status="success">Delete</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div *ngIf="AdmitCard?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="AdmitCard?.lock_transcript == false">
-                          <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
-                            document.Please remove this document and upload correct document</span>
-                        </div>
-                      </div>
-                      <div *ngIf="fifthForm.controls.admitCardCtrl.invalid && (fifthForm.controls.admitCardCtrl.dirty || fifthForm.controls.admitCardCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
-                      </div>
-                    </nb-card-body>
-                  </nb-card>
-                </div>
+              <div *ngIf="degreeCheck==false" class="row">
                 <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading26" nbSpinnerStatus="danger"
+                  <nb-card accent="primary" status="warning" [nbSpinner]="loading3" nbSpinnerStatus="danger"
                     nbSpinnerSize="xlarge">
-                    <nb-card-header>Grade X Marksheet<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Marksheet refers to the statement of marks issued by the authority/board, depicting a students marks obtained/achieved compared to the total number of marks obtainable/tested for.It also contains other details like the name, seat number etc.Scan the marksheet of your 10th standard or higher secondary school or whatsoever it is named as and upload it in the prescribed format."
-                        nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="SSCcertificate?.filename == undefined && (SampleSSCcertificate != null || SampleSSCcertificate != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleSSCcertificate,profile_info?.country_birth)"
-                        style=" margin-top:10px;">Sample</button>
-                        <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
-                    </nb-card-header>
-                    <nb-card-body class="form-control">
-                      <div class="row">
-                        <div *ngIf="SSCcertificate?.filename==undefined || SSCcertificate?.lock_transcript == false"
-                          class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
-                            chooseLabel="Browse" formControlName="gradeXmarkCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=SSC Certificate"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'26')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.gradeXmarkCtrl,'26')"
-                            (onSelect)="onSelect($event);this.fifthForm.controls.gradeXmarkCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'26')">
-                          </p-fileUpload>
-                        </div>
-                        <div *ngIf="SSCcertificate?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(SSCcertificate?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="SSCcertificate?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" SSCcertificate?.filename | auth" />
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="SSCcertificate?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(SSCcertificate?.filename)"
-                              status="success">Download</button>
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('SSC Certificate',profile_info?.id,SSCcertificate?.transcriptId,'26')"
-                              status="success">Delete</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div *ngIf="SSCcertificate?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="SSCcertificate?.lock_transcript == false">
-                          <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
-                            document.Please remove this document and upload correct document</span>
-                        </div>
-                      </div>
-                      <div *ngIf="fifthForm.controls.gradeXmarkCtrl.invalid && (fifthForm.controls.gradeXmarkCtrl.dirty || fifthForm.controls.gradeXmarkCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
-                      </div>
-                    </nb-card-body>
-                  </nb-card>
-                </div>
-                <div *ngIf="!(country_birth == '154' && appearance == 'appeared')"
-                  class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading6" nbSpinnerStatus="danger"
-                    nbSpinnerSize="xlarge">
-                    <nb-card-header>Grade XII Marksheet<span *ngIf="appearance == 'disappeared'" style="color:red; font-size: x-large;">*</span>
+                    <nb-card-header>Grade XII Marksheet<span style="color:red; font-size: x-large;">*</span>
                       <i class="fa fa-info-circle" nbPopover="Marksheet refers to the statement of marks issued by the authority/board, depicting a students marks obtained/achieved compared to the total number of marks obtainable/tested for.It also contains other details like the name, seat number etc.Scan the marksheet of your 12th standard or higher secondary school or whatsoever it is named as and upload it in the prescribed format."
                         nbPopoverMode="hover"></i>
                       <button type='button' *ngIf="HSCcertificate?.filename == undefined && (SampleHSCcertificate != null || SampleHSCcertificate != undefined )"
@@ -1126,10 +959,10 @@
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="gradeXIImarkCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=HSC Certificate"
                             maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'6')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.gradeXIImarkCtrl,'6')"
+                            (onBeforeSend)="onBeforeSend($event,'3')" 
+                            (onUpload)="onUpload($event,this.fifthForm.controls.gradeXIImarkCtrl,'3')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.gradeXIImarkCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'6')">
+                            (onError)="onErrorFileUpload($event,'3')">
                           </p-fileUpload>
                         </div>
                         <div *ngIf="HSCcertificate?.filename!=undefined" class="row">
@@ -1141,7 +974,7 @@
                               status="success">Download</button>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('HSC Certificate',profile_info?.id,HSCcertificate?.transcriptId,'6')"
+                            <button nbButton type='button' size="small" (click)="deleteTranscript('HSC Certificate',profile_info?.id,HSCcertificate?.transcriptId,'3')"
                               status="success">Delete</button>
                           </div>
                         </div>
@@ -1152,197 +985,49 @@
                             document.Please remove this document and upload correct document</span>
                         </div>
                       </div>
-                      <div *ngIf="fifthForm.controls.gradeXIImarkCtrl.invalid && (fifthForm.controls.gradeXIImarkCtrl.dirty || fifthForm.controls.gradeXIImarkCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
-                      </div>
                     </nb-card-body>
                   </nb-card>
                 </div>
-                <div class="col-xl-4" *ngIf="profile_info?.student_category != 'Foreign National'">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading7" nbSpinnerStatus="danger"
-                    nbSpinnerSize="xlarge">
-                    <nb-card-header>School Passing Certificate
-                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
-                        nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="SchoolPassingCertificate?.filename == undefined && (SampleSchoolPassingCertificate != null || SampleSchoolPassingCertificate != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleSchoolPassingCertificate,profile_info?.country_birth)"
-                        style=" margin-top:10px;">Sample</button>
-                        <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
-                    </nb-card-header>
-                    <nb-card-body class="form-control">
-                      <div class="row">
-                        <div *ngIf="SchoolPassingCertificate?.filename==undefined || SchoolPassingCertificate?.lock_transcript == false"
-                          class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload name="file" mode="basic" auto="true" [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=School Passing Certificate"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'7')" 
-                            (onUpload)="onUpload($event,'','7')"
-                            (onError)="onErrorFileUpload($event,'7')"
-                            (onSelect)="onSelect($event);">
-                          </p-fileUpload>
-                        </div>
-                        <div *ngIf="SchoolPassingCertificate?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(SchoolPassingCertificate?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="SchoolPassingCertificate?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" SchoolPassingCertificate?.filename | auth" />
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="SchoolPassingCertificate?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(SchoolPassingCertificate?.filename)"
-                              status="success">Download</button>
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('School Passing Certificate',profile_info?.id,SchoolPassingCertificate?.transcriptId,'7')"
-                              status="success">Delete</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div *ngIf="SchoolPassingCertificate?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="SchoolPassingCertificate?.lock_transcript == false">
-                          <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
-                            document.Please remove this document and upload correct document</span>
-                        </div>
-                      </div>
-                    </nb-card-body>
-                  </nb-card>
-                </div>
-              </div>
-              <div class="row" *ngIf="profile_info?.student_category != 'Foreign National'">
                 <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading8" nbSpinnerStatus="danger"
+                  <nb-card accent="primary" status="warning" [nbSpinner]="loading4" nbSpinnerStatus="danger"
                     nbSpinnerSize="xlarge">
-                    <nb-card-header>Birth Certificate<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
+                    <nb-card-header>Leaving Certificate<span style="color:red; font-size: x-large;">*</span>
+                      <i class="fa fa-info-circle" nbPopover="Marksheet refers to the statement of marks issued by the authority/board, depicting a students marks obtained/achieved compared to the total number of marks obtainable/tested for.It also contains other details like the name, seat number etc.Scan the marksheet of your 12th standard or higher secondary school or whatsoever it is named as and upload it in the prescribed format."
                         nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="BirthCertificate?.filename == undefined && (SampleBirthCertificate != null || SampleBirthCertificate != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleBirthCertificate,profile_info?.country_birth)"
+                      <button type='button' *ngIf="Leavingcertificate?.filename == undefined && (SampleLeavingcertificate != null || SampleLeavingcertificate != undefined )"
+                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleLeavingcertificate,profile_info?.country_birth)"
                         style=" margin-top:10px;">Sample</button>
                         <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
                     </nb-card-header>
                     <nb-card-body class="form-control">
                       <div class="row">
-                        <div *ngIf="BirthCertificate?.filename==undefined || BirthCertificate?.lock_transcript == false"
+                        <div *ngIf="Leavingcertificate?.filename==undefined || Leavingcertificate?.lock_transcript == false"
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
-                            chooseLabel="Browse" formControlName="birthCertificateCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Birth Certificate"
+                            chooseLabel="Browse" formControlName="LeavingcertiCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Leaving Certificate"
                             maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'8')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.birthCertificateCtrl,'8')"
-                            (onSelect)="onSelect($event);this.fifthForm.controls.birthCertificateCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'8')">
+                            (onBeforeSend)="onBeforeSend($event,'4')" 
+                            (onUpload)="onUpload($event,this.fifthForm.controls.LeavingcertiCtrl,'4')"
+                            (onSelect)="onSelect($event);this.fifthForm.controls.LeavingcertiCtrl.reset();"
+                            (onError)="onErrorFileUpload($event,'4')">
                           </p-fileUpload>
                         </div>
-                        <div *ngIf="BirthCertificate?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(BirthCertificate?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="BirthCertificate?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" BirthCertificate?.filename | auth" />
+                        <div *ngIf="Leavingcertificate?.filename!=undefined" class="row">
+                          <div (click)="imagePopup(Leavingcertificate?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="Leavingcertificate?.type!='pdf'">
+                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" Leavingcertificate?.filename | auth" />
                           </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="BirthCertificate?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(BirthCertificate?.filename)"
+                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="Leavingcertificate?.type=='pdf'">
+                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(Leavingcertificate?.filename)"
                               status="success">Download</button>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Birth Certificate',profile_info?.id,BirthCertificate?.transcriptId,'8')"
+                            <button nbButton type='button' size="small" (click)="deleteTranscript('Leaving Certificate',profile_info?.id,Leavingcertificate?.transcriptId,'4')"
                               status="success">Delete</button>
                           </div>
                         </div>
                       </div>
-                      <div *ngIf="BirthCertificate?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="BirthCertificate?.lock_transcript == false">
-                          <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
-                            document.Please remove this document and upload correct document</span>
-                        </div>
-                      </div>
-                      <div *ngIf="fifthForm.controls.birthCertificateCtrl.invalid && (fifthForm.controls.birthCertificateCtrl.dirty || fifthForm.controls.birthCertificateCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
-                      </div>
-                    </nb-card-body>
-                  </nb-card>
-                </div>
-                <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading9" nbSpinnerStatus="danger"
-                    nbSpinnerSize="xlarge">
-                    <nb-card-header>Migration Certificate
-                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
-                        nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="MigrationCertificate?.filename == undefined && (SampleMigrationCertificate != null || SampleMigrationCertificate != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleMigrationCertificate,profile_info?.country_birth)"
-                        style=" margin-top:10px;">Sample</button>
-                        <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
-                    </nb-card-header>
-                    <nb-card-body class="form-control">
-                      <div class="row">
-                        <div *ngIf="MigrationCertificate?.filename==undefined || MigrationCertificate?.lock_transcript == false"
-                          class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload name="file" mode="basic" auto="true" [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Migration Certificate"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'9')" 
-                            (onUpload)="onUpload($event,'','9')"
-                            (onError)="onErrorFileUpload($event,'9')"
-                            (onSelect)="onSelect($event);">
-                          </p-fileUpload>
-                        </div>
-                        <div *ngIf="MigrationCertificate?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(MigrationCertificate?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="MigrationCertificate?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" MigrationCertificate?.filename | auth" />
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="MigrationCertificate?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(MigrationCertificate?.filename)"
-                              status="success">Download</button>
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Migration Certificate',profile_info?.id,MigrationCertificate?.transcriptId,'9')"
-                              status="success">Delete</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div *ngIf="MigrationCertificate?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="MigrationCertificate?.lock_transcript == false">
-                          <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
-                            document.Please remove this document and upload correct document</span>
-                        </div>
-                      </div>
-                    </nb-card-body>
-                  </nb-card>
-                </div>
-                <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading10" nbSpinnerStatus="danger"
-                    nbSpinnerSize="xlarge">
-                    <nb-card-header>Gap Certificate
-                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
-                        nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="GapCertificate?.filename == undefined && (SampleGapCertificate != null || SampleGapCertificate != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleGapCertificate,profile_info?.country_birth)"
-                        style=" margin-top:10px;">Sample</button>
-                        <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
-                    </nb-card-header>
-                    <nb-card-body class="form-control">
-                      <div class="row">
-                        <div *ngIf="GapCertificate?.filename==undefined || GapCertificate?.lock_transcript == false"
-                          class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload name="file" mode="basic" auto="true" [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Gap Certificate"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'10')" 
-                            (onUpload)="onUpload($event,'','10')"
-                            (onError)="onErrorFileUpload($event,'10')"
-                            (onSelect)="onSelect($event);">
-                          </p-fileUpload>
-                        </div>
-                        <div *ngIf="GapCertificate?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(GapCertificate?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="GapCertificate?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" GapCertificate?.filename | auth" />
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="GapCertificate?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(GapCertificate?.filename)"
-                              status="success">Download</button>
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Gap Certificate',profile_info?.id,GapCertificate?.transcriptId,'10')"
-                              status="success">Delete</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div *ngIf="GapCertificate?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="GapCertificate?.lock_transcript == false">
+                      <div *ngIf="Leavingcertificate?.filename!=undefined" class="row">
+                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="Leavingcertificate?.lock_transcript == false">
                           <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
                             document.Please remove this document and upload correct document</span>
                         </div>
@@ -1351,12 +1036,12 @@
                   </nb-card>
                 </div>
               </div>
-              <div class="row" *ngIf="degreeCheck == true">
+              <div *ngIf="degreeCheck==true" class="row">
                 <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading11" nbSpinnerStatus="danger"
+                  <nb-card accent="primary" status="warning" [nbSpinner]="loading5" nbSpinnerStatus="danger"
                     nbSpinnerSize="xlarge">
                     <nb-card-header>First Year Marksheet<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
+                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 2 MB."
                         nbPopoverMode="hover"></i>
                       <button type='button' *ngIf="FirstYearMarksheet?.filename == undefined && (SampleFirstYearMarksheet != null || SampleFirstYearMarksheet != undefined )"
                         nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleFirstYearMarksheet,profile_info?.country_birth)"
@@ -1370,10 +1055,10 @@
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="firstYearMarksheetCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=First Year Certificate"
                             maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'11')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.firstYearMarksheetCtrl,'11')"
+                            (onBeforeSend)="onBeforeSend($event,'5')" 
+                            (onUpload)="onUpload($event,this.fifthForm.controls.firstYearMarksheetCtrl,'5')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.firstYearMarksheetCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'11')">
+                            (onError)="onErrorFileUpload($event,'5')">
                           </p-fileUpload>
                         </div>
                         <div *ngIf="FirstYearMarksheet?.filename!=undefined" class="row">
@@ -1385,7 +1070,7 @@
                             <img class="img-responsive" style="width: 100px; height:100px;" [src]=" FirstYearMarksheet?.filename | auth" />
                           </div>
                           <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('School Passing Certificate',profile_info?.id,FirstYearMarksheet?.transcriptId,'11')"
+                            <button nbButton type='button' size="small" (click)="deleteTranscript('School Passing Certificate',profile_info?.id,FirstYearMarksheet?.transcriptId,'5')"
                               status="success">Delete</button>
                           </div>
                         </div>
@@ -1396,18 +1081,14 @@
                             document.Please remove this document and upload correct document</span>
                         </div>
                       </div>
-                      <div *ngIf="fifthForm.controls.firstYearMarksheetCtrl.invalid && (fifthForm.controls.firstYearMarksheetCtrl.dirty || fifthForm.controls.firstYearMarksheetCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
-                      </div>
                     </nb-card-body>
                   </nb-card>
                 </div>
                 <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading12" nbSpinnerStatus="danger"
+                  <nb-card accent="primary" status="warning" [nbSpinner]="loading6" nbSpinnerStatus="danger"
                     nbSpinnerSize="xlarge">
                     <nb-card-header>Second Year Marksheet<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
+                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 2 MB."
                         nbPopoverMode="hover"></i>
                       <button type='button' *ngIf="SecondYearMarksheet?.filename == undefined && (SampleSecondYearMarksheet != null || SampleSecondYearMarksheet != undefined )"
                         nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleSecondYearMarksheet,profile_info?.country_birth)"
@@ -1421,10 +1102,10 @@
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
                             chooseLabel="Browse" formControlName="secondYearMarksheetCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Second Year Certificate"
                             maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'12')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.secondYearMarksheetCtrl,'12')"
+                            (onBeforeSend)="onBeforeSend($event,'6')" 
+                            (onUpload)="onUpload($event,this.fifthForm.controls.secondYearMarksheetCtrl,'6')"
                             (onSelect)="onSelect($event);this.fifthForm.controls.secondYearMarksheetCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'12')">
+                            (onError)="onErrorFileUpload($event,'6')">
                           </p-fileUpload>
                         </div>
                         <div *ngIf="SecondYearMarksheet?.filename!=undefined" class="row">
@@ -1436,7 +1117,7 @@
                               status="success">Download</button>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Second Year Certificate',profile_info?.id,SecondYearMarksheet?.transcriptId,'12')"
+                            <button nbButton type='button' size="small" (click)="deleteTranscript('Second Year Certificate',profile_info?.id,SecondYearMarksheet?.transcriptId,'6')"
                               status="success">Delete</button>
                           </div>
                         </div>
@@ -1447,116 +1128,63 @@
                             document.Please remove this document and upload correct document</span>
                         </div>
                       </div>
-                      <div *ngIf="fifthForm.controls.secondYearMarksheetCtrl.invalid && (fifthForm.controls.secondYearMarksheetCtrl.dirty || fifthForm.controls.secondYearMarksheetCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
-                      </div>
                     </nb-card-body>
                   </nb-card>
                 </div>
                 <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading13" nbSpinnerStatus="danger"
+                  <nb-card accent="primary" status="warning" [nbSpinner]="loading7" nbSpinnerStatus="danger"
                     nbSpinnerSize="xlarge">
-                    <nb-card-header>Graduation Marksheet<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
+                    <nb-card-header>Third Year Marksheet<span style="color:red; font-size: x-large;">*</span>
+                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 2 MB."
                         nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="GraduationMarksheet?.filename == undefined && (SampleGraduationMarksheet != null || SampleGraduationMarksheet != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleGraduationMarksheet,profile_info?.country_birth)"
+                      <button type='button' *ngIf="ThirdYearMarksheet?.filename == undefined && (SampleThirdYearMarksheet != null || SampleThirdYearMarksheet != undefined )"
+                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleThirdYearMarksheet,profile_info?.country_birth)"
                         style=" margin-top:10px;">Sample</button>
                         <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
                     </nb-card-header>
                     <nb-card-body class="form-control">
                       <div class="row">
-                        <div *ngIf="GraduationMarksheet?.filename==undefined || GraduationMarksheet?.lock_transcript == false"
+                        <div *ngIf="ThirdYearMarksheet?.filename==undefined || ThirdYearMarksheet?.lock_transcript == false"
                           class="col-xl-6 col-sm-6 col-xs-6">
                           <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
-                            chooseLabel="Browse" formControlName="graduationMarksheetCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Graduation Certificate"
+                            chooseLabel="Browse" formControlName="thirdYearMarksheetCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Third Year Marksheet"
                             maxFileSize="2000000"
-                            (onBeforeSend)="onBeforeSend($event,'13')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.graduationMarksheetCtrl,'13')"
-                            (onSelect)="onSelect($event);this.fifthForm.controls.graduationMarksheetCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'13')">
+                            (onBeforeSend)="onBeforeSend($event,'7')" 
+                            (onUpload)="onUpload($event,this.fifthForm.controls.thirdYearMarksheetCtrl,'7')"
+                            (onSelect)="onSelect($event);this.fifthForm.controls.thirdYearMarksheetCtrl.reset();"
+                            (onError)="onErrorFileUpload($event,'7')">
                           </p-fileUpload>
                         </div>
-                        <div *ngIf="GraduationMarksheet?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(GraduationMarksheet?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="GraduationMarksheet?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" GraduationMarksheet?.filename | auth" />
+                        <div *ngIf="ThirdYearMarksheet?.filename!=undefined" class="row">
+                          <div (click)="imagePopup(ThirdYearMarksheet?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="ThirdYearMarksheet?.type!='pdf'">
+                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" ThirdYearMarksheet?.filename | auth" />
                           </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="GraduationMarksheet?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(GraduationMarksheet?.filename)"
+                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="ThirdYearMarksheet?.type=='pdf'">
+                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(ThirdYearMarksheet?.filename)"
                               status="success">Download</button>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Graduation Certificate',profile_info?.id,GraduationMarksheet?.transcriptId,'13')"
+                            <button nbButton type='button' size="small" (click)="deleteTranscript('Third Year Marksheet',profile_info?.id,ThirdYearMarksheet?.transcriptId,'7')"
                               status="success">Delete</button>
                           </div>
                         </div>
                       </div>
-                      <div *ngIf="GraduationMarksheet?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="GraduationMarksheet?.lock_transcript == false">
+                      <div *ngIf="ThirdYearMarksheet?.filename!=undefined" class="row">
+                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="ThirdYearMarksheet?.lock_transcript == false">
                           <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
                             document.Please remove this document and upload correct document</span>
                         </div>
-                      </div>
-                      <div *ngIf="fifthForm.controls.graduationMarksheetCtrl.invalid && (fifthForm.controls.graduationMarksheetCtrl.dirty || fifthForm.controls.graduationMarksheetCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
                       </div>
                     </nb-card-body>
                   </nb-card>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-xl-4" *ngIf="degreeCheck == true">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading14" nbSpinnerStatus="danger"
+              <div *ngIf="degreeCheck==true" class="row">
+                <div class="col-xl-4">
+                  <nb-card accent="primary" status="warning" [nbSpinner]="loading8" nbSpinnerStatus="danger"
                     nbSpinnerSize="xlarge">
-                    <nb-card-header>Convocation
-                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
-                        nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="Convocation?.filename == undefined && (SampleConvocation != null || SampleConvocation != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleConvocation,profile_info?.country_birth)"
-                        style=" margin-top:10px;">Sample</button>
-                        <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
-                    </nb-card-header>
-                    <nb-card-body class="form-control">
-                      <div class="row">
-                        <div *ngIf="Convocation?.filename==undefined || Convocation?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload name="file" mode="basic" [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" auto="true" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Convocation Certificate"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'14')" 
-                            (onUpload)="onUpload($event,null,'14')"
-                            (onError)="onErrorFileUpload($event,'14')"
-                            (onSelect)="onSelect($event);">
-                          </p-fileUpload>
-                        </div>
-                        <div *ngIf="Convocation?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(Convocation?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="Convocation?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" Convocation?.filename | auth" />
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="Convocation?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(Convocation?.filename)"
-                              status="success">Download</button>
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Convocation',profile_info?.id,Convocation?.transcriptId,'14')"
-                              status="success">Delete</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div *ngIf="Convocation?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="Convocation?.lock_transcript == false">
-                          <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
-                            document.Please remove this document and upload correct document</span>
-                        </div>
-                      </div>
-                    </nb-card-body>
-                  </nb-card>
-                </div>
-                <div class="col-xl-4" *ngIf="degreeCheck == true">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading15" nbSpinnerStatus="danger"
-                    nbSpinnerSize="xlarge">
-                    <nb-card-header>Passing Certificate
-                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
+                    <nb-card-header>Passing Certificate<span style="color:red; font-size: x-large;">*</span>
+                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 2 MB."
                         nbPopoverMode="hover"></i>
                       <button type='button' *ngIf="PassingCertificate?.filename == undefined && (SamplePassingCertificate != null || SamplePassingCertificate != undefined )"
                         nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SamplePassingCertificate,profile_info?.country_birth)"
@@ -1567,11 +1195,11 @@
                       <div class="row">
                         <div *ngIf="PassingCertificate?.filename==undefined || PassingCertificate?.lock_transcript == false"
                           class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload name="file" mode="basic" [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" auto="true" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Passing Certificate"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'15')" 
-                            (onUpload)="onUpload($event,null,'15')"
-                            (onError)="onErrorFileUpload($event,'15')"
+                          <p-fileUpload ngDefaultControl name="file" mode="basic" [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" auto="true" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Passing Certificate"
+                            maxFileSize="2000000" formControlName="passingCertificateCtrl"
+                            (onBeforeSend)="onBeforeSend($event,'8')" 
+                            (onUpload)="onUpload($event,null,'8')"
+                            (onError)="onErrorFileUpload($event,'8')"
                             (onSelect)="onSelect($event);">
                           </p-fileUpload>
                         </div>
@@ -1584,7 +1212,7 @@
                               status="success">Download</button>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Passing Certificate',profile_info?.id,PassingCertificate?.transcriptId,'15')"
+                            <button nbButton type='button' size="small" (click)="deleteTranscript('Passing Certificate',profile_info?.id,PassingCertificate?.transcriptId,'8')"
                               status="success">Delete</button>
                           </div>
                         </div>
@@ -1598,514 +1226,328 @@
                     </nb-card-body>
                   </nb-card>
                 </div>
-                <div *ngIf="profile_info?.student_category ==='PIO'" class="col-xl-4">
-                    <nb-card accent="primary" status="warning" [nbSpinner]="loading16" nbSpinnerStatus="danger"
-                      nbSpinnerSize="xlarge">
-                      <nb-card-header>Person Of Indian Origin (PIO) Card<span style="color:red; font-size: x-large;">*</span>
-                        <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
-                          nbPopoverMode="hover"></i>
-                        <button type='button' *ngIf="Pio?.filename == undefined && (SamplePio != null || SamplePio != undefined )"
-                          nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SamplePio,profile_info?.country_birth)"
-                          style=" margin-top:10px;">Sample</button>
-                          <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
-                      </nb-card-header>
-                      <nb-card-body class="form-control">
-                        <div class="row">
-                          <div *ngIf="Pio?.filename==undefined || Pio?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
-                            <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
-                              chooseLabel="Browse" formControlName="pioCardCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=PIO"
-                              maxFileSize="2000000" 
-                              (onBeforeSend)="onBeforeSend($event,'16')" 
-                              (onUpload)="onUpload($event,this.fifthForm.controls.pioCardCtrl,'16');"
-                              (onSelect)="onSelect($event);this.fifthForm.controls.pioCardCtrl.reset();"
-                              (onError)="onErrorFileUpload($event,'16')">
-                            </p-fileUpload>
-                          </div>
-                          <div *ngIf="Pio?.filename!=undefined" class="row">
-                            <div (click)="imagePopup(Pio?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="Pio?.type!='pdf'">
-                              <img class="img-responsive" style="width: 100px; height:100px;" [src]=" Pio?.filename | auth" />
-                            </div>
-                            <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="Pio?.type=='pdf'">
-                              <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(Pio?.filename)"
-                                status="success">Download</button>
-                            </div>
-                            <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                              <button nbButton type='button' size="small" (click)="deleteTranscript('PIO',profile_info?.id,Pio?.transcriptId,'16')"
-                                status="success">Delete</button>
-                            </div>
-                          </div>
-                        </div>
-                        <div *ngIf="Pio?.filename!=undefined" class="row">
-                          <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="Pio?.lock_transcript == false">
-                            <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
-                              document.Please remove this document and upload correct document</span>
-                          </div>
-                        </div>
-                        <div *ngIf="fifthForm.controls.pioCardCtrl.invalid && (fifthForm.controls.pioCardCtrl.dirty || fifthForm.controls.pioCardCtrl.touched)"
-                          class="alert alert-danger">
-                          Upload File.
-                        </div>
-                      </nb-card-body>
-                    </nb-card>
-                </div>
-                <div *ngIf="profile_info?.student_category ==='OCI'" class="col-xl-4">
-                    <nb-card accent="primary" status="warning" [nbSpinner]="loading17" nbSpinnerStatus="danger"
-                      nbSpinnerSize="xlarge">
-                      <nb-card-header>Overseas Citizenship of India (OCI) Card<span style="color:red; font-size: x-large;">*</span>
-                        <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
-                          nbPopoverMode="hover"></i>
-                        <button type='button' *ngIf="Oci?.filename == undefined && (SampleOci != null || SampleOci != undefined )"
-                          nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleOci,profile_info?.country_birth)"
-                          style=" margin-top:10px;">Sample</button>
-                          <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
-                      </nb-card-header>
-                      <nb-card-body class="form-control">
-                        <div class="row">
-                          <div *ngIf="Oci?.filename==undefined || Oci?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
-                            <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
-                              chooseLabel="Browse" formControlName="ociCardCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=OCI"
-                              maxFileSize="2000000" 
-                              (onBeforeSend)="onBeforeSend($event,'17')" 
-                              (onUpload)="onUpload($event,this.fifthForm.controls.ociCardCtrl,'17');"
-                              (onSelect)="onSelect($event);this.fifthForm.controls.ociCardCtrl.reset();"
-                              (onError)="onErrorFileUpload($event,'17')">
-                            </p-fileUpload>
-                          </div>
-                          <div *ngIf="Oci?.filename!=undefined" class="row">
-                            <div (click)="imagePopup(Oci?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="Oci?.type!='pdf'">
-                              <img class="img-responsive" style="width: 100px; height:100px;" [src]=" Oci?.filename | auth" />
-                            </div>
-                            <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="Oci?.type=='pdf'">
-                              <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(Oci?.filename)"
-                                status="success">Download</button>
-                            </div>
-                            <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                              <button nbButton type='button' size="small" (click)="deleteTranscript('OCI',profile_info?.id,Oci?.transcriptId,'17')"
-                                status="success">Delete</button>
-                            </div>
-                          </div>
-                        </div>
-                        <div *ngIf="Oci?.filename!=undefined" class="row">
-                          <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="Oci?.lock_transcript == false">
-                            <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
-                              document.Please remove this document and upload correct document</span>
-                          </div>
-                        </div>
-                        <div *ngIf="fifthForm.controls.ociCardCtrl.invalid && (fifthForm.controls.ociCardCtrl.dirty || fifthForm.controls.ociCardCtrl.touched)"
-                          class="alert alert-danger">
-                          Upload File.
-                        </div>
-                      </nb-card-body>
-                    </nb-card>
-                  </div>
-              </div>
-              <div class="row" *ngIf="profile_info?.student_category == 'NRI of Gulf' || profile_info?.student_category == 'NRI of SEAsia'">
                 <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading18" nbSpinnerStatus="danger"
+                  <nb-card accent="primary" status="warning" [nbSpinner]="loading9" nbSpinnerStatus="danger"
                     nbSpinnerSize="xlarge">
-                    <nb-card-header>Passport of Sponsor Parent<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
+                    <nb-card-header>Date of Birth Certificate<span style="color:red; font-size: x-large;">*</span>
+                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 2 MB."
                         nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="PassportSponsorParent?.filename == undefined && (SamplePassportSponsorParent != null || SamplePassportSponsorParent != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SamplePassportSponsorParent,profile_info?.country_birth)"
+                      <button type='button' *ngIf="dobCertificate?.filename == undefined && (SampledobCertificate != null || SampledobCertificate != undefined )"
+                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampledobCertificate,profile_info?.country_birth)"
                         style=" margin-top:10px;">Sample</button>
                         <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
                     </nb-card-header>
                     <nb-card-body class="form-control">
                       <div class="row">
-                        <div *ngIf="PassportSponsorParent?.filename==undefined || PassportSponsorParent?.lock_transcript == false"
+                        <div *ngIf="dobCertificate?.filename==undefined || dobCertificate?.lock_transcript == false"
                           class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
-                            chooseLabel="Browse" formControlName="passport_of_sponsor_parentCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Passport of Sponser Parent"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'18')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.passport_of_sponsor_parentCtrl,'18');"
-                            (onSelect)="onSelect($event);this.fifthForm.controls.passport_of_sponsor_parentCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'18')">
+                          <p-fileUpload ngDefaultControl name="file" mode="basic" [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" auto="true" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Date of Birth Certificate"
+                            maxFileSize="2000000" formControlName="dobCertificateCtrl"
+                            (onBeforeSend)="onBeforeSend($event,'9')" 
+                            (onUpload)="onUpload($event,null,'9')"
+                            (onError)="onErrorFileUpload($event,'9')"
+                            (onSelect)="onSelect($event);">
                           </p-fileUpload>
                         </div>
-                        <div *ngIf="PassportSponsorParent?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(PassportSponsorParent?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="PassportSponsorParent?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" PassportSponsorParent?.filename | auth" />
+                        <div *ngIf="dobCertificate?.filename!=undefined" class="row">
+                          <div (click)="imagePopup(dobCertificate?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="dobCertificate?.type!='pdf'">
+                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" dobCertificate?.filename | auth" />
                           </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="PassportSponsorParent?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(PassportSponsorParent?.filename)"
+                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="dobCertificate?.type=='pdf'">
+                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(dobCertificate?.filename)"
                               status="success">Download</button>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Passport of Sponser Parent',profile_info?.id,PassportSponsorParent?.transcriptId,'18')"
+                            <button nbButton type='button' size="small" (click)="deleteTranscript('Date of Birth Certificate',profile_info?.id,dobCertificate?.transcriptId,'9')"
                               status="success">Delete</button>
                           </div>
                         </div>
                       </div>
-                      <div *ngIf="PassportSponsorParent?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="PassportSponsorParent?.lock_transcript == false">
+                      <div *ngIf="dobCertificate?.filename!=undefined" class="row">
+                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="dobCertificate?.lock_transcript == false">
                           <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
                             document.Please remove this document and upload correct document</span>
                         </div>
-                      </div>
-                      <div *ngIf="fifthForm.controls.passport_of_sponsor_parentCtrl.invalid && (fifthForm.controls.passport_of_sponsor_parentCtrl.dirty || fifthForm.controls.passport_of_sponsor_parentCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
-                      </div>
-                    </nb-card-body>
-                  </nb-card>
-                </div>
-                <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading19" nbSpinnerStatus="danger"
-                    nbSpinnerSize="xlarge">
-                    <nb-card-header>Residence Permit (Visa Page Copy)<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
-                        nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="ResidencePermit?.filename == undefined && (SampleResidencePermit != null || SampleResidencePermit != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleResidencePermit,profile_info?.country_birth)"
-                        style=" margin-top:10px;">Sample</button>
-                        <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
-                    </nb-card-header>
-                    <nb-card-body class="form-control">
-                      <div class="row">
-                        <div *ngIf="ResidencePermit?.filename==undefined || ResidencePermit?.lock_transcript == false"
-                          class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
-                            chooseLabel="Browse" formControlName="resident_permitCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Visa of Sponser Parent"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'19')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.resident_permitCtrl,'19');"
-                            (onSelect)="onSelect($event);this.fifthForm.controls.resident_permitCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'19')">
-                          </p-fileUpload>
-                        </div>
-                        <div *ngIf="ResidencePermit?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(ResidencePermit?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="ResidencePermit?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" ResidencePermit?.filename | auth" />
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="ResidencePermit?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(ResidencePermit?.filename)"
-                              status="success">Download</button>
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Visa of Sponser Parent',profile_info?.id,ResidencePermit?.transcriptId,'19')"
-                              status="success">Delete</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div *ngIf="ResidencePermit?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="ResidencePermit?.lock_transcript == false">
-                          <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
-                            document.Please remove this document and upload correct document</span>
-                        </div>
-                      </div>
-                      <div *ngIf="fifthForm.controls.resident_permitCtrl.invalid && (fifthForm.controls.resident_permitCtrl.dirty || fifthForm.controls.resident_permitCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
-                      </div>
-                    </nb-card-body>
-                  </nb-card>
-                </div>
-                <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading20" nbSpinnerStatus="danger"
-                    nbSpinnerSize="xlarge">
-                    <nb-card-header>NRI Certificate of Sponsor Parent<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
-                        nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="NRICertiSponsor?.filename == undefined && (SampleNRICertiSponsor != null || SampleNRICertiSponsor != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleNRICertiSponsor,profile_info?.country_birth)"
-                        style=" margin-top:10px;">Sample</button>
-                        <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
-                    </nb-card-header>
-                    <nb-card-body class="form-control">
-                      <div class="row">
-                        <div *ngIf="NRICertiSponsor?.filename==undefined || NRICertiSponsor?.lock_transcript == false"
-                          class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png'" mode="basic" auto="true"
-                            chooseLabel="Browse" formControlName="NRI_certificate_sponsor_parentCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=NRI Certificate of Sponser"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'20')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.NRI_certificate_sponsor_parentCtrl,'20');"
-                            (onSelect)="onSelect($event);this.fifthForm.controls.NRI_certificate_sponsor_parentCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'20')">
-                          </p-fileUpload>
-                        </div>
-                        <div *ngIf="NRICertiSponsor?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(NRICertiSponsor?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="NRICertiSponsor?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" NRICertiSponsor?.filename | auth" />
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="NRICertiSponsor?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(NRICertiSponsor?.filename)"
-                              status="success">Download</button>
-                          </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('NRI Certificate of Sponser',profile_info?.id,NRICertiSponsor?.transcriptId,'20')"
-                              status="success">Delete</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div *ngIf="NRICertiSponsor?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="NRICertiSponsor?.lock_transcript == false">
-                          <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
-                            document.Please remove this document and upload correct document</span>
-                        </div>
-                      </div>
-                      <div *ngIf="fifthForm.controls.NRI_certificate_sponsor_parentCtrl.invalid && (fifthForm.controls.NRI_certificate_sponsor_parentCtrl.dirty || fifthForm.controls.NRI_certificate_sponsor_parentCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
                       </div>
                     </nb-card-body>
                   </nb-card>
                 </div>
               </div>
-              <div class="row" *ngIf="profile_info?.student_category == 'NRI of Gulf' || profile_info?.student_category == 'NRI of SEAsia'">
+              <div *ngIf="profile_info?.student_category != 'OPEN'" class="row">
                 <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading21" nbSpinnerStatus="danger"
+                  <nb-card accent="primary" status="warning" [nbSpinner]="loading11" nbSpinnerStatus="danger"
                     nbSpinnerSize="xlarge">
-                    <nb-card-header>Work Permit Of Sponsor Parent<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Work Permit of Sponser Parent -Country Id" nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="WorkPermit?.filename == undefined && (SampleWorkPermit != null || SampleWorkPermit != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleWorkPermit,profile_info?.country_birth)"
+                    <nb-card-header>Caste Ceritificate<span style="color:red; font-size: x-large;">*</span>
+                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 2 MB."
+                        nbPopoverMode="hover"></i>
+                      <button type='button' *ngIf="CasteCertificate?.filename == undefined && (SampleCasteCertificate != null || SampleCasteCertificate != undefined )"
+                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleCasteCertificate,profile_info?.country_birth)"
                         style=" margin-top:10px;">Sample</button>
                         <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
                     </nb-card-header>
                     <nb-card-body class="form-control">
                       <div class="row">
-                        <div *ngIf="WorkPermit?.filename==undefined || WorkPermit?.lock_transcript == false" class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
-                            chooseLabel="Browse" formControlName="work_permit_sponsor_parentCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Work Permit"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'21')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.work_permit_sponsor_parentCtrl,'21')"
-                            (onSelect)="onSelect($event);this.fifthForm.controls.work_permit_sponsor_parentCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'21')">
+                        <div *ngIf="CasteCertificate?.filename==undefined || CasteCertificate?.lock_transcript == false"
+                          class="col-xl-6 col-sm-6 col-xs-6">
+                          <p-fileUpload ngDefaultControl name="file" mode="basic" [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" auto="true" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Caste Certificate"
+                            maxFileSize="2000000" formControlName="casteCertificateCtrl"
+                            (onBeforeSend)="onBeforeSend($event,'11')" 
+                            (onUpload)="onUpload($event,null,'11')"
+                            (onError)="onErrorFileUpload($event,'11')"
+                            (onSelect)="onSelect($event);">
                           </p-fileUpload>
                         </div>
-                        <div *ngIf="WorkPermit?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(WorkPermit?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="WorkPermit?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" WorkPermit?.filename | auth" />
+                        <div *ngIf="CasteCertificate?.filename!=undefined" class="row">
+                          <div (click)="imagePopup(CasteCertificate?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="CasteCertificate?.type!='pdf'">
+                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" CasteCertificate?.filename | auth" />
                           </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="WorkPermit?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(WorkPermit?.filename)"
+                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="CasteCertificate?.type=='pdf'">
+                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(CasteCertificate?.filename)"
                               status="success">Download</button>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Work Permit',profile_info?.id,WorkPermit?.transcriptId,'21')"
+                            <button nbButton type='button' size="small" (click)="deleteTranscript('Caste Certificate',profile_info?.id,CasteCertificate?.transcriptId,'11')"
                               status="success">Delete</button>
                           </div>
                         </div>
                       </div>
-                      <div *ngIf="WorkPermit?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="WorkPermit?.lock_transcript == false">
+                      <div *ngIf="CasteCertificate?.filename!=undefined" class="row">
+                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="CasteCertificate?.lock_transcript == false">
                           <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
                             document.Please remove this document and upload correct document</span>
                         </div>
-                      </div>
-                      <div *ngIf="fifthForm.controls.work_permit_sponsor_parentCtrl.invalid && (fifthForm.controls.work_permit_sponsor_parentCtrl.dirty || fifthForm.controls.work_permit_sponsor_parentCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
                       </div>
                     </nb-card-body>
                   </nb-card>
                 </div>
                 <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading22" nbSpinnerStatus="danger"
+                  <nb-card accent="primary" status="warning" [nbSpinner]="loading12" nbSpinnerStatus="danger"
                     nbSpinnerSize="xlarge">
-                    <nb-card-header>Employment Letter Of Sponsor Parent<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Letter of Employment from Employer on Company Letterhead"
+                    <nb-card-header>Ration Card<span style="color:red; font-size: x-large;">*</span>
+                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 2 MB."
                         nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="EmploymentLetter?.filename == undefined && (SampleEmploymentLetter != null || SampleEmploymentLetter != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleEmploymentLetter,profile_info?.country_birth)"
+                      <button type='button' *ngIf="RationCard?.filename == undefined && (SampleRationCard != null || SampleRationCard != undefined )"
+                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleRationCard,profile_info?.country_birth)"
                         style=" margin-top:10px;">Sample</button>
                         <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
                     </nb-card-header>
                     <nb-card-body class="form-control">
                       <div class="row">
-                        <div *ngIf="EmploymentLetter?.filename == undefined || EmploymentLetter?.lock_transcript == false"
+                        <div *ngIf="RationCard?.filename==undefined || RationCard?.lock_transcript == false"
                           class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
-                            chooseLabel="Browse" formControlName="employment_letter_sponsor_parentCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Employment Letter"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'22')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.employment_letter_sponsor_parentCtrl,'22')"
-                            (onSelect)="onSelect($event);this.fifthForm.controls.employment_letter_sponsor_parentCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'22')">
+                          <p-fileUpload ngDefaultControl name="file" mode="basic" [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" auto="true" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Ration Card"
+                            maxFileSize="2000000" formControlName="rationCardCtrl"
+                            (onBeforeSend)="onBeforeSend($event,'12')" 
+                            (onUpload)="onUpload($event,null,'12')"
+                            (onError)="onErrorFileUpload($event,'12')"
+                            (onSelect)="onSelect($event);">
                           </p-fileUpload>
                         </div>
-                        <div *ngIf="EmploymentLetter?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(EmploymentLetter?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="EmploymentLetter?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" EmploymentLetter?.filename | auth" />
+                        <div *ngIf="RationCard?.filename!=undefined" class="row">
+                          <div (click)="imagePopup(RationCard?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="RationCard?.type!='pdf'">
+                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" RationCard?.filename | auth" />
                           </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="EmploymentLetter?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(EmploymentLetter?.filename)"
+                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="RationCard?.type=='pdf'">
+                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(RationCard?.filename)"
                               status="success">Download</button>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Employment Letter',profile_info?.id,EmploymentLetter?.transcriptId,'22')"
+                            <button nbButton type='button' size="small" (click)="deleteTranscript('Ration Card',profile_info?.id,RationCard?.transcriptId,'12')"
                               status="success">Delete</button>
                           </div>
                         </div>
                       </div>
-                      <div *ngIf="EmploymentLetter?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="EmploymentLetter?.lock_transcript == false">
+                      <div *ngIf="RationCard?.filename!=undefined" class="row">
+                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="RationCard?.lock_transcript == false">
                           <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
                             document.Please remove this document and upload correct document</span>
                         </div>
-                      </div>
-                      <div *ngIf="fifthForm.controls.employment_letter_sponsor_parentCtrl.invalid && (fifthForm.controls.employment_letter_sponsor_parentCtrl.dirty || fifthForm.controls.employment_letter_sponsor_parentCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
                       </div>
                     </nb-card-body>
                   </nb-card>
                 </div>
                 <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading23" nbSpinnerStatus="danger"
+                  <nb-card accent="primary" status="warning" [nbSpinner]="loading13" nbSpinnerStatus="danger"
                     nbSpinnerSize="xlarge">
-                    <nb-card-header>Residence Proof Of Sponsor Parent<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Residence (Address) Proof - Original name and address in English on Electricity Bill / Water Bill / Telephone Bill/ Bank Statement/ Company Letter (Any One)."
+                    <nb-card-header>Caste Validity Certificate<span style="color:red; font-size: x-large;">*</span>
+                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 2 MB."
                         nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="ResidenceProof?.filename == undefined && (SampleResidenceProof != null || SampleResidenceProof != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleResidenceProof,profile_info?.country_birth)"
+                      <button type='button' *ngIf="CasteValidityCertificate?.filename == undefined && (SampleCasteValidityCertificate != null || SampleCasteValidityCertificate != undefined )"
+                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleCasteValidityCertificate,profile_info?.country_birth)"
                         style=" margin-top:10px;">Sample</button>
                         <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
                     </nb-card-header>
                     <nb-card-body class="form-control">
                       <div class="row">
-                        <div *ngIf="ResidenceProof?.filename==undefined || ResidenceProof?.lock_transcript == false"
+                        <div *ngIf="CasteValidityCertificate?.filename==undefined || CasteValidityCertificate?.lock_transcript == false"
                           class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
-                            chooseLabel="Browse" formControlName="residence_proof_sponsor_parentCtrl" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Residence Proof"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'23')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.residence_proof_sponsor_parentCtrl,'23')"
-                            (onSelect)="onSelect($event);this.fifthForm.controls.residence_proof_sponsor_parentCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'23')">
+                          <p-fileUpload ngDefaultControl name="file" mode="basic" [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" auto="true" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Caste Validity Certificate"
+                            maxFileSize="2000000" formControlName="CasteValidityCertificateCtrl"
+                            (onBeforeSend)="onBeforeSend($event,'13')" 
+                            (onUpload)="onUpload($event,null,'13')"
+                            (onError)="onErrorFileUpload($event,'13')"
+                            (onSelect)="onSelect($event);">
                           </p-fileUpload>
                         </div>
-                        <div *ngIf="ResidenceProof?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(ResidenceProof?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="ResidenceProof?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" ResidenceProof?.filename | auth" />
+                        <div *ngIf="CasteValidityCertificate?.filename!=undefined" class="row">
+                          <div (click)="imagePopup(CasteValidityCertificate?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="CasteValidityCertificate?.type!='pdf'">
+                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" CasteValidityCertificate?.filename | auth" />
                           </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="ResidenceProof?.type=='pdf'">
-                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(ResidenceProof?.filename)"
+                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="CasteValidityCertificate?.type=='pdf'">
+                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(CasteValidityCertificate?.filename)"
                               status="success">Download</button>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Residence Proof',profile_info?.id,ResidenceProof?.transcriptId,'23')"
+                            <button nbButton type='button' size="small" (click)="deleteTranscript('Caste Validity Certificate',profile_info?.id,CasteValidityCertificate?.transcriptId,'13')"
                               status="success">Delete</button>
                           </div>
                         </div>
                       </div>
-                      <div *ngIf="ResidenceProof?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="ResidenceProof?.lock_transcript == false">
+                      <div *ngIf="CasteValidityCertificate?.filename!=undefined" class="row">
+                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="CasteValidityCertificate?.lock_transcript == false">
                           <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
                             document.Please remove this document and upload correct document</span>
                         </div>
-                      </div>
-                      <div *ngIf="fifthForm.controls.residence_proof_sponsor_parentCtrl.invalid && (fifthForm.controls.residence_proof_sponsor_parentCtrl.dirty || fifthForm.controls.residence_proof_sponsor_parentCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
                       </div>
                     </nb-card-body>
                   </nb-card>
                 </div>
               </div>
-              <div class="row" *ngIf="profile_info?.student_category == 'NRI of Gulf' || profile_info?.student_category == 'NRI of SEAsia'">
-                <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading24" nbSpinnerStatus="danger"
+              <div class="row">
+                <div *ngIf="profile_info?.student_category != 'OPEN' && profile_info?.student_category != 'SC' && profile_info?.student_category != 'ST'" class="col-xl-4">
+                  <nb-card accent="primary" status="warning" [nbSpinner]="loading14" nbSpinnerStatus="danger"
                     nbSpinnerSize="xlarge">
-                    <nb-card-header>Six Month Bank Statement Of Sponsor Parent<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Six month statement from an NRI account Or A Foreign bank letter head with bank stamp original"
+                    <nb-card-header>Non-Creamy Layer Certificate<span style="color:red; font-size: x-large;">*</span>
+                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 2 MB."
                         nbPopoverMode="hover"></i>
-                      <button type='button' *ngIf="BankStatement?.filename == undefined && (SampleBankStatement != null || SampleBankStatement != undefined )"
-                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleBankStatement,profile_info?.country_birth)"
+                      <button type='button' *ngIf="NonCreamyLayerCertificate?.filename == undefined && (SampleNonCreamyLayerCertificate != null || SampleNonCreamyLayerCertificate != undefined )"
+                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleNonCreamyLayerCertificate,profile_info?.country_birth)"
                         style=" margin-top:10px;">Sample</button>
                         <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
                     </nb-card-header>
                     <nb-card-body class="form-control">
                       <div class="row">
-                        <div *ngIf="BankStatement?.filename ==undefined || BankStatement?.lock_transcript == false"
+                        <div *ngIf="NonCreamyLayerCertificate?.filename==undefined || NonCreamyLayerCertificate?.lock_transcript == false"
                           class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" mode="basic" auto="true"
-                            chooseLabel="Browse" formControlName="six_month_bank_state_sponsor_parentCtrl" name="file"
-                            url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Bank Statement"
-                            maxFileSize="2000000" 
-                            (onBeforeSend)="onBeforeSend($event,'24')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.six_month_bank_state_sponsor_parentCtrl,'24')"
-                            (onSelect)="onSelect($event);this.fifthForm.controls.six_month_bank_state_sponsor_parentCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'24')">
+                          <p-fileUpload ngDefaultControl name="file" mode="basic" [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" auto="true" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Non-Creamy Layer Certificate"
+                            maxFileSize="2000000" formControlName="NonCreamyLayerCertificateCtrl"
+                            (onBeforeSend)="onBeforeSend($event,'14')" 
+                            (onUpload)="onUpload($event,null,'14')"
+                            (onError)="onErrorFileUpload($event,'14')"
+                            (onSelect)="onSelect($event);">
                           </p-fileUpload>
                         </div>
-                        <div *ngIf="BankStatement?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(BankStatement?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="BankStatement?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" BankStatement?.filename | auth" />
+                        <div *ngIf="NonCreamyLayerCertificate?.filename!=undefined" class="row">
+                          <div (click)="imagePopup(NonCreamyLayerCertificate?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="NonCreamyLayerCertificate?.type!='pdf'">
+                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" NonCreamyLayerCertificate?.filename | auth" />
                           </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="BankStatement?.type=='pdf'">
-                            <button nbButton type='button' type='button' shape="round" size="small" (click)="downloadTranscript(BankStatement?.filename)"
+                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="NonCreamyLayerCertificate?.type=='pdf'">
+                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(NonCreamyLayerCertificate?.filename)"
                               status="success">Download</button>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Bank Statement',profile_info?.id,BankStatement?.transcriptId,'24')"
+                            <button nbButton type='button' size="small" (click)="deleteTranscript('Non-Creamy Layer Certificate',profile_info?.id,NonCreamyLayerCertificate?.transcriptId,'14')"
                               status="success">Delete</button>
                           </div>
                         </div>
                       </div>
-                      <div *ngIf="BankStatement?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="BankStatement?.lock_transcript == false">
+                      <div *ngIf="NonCreamyLayerCertificate?.filename!=undefined" class="row">
+                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="NonCreamyLayerCertificate?.lock_transcript == false">
                           <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
                             document.Please remove this document and upload correct document</span>
                         </div>
-                      </div>
-                      <div *ngIf="fifthForm.controls.six_month_bank_state_sponsor_parentCtrl.invalid && (fifthForm.controls.six_month_bank_state_sponsor_parentCtrl.dirty || fifthForm.controls.six_month_bank_state_sponsor_parentCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
                       </div>
                     </nb-card-body>
                   </nb-card>
                 </div>
                 <div class="col-xl-4">
-                  <nb-card accent="primary" status="warning" [nbSpinner]="loading25" nbSpinnerStatus="danger"
+                  <nb-card accent="primary" status="warning" [nbSpinner]="loading15" nbSpinnerStatus="danger"
                     nbSpinnerSize="xlarge">
-                    <nb-card-header>Sponsership Letter From Sponsor Parent<span style="color:red; font-size: x-large;">*</span>
-                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
+                    <nb-card-header>District Change Certificate
+                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 2 MB."
                         nbPopoverMode="hover"></i>
-                      <button type='button' nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload('SponsorshipLetter.pdf',null)"
+                      <button type='button' *ngIf="DistrictChangeCertificate?.filename == undefined && (SampleDistrictChangeCertificate != null || SampleDistrictChangeCertificate != undefined )"
+                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleDistrictChangeCertificate,profile_info?.country_birth)"
                         style=" margin-top:10px;">Sample</button>
                         <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
                     </nb-card-header>
                     <nb-card-body class="form-control">
                       <div class="row">
-                        <div *ngIf="SponsershipLetter?.filename==undefined || SponsershipLetter?.lock_transcript == false"
+                        <div *ngIf="DistrictChangeCertificate?.filename==undefined || DistrictChangeCertificate?.lock_transcript == false"
                           class="col-xl-6 col-sm-6 col-xs-6">
-                          <p-fileUpload ngDefaultControl [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" formControlName="sponsership_letter_from_sponsor_parentCtrl"
-                            mode="basic" auto="true" chooseLabel="Browse" name="file" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Sponsership Letter"
-                            maxFileSize="2000000"
-                            (onBeforeSend)="onBeforeSend($event,'25')" 
-                            (onUpload)="onUpload($event,this.fifthForm.controls.sponsership_letter_from_sponsor_parentCtrl,'25')"
-                            (onSelect)="onSelect($event);this.fifthForm.controls.sponsership_letter_from_sponsor_parentCtrl.reset();"
-                            (onError)="onErrorFileUpload($event,'25')">
+                          <p-fileUpload ngDefaultControl name="file" mode="basic" [accept]="'.pdf,.jpg,.jpeg,.png,.PNG,.JPEG,.JPG,.PDF'" auto="true" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=District Change Certificate"
+                            maxFileSize="2000000" formControlName="districtChangeCertificateCtrl"
+                            (onBeforeSend)="onBeforeSend($event,'15')" 
+                            (onUpload)="onUpload($event,null,'15')"
+                            (onError)="onErrorFileUpload($event,'15')"
+                            (onSelect)="onSelect($event);">
                           </p-fileUpload>
                         </div>
-                        <div *ngIf="SponsershipLetter?.filename!=undefined" class="row">
-                          <div (click)="imagePopup(SponsershipLetter?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="SponsershipLetter?.type!='pdf'">
-                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" SponsershipLetter?.filename | auth" />
+                        <div *ngIf="DistrictChangeCertificate?.filename!=undefined" class="row">
+                          <div (click)="imagePopup(DistrictChangeCertificate?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="DistrictChangeCertificate?.type!='pdf'">
+                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" DistrictChangeCertificate?.filename | auth" />
                           </div>
-                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="SponsershipLetter?.type=='pdf'">
-                            <button type='button' nbButton shape="round" size="small" (click)="downloadTranscript(SponsershipLetter?.filename)"
+                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="DistrictChangeCertificate?.type=='pdf'">
+                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(DistrictChangeCertificate?.filename)"
                               status="success">Download</button>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
-                            <button nbButton type='button' size="small" (click)="deleteTranscript('Sponsership Letter',profile_info?.id,SponsershipLetter?.transcriptId,'25')"
+                            <button nbButton type='button' size="small" (click)="deleteTranscript('District Change Certificate',profile_info?.id,DistrictChangeCertificate?.transcriptId,'15')"
                               status="success">Delete</button>
                           </div>
                         </div>
                       </div>
-                      <div *ngIf="SponsershipLetter?.filename!=undefined" class="row">
-                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="SponsershipLetter?.lock_transcript == false">
+                      <div *ngIf="DistrictChangeCertificate?.filename!=undefined" class="row">
+                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="DistrictChangeCertificate?.lock_transcript == false">
                           <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
                             document.Please remove this document and upload correct document</span>
                         </div>
                       </div>
-                      <div *ngIf="fifthForm.controls.sponsership_letter_from_sponsor_parentCtrl.invalid && (fifthForm.controls.sponsership_letter_from_sponsor_parentCtrl.dirty || fifthForm.controls.sponsership_letter_from_sponsor_parentCtrl.touched)"
-                        class="alert alert-danger">
-                        Upload File.
+                    </nb-card-body>
+                  </nb-card>
+                </div>
+                <div class="col-xl-4">
+                  <nb-card accent="primary" status="warning" [nbSpinner]="loading16" nbSpinnerStatus="danger"
+                    nbSpinnerSize="xlarge">
+                    <nb-card-header>Gap Certificate
+                      <i class="fa fa-info-circle" nbPopover="Please upload your transcript in .jpeg, .jpg or .png formats only and max image size should be 5 MB."
+                        nbPopoverMode="hover"></i>
+                      <button type='button' *ngIf="GapCertificate?.filename == undefined && (SampleGapCertificate != null || SampleGapCertificate != undefined )"
+                        nbButton hero status="primary" class="col-sm-12 col-xs-12" size="xsmall" (click)="sampleDownload(SampleGapCertificate,profile_info?.country_birth)"
+                        style=" margin-top:10px;">Sample</button>
+                        <nb-badge text="info" status="danger" position="top right" [nbPopover]="templateRef1" nbPopoverMode="hover"></nb-badge>
+                    </nb-card-header>
+                    <nb-card-body class="form-control">
+                      <div class="row">
+                        <div *ngIf="GapCertificate?.filename==undefined || GapCertificate?.lock_transcript == false"
+                          class="col-xl-6 col-sm-6 col-xs-6">
+                          <p-fileUpload ngDefaultControl name="file" mode="basic" auto="true" [accept]="'.jpg,.jpeg,.png,.PNG,.JPEG,.JPG'" chooseLabel="Browse" url="{{serverUrl}}/api/uploadtranscript?userid={{profile_info?.id}}&transcript_name=Gap Certificate"
+                            maxFileSize="2000000" formControlName="gapCertificateCtrl"
+                            (onBeforeSend)="onBeforeSend($event,'16')" 
+                            (onUpload)="onUpload($event,'','16')"
+                            (onError)="onErrorFileUpload($event,'16')"
+                            (onSelect)="onSelect($event);">
+                          </p-fileUpload>
+                        </div>
+                        <div *ngIf="GapCertificate?.filename!=undefined" class="row">
+                          <div (click)="imagePopup(GapCertificate?.filename)" class="col-xl-6 col-sm-12 col-xs-12" *ngIf="GapCertificate?.type!='pdf'">
+                            <img class="img-responsive" style="width: 100px; height:100px;" [src]=" GapCertificate?.filename | auth" />
+                          </div>
+                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="GapCertificate?.type=='pdf'">
+                            <button nbButton type='button' shape="round" size="small" (click)="downloadTranscript(GapCertificate?.filename)"
+                              status="success">Download</button>
+                          </div>
+                          <div class="col-xl-6 col-sm-6 col-xs-6" *ngIf="preferences == false">
+                            <button nbButton type='button' size="small" (click)="deleteTranscript('Gap Certificate',profile_info?.id,GapCertificate?.transcriptId,'16')"
+                              status="success">Delete</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf="GapCertificate?.filename!=undefined" class="row">
+                        <div class="col-xl-12 col-sm-12 col-xs-12" *ngIf="GapCertificate?.lock_transcript == false">
+                          <span style="color:red; font-size: 100%;">Eligibility department finds fault in this
+                            document.Please remove this document and upload correct document</span>
+                        </div>
                       </div>
                     </nb-card-body>
                   </nb-card>
@@ -2147,25 +1589,22 @@
               </div>
               <hr>
               <div class="row justify-content-between">
-                  <!-- <div class="col-xl-12">
+                  <div class="col-xl-12">
                     <button nbButton class="col-md-4 col-sm-4 col-xs-4 offset-md-4" style="margin-top:10px;" (click)="Letter(profile_info?.id)"
                         hero status="info">Preview Letter</button>
-                  </div> -->
+                  </div>
                   <div class="col-xl-12" *ngIf="profileCompleteness == true">
                     <button nbButton class="col-md-4 col-sm-4 col-xs-4 offset-md-4" size="small" hero status="info" style="margin-top:10px;" (click)="quickApply()">Quick Apply</button>
                   </div>
-                </div>
+              </div>
               </div>
               <div class="col-xl-12">
               <button nbButton nbStepperPrevious class="col-md-4 col-sm-4 col-xs-4 offset-md-4" style="margin-top:10px;">previous</button>
             </div>
           </form>
         </nb-step>
-          <!-- <nb-step [stepControl]="sixthForm" label="6th step"> -->
-            <!-- <h3>Select College</h3> -->
-            <button nbButton nbStepperPrevious>prev</button>
-            <button nbButton nbStepperNext>next</button>
-          <!-- </nb-step> -->
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
         </nb-stepper>
       </nb-card-body>
     </nb-card>

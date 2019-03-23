@@ -26,7 +26,7 @@ import { SupportapiService } from '../../shared/supportapi.service';
             <div class="col-lg-1"></div>
             <div class="col-lg-11">
                 <nb-checkbox status="success" value="true">
-                The Garware University may communicate with me by mail, email, phone or text message about my account and other information relevant to the admission application process (you can change this response later within your account settings).
+                The Garware Institute may communicate with me by mail, email, phone or text message about my account and other information relevant to the admission application process (you can change this response later within your account settings).
                 </nb-checkbox>
             </div>
         </div><br>
@@ -45,7 +45,7 @@ import { SupportapiService } from '../../shared/supportapi.service';
             <div class="col-lg-1"></div>
             <div class="col-lg-11">
                 <nb-checkbox status="success">
-                    The Garware University website uses small files stored on your computer, known as cookies, that help us remember your settings and ensure the website works properly. By continuing, I am agreeing to The Garware University's use of cookies.
+                    The Garware Institute website uses small files stored on your computer, known as cookies, that help us remember your settings and ensure the website works properly. By continuing, I am agreeing to The Garware Institute's use of cookies.
                 </nb-checkbox>
             </div>
 		</div> 		
@@ -74,8 +74,8 @@ import { SupportapiService } from '../../shared/supportapi.service';
         @Input() userCity:string;
         @Input()  userState:string;
         @Input()  postal_code:string;
-        @Input()  Country:string;
-        @Input()  CountryOfOrigin:string;
+       // @Input()  Country:string;
+       // @Input()  CountryOfOrigin:string;
 
 
         loading=false;
@@ -109,8 +109,8 @@ import { SupportapiService } from '../../shared/supportapi.service';
                     userCity: this.userCity,
                     userState : this.userState,
                     postal_code : this.postal_code,
-                    Country:this.Country,
-                    CountryOfOrigin:this.CountryOfOrigin,
+                    //Country:this.Country,
+                    //CountryOfOrigin:this.CountryOfOrigin,
                }
 
                 if(this.Condition != true){
@@ -129,6 +129,7 @@ import { SupportapiService } from '../../shared/supportapi.service';
                                         this.messagealertflag = 0;
                                         this.ref.close();
                                         this.dialogService.open(RegisteredComponent, {
+                                        closeOnBackdropClick : false,
                                         context: {
                                         email: this.userEmail,
                                         password:this.userPassword,
