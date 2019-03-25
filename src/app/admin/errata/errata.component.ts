@@ -7,6 +7,7 @@ import {
 import {Location} from '@angular/common';
 import {ConfirmationService} from 'primeng/api';
 import {Message} from 'primeng/api';
+import { config } from '../../../../config';
 
 @Component({
   selector: 'errata',
@@ -15,6 +16,7 @@ import {Message} from 'primeng/api';
   providers:[ConfirmationService],
 })
 export class AdminErrataComponent {
+  serverUrl = config.serverUrl;
   TranscriptData:any =[];
   checked;
   errataTranscript:any=[];

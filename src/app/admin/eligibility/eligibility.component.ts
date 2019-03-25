@@ -5,6 +5,7 @@ import { saveAs } from 'file-saver';
 import { Router, ActivatedRoute } from '@angular/router';
 import {ConfirmationService} from 'primeng/api';
 import {Message} from 'primeng/api';
+import {config} from '../../../../config';
 
 @Component({
   selector: 'eligibility',
@@ -20,6 +21,7 @@ export class AdminEligibilityComponent {
   p: number = 1;
   status;
   msgs : Message[]= [];
+  serverUrl = config.serverUrl;
   public filterText: string;
   public filterPlaceholder: string;
   public filterInput = new FormControl();

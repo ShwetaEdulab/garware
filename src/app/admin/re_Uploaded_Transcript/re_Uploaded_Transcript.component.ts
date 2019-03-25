@@ -5,6 +5,7 @@ import {
   ActivatedRoute
 } from '@angular/router';
 import {Location} from '@angular/common';
+import { config } from '../../../../config';
 
 @Component({
   selector: 're_Uploaded_Transcript',
@@ -15,6 +16,7 @@ export class AdminReuploadedTranscriptComponent {
   studentData;
   userTranscripts;
   category;
+  serverUrl = config.serverUrl;
   constructor(protected adminApi : AdminApiService,
     private route: ActivatedRoute,
     private _location: Location

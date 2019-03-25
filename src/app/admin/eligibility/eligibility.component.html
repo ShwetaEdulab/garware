@@ -36,8 +36,8 @@
 							<td>{{application?.stu_name}}</td>
 							<td>{{application?.email}}</td>
 							<td>{{application?.specialization}} ({{application?.course}})</td>
-							<td><a (click)=downloadForewordLetter(application.pdf,application.file_name)><img src="http://93.104.211.51:5000/front_assets/img/pdf1.png"  style="height:50px; width:50px;"></a></td>
-							<td><img src="http://93.104.211.51:5000/front_assets/img/pdf1.png"  style="height:50px; width:50px;" (click)="DownloadProvisionalLetter(application.user_id,application.id)"></td>
+							<td><a (click)=downloadForewordLetter(application.pdf,application.file_name)><img src="{{serverUrl}}/front_assets/img/pdf1.png"  style="height:50px; width:50px;"></a></td>
+							<td><img src="{{serverUrl}}/front_assets/img/pdf1.png"  style="height:50px; width:50px;" (click)="DownloadProvisionalLetter(application.user_id,application.id)"></td>
 							<td><mat-form-field class="example-full-width">
 									<input matInput placeholder="Eligbility Number" id='eligib_number{{application.id}}'>
 								</mat-form-field><br>

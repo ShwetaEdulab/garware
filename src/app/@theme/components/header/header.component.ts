@@ -1,15 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
 import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 import { LayoutService } from '../../../@core/data/layout.service';
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import { HttpClient } from '@angular/common/http';
-import { SocketService } from '../../../shared/socket.service';
 import { ApiService } from '../../../shared/api.service';
 import * as io from 'socket.io-client';
 import { Socket } from 'ngx-socket-io';
+import { config } from '../../../../../config';
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
@@ -26,6 +25,7 @@ export class HeaderComponent implements OnInit {
   notification;
   notification_no: any;
   deleteShow :any;
+  serverUrl = config.serverUrl;
 
   private alive: boolean; // used to unsubscribe from the IntervalObservable
                           // when OnDestroy is called.

@@ -5,6 +5,7 @@ import { UserService } from '../../../../@core/data/users.service';
 import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
 import { FormBuilder, FormGroup,Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Router , ActivatedRoute } from '@angular/router';
+import { config } from '../../../../../../config';
 
 @Component({
 selector: 'nb-dialog',
@@ -29,7 +30,7 @@ template: `
   </nb-card-header>
   <form [formGroup]="SecondUploadForm">
     <nb-card-body>
-      <p-fileUpload name="file" url="http://93.104.211.51:5000/api/myApplication/upload?userid={{userId}}&second_payment=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,s.SecondDocument)" (onSelect)="mySelect($event);this.SecondUploadForm.controls.SecondDocument.reset();" accept="application/pdf,image/*" maxFileSize="1000000" formControlName="SecondDocument" class="form-control" [ngClass]="{ 'is-invalid': secondsubmitted && s.SecondDocument.errors }" ngDefaultControl>
+      <p-fileUpload name="file" url="{{serverUrl}}/api/myApplication/upload?userid={{userId}}&second_payment=true&applicationId={{applicationId}}" (onUpload)="onUpload($event,s.SecondDocument)" (onSelect)="mySelect($event);this.SecondUploadForm.controls.SecondDocument.reset();" accept="application/pdf,image/*" maxFileSize="1000000" formControlName="SecondDocument" class="form-control" [ngClass]="{ 'is-invalid': secondsubmitted && s.SecondDocument.errors }" ngDefaultControl>
         <ng-template pTemplate="content">
           <ul *ngIf="uploadedFiles.length">
             <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
@@ -61,6 +62,7 @@ userId;
 SecondUploadForm : FormGroup;
 secondsubmitted = false;
 showclose = 1;
+serverUrl = config.serverUrl;
 constructor(protected ref: NbDialogRef<uploadreceiptdialog>,
   protected api : ApiService,
   private authService: NbAuthService,

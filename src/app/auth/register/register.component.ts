@@ -121,33 +121,7 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
                         });
 
     };
-    disablestate(country_id){
-      this.country_id = country_id;
-      if(country_id === 1 ){
-        this.RegisterForm.get('StateCtrl').clearValidators();
-        this.RegisterForm.get('StateCtrl').updateValueAndValidity();
-        document.getElementById('inputState').style.visibility = 'hidden';
-        document.getElementById('State').style.visibility = 'hidden';
-      }else if(country_id === 154){
-        this.RegisterForm.get('StateCtrl').clearValidators();
-        this.RegisterForm.get('StateCtrl').updateValueAndValidity();
-        this.RegisterForm.get('PostCodeCtrl').clearValidators();
-        this.RegisterForm.get('PostCodeCtrl').updateValueAndValidity();
-        document.getElementById('inputState').style.visibility = 'hidden';
-        document.getElementById('State').style.visibility = 'hidden';
-        document.getElementById('inputPremPost').style.visibility = 'hidden';
-        document.getElementById('Postal').style.visibility = 'hidden';     
-      }else{
-		this.RegisterForm.get('StateCtrl').setValidators([Validators.required, Validators.maxLength(30),Validators.minLength(2)]);
-		this.RegisterForm.get('StateCtrl').updateValueAndValidity();
-		this.RegisterForm.get('PostCodeCtrl').setValidators([ Validators.required, Validators.pattern(this.postalValidate), Validators.maxLength(10),Validators.minLength(5)]);
-		this.RegisterForm.get('PostCodeCtrl').updateValueAndValidity();
-        document.getElementById('inputState').style.visibility = 'visible';
-        document.getElementById('State').style.visibility = 'visible';
-        document.getElementById('inputPremPost').style.visibility = 'visible';
-        document.getElementById('Postal').style.visibility = 'visible';
-      }
-  }
+
   	checkcaptcha(duration,status){
 		if(!(this.RegisterForm.controls.captchaCtrl.value == this.captchaText)){		
 			this.toastrService.show(       

@@ -262,7 +262,7 @@
                   <div>
                      <nb-card status="success" size="small">
                         <nb-card-body>
-                           <img class="viewMoreImg img-responsive" src="http://93.104.211.51:5000/front_assets/img/pdf1.png" (click)="preview(category)"/>
+                           <img class="viewMoreImg img-responsive" src="{{serverUrl}}/front_assets/img/pdf1.png" (click)="preview(category)"/>
                         </nb-card-body>
                         <nb-card-footer>
                               <h5>Download Preview Letter</h5>
@@ -277,7 +277,7 @@
                         <nb-card-body>
                            <!-- <img class="img-responsive viewMoreImg" src="{{data?.image}}"/> -->
                            <div *ngIf="data?.extension=='pdf'">
-                              <img src="http://93.104.211.51:5000/front_assets/img/pdf1.png"  style="height:150px; width:150px;">
+                              <img src="{{serverUrl}}/front_assets/img/pdf1.png"  style="height:150px; width:150px;">
                            </div>
                            <div *ngIf="data?.extension != 'pdf'">
                               <img class="img-responsive viewMoreImg" src="{{data?.image}}"/>

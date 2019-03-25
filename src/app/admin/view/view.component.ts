@@ -6,6 +6,7 @@ import {
 } from '@angular/router';
 import {Location} from '@angular/common';
 import { saveAs } from 'file-saver';
+import { config } from '../../../../config';
 
 @Component({
   selector: 'view',
@@ -19,6 +20,7 @@ export class AdminViewComponent {
   userId;
   courseId;
   applicationId;
+  serverUrl = config.serverUrl;
   constructor(protected adminApi : AdminApiService,
     private route: ActivatedRoute,
     private _location: Location

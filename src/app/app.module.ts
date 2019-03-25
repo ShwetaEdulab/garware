@@ -46,8 +46,9 @@ import {  NbToastrModule,
  import { RouterExtService } from './shared/identifyUrl';
  import { AdminOtpModule } from './admin/admin-otp/admin-otp.module';
 import { InstituteRegisterComponent } from './auth/institute-register/institute-register.component';
+import { config } from '../../config';
 
-const config: SocketIoConfig = { url: 'http://93.104.211.51:2', options: {} };
+const socketconfig: SocketIoConfig = { url: 'http://93.104.211.51:2', options: {} };
 //const socketconfig: SocketIoConfig = { url: 'http://93.104.211.51', options: {reconnection: true,transports: ['websocket'],secure: true} };
 @NgModule({
   declarations: [AppComponent,
@@ -85,7 +86,7 @@ const config: SocketIoConfig = { url: 'http://93.104.211.51:2', options: {} };
    NbInputModule,
    MatSelectModule,
    OTPModule,
-   SocketIoModule.forRoot(config),
+   SocketIoModule.forRoot(socketconfig),
    AdminOtpModule
    //DraggableModule,
     //DragDropModule,
@@ -110,7 +111,7 @@ const config: SocketIoConfig = { url: 'http://93.104.211.51:2', options: {} };
 export class AppModule {
 }
 export function filterInterceptorRequest(req: HttpRequest<any>) {
-  return ['http://93.104.211.51:5000/api/auth/',
+  return [config.serverUrl+'/api/auth/',
          ]
     .some(url => req.url.includes(url));
 }
