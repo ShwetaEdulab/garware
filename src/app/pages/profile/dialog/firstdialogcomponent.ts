@@ -42,7 +42,7 @@ template: `
       <div class="col-md-9"> <input readonly ngModel="{{cbse_marks?.result_date}}" nbInput [ngClass]="{'form-control-danger': ssc_form.controls.sscResultDateCtrl.invalid && (ssc_form.controls.sscResultDateCtrl.dirty || ssc_form.controls.sscResultDateCtrl.touched)}" formControlName="sscResultDateCtrl" placeholder="DD/MM/YY" class="form-control" [nbDatepicker]="picker"> <nb-datepicker #picker [(date)]="date" [max]="max"></nb-datepicker></div><br>
       <div class="col-md-3">Roll No / Seat No : </div>
       <div class="col-md-9"> <input ngModel="{{cbse_marks?.school_rollNo}}" nbInput type="text"  [ngClass]="{'form-control-danger': ssc_form.controls.sscRollNoCtrl.invalid && (ssc_form.controls.sscRollNoCtrl.dirty || ssc_form.controls.sscRollNoCtrl.touched)}" formControlName="sscRollNoCtrl" placeholder="" id="" class="form-control"> </div><br>
-      <div class="col-md-3">Medium of Examination : </div>
+      <div class="col-md-3">Medium of Instruction at school(English/Others) : </div>
       <div class="col-md-9"> <input ngModel="{{cbse_marks?.school_medium}}" nbInput type="text" [ngClass]="{'form-control-danger': ssc_form.controls.sscMediumCtrl.invalid && (ssc_form.controls.sscMediumCtrl.dirty || ssc_form.controls.sscMediumCtrl.touched)}" formControlName="sscMediumCtrl" placeholder="" id="" class="form-control"> </div><br>
 
       <div class="col-md-3">Subject :</div>

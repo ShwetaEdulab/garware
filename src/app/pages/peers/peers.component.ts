@@ -23,6 +23,7 @@ export class PeersComponent  {
   peer : any;
   peer_id : any;
   college_id;
+  courseid;
   constructor(private searchService: NbSearchService,
              protected api : ApiService, 
             private route : ActivatedRoute,
@@ -32,7 +33,9 @@ export class PeersComponent  {
 
   ngOnInit() {
   this.college_id =  this.route.snapshot.queryParamMap.get('college_id');
-    this.api.getPeers(this.college_id) 
+  this.courseid = this.route.snapshot.queryParamMap.get('cour_id');
+  //console.log("this.courseid============>"+this.courseid);
+    this.api.getPeers(this.college_id,this.courseid) 
     .subscribe(data => { 
       this.available_counsellors =  data['data']['available_counsellors'];
       this.collegelist= data['data']['college_detail'];

@@ -130,13 +130,13 @@ export const NB_CORE_PROVIDERS = [
       //   view: '*',
       // },
       student: {
-        view: ['dashboard','search','profile','application','UTILITIES','downloads','faq','help','theme',],
+        view: ['dashboard','search','profile','application','UTILITIES','downloads','faq','help','theme','totalcourse'],
         //create: '',
         // edit: '*',
         // remove: '*',
       },
       admin: {
-        view:['adminDashboard','adminApplication','adminEligibility','adminErrata','adminView','adminForeignOffice','AdminReuploadedTranscript','theme','help'],
+        view:['adminDashboard','studentManagement','adminApplication','adminEligibility','adminErrata','adminView','adminForeignOffice','AdminReuploadedTranscript','theme','help'],
         //create: '*',
         // edit: '*',
         // remove: '*',

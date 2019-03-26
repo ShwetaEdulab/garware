@@ -10,6 +10,7 @@ import { DownloadsComponent } from './downloads/downloads.component';
 import { CartComponent } from './cart/cart.component';
 import { ApplicationComponent } from './application/application.component';
 import { CollegeinfoComponent } from './collegeinfo/collegeinfo.component';
+import { TotalCourseComponent } from './totalcourse/totalcourse.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SelectCollegeComponent } from './selectcollege/selectcollege.component';
 import { CourseComponent } from './course/course.component';
@@ -39,6 +40,7 @@ import { AdminViewComponent } from '../admin/view/view.component';
 import { AdminErrataComponent } from '../admin/errata/errata.component';
 import { AdminForeignOfficeComponent } from '../admin/foreign_office/foreignoffice.component';
 import { AdminReuploadedTranscriptComponent } from '../admin/re_Uploaded_Transcript/re_Uploaded_Transcript.component';
+import { StudentManagementComponent } from '../admin/student-management/student-management.component';
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
@@ -97,6 +99,10 @@ const routes: Routes = [{
     component: CollegeinfoComponent,
   },
   {
+    path: 'totalcourse',
+    component: TotalCourseComponent,
+  },
+  {
     path: 'course',
     component: CourseComponent,
   },
@@ -145,6 +151,11 @@ const routes: Routes = [{
  
   },
   /*Admin Components*/
+  {
+    path: 'studentManagement',
+    component: StudentManagementComponent,
+
+  }, 
   {
     path: 'adminDashboard',
     component: AdminDashboardComponent,

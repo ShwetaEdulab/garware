@@ -12,15 +12,19 @@
             <nb-list>
                     <nb-list-item *ngFor="let course of courses | filter:{college_name: filterText}" style="padding: 2rem">
                     <div class="row">
-                        <div class="col-lg-3" colListPad>
+                        <div class="col-md-3" colListPad>
                             <img class="img-responsive" style= "width: 100px;" src="{{course.logo}}"/> 
                         </div>
-                        <div class="col-lg-7">
+                        <div class="col-md-7">
                             <h3> {{ course?.specialization }} </h3> <br>Degree : {{ course?.degree }}<br><br>College : {{ course?.college_name }}<br>
                         </div>
-                        <div class="col-lg-2">
-                                <a (click)="CourseList(course.id,course.specialization)" class="btn btn-primary">View More</a>                           </div>
+                        <div class="col-md-2">
+                            <a (click)="CourseList(course.id,course.specialization)" class="btn btn-primary">View More</a>
                         </div>
+                        <!-- <div class="col-md-2">
+                            <a status="info" (click)="redirectToPeers(course.id,course.id);" class="btn btn-primary" tabindex="0"> <a class="ion ion-ios-telephone" style="color:white;"></a> Peers </a>
+                        </div> -->
+                    </div>
                 </nb-list-item> 
         </nb-list>
         </nb-card>

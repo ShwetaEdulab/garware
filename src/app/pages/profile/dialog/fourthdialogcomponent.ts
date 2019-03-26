@@ -44,7 +44,7 @@ template: `
       <div class="col-md-9"> <input readonly ngModel="{{degree_marks?.degree_result_date}}" name="date_of_result_deg" nbInput type="text" [ngClass]="{'form-control-danger': degree_form.controls.degreeResultDateCtrl.invalid && (degree_form.controls.degreeResultDateCtrl.dirty || degree_form.controls.degreeResultDateCtrl.touched)}" formControlName="degreeResultDateCtrl" placeholder="DD/MM/YY" id="" class="form-control"[nbDatepicker]="picker"> <nb-datepicker #picker [(date)]="date" [max]="max"></nb-datepicker></div><br>
       <div class="col-md-3">Roll No / Seat No : </div>
       <div class="col-md-9"> <input ngModel="{{degree_marks?.degree_rollNo}}" name="seat_no_deg" nbInput type="text" [ngClass]="{'form-control-danger': degree_form.controls.degreeRollNoCtrl.invalid && (degree_form.controls.degreeRollNoCtrl.dirty || degree_form.controls.degreeRollNoCtrl.touched)}" formControlName="degreeRollNoCtrl" placeholder="" id="" class="form-control"> </div><br>
-      <div class="col-md-3">Medium of Examination : </div>
+      <div class="col-md-3">Medium of Instruction at school(English/Others) : </div>
       <div class="col-md-9"> <input ngModel="{{degree_marks?.degree_medium}}" name="medium_exam_deg" nbInput type="text" [ngClass]="{'form-control-danger': degree_form.controls.degreeMediumCtrl.invalid && (degree_form.controls.degreeMediumCtrl.dirty || degree_form.controls.degreeMediumCtrl.touched)}" formControlName="degreeMediumCtrl" placeholder="" id="" class="form-control"> </div><br>
 
       <div class="col-md-3">Subject :</div>

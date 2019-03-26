@@ -193,7 +193,8 @@ openQuickApply(){
   this.courseFlag = false;
 }
 
-redirectToPeers(college_id){
-   this.router.navigate(['pages/peers'],{queryParams:{college_id:college_id}}); 
+redirectToPeers(college_id,id){
+  console.log("id========>"+id);
+  this.router.navigate(['pages/peers'],{queryParams:{college_id:college_id,cour_id:id}}); 
  }
 }

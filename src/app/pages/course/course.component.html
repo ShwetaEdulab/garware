@@ -3,12 +3,15 @@
             <nb-card status="success">
                 <nb-card-header>
                     <div class="row" >
-                        <div class="col-md-9">
+                        <div class="col-md-8">
                             <h3>{{college?.collegename}}</h3><br>
                             <h5>{{college?.city}}, {{college?.state}}</h5>
                         </div>
-                        <div class="col-md-3">
-                                <button nbButton   size="small" status="info" (click)="addCart(college.course_id,college.degree)">Add To Wishlist</button>
+                        <div class="col-md-2">
+                            <button nbButton   size="small" status="info" (click)="addCart(college.course_id,college.degree)">Add To Cart</button>
+                        </div>
+                        <div class="col-md-2">
+                            <a status="info" size="small" (click)="redirectToPeers(college.college_id,college.course_id);" class="btn btn-primary" tabindex="0"> <a class="ion ion-ios-telephone" style="color:white;"></a> Peers </a>
                         </div>
                     </div>
                  </nb-card-header>

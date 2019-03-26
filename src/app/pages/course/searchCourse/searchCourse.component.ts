@@ -49,6 +49,7 @@ public filterInput = new FormControl();
       this.specialization = this.route.snapshot.queryParamMap.get('specialization');
       this.api.QuickSearch(this.coursename,this.specialization).subscribe(data => { 
         this.courses = data['data'];
+       // console.log("Json stringfy======="+JSON.stringify(this.courses));
         this.courseCount = this.courses.length;
         this.loading = false;
       this.loadingbutton = false;
@@ -72,6 +73,12 @@ public filterInput = new FormControl();
  Back(){
   this._location.back();
 }
+
+redirectToPeers(college_id,id){
+   console.log("id========>"+id);
+   console.log("college_id========>"+college_id);
+   //this.router.navigate(['pages/peers'],{queryParams:{college_id:college_id,cour_id:id}}); 
+  }
 
 
 

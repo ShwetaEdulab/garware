@@ -20,6 +20,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
       resource: 'profile'
     },
   },
+  //totalcourse
+  {
+    title: 'All Courses',
+    icon: 'nb-edit',
+    link: '/pages/totalcourse',
+    data: {
+      permission: 'view',
+      resource: 'totalcourse'
+    },
+  },
   {
     title: 'Search College/Course',
     icon: 'nb-search',
@@ -38,6 +48,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     data: {
       permission: 'view',
       resource: 'adminDashboard'
+    },
+  },
+  {
+    title: 'Student Management',
+    icon: 'fas fa-user-graduate',
+    link: '/pages/studentManagement',
+    data: {
+      permission: 'view',
+      resource: 'studentManagement'
     },
   },
   {

@@ -11,6 +11,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { CollegeinfoModule } from './collegeinfo/collegeinfo.module';
+import { TotalCourseModule } from './totalcourse/totalcourse.module';
 import { SettingsComponent } from './settings/settings.component';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { SelectCollegeModule } from "./selectcollege/selectcollege.module";
@@ -40,7 +41,7 @@ import { AdminViewModule } from '../admin/view/view.module';
 import { AdminErrataModule } from '../admin/errata/errata.module';
 import { AdminForeignOfficeModule } from '../admin/foreign_office/foreignoffice.module';
 import { AdminReuploadedTranscriptModule } from '../admin/re_Uploaded_Transcript/re_Uploaded_Transcript.module';
-
+import { StudentMgmtModule } from '../admin/student-management/student-management.module';
 
 
 const PAGES_COMPONENTS = [
@@ -59,6 +60,7 @@ const PAGES_COMPONENTS = [
     CartModule,
     ApplicationModule,
     CollegeinfoModule,
+    TotalCourseModule,
     NgxUploaderModule,
     SelectCollegeModule,
     CourseModule,
@@ -83,6 +85,7 @@ const PAGES_COMPONENTS = [
     AdminErrataModule,
     AdminForeignOfficeModule,
     AdminReuploadedTranscriptModule,
+    StudentMgmtModule
   ],
   providers: [Data],
   declarations: [

@@ -71,7 +71,7 @@ import {
       <div class="col-md-9"> <input readonly ngModel="{{hsc_marks?.college_result_date}}" nbInput type="text" [ngClass]="{'form-control-danger': hsc_form.controls.hscResultDateCtrl.invalid && (hsc_form.controls.hscResultDateCtrl.dirty || hsc_form.controls.hscResultDateCtrl.touched)}" formControlName="hscResultDateCtrl" placeholder="DD/MM/YY" id="" class="form-control"[nbDatepicker]="picker"> <nb-datepicker #picker [(date)]="date" [max]="max"></nb-datepicker></div><br>
       <div class="col-md-3">Roll No / Seat No : </div>
       <div class="col-md-9"> <input ngModel="{{hsc_marks?.college_rollNo}}" nbInput type="text" [ngClass]="{'form-control-danger': hsc_form.controls.hscRollNoCtrl.invalid && (hsc_form.controls.hscRollNoCtrl.dirty || hsc_form.controls.hscRollNoCtrl.touched)}" formControlName="hscRollNoCtrl" placeholder="" id="" class="form-control"> </div><br>
-      <div class="col-md-3">Medium of Examination : </div>
+      <div class="col-md-3">Medium of Instruction at school(English/Others) : </div>
       <div class="col-md-9"> <input ngModel="{{hsc_marks?.college_medium}}" nbInput type="text" [ngClass]="{'form-control-danger': hsc_form.controls.hscMediumCtrl.invalid && (hsc_form.controls.hscMediumCtrl.dirty || hsc_form.controls.hscMediumCtrl.touched)}" formControlName="hscMediumCtrl" placeholder="" id="" class="form-control"> </div><br>
 
       <div class="col-md-3">Subject :</div>

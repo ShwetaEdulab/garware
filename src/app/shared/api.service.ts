@@ -510,6 +510,14 @@ getProfileCompleteness(){
 
   }
 
+  addtoCart(courseId){
+    try{
+      return this.httpClient.post(`${this.baseUrl}/addToCart`,{"courseId" : courseId});
+    }catch(error){
+      this.handleError("addtoCart : "+error);
+    }
+  }
+
   updatePreferences(course_id,pref1,pref2,pref3,pref4,pref5,pref6,pref7,pref8,pref9,pref10){
     try{
       return  this.httpClient.post(`${this.baseUrl}/updatePreferences`,{"courseId" : course_id,"pref1":pref1,"pref2":pref2,"pref3":pref3,"pref4":pref4,"pref5":pref5,"pref6":pref6,"pref7":pref7,"pref8":pref8,"pref9":pref9,"pref10":pref10});
@@ -730,6 +738,14 @@ getProfileCompleteness(){
      }
    }
 
+   allcoursedetails(){
+    try{
+      return this.httpClient.get(`${this.baseUrl}/api/allcourselist`);
+     }catch(error) {
+       this.handleError("find_intake : "+error);
+     }
+   }
+
    getDegree(courseid){
     try{
        return this.httpClient.post(`${this.baseUrl}/api/getDegree`,{"courseid":courseid});
@@ -769,9 +785,9 @@ getProfileCompleteness(){
     
   }
 
-  getPeers(college_id){
+  getPeers(college_id,course_id){
     try{
-      return  this.httpClient.get(`${this.baseUrl}/api/search/peers_list?collId=`+college_id);
+      return  this.httpClient.get(`${this.baseUrl}/api/search/peers_list?collId=`+college_id+`&courId=`+course_id);
     }catch(error) {
       this.handleError("setTheme : "+error);
     }

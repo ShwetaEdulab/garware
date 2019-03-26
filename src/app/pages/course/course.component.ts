@@ -16,6 +16,7 @@ import {
   NbAuthJWTToken
 } from '@nebular/auth';
 import { HeaderComponent } from '../../@theme/components/header/header.component';
+import { SocketService } from '../../shared/socket.service';
 
 @Component({
   selector: 'course',
@@ -41,6 +42,7 @@ export class CourseComponent {
     private searchService: NbSearchService,
     private authService: NbAuthService,
     private comp: HeaderComponent,
+    private socket : SocketService,
   ) {
 
   }
@@ -67,6 +69,7 @@ export class CourseComponent {
   placement;
   logo;
   Dropdown = 1;
+  user_id;
   async ngOnInit() {
     this.api.getTheme();
     this.searchService.onSearchSubmit()
@@ -89,6 +92,7 @@ export class CourseComponent {
       this.specialization = this.route.snapshot.queryParamMap.get('specialization');
       var response = await this.api.getCourseCollegeList(this.courseid, this.specialization);
       this.collegelist = response['data']['college_detail'];
+      //console.log("Json===>"+JSON.stringify(this.collegelist));
       this.logo = response['data']['college_detail']['logo'];
       this.procedure = response['data']['admission_procedure'];
       this.placement = response['data']['course_placements'];
@@ -167,7 +171,17 @@ export class CourseComponent {
         if(profileCompleteness == 100){
           this.api.getDegree(this.courseid).subscribe(data =>{
             if(data['status'] ==200){
-              this.router.navigate(['pages/selectcollege'],{queryParams:{courseId:course_id}}); 
+              //this.router.navigate(['pages/selectcollege'],{queryParams:{courseId:course_id}});
+              this.api.addtoCart(this.courseid).subscribe(
+                data => {
+                  this.user_id=data['data']['user_id'];
+                  this.socket.getCartvalue(this.user_id);
+                  this.router.navigateByUrl('/pages/cart');
+                },
+                error => {
+                  console.log("Error", error);
+                }
+              ); 
             }else{
               this.router.navigate(['pages/profile'],{queryParams:{courseId:course_id,degree:degree}});
             }
@@ -186,6 +200,12 @@ export class CourseComponent {
       }
     });
     }
+
+  redirectToPeers(college_id,id){
+    //console.log("id========>"+id);
+    //console.log("college_id========>"+college_id);
+    this.router.navigate(['pages/peers'],{queryParams:{college_id:college_id,cour_id:id}}); 
+  }
 
 
   redirectCourse(course_id, specialization) {

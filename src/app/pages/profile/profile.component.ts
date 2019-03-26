@@ -54,6 +54,7 @@ import { config } from '../../../../config';
 import {ConfirmationService} from 'primeng/api';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { transcriptpreview } from './dialog/transcriptpreview.component';
+import { SocketService } from '../../shared/socket.service';
 
 @Component({
   selector: 'profile',
@@ -294,6 +295,7 @@ export class ProfileComponent {
   mobile_country_code: any;
   eduerrortext: string;
   alertflagEducation :boolean = false;
+  user_id: any;
 
   constructor(private userService: UserService,
     private fb: FormBuilder,
@@ -309,6 +311,7 @@ export class ProfileComponent {
     private comp: HeaderComponent,
     private ref: ChangeDetectorRef,
     private confirmationService: ConfirmationService,
+    private socket : SocketService,
   ) {
     this.Countries = this.countries.getData();
   }
@@ -2307,7 +2310,17 @@ export class ProfileComponent {
     if(courID == null){
       this.router.navigate(['pages/search']);
     }else if(courID != null){
-      this.router.navigate(['/pages/selectcollege'],{queryParams:{courseId:courID}})
+      //this.router.navigate(['/pages/selectcollege'],{queryParams:{courseId:courID}})
+      this.api.addtoCart(courID).subscribe(
+        data => {
+          this.user_id=data['data']['user_id'];
+          this.socket.getCartvalue(this.user_id);
+          this.router.navigateByUrl('/pages/cart');
+        },
+        error => {
+          console.log("Error", error);
+        }
+      );
     }
   }
 
