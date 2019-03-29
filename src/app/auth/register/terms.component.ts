@@ -33,6 +33,14 @@ import { SupportapiService } from '../../shared/supportapi.service';
         <div class="row">
             <div class="col-lg-1"></div>
             <div class="col-lg-11">
+                <nb-checkbox status="success" value="true">
+                I declare that information given in this form is true to the best of my knowledge. If selected for the course, I agree to abide by the rules and conditions in force at this institute and laid down by the Institute from time to time.
+                </nb-checkbox>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-11">
                 <nb-checkbox status="success"  [(ngModel)]="Condition3">
                         By checking this box, I represent that (i) I am age 13 or older and (ii) I have read, understood and agreed to the terms and conditions of the Terms of Use and Privacy Policy (unless I am over the age of 13 but under the age of 18, in which case, my parent or legal guardian has also read, understood and agreed to the terms and conditions of the Privacy Policy and Terms of Use sections).
                 </nb-checkbox>
@@ -74,6 +82,7 @@ import { SupportapiService } from '../../shared/supportapi.service';
         @Input() userCity:string;
         @Input()  userState:string;
         @Input()  postal_code:string;
+        @Input()  sourInfo:string;
        // @Input()  Country:string;
        // @Input()  CountryOfOrigin:string;
 
@@ -109,6 +118,7 @@ import { SupportapiService } from '../../shared/supportapi.service';
                     userCity: this.userCity,
                     userState : this.userState,
                     postal_code : this.postal_code,
+                    sourInfo : this.sourInfo
                     //Country:this.Country,
                     //CountryOfOrigin:this.CountryOfOrigin,
                }

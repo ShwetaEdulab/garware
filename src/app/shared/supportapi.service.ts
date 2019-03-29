@@ -6,7 +6,7 @@ import { config } from '../../../config';
   providedIn: 'root'
 })
 export class SupportapiService {
-  private baseUrl = 'http://93.104.211.51:5000';
+  private baseUrl = config.serverUrl;
   constructor(private httpClient : HttpClient) { }
 
   getUserTickets(){

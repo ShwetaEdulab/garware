@@ -4,6 +4,8 @@ import { ApiService } from '../../shared/api.service';
 import { NbSearchService } from '@nebular/theme';
 import { NbDialogService } from '@nebular/theme';
 import { HeaderComponent } from '../../@theme/components/header/header.component';
+import { FormControl } from '@angular/forms';
+import { config } from '../../../../config';
 
 @Component({
     selector: 'totalcourse',
@@ -12,7 +14,6 @@ import { HeaderComponent } from '../../@theme/components/header/header.component
     providers:[HeaderComponent],
   })
   export class TotalCourseComponent {
-  courselist_data: any;
     constructor(private router : Router,
       private route: ActivatedRoute,
       private api : ApiService,
@@ -21,6 +22,9 @@ import { HeaderComponent } from '../../@theme/components/header/header.component
       private comp: HeaderComponent,
     ) {
     }
+    p: number = 1;
+    courselist_data: any = [];
+    serverUrl = config.serverUrl;
     courseid ;
     collegeId;
     collegelist;
@@ -50,14 +54,26 @@ import { HeaderComponent } from '../../@theme/components/header/header.component
     mobile :any;
     peer : any;
     peer_id : any;
+    public filterText: string;
+    public filterPlaceholder: string;
+    public filterInput = new FormControl();
 
     async ngOnInit() {
+      this.filterText = "";
+      this.filterPlaceholder = "Search";
       this.api.getTheme();
       this.api.allcoursedetails().subscribe(data=>{
         //console.log("data['data']======>"+JSON.stringify(data['data']));
         this.courselist_data = data['data']['courses'];
         //console.log("this.courselist_data======>"+this.courselist_data.length);
       })
+
+      this.filterInput
+      .valueChanges
+      .debounceTime(200)
+      .subscribe(term => {
+      this.filterText = term;
+    });
   
     }
 

@@ -81,6 +81,7 @@ export class ProfileComponent {
   countryofbirth;
   selectedItem;
   selectedGender;
+  selectedMaritalStatus;
   passportCountry;
   Countries: any[];
   altCountry;
@@ -90,6 +91,8 @@ export class ProfileComponent {
   permCountry_guardian;
   profile_info;
   firstdob;
+  father_name;
+  mother_name;
   guardian_info;
   guardian_other_address;
   guardian_other_address_values;
@@ -103,12 +106,12 @@ export class ProfileComponent {
   edudegreecheck;
   messages;
   // cbse_marks;
-  // cbse = {
-  //   university: '',
-  //   school_name: '',
-  //   result_date: '',
-  //   school_marks: ''
-  // };
+  cbse = {
+    university: '',
+    school_name: '',
+    result_date: '',
+    school_marks: ''
+  };
   hsc = {
     college_university: '',
     college_name: '',
@@ -157,16 +160,19 @@ export class ProfileComponent {
   country_birth: any;
   appearance: any;
   degreeCheck: any;
+  married: any;
 
   Photo: any;
   Sign: any;
   ExperienceCertificate: any;
+  SSCcertificate: any;
   HSCcertificate: any;
   Leavingcertificate: any;
   FirstYearMarksheet: any;
   SecondYearMarksheet: any;
   ThirdYearMarksheet: any;
   PassingCertificate: any;
+  AdharCard: any;
   dobCertificate: any;
   CasteCertificate: any;
   RationCard: any;
@@ -174,28 +180,10 @@ export class ProfileComponent {
   NonCreamyLayerCertificate: any;
   DistrictChangeCertificate: any;
   GapCertificate: any;
+  DomicileCertificate: any;
+  MarriageCertificate: any;
+  MigrationCertificate: any;
 
-  // Passport: any;
-  // AdmitCard: any;
-  // SSCcertificate: any;
-  // CountryIdCard: any;
-  
-  // Convocation: any;
-  
-  // SchoolPassingCertificate: any;
-  // BirthCertificate: any;
-  // MigrationCertificate: any;
-  
-  // Pio: any;
-  // Oci: any;
-  // PassportSponsorParent: any;
-  // ResidencePermit: any;
-  // NRICertiSponsor: any;
-  // WorkPermit: any;
-  // EmploymentLetter: any;
-  // ResidenceProof: any;
-  // BankStatement: any;
-  // SponsershipLetter: any;
   private index: number = 0;
   position: any;
   status: any;
@@ -230,12 +218,14 @@ export class ProfileComponent {
   SamplePhoto: any;
   SampleSign: any;
   SampleExperienceCertificate: any;
+  SampleSSCcertificate: any;
   SampleHSCcertificate: any;
   SampleLeavingcertificate: any;
   SampleFirstYearMarksheet: any;
   SampleSecondYearMarksheet: any;
   SampleThirdYearMarksheet: any;
   SamplePassingCertificate: any;
+  SampleAdharCard: any;//AdharCard
   SampledobCertificate: any;
   SampleCasteCertificate: any;
   SampleRationCard: any;
@@ -243,29 +233,11 @@ export class ProfileComponent {
   SampleNonCreamyLayerCertificate: any;
   SampleDistrictChangeCertificate: any;
   SampleGapCertificate: any;
+  SampleDomicileCertificate: any;
+  SampleMarriageCertificate: any;
+  SampleMigrationCertificate: any;
 
 
-  // SampleAdmitCard: any;
-  // SamplePassport: any;
-  // SampleCountryIdCard: any;
- 
-  // SampleConvocation: any;
-  
-  // SampleSchoolPassingCertificate: any;
-  // SampleBirthCertificate: any;
-  // SampleMigrationCertificate: any;
-  // SamplePio: any;
-  // SampleOci: any;
-  // SamplePassportSponsorParent: any;
-  // SampleResidencePermit: any;
-  // SampleNRICertiSponsor: any;
-  // SampleWorkPermit: any;
-  // SampleEmploymentLetter: any;
-  // SampleResidenceProof: any;
-  // SampleBankStatement: any;
-  // SampleSponsershipLetter: any;
-  // SampleSSCcertificate: any;
-  
 
   readonly emailValidate = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   readonly charValidate = /^[.a-zA-Z ]*$/;
@@ -648,6 +620,7 @@ export class ProfileComponent {
           this.altCountry = data['data']['user_data']['alternate_country'];
           //this.passportCountry = data['data']['user_data']['country_of_issuance'];
           this.selectedGender = data['data']['user_data']['gender'];
+          this.selectedMaritalStatus = data['data']['user_data']['maritalstatus'];
           this.countryofbirth = data['data']['user_data']['country_birth'];
           err => console.log(err)
         });
@@ -661,6 +634,7 @@ export class ProfileComponent {
       emailCtrl: ['', [Validators.required, Validators.pattern(this.emailValidate)]], // Validators.pattern("^[0-9]*$")
       permAddCtrl: ['', [Validators.required, Validators.maxLength(250), Validators.minLength(3)]],
       genderCtrl: ['', [Validators.required]],
+      maritalCtrl: ['', [Validators.required]],
       permCityCtrl: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(2)]],
       permStateCtrl: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(2)]],
       permPostCodeCtrl: ['', [Validators.required, Validators.pattern(this.postalValidate), Validators.maxLength(10), Validators.minLength(5)]],
@@ -672,6 +646,7 @@ export class ProfileComponent {
       dobCtrl: ['', [Validators.required]],
       phonecodeCtrl: ['', [Validators.required]],
       phoneCtrl: ['', [Validators.required, Validators.pattern(this.mobileValidate)]],
+      adharCardCtrl : ['', [Validators.required, Validators.pattern(this.mobileValidate), Validators.minLength(12)]], 
       //passIssueCtrl: ['', [Validators.required]],
       //permCountryCtrl: ['', [Validators.required]],
       //countryidCtrl: ['', [Validators.required]],
@@ -684,6 +659,8 @@ export class ProfileComponent {
 
   private buildForm2(): void {
     this.secondForm = this.fb.group({
+      fatherNameCtrl : ['', [Validators.required, Validators.maxLength(70), Validators.minLength(3)]],
+      motherNameCtrl : ['', [Validators.required, Validators.maxLength(70), Validators.minLength(3)]],
       guardianNameCtrl2: ['', [Validators.required, Validators.maxLength(70), Validators.minLength(3)]],
       relationCtrl: ['', [Validators.required, Validators.maxLength(70), Validators.minLength(3)]],
       guardianDOBCtrl: ['', Validators.required],
@@ -694,7 +671,7 @@ export class ProfileComponent {
       address_Radio: ['', [Validators.required, ]],
       //citizenshipNumberCtrl: ['', [Validators.required, ]],
      // citizenshipCtrl: ['', [Validators.required, ]],
-      perm_guardian_address: ['', [Validators.required, Validators.maxLength(250), Validators.minLength(5)]],
+      perm_guardian_address: ['', [Validators.required, Validators.maxLength(250), Validators.minLength(3)]],
       perm_guardian_city: ['', [Validators.required, Validators.maxLength(250), Validators.minLength(3)]],
       perm_guardian_postal_code: ['', [Validators.required]],
       perm_guardian_state: ['', [Validators.required, Validators.maxLength(250), Validators.minLength(3)]],
@@ -721,6 +698,8 @@ export class ProfileComponent {
       .subscribe(
         (data: any) => {
           this.guardian_info = data['data']['guardian_info'];
+          this.father_name = data['data']['father_name'];
+          this.mother_name = data['data']['mother_name'];
           if(!(this.guardian_info==null)){
           if (this.guardian_info.address_type == "Permanent") {
             this.testradio = "" + 1;
@@ -818,7 +797,7 @@ export class ProfileComponent {
 
   public buildForm3(): void {
     this.thirdForm = this.fb.group({
-			//cbseUniversityCtrl: ['', [Validators.required,]],
+			cbseUniversityCtrl: ['', [Validators.required,]],
 			hscUniversityCtrl: ['', [Validators.required,]],
 			degreeUniversityCtrl: [''],
 		});
@@ -826,16 +805,16 @@ export class ProfileComponent {
     this.api.getProfileValue('All_Education_Details')
       .subscribe(
         (data: any) => {
-          // if (data['data']['cbse'] != null) {
-          //   this.cbse = data['data']['cbse'];
-          //   this.cbse.university = data['data']['cbse']['university'];
-          //   this.cbse.school_name = data['data']['cbse']['school_name'];
-          // } else {
-          //   this.cbse.university = '';
-          //   this.cbse.school_name = '';
-          //   this.cbse.result_date = '';
-          //   this.cbse.school_marks = '';
-          // }
+          if (data['data']['cbse'] != null) {
+            this.cbse = data['data']['cbse'];
+            this.cbse.university = data['data']['cbse']['university'];
+            this.cbse.school_name = data['data']['cbse']['school_name'];
+          } else {
+            this.cbse.university = '';
+            this.cbse.school_name = '';
+            this.cbse.result_date = '';
+            this.cbse.school_marks = '';
+          }
 
           if (data['data']['hsc'] != null) {
             this.hsc = data['data']['hsc'];
@@ -887,16 +866,15 @@ export class ProfileComponent {
 
 	next_disable() {   
 
-		if (this.hsc == null  ) { //|| this.cbse == null
+		if (this.hsc == null || this.cbse == null  ) {
 			this.education_next_validation = false;
 			return;
 		}
-			// if (this.cbse.university == null || this.cbse.university == '' || this.cbse.university == undefined &&
-			// this.cbse.school_name == null || this.cbse.school_name == '' || this.cbse.school_name == undefined) {
-			// this.education_next_validation = false;
+			if (this.cbse.university == null || this.cbse.university == '' || this.cbse.university == undefined &&
+			this.cbse.school_name == null || this.cbse.school_name == '' || this.cbse.school_name == undefined) {
+			this.education_next_validation = false;
 
-      // } else 
-      if (this.hsc.college_university == null || this.hsc.college_university == '' || this.hsc.college_university == undefined &&
+      } else if (this.hsc.college_university == null || this.hsc.college_university == '' || this.hsc.college_university == undefined &&
 			this.hsc.college_name == null || this.hsc.college_name == '' || this.hsc.college_name == undefined) {
 			this.education_next_validation = false;
 
@@ -931,15 +909,18 @@ export class ProfileComponent {
       this.moreDocs = data['data']['moreDocs'];
       this.preferences = data['data']['preferences'];
       this.degreeCheck = data['data']['degreeCheck'];
-      console.log("this.degreeCheck==========>"+this.degreeCheck);
+      this.married = data['data']['married']
+      //console.log("this.married==========>"+data['data']['married']);
       this.Photo = data['data']['photo'];
       this.Sign = data['data']['sign'];
+      this.SSCcertificate = data['data']['ssc_certificate'];
       this.HSCcertificate = data['data']['hsc_certificate'];
       this.Leavingcertificate = data['data']['leaving_certificate'];
       this.FirstYearMarksheet = data['data']['firstYearMarksheet'];
       this.SecondYearMarksheet = data['data']['secondYearMarksheet'];
       this.ThirdYearMarksheet = data['data']['thirdYearMarksheet'];
       this.PassingCertificate = data['data']['passingCertificate'];
+      this.AdharCard = data['data']['adharcard'];
       this.dobCertificate = data['data']['dobCertificate'];
       this.ExperienceCertificate = data['data']['experienceCertificate'];
       this.CasteCertificate = data['data']['casteCertificate'];
@@ -948,10 +929,14 @@ export class ProfileComponent {
       this.NonCreamyLayerCertificate = data['data']['noncreamylayerCertificate'];
       this.DistrictChangeCertificate = data['data']['districtchangeCertificate']
       this.GapCertificate = data['data']['gapCertificate'];
+      this.DomicileCertificate = data['data']['domicileCertificate'];
+      this.MarriageCertificate = data['data']['marriageCertificate'];
+      this.MigrationCertificate = data['data']['migrationCertificate'];
 
       this.SamplePhoto = data['data']['samplephoto'];
       this.SampleSign = data['data']['samplesign'];
       this.SampleExperienceCertificate = data['data']['sampleexperi_certificate'];
+      this.SampleSSCcertificate = data['data']['samplessc_certificate'];
       this.SampleHSCcertificate = data['data']['samplehsc_certificate'];
       this.SampleLeavingcertificate = data['data']['sampleleaving_certificate'];
       this.SampleFirstYearMarksheet = data['data']['samplefirstYearMarksheet'];
@@ -965,9 +950,10 @@ export class ProfileComponent {
       this.SampleNonCreamyLayerCertificate = data['data']['samplenoncreamylayerCertificate'];
       this.SampleDistrictChangeCertificate = data['data']['sampledistrictchangeCertificate'];
       this.SampleGapCertificate = data['data']['samplegapCertificate'];
+      this.SampleDomicileCertificate = data['data']['sampledomicileCertificate'];
+      this.SampleMarriageCertificate = data['data']['samplemarriageCertificate'];
+      this.SampleMigrationCertificate = data['data']['samplemigrationCertificate'];
       
-
-
     }, error => {
       console.error(" buildForm5 : " + error);
     });
@@ -976,19 +962,23 @@ export class ProfileComponent {
       passportSizePhotoCtrl: ['', Validators.required],
       studSignCtrl: ['', Validators.required],
       experienceCertificateCtrl: ['', Validators.required],
+      gradeXImarkCtrl: ['', Validators.required],
       gradeXIImarkCtrl: ['', Validators.required],
       LeavingcertiCtrl: ['', Validators.required],
       firstYearMarksheetCtrl: ['', Validators.required],
       secondYearMarksheetCtrl: ['', Validators.required],
       thirdYearMarksheetCtrl: ['', Validators.required],
       passingCertificateCtrl: ['', Validators.required],
-      dobCertificateCtrl: ['', Validators.required],
+      adharCardCtrl: ['', Validators.required],
+      //dobCertificateCtrl: ['', Validators.required],
       casteCertificateCtrl: ['', Validators.required],
-      rationCardCtrl: ['', Validators.required],
-      CasteValidityCertificateCtrl: ['', Validators.required],
-      NonCreamyLayerCertificateCtrl: ['', Validators.required],
+      //rationCardCtrl: ['', Validators.required],
+      domicileCertificateCtrl: ['', Validators.required],
+      CasteValidityCertificateCtrl: [''],
+      //NonCreamyLayerCertificateCtrl: [''],
       districtChangeCertificateCtrl: ['', Validators.required],
-      gapCertificateCtrl: ['', Validators.required],
+      MarriageCertificateCtrl: ['', Validators.required],
+      //gapCertificateCtrl: ['', Validators.required],
     });
   }
 
@@ -997,6 +987,7 @@ export class ProfileComponent {
   }
 
   onFirstSubmit() {
+    console.log("this.firstForm.controls.maritalCtrl.value========>"+this.firstForm.controls.maritalCtrl.value);
     var check_validation;
     var validation_messages;
     var alternate_message_show;
@@ -1006,6 +997,7 @@ export class ProfileComponent {
     //this.firstForm.controls.nationalityCtrl.markAsDirty();
     this.firstForm.controls.emailCtrl.markAsDirty();
     //this.firstForm.controls.genderCtrl.markAsDirty(); //dropdown
+    this.firstForm.controls.maritalCtrl.markAsDirty();
     this.firstForm.controls.permAddCtrl.markAsDirty();
     this.firstForm.controls.permCityCtrl.markAsDirty();
     this.firstForm.controls.permStateCtrl.markAsDirty();
@@ -1017,12 +1009,13 @@ export class ProfileComponent {
     this.firstForm.controls.dobCtrl.markAsDirty();
     this.firstForm.controls.phonecodeCtrl.markAsDirty();
     this.firstForm.controls.phoneCtrl.markAsDirty();
-    //this.firstForm.controls.passportCtrl.markAsDirty();
-    //this.firstForm.controls.passIssueCtrl.markAsDirty();
-    //this.firstForm.controls.passExpiryCtrl.markAsDirty();
-    //this.firstForm.controls.permCountryCtrl.markAsDirty();  //dropdown
-    // this.firstForm.controls.altCountryCtrl.markAsDirty();  //dropdown
-    //this.firstForm.controls.passportCountry.markAsDirty();  //dropdown
+    this.firstForm.controls.adharCardCtrl.markAsDirty();
+
+    // if(this.firstForm.controls.maritalCtrl.value=="" || this.firstForm.controls.maritalCtrl.value == null){
+    //   //this.date_message_show = true;
+    //   this.errortext = "Please fill Marital Status fields";
+    //   this.timer();
+    // }
 
     if (this.firstForm.valid) {
       this.countryValidation = false;
@@ -1039,57 +1032,22 @@ export class ProfileComponent {
 			}
     }
     if (!this.firstForm.valid){
-      if(date_message_show)
-				this.errortext = this.errortext;
-      else
+      if(date_message_show){
+        this.errortext = this.errortext;
+      }else if(this.firstForm.controls.maritalCtrl.value=="" || this.firstForm.controls.maritalCtrl.value == null){
+        this.errorflag = 1;
+        this.errortext = "Please fill Marital Status fields";
+        this.timer();
+      }else{
         this.errorflag = 1;
 				this.errortext = "Please fill all mandatory fields";
 			  this.timer();
       // this.errorflag = 1;
       // this.errortext = "Please fill all mandatory fields";
       // this.timer();
+
+      }
     }
-
-    // if (this.firstForm.controls.permCountryCtrl.value === null || this.firstForm.controls.permCountryCtrl.value === '' || this.firstForm.controls.permCountryCtrl.value === undefined) {
-
-    //   this.permcountryValidation = false;
-    //   check_validation = false;
-    //   this.alertflag = 0;
-
-    // } else {
-
-    //   this.permcountryValidation = true;
-    //   check_validation = true;
-    // }
-
-    // if (this.firstForm.controls.countryidCtrl.value === null || this.firstForm.controls.countryidCtrl.value === '' || this.firstForm.controls.countryidCtrl.value === undefined) {
-
-    //   this.countryValidation = false;
-    //   check_validation = false;
-    //   this.alertflag = 0;
-
-    // } else {
-
-    //   this.countryValidation = true;
-    //   check_validation = true;
-    // }
-
-
-
-
-   
-
-    // if (this.firstForm.controls.passportCountry.value === null || this.firstForm.controls.passportCountry.value === '' || this.firstForm.controls.passportCountry.value === undefined) {
-
-    //   this.passportcountryValidation = false;
-    //   check_validation = false;
-    //   this.alertflag = 0;
-
-    // } else {
-
-    //   this.passportcountryValidation = true;
-    //   check_validation = true;
-    // }
 
     if( (this.firstForm.controls.alterAddCtrl.value =='' || this.firstForm.controls.alterAddCtrl.value ==null || this.firstForm.controls.alterAddCtrl.value ==undefined) 
     || ( this.firstForm.controls.alterCityCtrl.value =='' || this.firstForm.controls.alterCityCtrl.value ==null || this.firstForm.controls.alterCityCtrl.value ==undefined) 
@@ -1182,98 +1140,27 @@ export class ProfileComponent {
           //validation_messages = "If you fill any alternate details, need to fill all alternate details !";
       }
       
-      
-			
     }
-
-		// if(this.countryofbirth == 154 || this.countryofbirth == 25 ){
-		// 	this.firstForm.controls['passportCtrl'].clearValidators();
-		// 	this.firstForm.controls['passportCtrl'].updateValueAndValidity();
-		// 	this.firstForm.controls['passportCountry'].clearValidators();
-		// 	this.firstForm.controls['passportCountry'].updateValueAndValidity();
-		// 	this.firstForm.controls['passIssueCtrl'].clearValidators();
-		// 	this.firstForm.controls['passIssueCtrl'].updateValueAndValidity();
-		// 	this.firstForm.controls['passExpiryCtrl'].clearValidators();
-		// 	this.firstForm.controls['passExpiryCtrl'].updateValueAndValidity();
-		// 	this.passportcountryValidation = true;
-		// 	check_validation=true
-		//   }else{
-		// 	this.firstForm.controls['passportCtrl'].setValidators([Validators.pattern(this.passportValidate), Validators.required, Validators.maxLength(15)]);
-		// 	this.firstForm.controls['passportCtrl'].updateValueAndValidity();
-		// 	this.firstForm.controls['passportCountry'].setValidators([Validators.required]);
-		// 	this.firstForm.controls['passportCountry'].updateValueAndValidity();
-		// 	this.firstForm.controls['passIssueCtrl'].setValidators([Validators.required]);
-		// 	this.firstForm.controls['passIssueCtrl'].updateValueAndValidity();
-		// 	this.firstForm.controls['passExpiryCtrl'].setValidators([Validators.required]);
-		// 	this.firstForm.controls['passExpiryCtrl'].updateValueAndValidity();
-		// 	this.firstForm.controls.passportCtrl.markAsDirty();
-		// 	this.firstForm.controls.passportCountry.markAsDirty();
-		// 	this.firstForm.controls.passIssueCtrl.markAsDirty();
-		// 	this.firstForm.controls.passExpiryCtrl.markAsDirty();      
-    //   }
-
-    // if( this.countryofbirth != 154 || this.countryofbirth != 25){
-    //   var passExpiryDate = new Date(this.firstForm.controls.passExpiryCtrl.value);
-    //   var passIssueDate = new Date(this.firstForm.controls.passIssueCtrl.value);
-    //   var expiryDay = passExpiryDate.getDay();
-    //   var expiryMonnth = passExpiryDate.getMonth();
-    //   var expiryYear = passExpiryDate.getFullYear();
-    //   var issueDay = passIssueDate.getDay();
-    //   var issueMonnth = passIssueDate.getMonth();
-    //   var issueYear = passIssueDate.getFullYear();
-    //   if((expiryYear - issueYear) > 10){
-    //     this.firstForm.controls.passExpiryCtrl.markAsPending();
-    //     this.firstForm.controls.passExpiryCtrl.markAsTouched();
-    //     date_message_show = true;
-    //     check_validation = false;
-    //     this.errorflag = 1;
-    //     this.errortext = "Passport Issue and expiry date difference should not be greater than 10 years.";
-    //   }else if((expiryYear - issueYear) == 10){
-    //     if((expiryMonnth - issueMonnth) > 0){ 
-    //       date_message_show = true;
-    //       this.firstForm.controls.passExpiryCtrl.markAsPending();
-    //       this.firstForm.controls.passExpiryCtrl.markAsDirty();
-    //       check_validation = false;
-    //       this.errorflag = 1;
-    //       this.errortext = "Passport Issue and expiry date difference should not be greater than 10 years.";
-    //     }else if((expiryMonnth - issueMonnth) == 0){
-    //       if((expiryDay - issueDay) > -1){
-    //         date_message_show = true;
-    //         check_validation = false;
-    //         this.errorflag = 1;
-    //         this.firstForm.controls.passExpiryCtrl.markAsPending();
-    //         this.firstForm.controls.passExpiryCtrl.markAsDirty();
-    //         this.errortext = "Passport Issue and expiry date difference should not be greater than 10 years.";
-    //       }
-    //     }
-    //   }
-    // }
 	  
 
     var profile_data = {
       Full_Name: this.firstForm.controls.fullNameCtrl.value,
       Surname: this.firstForm.controls.surnameCtrl.value,
-      //Nationality: this.firstForm.controls.nationalityCtrl.value,
       Gender: this.firstForm.controls.genderCtrl.value,
+      maritalstatus: this.firstForm.controls.maritalCtrl.value,
       dob: this.firstForm.controls.dobCtrl.value,
       Email: this.firstForm.controls.emailCtrl.value,
       CountryCode: this.firstForm.controls.phonecodeCtrl.value,
       Mobile: this.firstForm.controls.phoneCtrl.value,
-      //Country_id: this.firstForm.controls.countryidCtrl.value,
       Permanent_address: this.firstForm.controls.permAddCtrl.value,
       Permanent_city: this.firstForm.controls.permCityCtrl.value,
       Permanent_state: this.firstForm.controls.permStateCtrl.value,
       Permanent_postalcode: this.firstForm.controls.permPostCodeCtrl.value,
-     // PermCountryCtrl: this.firstForm.controls.permCountryCtrl.value,
       Alternate_address: this.firstForm.controls.alterAddCtrl.value,
       Alternate_city: this.firstForm.controls.alterCityCtrl.value,
       Alternate_state: this.firstForm.controls.alterStateCtrl.value,
       Alternate_postalcode: this.firstForm.controls.alterPostCodeCtrl.value,
-      //AltCountryCtrl: this.firstForm.controls.altCountryCtrl.value,
-      // Passport: this.firstForm.controls.passportCtrl.value,
-      // Date_of_issue: this.firstForm.controls.passIssueCtrl.value,
-      // Date_of_expiry: this.firstForm.controls.passExpiryCtrl.value,
-      // Country_of_issuance: this.firstForm.controls.passportCountry.value,
+      adharNo : this.firstForm.controls.adharCardCtrl.value,
     }
     //initializing "profile_info" to get value of it in guardian step 
     this.profile_info.address1 = this.firstForm.controls.permAddCtrl.value;
@@ -1331,6 +1218,8 @@ export class ProfileComponent {
   }
 
   onSecondSubmit() {
+    this.secondForm.controls.fatherNameCtrl.markAsDirty();
+    this.secondForm.controls.motherNameCtrl.markAsDirty();
     this.secondForm.controls.guardianNameCtrl2.markAsDirty();
     this.secondForm.controls.relationCtrl.markAsDirty();
     this.secondForm.controls.guardianDOBCtrl.markAsDirty();
@@ -1345,6 +1234,8 @@ export class ProfileComponent {
     var validation_messages;
 
     var guardian_data = {
+      father_name: this.secondForm.controls.fatherNameCtrl.value,//motherNameCtrl
+      mother_name: this.secondForm.controls.fatherNameCtrl.value,
       Guardian_Name: this.secondForm.controls.guardianNameCtrl2.value,
       Relation: this.secondForm.controls.relationCtrl.value,
       dob: this.secondForm.controls.guardianDOBCtrl.value,
@@ -1549,18 +1440,18 @@ export class ProfileComponent {
 
   onThirdSubmit() {
     if(this.edudegreecheck == null || this.edudegreecheck == "Bachelor's" ){
-      if(this.hsc.college_university == '' || this.hsc == null ){ //|| this.cbse.university == '' || this.cbse == null
+      if(this.hsc.college_university == '' || this.hsc == null || this.cbse.university == '' || this.cbse == null){ 
         this.eduerrorflag = 1;
         this.eduerrortext = "Please fill all mandatory fields( hsc )";	
-      }else if(this.hsc.college_university != '' && this.hsc != null){ // && this.cbse.university != '' && this.cbse != null
+      }else if(this.hsc.college_university != '' && this.hsc != null && this.cbse.university != '' && this.cbse != null){ 
         this.api.getcheckTabs().subscribe((data: any) => {
         });
       }
     }else if(this.edudegreecheck == "Master\'s" || this.edudegreecheck == "Post graduate diplomas"){
-      if(this.hsc.college_university == '' || this.hsc == null  || this.degree.degree_university == '' || this.degree == null){ //|| this.cbse.university == '' || this.cbse == null
+      if(this.hsc.college_university == '' || this.hsc == null  || this.degree.degree_university == '' || this.degree == null || this.cbse.university == '' || this.cbse == null){ 
         this.eduerrorflag = 1;
         this.eduerrortext = "Please fill all mandatory fields( hsc & degree )";
-      }else if(this.hsc.college_university != '' || this.hsc != null || this.degree.degree_university != '' || this.degree != null){ //|| this.cbse.university != '' || this.cbse != null
+      }else if(this.hsc.college_university != '' || this.hsc != null || this.degree.degree_university != '' || this.degree != null || this.cbse.university != '' || this.cbse != null){ 
         this.api.getcheckTabs().subscribe((data: any) => {
         });
       }
@@ -1691,10 +1582,10 @@ export class ProfileComponent {
           (data: any) => {
 
             if (data !== undefined) {
-              // this.cbse.university = data.sscUniversity;
-              // this.cbse.school_name = data.sscCollege;
-              // this.cbse.result_date = data.sscResultDate;
-              // this.cbse.school_marks = data.sscMarks;
+              this.cbse.university = data.sscUniversity;
+              this.cbse.school_name = data.sscCollege;
+              this.cbse.result_date = data.sscResultDate;
+              this.cbse.school_marks = data.sscMarks;
             }
             this.eduerrorflag = 0;
             //this.next_disable();
@@ -2308,9 +2199,8 @@ export class ProfileComponent {
   quickApply() {
     var courID = this.route.snapshot.queryParamMap.get('courseId');
     if(courID == null){
-      this.router.navigate(['pages/search']);
+      this.router.navigate(['pages/totalcourse']);
     }else if(courID != null){
-      //this.router.navigate(['/pages/selectcollege'],{queryParams:{courseId:courID}})
       this.api.addtoCart(courID).subscribe(
         data => {
           this.user_id=data['data']['user_id'];

@@ -12,6 +12,8 @@ import { NbDialogModule } from '@nebular/theme';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { config } from '../../../../config';
 import { InternationalPhoneModule } from 'ng4-intl-phone';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { SharedModule } from '../shared-authpipe.module';
 @NgModule({
     imports: [
       ThemeModule,
@@ -20,7 +22,9 @@ import { InternationalPhoneModule } from 'ng4-intl-phone';
       NbListModule,
       NbAlertModule,
       NbButtonModule,
+      NgxPaginationModule,
       YoutubePlayerModule,
+      SharedModule,
       NgxMaterialTimepickerModule.forRoot(),
       NbDialogModule.forRoot(),
       AgmCoreModule.forRoot({

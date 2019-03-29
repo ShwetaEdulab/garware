@@ -42,9 +42,10 @@ template: `
       <div class="col-md-9"> <input readonly ngModel="{{cbse_marks?.result_date}}" nbInput [ngClass]="{'form-control-danger': ssc_form.controls.sscResultDateCtrl.invalid && (ssc_form.controls.sscResultDateCtrl.dirty || ssc_form.controls.sscResultDateCtrl.touched)}" formControlName="sscResultDateCtrl" placeholder="DD/MM/YY" class="form-control" [nbDatepicker]="picker"> <nb-datepicker #picker [(date)]="date" [max]="max"></nb-datepicker></div><br>
       <div class="col-md-3">Roll No / Seat No : </div>
       <div class="col-md-9"> <input ngModel="{{cbse_marks?.school_rollNo}}" nbInput type="text"  [ngClass]="{'form-control-danger': ssc_form.controls.sscRollNoCtrl.invalid && (ssc_form.controls.sscRollNoCtrl.dirty || ssc_form.controls.sscRollNoCtrl.touched)}" formControlName="sscRollNoCtrl" placeholder="" id="" class="form-control"> </div><br>
+      <div class="col-md-3">Cert No : </div>
+      <div class="col-md-9"> <input ngModel="{{cbse_marks?.school_certi_no}}" nbInput type="text"  [ngClass]="{'form-control-danger': ssc_form.controls.ssccertiNoCtrl.invalid && (ssc_form.controls.ssccertiNoCtrl.dirty || ssc_form.controls.ssccertiNoCtrl.touched)}" formControlName="ssccertiNoCtrl" placeholder="" id="" class="form-control"> </div><br>
       <div class="col-md-3">Medium of Instruction at school(English/Others) : </div>
       <div class="col-md-9"> <input ngModel="{{cbse_marks?.school_medium}}" nbInput type="text" [ngClass]="{'form-control-danger': ssc_form.controls.sscMediumCtrl.invalid && (ssc_form.controls.sscMediumCtrl.dirty || ssc_form.controls.sscMediumCtrl.touched)}" formControlName="sscMediumCtrl" placeholder="" id="" class="form-control"> </div><br>
-
       <div class="col-md-3">Subject :</div>
       <div class="col-md-2"><input ngModel="{{cbse_marks?.Subject_first}}" nbInput type="text" [ngClass]="{'form-control-danger': ssc_form.controls.subjectFirstsscCtrl.invalid && (ssc_form.controls.subjectFirstsscCtrl.dirty || ssc_form.controls.subjectFirstsscCtrl.touched)}" formControlName="subjectFirstsscCtrl" placeholder="Subject1" id="" class="form-control"></div>
       <div class="col-md-2"><input ngModel="{{cbse_marks?.mark_first}}" nbInput type="text" [ngClass]="{'form-control-danger': ssc_form.controls.markFirstsscCtrl.invalid && (ssc_form.controls.markFirstsscCtrl.dirty || ssc_form.controls.markFirstsscCtrl.touched)}" formControlName="markFirstsscCtrl" placeholder="Marks" id="" class="form-control"></div>
@@ -150,6 +151,7 @@ constructor(protected ref: NbDialogRef<FirstDialogComponent>,
           sscUrlCtrl:['',  Validators.required],
           sscResultDateCtrl: [ '',  Validators.required],
           sscRollNoCtrl:['',  Validators.required],
+          ssccertiNoCtrl:['',  Validators.required],
           sscCountryCtrl:['',  Validators.required],
           sscMediumCtrl:['',  Validators.required],
           subjectFirstsscCtrl:['', Validators.required],
@@ -192,6 +194,7 @@ constructor(protected ref: NbDialogRef<FirstDialogComponent>,
         //this.ssc_form.controls.sscCountryCtrl.markAsDirty();
         this.ssc_form.controls.sscResultDateCtrl.markAsDirty();
         this.ssc_form.controls.sscRollNoCtrl.markAsDirty();
+        this.ssc_form.controls.ssccertiNoCtrl.markAsDirty();
         this.ssc_form.controls.sscMediumCtrl.markAsDirty();
         this.ssc_form.controls.subjectFirstsscCtrl.markAsDirty();
         this.ssc_form.controls.markFirstsscCtrl.markAsDirty();
@@ -229,6 +232,7 @@ constructor(protected ref: NbDialogRef<FirstDialogComponent>,
           sscUrl : this.ssc_form.controls.sscUrlCtrl.value,
           sscResultDate: this.ssc_form.controls.sscResultDateCtrl.value,
           sscRollNo: this.ssc_form.controls.sscRollNoCtrl.value,
+          sscCertiNo: this.ssc_form.controls.ssccertiNoCtrl.value,
           sscMedium: this.ssc_form.controls.sscMediumCtrl.value,
           subjectFirstssc: this.ssc_form.controls.subjectFirstsscCtrl.value,
           markFirstssc: this.ssc_form.controls.markFirstsscCtrl.value,

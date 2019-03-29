@@ -35,16 +35,6 @@ import {
   <nb-card-body>
   <form [formGroup]="hsc_form"  class="step-container">
     <div class="row">
-      <div class="col-md-6">
-        <input id="rdb1" type="radio" value="1" (click)="checkradiohsc(1)" formControlName="Radio_hsc" [checked]="preboard == 1"/> PRE-BOARD
-        <input id="rdb1" type="radio" value="2" (click)="checkradiohsc(2)" formControlName="Radio_hsc" [checked]="hsc == 1"/> HSC/CBSE/HSEB/IB/CIE
-        <div  *ngIf="submitted && Radio_hsc.invalid" style="color:red;margin-top: 5px"> Qualification is  required.</div>
-      </div><div class="col-md-6"></div>
-      <div class="col-md-3" *ngIf="hsc_radio_check==1">
-        <input  type="checkbox" [checked]="appearances == 1" (click)="appear($event)" /> Appear
-      </div>
-      <div *ngIf="hsc_radio_check==1" class="col-md-9"></div>
-      <br>
       <div class="col-md-3">Name of University/Board : </div>
       <div class="col-md-9"> <input ngModel="{{hsc_marks?.college_university}}" nbInput type="text" [ngClass]="{'form-control-danger': hsc_form.controls.hscUniversityCtrl.invalid && (hsc_form.controls.hscUniversityCtrl.dirty || hsc_form.controls.hscUniversityCtrl.touched)}" formControlName="hscUniversityCtrl" placeholder="" id="" class="form-control"> </div><br>
       <div class="col-md-3">School/College Name : </div>
@@ -71,6 +61,8 @@ import {
       <div class="col-md-9"> <input readonly ngModel="{{hsc_marks?.college_result_date}}" nbInput type="text" [ngClass]="{'form-control-danger': hsc_form.controls.hscResultDateCtrl.invalid && (hsc_form.controls.hscResultDateCtrl.dirty || hsc_form.controls.hscResultDateCtrl.touched)}" formControlName="hscResultDateCtrl" placeholder="DD/MM/YY" id="" class="form-control"[nbDatepicker]="picker"> <nb-datepicker #picker [(date)]="date" [max]="max"></nb-datepicker></div><br>
       <div class="col-md-3">Roll No / Seat No : </div>
       <div class="col-md-9"> <input ngModel="{{hsc_marks?.college_rollNo}}" nbInput type="text" [ngClass]="{'form-control-danger': hsc_form.controls.hscRollNoCtrl.invalid && (hsc_form.controls.hscRollNoCtrl.dirty || hsc_form.controls.hscRollNoCtrl.touched)}" formControlName="hscRollNoCtrl" placeholder="" id="" class="form-control"> </div><br>
+      <div class="col-md-3">Cert No : </div>
+      <div class="col-md-9"> <input ngModel="{{hsc_marks?.college_certi_no}}" nbInput type="text"  [ngClass]="{'form-control-danger': hsc_form.controls.hsccertiNoCtrl.invalid && (hsc_form.controls.hsccertiNoCtrl.dirty || hsc_form.controls.hsccertiNoCtrl.touched)}" formControlName="hsccertiNoCtrl" placeholder="" id="" class="form-control"> </div><br>
       <div class="col-md-3">Medium of Instruction at school(English/Others) : </div>
       <div class="col-md-9"> <input ngModel="{{hsc_marks?.college_medium}}" nbInput type="text" [ngClass]="{'form-control-danger': hsc_form.controls.hscMediumCtrl.invalid && (hsc_form.controls.hscMediumCtrl.dirty || hsc_form.controls.hscMediumCtrl.touched)}" formControlName="hscMediumCtrl" placeholder="" id="" class="form-control"> </div><br>
 
@@ -150,9 +142,9 @@ date;
     this.ref.close();
   }
 
-  get Radio_hsc() {
-    return this.hsc_form.get('Radio_hsc');
-  }
+  // get Radio_hsc() {
+  //   return this.hsc_form.get('Radio_hsc');
+  // }
 
   appear(event) {
     if (event.target.checked == true) {
@@ -207,13 +199,13 @@ date;
               this.preboard = 0;
               this.hsc_radio_check = '2';
               this.qualification = 'HSC';
-              this.hsc_form.controls['Radio_hsc'].setValue('2');
+              //this.hsc_form.controls['Radio_hsc'].setValue('2');
             } else if (this.hsc_marks.qualification == "PRE-BOARD") {
               this.preboard = 1;
               this.hsc = 0;
               this.hsc_radio_check = '1';
               this.qualification = 'PRE-BOARD';
-              this.hsc_form.controls['Radio_hsc'].setValue('1');
+              //this.hsc_form.controls['Radio_hsc'].setValue('1');
               if (this.hsc_marks.appearance == "appeared") {
                 this.appearances = "" + 1;
                 this.appearance = "appeared";
@@ -230,7 +222,7 @@ date;
         });
 
     this.hsc_form = this.fb.group({
-      Radio_hsc: ['', Validators.required, ],
+      //Radio_hsc: ['', Validators.required, ],
       hscUniversityCtrl: ['', Validators.required],
       hscCollegeCtrl: ['', Validators.required],
       hscCountryCtrl: ['', Validators.required],
@@ -239,6 +231,7 @@ date;
       hscUrlCtrl: ['', Validators.required],
       hscResultDateCtrl: ['', Validators.required],
       hscRollNoCtrl: ['', Validators.required],
+      hsccertiNoCtrl: ['', Validators.required],
       hscMediumCtrl: ['', Validators.required],
       subjectFirsthscCtrl: ['', Validators.required],
       markFirsthscCtrl: ['', Validators.required],
@@ -280,6 +273,7 @@ date;
       this.hsc_form.controls.hscUrlCtrl.markAsDirty();
       this.hsc_form.controls.hscResultDateCtrl.markAsDirty();
       this.hsc_form.controls.hscRollNoCtrl.markAsDirty();
+      this.hsc_form.controls.hsccertiNoCtrl.markAsDirty();
       this.hsc_form.controls.hscMediumCtrl.markAsDirty();
       this.hsc_form.controls.subjectFirsthscCtrl.markAsDirty();
       this.hsc_form.controls.markFirsthscCtrl.markAsDirty();
@@ -310,8 +304,9 @@ date;
     } else {
 
       var hsc_data = {
-        appearance: this.appearance,
-        qualification: this.qualification,
+        //appearance: this.appearance,
+        //qualification: this.qualification,
+        qualification: '',
         hscUniversity: this.hsc_form.controls.hscUniversityCtrl.value,
         hscCollege: this.hsc_form.controls.hscCollegeCtrl.value,
         hscCountry: this.hsc_form.controls.hscCountryCtrl.value,
@@ -320,6 +315,7 @@ date;
         hscUrl: this.hsc_form.controls.hscUrlCtrl.value,
         hscResultDate: this.hsc_form.controls.hscResultDateCtrl.value,
         hscRollNo: this.hsc_form.controls.hscRollNoCtrl.value,
+        hscCertiNo: this.hsc_form.controls.hsccertiNoCtrl.value,
         hscMedium: this.hsc_form.controls.hscMediumCtrl.value,
         subjectFirsthsc: this.hsc_form.controls.subjectFirsthscCtrl.value,
         markFirsthsc: this.hsc_form.controls.markFirsthscCtrl.value,

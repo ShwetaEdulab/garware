@@ -43,6 +43,8 @@ template: `
       <div class="col-md-9"> <input readonly ngModel="{{diploma_marks?.diploma_result_date}}" nbInput type="text"  [ngClass]="{'form-control-danger': diploma_form.controls.diplomaResultDateCtrl.invalid && (diploma_form.controls.diplomaResultDateCtrl.dirty || diploma_form.controls.diplomaResultDateCtrl.touched)}" formControlName="diplomaResultDateCtrl" placeholder="DD/MM/YY" class="form-control"[nbDatepicker]="picker"> <nb-datepicker #picker [(date)]="date" [max]="max"></nb-datepicker></div><br>
       <div class="col-md-3">Roll No / Seat No : </div>
       <div class="col-md-9"> <input ngModel="{{diploma_marks?.diploma_rollNo}}" nbInput type="text"  [ngClass]="{'form-control-danger': diploma_form.controls.diplomaRollNoCtrl.invalid && (diploma_form.controls.diplomaRollNoCtrl.dirty || diploma_form.controls.diplomaRollNoCtrl.touched)}" formControlName="diplomaRollNoCtrl" placeholder="" id="" class="form-control"> </div><br>
+      <div class="col-md-3">Cert No : </div>
+      <div class="col-md-9"> <input ngModel="{{diploma_marks?.diploma_certi_no}}" nbInput type="text"  [ngClass]="{'form-control-danger': diploma_form.controls.diplomacertiNoCtrl.invalid && (diploma_form.controls.diplomacertiNoCtrl.dirty || diploma_form.controls.diplomacertiNoCtrl.touched)}" formControlName="diplomacertiNoCtrl" placeholder="" id="" class="form-control"> </div><br>
       <div class="col-md-3">Medium of Instruction at school(English/Others) : </div>
       <div class="col-md-9"> <input ngModel="{{diploma_marks?.diploma_medium}}" nbInput type="text"  [ngClass]="{'form-control-danger': diploma_form.controls.diplomaMediumCtrl.invalid && (diploma_form.controls.diplomaMediumCtrl.dirty || diploma_form.controls.diplomaMediumCtrl.touched)}" formControlName="diplomaMediumCtrl" placeholder="" id="" class="form-control"> </div><br>
       <div class="col-md-3">Name of Diploma : </div>
@@ -157,6 +159,7 @@ constructor(protected ref: NbDialogRef<ThirdDialogComponent>,
           diplomaUrlCtrl:['',  Validators.required],
           diplomaResultDateCtrl: [ '',  Validators.required],
           diplomaRollNoCtrl:['',  Validators.required],
+          diplomacertiNoCtrl:['',  Validators.required],
           diplomaMediumCtrl:['',  Validators.required],
           subjectFirstDipCtrl:['', Validators.required],
           markFirstDipCtrl:['',  Validators.required],
@@ -200,6 +203,7 @@ constructor(protected ref: NbDialogRef<ThirdDialogComponent>,
         this.diploma_form.controls.diplomaUrlCtrl.markAsDirty();
         this.diploma_form.controls.diplomaResultDateCtrl.markAsDirty();
         this.diploma_form.controls.diplomaRollNoCtrl.markAsDirty();
+        this.diploma_form.controls.diplomacertiNoCtrl.markAsDirty();
         this.diploma_form.controls.diplomaMediumCtrl.markAsDirty();
         this.diploma_form.controls.subjectFirstDipCtrl.markAsDirty();
         this.diploma_form.controls.markFirstDipCtrl.markAsDirty();
@@ -240,6 +244,7 @@ constructor(protected ref: NbDialogRef<ThirdDialogComponent>,
           diplomaUrl : this.diploma_form.controls.diplomaUrlCtrl.value,
           diplomaResultDate: this.diploma_form.controls.diplomaResultDateCtrl.value,
           diplomaRollNo: this.diploma_form.controls.diplomaRollNoCtrl.value,
+          diplomaCertiNo: this.diploma_form.controls.diplomacertiNoCtrl.value,
           diplomaMedium: this.diploma_form.controls.diplomaMediumCtrl.value,
           subjectFirstDip: this.diploma_form.controls.subjectFirstDipCtrl.value,
           markFirstDip: this.diploma_form.controls.markFirstDipCtrl.value,

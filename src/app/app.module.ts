@@ -47,7 +47,8 @@ import {  NbToastrModule,
  import { AdminOtpModule } from './admin/admin-otp/admin-otp.module';
 import { InstituteRegisterComponent } from './auth/institute-register/institute-register.component';
 import { config } from '../../config';
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {MatDialogModule} from '@angular/material/dialog';
 const socketconfig: SocketIoConfig = { url: 'http://93.104.211.51:2', options: {} };
 //const socketconfig: SocketIoConfig = { url: 'http://93.104.211.51', options: {reconnection: true,transports: ['websocket'],secure: true} };
 @NgModule({
@@ -87,7 +88,9 @@ const socketconfig: SocketIoConfig = { url: 'http://93.104.211.51:2', options: {
    MatSelectModule,
    OTPModule,
    SocketIoModule.forRoot(socketconfig),
-   AdminOtpModule
+   AdminOtpModule,
+   ConfirmDialogModule,
+   MatDialogModule,
    //DraggableModule,
     //DragDropModule,
 

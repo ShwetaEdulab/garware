@@ -30,6 +30,7 @@ export class RegisterComponent{
 	permCountry;
 	selectedGender;
 	selectedCategory;
+	selectedSource;
 	Country;
 	max;
 	date;
@@ -85,7 +86,8 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
         dobCtrl:['', Validators.required],
         phonecodeCtrl:[''],
         phoneCtrl:['', [ Validators.required, Validators.pattern(this.mobileValidate)]],
-        captchaCtrl:['', Validators.required],
+				captchaCtrl:['', Validators.required],
+				sourInfoCtrl:[ '', [ Validators.required]],
       });
     }
               
@@ -133,6 +135,17 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
 		}
 	}
 
+	reloadcaptcha(){
+		this.api.getCaptcha()
+		.subscribe(
+			(data: any) => {  
+				this.captchaText = data['data']['captchaText'];
+				this.captcha =  data['data']['captchadata'];
+				this.svg = this.sanitizer.bypassSecurityTrustHtml(this.captcha);         
+			err => console.error(err)
+		});
+	}
+
 	checkpassword(duration,status){
 		if(this.RegisterForm.controls.passwordCtrl.value != this.RegisterForm.controls.repasswordCtrl.value){		
 
@@ -153,6 +166,7 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
 		this.RegisterForm.controls.firstNameCtrl.markAsDirty();
 		this.RegisterForm.controls.LastNameCtrl.markAsDirty();
 		this.RegisterForm.controls.categoryCtrl.markAsDirty();
+		this.RegisterForm.controls.sourInfoCtrl.markAsDirty();
 		this.RegisterForm.controls.AddCtrl.markAsDirty();
 		this.RegisterForm.controls.CityCtrl.markAsDirty();
 		this.RegisterForm.controls.StateCtrl.markAsDirty();
@@ -203,6 +217,7 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
 						userCity: this.RegisterForm.controls.CityCtrl.value,
 						userState : this.RegisterForm.controls.StateCtrl.value,
 						postal_code : this.RegisterForm.controls.PostCodeCtrl.value,
+						sourInfo : this.RegisterForm.controls.sourInfoCtrl.value,
 					},
 				});
 		  }else{
@@ -227,6 +242,7 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
   showResponse(event) {
     this.messageService.add({severity:'info', summary:'Succees', detail: 'User Responded', sticky: true});
 }
+
 
 onValueChange(event){
   

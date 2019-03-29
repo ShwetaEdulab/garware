@@ -22,23 +22,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   //totalcourse
   {
-    title: 'All Courses',
-    icon: 'nb-edit',
+    title: 'Search Course',
+    icon: 'nb-search',
     link: '/pages/totalcourse',
     data: {
       permission: 'view',
       resource: 'totalcourse'
     },
   },
-  {
-    title: 'Search College/Course',
-    icon: 'nb-search',
-    link: '/pages/search',
-    data: {
-      permission: 'view',
-      resource: 'search'
-    },
-  },
+  // {
+  //   title: 'Search College/Course',
+  //   icon: 'nb-search',
+  //icon: 'nb-edit',
+  //   link: '/pages/search',
+  //   data: {
+  //     permission: 'view',
+  //     resource: 'search'
+  //   },
+  // },
   
   /**Admin Menus*/
   {

@@ -44,6 +44,8 @@ template: `
       <div class="col-md-9"> <input readonly ngModel="{{degree_marks?.degree_result_date}}" name="date_of_result_deg" nbInput type="text" [ngClass]="{'form-control-danger': degree_form.controls.degreeResultDateCtrl.invalid && (degree_form.controls.degreeResultDateCtrl.dirty || degree_form.controls.degreeResultDateCtrl.touched)}" formControlName="degreeResultDateCtrl" placeholder="DD/MM/YY" id="" class="form-control"[nbDatepicker]="picker"> <nb-datepicker #picker [(date)]="date" [max]="max"></nb-datepicker></div><br>
       <div class="col-md-3">Roll No / Seat No : </div>
       <div class="col-md-9"> <input ngModel="{{degree_marks?.degree_rollNo}}" name="seat_no_deg" nbInput type="text" [ngClass]="{'form-control-danger': degree_form.controls.degreeRollNoCtrl.invalid && (degree_form.controls.degreeRollNoCtrl.dirty || degree_form.controls.degreeRollNoCtrl.touched)}" formControlName="degreeRollNoCtrl" placeholder="" id="" class="form-control"> </div><br>
+      <div class="col-md-3">Cert No : </div>
+      <div class="col-md-9"> <input ngModel="{{degree_marks?.degree_certi_no}}" nbInput type="text"  [ngClass]="{'form-control-danger': degree_form.controls.degreecertiNoCtrl.invalid && (degree_form.controls.degreecertiNoCtrl.dirty || degree_form.controls.degreecertiNoCtrl.touched)}" formControlName="degreecertiNoCtrl" placeholder="" id="" class="form-control"> </div><br>
       <div class="col-md-3">Medium of Instruction at school(English/Others) : </div>
       <div class="col-md-9"> <input ngModel="{{degree_marks?.degree_medium}}" name="medium_exam_deg" nbInput type="text" [ngClass]="{'form-control-danger': degree_form.controls.degreeMediumCtrl.invalid && (degree_form.controls.degreeMediumCtrl.dirty || degree_form.controls.degreeMediumCtrl.touched)}" formControlName="degreeMediumCtrl" placeholder="" id="" class="form-control"> </div><br>
 
@@ -140,6 +142,7 @@ constructor(protected ref: NbDialogRef<FourthDialogComponent>,
       this.degree_form.controls.degreeUrlCtrl.markAsDirty();
       this.degree_form.controls.degreeResultDateCtrl.markAsDirty();
       this.degree_form.controls.degreeRollNoCtrl.markAsDirty();
+      this.degree_form.controls.degreecertiNoCtrl.markAsDirty();
       this.degree_form.controls.degreeMediumCtrl.markAsDirty();
       this.degree_form.controls.subjectFirstDegCtrl.markAsDirty();
       this.degree_form.controls.markFirstDegCtrl.markAsDirty();
@@ -181,6 +184,7 @@ constructor(protected ref: NbDialogRef<FourthDialogComponent>,
         degreeUrl : this.degree_form.controls.degreeUrlCtrl.value,
         degreeResultDate: this.degree_form.controls.degreeResultDateCtrl.value,
         degreeRollNo: this.degree_form.controls.degreeRollNoCtrl.value,
+        degreeCertiNo : this.degree_form.controls.degreecertiNoCtrl.value,
         degreeMedium: this.degree_form.controls.degreeMediumCtrl.value,
         subjectFirstDeg: this.degree_form.controls.subjectFirstDegCtrl.value,
         markFirstDeg: this.degree_form.controls.markFirstDegCtrl.value,
@@ -252,6 +256,7 @@ constructor(protected ref: NbDialogRef<FourthDialogComponent>,
           degreeUrlCtrl:['',  Validators.required],
           degreeResultDateCtrl: [ '',  Validators.required],
           degreeRollNoCtrl:['',  Validators.required],
+          degreecertiNoCtrl:['',  Validators.required],
           degreeMediumCtrl:['',  Validators.required],
           subjectFirstDegCtrl:['', Validators.required],
           markFirstDegCtrl:['',  Validators.required],
