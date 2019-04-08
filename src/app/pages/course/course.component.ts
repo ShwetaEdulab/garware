@@ -17,6 +17,8 @@ import {
 } from '@nebular/auth';
 import { HeaderComponent } from '../../@theme/components/header/header.component';
 import { SocketService } from '../../shared/socket.service';
+import { NbDialogService } from '@nebular/theme';
+import { GalleryComponent } from './gallery.component';
 
 @Component({
   selector: 'course',
@@ -36,6 +38,8 @@ import { SocketService } from '../../shared/socket.service';
 providers:[HeaderComponent],
 })
 export class CourseComponent {
+  gallery: any;
+  video: any;
   constructor(private router: Router,
     private route: ActivatedRoute,
     private api: ApiService,
@@ -43,6 +47,7 @@ export class CourseComponent {
     private authService: NbAuthService,
     private comp: HeaderComponent,
     private socket : SocketService,
+    private dialogService: NbDialogService,
   ) {
 
   }
@@ -99,6 +104,8 @@ export class CourseComponent {
       this.process = this.procedure.slice(1, -1);
       this.course_curriculum = response['data']['course_curriculum'];
       this.course_duration = response['data'].cal_duration;
+      this.gallery = response['data']['college_gallery_images'];
+      this.video = response['data']['college_gallery_videos'];
     } catch (error) {
       console.error("Error from ngOnInit => " + error);
     }
@@ -216,5 +223,13 @@ export class CourseComponent {
       }
     });
     window.location.reload();
+  }
+
+  galleryPopup(){
+    this.dialogService.open(GalleryComponent, {
+      context: {
+       arr : this.gallery
+      },
+   });
   }
 }

@@ -1,10 +1,82 @@
-<nb-card>
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerSize="xlarge">
 	<nb-card-body>
 		<div class="titleWrap">
 			<label>Eligibility</label>
 		</div>
 		<p-tabView (onChange)="getApplication($event)">
-			<p-tabPanel header="Applications">
+			<p-tabPanel header="Personal Interview Details">
+				<b><h3>Personal Interview Details</h3></b><br>
+				<div class="row">
+					<div class="col-xl-4">
+						<mat-form-field class="example-full-width">
+							<input matInput  type="text" [value]="filterText"
+							[placeholder]="filterPlaceholder" [formControl]="filterInput" />
+						</mat-form-field>
+					</div>
+					<div class="col-xl-4">
+						<label for="DOBtxt">Date of PI Test<span style="color:red;">*</span></label><br>
+						<input nbInput [(ngModel)]="piTest" placeholder="Select Date of PI Test" id="DOBtxt" 
+								[nbDatepicker]="formpicker" ><br>
+						<nb-datepicker #formpicker [min]="max"></nb-datepicker><br>
+						<button nbButton  size="xsmall" outline status="info" (click)="saveDate('pit')">Save Date</button>
+						<span *ngIf="showOne" style="color: red">{{message}}</span><br>
+					</div>
+					<div class="col-xl-4">
+						<label for="inputPITime">Time of Personal Interview Test<span style="color:red;">*</span></label><br>
+						<input [ngxTimepicker]="picker1" id="inputPITime" [(ngModel)]="onlinePITime" nbInput 
+							placeholder="Select Time of Online Test" name="onlinePITime"><br>
+						<ngx-material-timepicker #picker1></ngx-material-timepicker><br>
+						<button nbButton size="xsmall" outline status="info" (click)="saveTime(serverTimeId)">Save Time</button>
+						<span *ngIf="showTwo" style="color: red">{{message}}</span><br>
+					</div>
+				</div>
+				
+				<table class="table table-striped w-auto">
+						<thead>
+							<h5><b>Total Count:</b></h5>{{application_data?.length}}
+							<tr>
+								<th>Application No.</th>
+								<th>Application No.For 1st Payment</th>
+								<th>Category</th>
+								<!-- <th>Country Name</th> -->
+								<th>Student Name</th>
+								<th>Email Address</th>
+								<th>Selected Course</th>
+								<!-- <th>Check Eligibility</th> -->
+								<th>Action</th>
+								<th>Personal Interview Exam Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="info" *ngFor="let application of application_data | filter:{date:filterText,email:filterText,course:filterText,specialization:filterText,student_category:filterText,enrollment_no: filterText,stu_name : filterText,country_name:filterText,user_id:filterText} : false | paginate: { itemsPerPage: 10, currentPage: p } ">
+								<th scope="row">{{application?.enrollment_no}}</th>
+								<td>{{application?.user_id}}</td>
+								<td>{{application?.student_category}}</td>
+								<!-- <td>{{application?.country_name}}</td> -->
+								<td>{{application?.stu_name}}</td>
+								<td>{{application?.email}}</td>
+								<td>{{application?.specialization}} ({{application?.course}})</td>
+								<!-- <td><button nbButton  size="xsmall" outline status="info" (click)="Check_Eligibility(application.user_id,application.college_university,application.college_name,application.Subject_first_hsc,application.Subject_Second_hsc,application.Subject_Third_hsc,application.Subject_fourth_hsc,application.Subject_fifth_hsc,application.Subject_Six_hsc,application.specialization,application.course)">Check Eligibility</button></td> -->
+								<td><i class="fa ion-person" status="danger" nbPopover="View More" nbPopoverMode="hover" (click)="viewMore('application',application.user_id,application.course_id,'new',application.id);"></i>
+									<section class="example-section">
+										<mat-slide-toggle
+											class="example-margin"
+											[color]="color"
+											(change)="sendToForeign($event,application.id,application.course_id,application.user_id,application.check_eligibility)"
+											[checked]="application.check_foreign"
+											[disabled]="disabled">
+											Send Email about PI Test 
+										</mat-slide-toggle>
+									</section>
+									<i class="fa ion-email" status="info" nbPopover="Raise Ticket" nbPopoverMode="hover" (click)="Ticket(application.email);"></i>
+								</td>
+								<td>{{application?.pi_test_date}}</td>				
+							</tr>
+						</tbody>				
+					</table>
+				<pagination-controls (pageChange)="p = $event"></pagination-controls>
+			</p-tabPanel>
+			<!-- <p-tabPanel header="Applications">
 				<b><h3>Eligibility</h3></b><br>
 				<div class="row">
 					<div class="col-md-12 ">
@@ -23,8 +95,7 @@
 							<th>Student Name</th>
 							<th>Email Address</th>
 							<th>Selected Course</th>
-							<th>Forword Letter</th>
-							<th>Provisional Letter</th>
+							<th>Online test marks</th>
 							<th>Eligblity Number</th>
 							<th>Actions</th>
 							<th>Raise Ticket</th>
@@ -32,14 +103,17 @@
 					</thead>
 					<tbody>
 						<tr class="info" *ngFor="let application of application_data | filter:{stu_name: filterText, email: filterText, specialization: filterText, course: filterText} | paginate: { itemsPerPage: 10, currentPage: p }">
-							<td>{{application?.id}}</td>
+							<td>{{application?.enrollment_no}}</td>
 							<td>{{application?.stu_name}}</td>
 							<td>{{application?.email}}</td>
 							<td>{{application?.specialization}} ({{application?.course}})</td>
-							<td><a (click)=downloadForewordLetter(application.pdf,application.file_name)><img src="{{serverUrl}}/front_assets/img/pdf1.png"  style="height:50px; width:50px;"></a></td>
-							<td><img src="{{serverUrl}}/front_assets/img/pdf1.png"  style="height:50px; width:50px;" (click)="DownloadProvisionalLetter(application.user_id,application.id)"></td>
+							
+							<td>
+								<mat-form-field class="example-full-width">
+									<input matInput placeholder="Online Test Marks" id='onlineMark{{application.id}}' value="40" readonly>
+								</mat-form-field></td>
 							<td><mat-form-field class="example-full-width">
-									<input matInput placeholder="Eligbility Number" id='eligib_number{{application.id}}'>
+									<input matInput placeholder="PI Test Marks" id='eligib_number{{application.id}}'>
 								</mat-form-field><br>
 								<span id="elignumbererror{{application.id}}"></span>
 							</td>
@@ -61,7 +135,7 @@
 					</tbody>
 				</table>
 				<pagination-controls (pageChange)="p = $event"></pagination-controls>
-			</p-tabPanel>
+			</p-tabPanel> -->
 			<p-tabPanel header="Re-Uploaded Transcripts">
 				<b><h3>Re-Uploaded Transcripts of Student's</h3></b><br>
 				<div class="row">

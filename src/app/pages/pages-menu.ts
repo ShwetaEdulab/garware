@@ -61,7 +61,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     },
   },
   {
-    title: 'Admin Application',
+    title: 'Online Entrance Exam',
     icon: 'ion-filing',
     link: '/pages/adminApplication',
     data: {
@@ -71,7 +71,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
 
   {
-    title: 'Eligiblity',
+    title: 'Personal Interview Exam',
     icon: 'ion-clipboard',
     link: '/pages/adminEligibility',
     data: {
@@ -80,12 +80,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
     },
   },
   {
-    title: 'Foreign Office',
+    title: 'Update Marks & Seat Allocation',
     icon: 'ion-planet',
     link: '/pages/adminForeignOffice',
     data: {
       permission: 'view',
       resource: 'adminForeignOffice'
+    },
+  },
+  {
+    title: 'Reports',
+    icon: 'nb-bar-chart',
+    link: '/pages/AdminReport',
+    data: {
+      permission: 'view',
+      resource: 'adminReport'
     },
   },
 

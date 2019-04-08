@@ -6,6 +6,8 @@ import { CourseComponent } from './course.component';
 import { NbListModule } from '@nebular/theme';
 import { NbAlertModule } from '@nebular/theme';
 import { NbButtonModule , NbAccordionModule,NbSpinnerModule } from '@nebular/theme';
+import { YoutubePlayerModule } from 'ngx-youtube-player';
+import { GalleryComponent } from './gallery.component';
 @NgModule({
   imports: [
 
@@ -16,10 +18,15 @@ import { NbButtonModule , NbAccordionModule,NbSpinnerModule } from '@nebular/the
     NbAlertModule,
     NbButtonModule,
     NbAccordionModule,
-    NbSpinnerModule
+    NbSpinnerModule,
+    YoutubePlayerModule,
   ],
   declarations: [
     CourseComponent,
+    GalleryComponent,
+  ],
+  entryComponents: [
+    GalleryComponent
   ],
   providers: []
 })

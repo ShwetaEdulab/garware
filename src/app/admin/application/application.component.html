@@ -1,13 +1,13 @@
-<nb-card>
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerSize="xlarge">
 	<nb-card-body>
 		<div class="titleWrap">
 			<label>Application</label>
 		</div>
 		<p-tabView (onChange)="getApplicationAccepted($event)">
 			<p-tabPanel header="Application">
-				<h3>Applications Requested</h3>
+				<h3>Online Entrance Test Details</h3>
 				<div class="row">
-					<div class="col-md-12 ">
+					<div class="col-xl-4">
 						<mat-form-field class="example-full-width">
 							<input matInput  type="text" [value]="filterText"
 							[placeholder]="filterPlaceholder" [formControl]="filterInput" />
@@ -15,6 +15,22 @@
 								<mat-icon>close</mat-icon>
 							</button>
 						</mat-form-field>
+					</div>
+					<div class="col-xl-4">
+						<label for="inputDob">Date of Online Entrance Test<span style="color:red;">*</span></label><br>
+						<input [(ngModel)]="onlineTest" id="inputDob" nbInput
+						placeholder="Select Date of Online Test" [nbDatepicker]="picker"><br>
+						<nb-datepicker #picker [(date)]="date" [min]="max"></nb-datepicker><br>
+						<button nbButton size="xsmall" outline status="info" (click)="saveDate('ot')">Save Date</button>
+						<span *ngIf="showOne" style="color: red">{{message}}</span><br>
+					</div>
+					<div class="col-xl-4">
+						<label for="inputTime">Time of Online Entrance Test<span style="color:red;">*</span></label><br>
+						<input [ngxTimepicker]="picker1" id="inputTime" [(ngModel)]="onlineTime" nbInput 
+						placeholder="Select Time of Online Test" name="onlineTime"><br>
+						<ngx-material-timepicker #picker1></ngx-material-timepicker><br>
+						<button nbButton size="xsmall" outline status="info" (click)="saveTime(serverDateId)">Save Time</button>
+						<span *ngIf="showTwo" style="color: red">{{message}}</span><br>
 					</div>
 				</div>
 				<table class="table table-striped w-auto">
@@ -24,12 +40,11 @@
 							<th>Application No.</th>
 							<th>Application No.For 1st Payment</th>
 							<th>Category</th>
-							<th>Country Name</th>
 							<th>Student Name</th>
 							<th>Email Address</th>
 							<th>Selected Course</th>
-							<!-- <th>Check Eligibility</th> -->
 							<th>Action</th>
+							<th>Online Entrance Exam Date</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -37,31 +52,31 @@
 							<th scope="row">{{application?.enrollment_no}}</th>
 							<td>{{application?.user_id}}</td>
 							<td>{{application?.student_category}}</td>
-							<td>{{application?.country_name}}</td>
 							<td>{{application?.stu_name}}</td>
 							<td>{{application?.email}}</td>
 							<td>{{application?.specialization}} ({{application?.course}})</td>
-							<!-- <td><button nbButton  size="xsmall" outline status="info" (click)="Check_Eligibility(application.user_id,application.college_university,application.college_name,application.Subject_first_hsc,application.Subject_Second_hsc,application.Subject_Third_hsc,application.Subject_fourth_hsc,application.Subject_fifth_hsc,application.Subject_Six_hsc,application.specialization,application.course)">Check Eligibility</button></td> -->
 							<td><i class="fa ion-person" status="danger" nbPopover="View More" nbPopoverMode="hover" (click)="viewMore('application',application.user_id,application.course_id,'new',application.id);"></i>
 								<section class="example-section">
 									<mat-slide-toggle
+										id='sendToEligibilitytick{{application.id}}'
 										class="example-margin"
 										[color]="color"
 										(change)="sendToEligibility($event,application.id,application.course_id,application.user_id,application.check_eligibility)"
 										[checked]="application.check_eligibility"
 										[disabled]="disabled">
-										Send to Eligibility
+										Send Email about Online Test 
 									</mat-slide-toggle>
 								</section>
 								<i class="fa ion-email" status="info" nbPopover="Raise Ticket" nbPopoverMode="hover" (click)="Ticket(application.email);"></i>
-							</td>					
+							</td>
+							<td>{{application?.online_test_date}}</td>				
 						</tr>
 					</tbody>				
 				</table>
 			<pagination-controls (pageChange)="p = $event"></pagination-controls>			
 			</p-tabPanel>
 	
-			<p-tabPanel header="Application Accepted">
+			<!-- <p-tabPanel header="Application Accepted">
 				<h3>Applications Accepted</h3>
 				<div class="row">
 					<div class="col-lg-12 ">
@@ -81,7 +96,6 @@
 							<th>Date</th>
 							<th>Application No.</th>
 							<th>Category</th>
-							<th>Country Name</th>
 							<th>Student Name</th>
 							<th>Selected Course</th>
 							<th>Passport No.</th>
@@ -96,7 +110,6 @@
 							<td>{{application.date}}</td>
 							<td>{{application.enrollment_no}}</td>
 							<td>{{application.student_category}}</td>
-							<td>{{application.country_name}}</td>
 							<td>{{application.stu_name}}</td>
 							<td>{{application.specialization}}({{application.course}})</td>
 							<td>{{application.passport_no}}</td>
@@ -130,7 +143,6 @@
 							<th>Date</th>
 							<th>Application No.</th>
 							<th>Category</th>
-							<th>Country Name</th>
 							<th>Student Name</th>
 							<th>Selected Course</th>
 							<th>Passport No.</th>
@@ -143,7 +155,6 @@
 							<th scope="row">{{application?.date}}</th>
 							<td>{{application?.enrollment_no}}</td>
 							<td>{{application?.student_category}}</td>
-							<td>{{application?.country_name}}</td>
 							<td>{{application?.stu_name}}</td>
 							<td>{{application?.specialization}} ({{application?.course}})</td>
 							<td>{{application.passport_no}}</td>
@@ -153,7 +164,7 @@
 					</tbody>				
 				</table>
 				<pagination-controls (pageChange)="p = $event"></pagination-controls>
-			</p-tabPanel>
+			</p-tabPanel> -->
 	
 			<!-- <p-tabPanel header="ICCR Application">
 				<h3>ICCR Applications</h3>
@@ -344,4 +355,5 @@
 		</p-tabView>    
 	</nb-card-body>
 </nb-card>
+<p-confirmDialog [style]="{width: '425px'}"></p-confirmDialog> 
 	

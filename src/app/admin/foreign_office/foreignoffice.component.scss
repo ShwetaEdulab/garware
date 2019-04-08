@@ -85,3 +85,32 @@ table {
     font-size: 14px;
     font-weight: 900;
   }
+
+  .fa {
+    width: 18px;
+    text-align: center;
+    font-size: 50px;
+    visibility: visible;
+  }
+  
+  .fa {
+    
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 20px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  i:hover {
+    //background-color: red;
+    font-size: xx-large;
+    font-family: Arial, Helvetica, sans-serif;
+    color: red;
+    outline-color : aqua;
+  }
+  
+  .ion-email{
+    font-size: 25px;
+  }

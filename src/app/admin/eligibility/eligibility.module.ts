@@ -9,11 +9,23 @@ import { AdminEligibilityComponent } from './eligibility.component';
 
 import {NgxPaginationModule} from 'ngx-pagination';
 import {CommonModule} from '@angular/common';
-import {NbCardModule ,NbPopoverModule, NbActionsModule,NbButtonModule} from '@nebular/theme'; 
+import {NbCardModule ,
+  NbPopoverModule,
+  NbActionsModule,
+  NbButtonModule,
+  NbInputModule,
+  NbSpinnerModule } from '@nebular/theme'; 
 import {MatInputModule} from '@angular/material/input'; 
 import { SharedModule } from '../../pages/shared-authpipe.module';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {
+  NbDatepickerModule
+} from '@nebular/theme/components/datepicker/datepicker.module';
+import {MatIconModule} from '@angular/material/icon';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+
 
 @NgModule({
   imports: [
@@ -29,7 +41,13 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     NgxPaginationModule,
     SharedModule,
     ReactiveFormsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    MatSlideToggleModule,
+    NbDatepickerModule,
+    MatIconModule,
+    NbInputModule,
+    NbSpinnerModule,
+    NgxMaterialTimepickerModule
   ],
   declarations: [
     AdminEligibilityComponent,

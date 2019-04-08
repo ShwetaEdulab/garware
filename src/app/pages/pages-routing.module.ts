@@ -41,6 +41,7 @@ import { AdminErrataComponent } from '../admin/errata/errata.component';
 import { AdminForeignOfficeComponent } from '../admin/foreign_office/foreignoffice.component';
 import { AdminReuploadedTranscriptComponent } from '../admin/re_Uploaded_Transcript/re_Uploaded_Transcript.component';
 import { StudentManagementComponent } from '../admin/student-management/student-management.component';
+import { AdminReportComponent } from '../admin/report/report.component';
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
@@ -191,6 +192,11 @@ const routes: Routes = [{
     component: AdminReuploadedTranscriptComponent,
 
   },
+  {
+    path: 'AdminReport',
+    component: AdminReportComponent,
+
+},
   {
     path: '',
     redirectTo: 'dashboard',

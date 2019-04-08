@@ -33,9 +33,9 @@ updateOtp(){
       this.handleError("updateOtp : "+JSON.stringify(error));
   }
 }
-getApplication(tab_type){
+getApplication(tab_type,year){
     try{
-        return this.httpClient.get(`${this.baseUrl}/admin_api/Application?tab=`+tab_type);
+        return this.httpClient.get(`${this.baseUrl}/admin_api/Application?tab=`+tab_type+`&year=`+year);
     }catch(error) {
         this.handleError("getApplication : "+JSON.stringify(error));
     }
@@ -56,11 +56,19 @@ getIccrApplication(tab){
       this.handleError("getIccrApplication : "+JSON.stringify(error));
   }
 }
-getApplicationinEligibility(tab_type){
+getApplicationinEligibility(tab_type,academic_year){
   try{
-      return this.httpClient.get(`${this.baseUrl}/admin_api/Eligibility?tab=`+tab_type);
+      return this.httpClient.get(`${this.baseUrl}/admin_api/Eligibility?tab=`+tab_type+`&year=`+academic_year);
   }catch(error) {
       this.handleError("getApplicationinEligibility : "+JSON.stringify(error));
+  }
+}
+
+getEmailTracker(){
+  try{
+    return this.httpClient.get(`${this.baseUrl}/admin_api/report/getEmailTracker`);
+  }catch(error) {
+      this.handleError("getEmailTracker : "+JSON.stringify(error));
   }
 }
 
@@ -232,10 +240,10 @@ sendEmailToEmbassy(user_id,course_id,application_id,email,countryName){
 
 getApplicationinForeignOffice(tab_type){
   try{
-      if(tab_type == "seat_allocation"){
+      if(tab_type == "new"){
           return this.httpClient.get(`${this.baseUrl}/admin_api/foreignoffice?tab=`+tab_type);
-      }else if(tab_type == "iccr_seat_allocation"){
-          return this.httpClient.get(`${this.baseUrl}/admin_api/iccr/foregin_office?tab=`+tab_type);
+      }else if(tab_type == "seat_allocation"){
+        return this.httpClient.get(`${this.baseUrl}/admin_api/foreignoffice/seat_allocation?tab=`+tab_type);
       }else if(tab_type == "third_payment"){
           return this.httpClient.get(`${this.baseUrl}/admin_api/foreignoffice/third_payment_details?tab=`+tab_type);
       }
@@ -312,6 +320,16 @@ checkeligiblity(data){
       });
   }catch(error) {
       this.handleError("checkeligiblity : "+JSON.stringify(error));
+    }
+}
+
+checkforeign(data){
+  try{
+      return this.httpClient.post(`${this.baseUrl}/admin_api/Eligibility/sendEmailPI`,{
+        data : data,
+      });
+  }catch(error) {
+      this.handleError("checkforeign : "+JSON.stringify(error));
     }
 }
 
@@ -427,17 +445,17 @@ Check_Eligibility_data(nrp,specialization,course){
   }
 }
 
-getApplicationsByStatus(){
+getApplicationsByStatus(year){
   try{
-    return this.httpClient.get(`${this.baseUrl}/admin_api/report/admission-request`);
+    return this.httpClient.get(`${this.baseUrl}/admin_api/report/admission-request?year=`+year);
   }catch(error) {
     this.handleError("getApplicationsByStatus : "+JSON.stringify(error));
   }
 }
 
-getApplicationAcceptance(){
+getApplicationAcceptance(year){
   try{
-    return this.httpClient.get(`${this.baseUrl}/admin_api/report/application-acceptance`);
+    return this.httpClient.get(`${this.baseUrl}/admin_api/report/application-acceptance?year=`+year);
   }catch(error) {
     this.handleError("getApplicationAcceptance : "+JSON.stringify(error));
   }
@@ -711,6 +729,78 @@ getTickets(tab_type){
             }
         };
     });
+}
+
+savedate(value,Online_test_date){
+  try{
+      return this.httpClient.post(`${this.baseUrl}/admin_api/Application/saveDate`,{
+          Online_test_date : Online_test_date,
+          date_type : value
+      });
+  }catch(error) {
+      this.handleError("getStudentEducationDetails : "+JSON.stringify(error));
+  }
+
+}
+
+saveTime(value,Online_test_time){
+  try{
+      return this.httpClient.post(`${this.baseUrl}/admin_api/Application/saveTime`,{
+        Online_test_time : Online_test_time,
+        dateId : value
+      });
+  }catch(error) {
+      this.handleError("getStudentEducationDetails : "+JSON.stringify(error));
+  }
+
+}
+
+enterPIMarks(id,pi_test_marks,course_id){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/admin_api/foreignoffice/savePIMarks`,{
+        application_id : id,
+        pi_test_marks : pi_test_marks,
+        course_id : course_id
+    });
+  }catch(error) {
+      this.handleError("enterPIMarks : "+JSON.stringify(error));
+  }
+}
+
+totalseats(user_id,course_id,application_id){
+  try{
+      return this.httpClient.post(`${this.baseUrl}/admin_api/foreignoffice/seatsListView`,{
+          applicationId : application_id,
+          userId : user_id,
+          course_id :course_id                 
+      });
+  }catch(error) {
+      this.handleError("getStudentPreferencesList : "+JSON.stringify(error));
+  }
+}
+
+allocateSeat(user_id,course_id,application_id){
+  try{
+      return this.httpClient.post(`${this.baseUrl}/admin_api/foreignoffice/allocateSeat`,{
+          applicationId : application_id,
+          userId : user_id,
+          course_id :course_id                 
+      });
+  }catch(error) {
+      this.handleError("getStudentPreferencesList : "+JSON.stringify(error));
+  }
+}
+
+failStudent(user_id,course_id,application_id){
+  try{
+      return this.httpClient.post(`${this.baseUrl}/admin_api/foreignoffice/failStudent`,{
+          applicationId : application_id,
+          userId : user_id,
+          course_id :course_id                 
+      });
+  }catch(error) {
+      this.handleError("getStudentPreferencesList : "+JSON.stringify(error));
+  }
 }
 
 

@@ -42,6 +42,7 @@ import { AdminErrataModule } from '../admin/errata/errata.module';
 import { AdminForeignOfficeModule } from '../admin/foreign_office/foreignoffice.module';
 import { AdminReuploadedTranscriptModule } from '../admin/re_Uploaded_Transcript/re_Uploaded_Transcript.module';
 import { StudentMgmtModule } from '../admin/student-management/student-management.module';
+import { AdminReportModule } from '../admin/report/report.module';
 
 
 const PAGES_COMPONENTS = [
@@ -85,7 +86,8 @@ const PAGES_COMPONENTS = [
     AdminErrataModule,
     AdminForeignOfficeModule,
     AdminReuploadedTranscriptModule,
-    StudentMgmtModule
+    StudentMgmtModule,
+    AdminReportModule,
   ],
   providers: [Data],
   declarations: [

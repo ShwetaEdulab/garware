@@ -31,7 +31,9 @@ import {
   NbButtonModule,
   NbCheckboxModule,
    NbInputModule 
-} from '@nebular/theme';  
+} from '@nebular/theme'; 
+import {ConfirmDialogModule} from 'primeng/confirmdialog'; 
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 /** Material Modules*/
 import {MatTabsModule} from '@angular/material/tabs';
@@ -93,6 +95,8 @@ import { EligibilityComponent } from './Eligibility.Component';
     NbRadioModule ,
     NbDialogModule,
     NbCheckboxModule,
+    ConfirmDialogModule,
+    NgxMaterialTimepickerModule
   ],
   declarations: [
       AdminApplicationComponent,

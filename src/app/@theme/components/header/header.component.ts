@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NbMenuService, NbSidebarService } from '@nebular/theme';
+import { NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 import { LayoutService } from '../../../@core/data/layout.service';
@@ -52,7 +52,9 @@ export class HeaderComponent implements OnInit {
               private authService: NbAuthService,
               public http: HttpClient,
               private socket : Socket,
-              protected api: ApiService,) {
+              protected api: ApiService,
+              public themeService : NbThemeService,
+            ) {
                 this.api.notification(this.user.id);
        
 
@@ -61,6 +63,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.userService.onUserChange()
       .subscribe((user: any) => this.user = user);
+      this.api.getTheme().subscribe((data: any) => {
+        if(data['data']){
+          this.themeService.changeTheme(data['data']);
+        }else{
+          this.themeService.changeTheme('default');
+        }
+      });
       
       if(this.user.role == 'student'){
 

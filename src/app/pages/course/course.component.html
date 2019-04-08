@@ -55,6 +55,19 @@
                                   </nb-card-body>
                               </nb-card>
                           </div>
+                          <div *ngIf="gallery != '' ">
+                                <nb-card>
+                                    <nb-card-header><b>Gallery</b></nb-card-header>
+                                    <nb-card-body >
+                                        <ngb-carousel >
+                                            <ng-template ngbSlide *ngFor="let img of gallery">
+                                                <div (click)="galleryPopup()"><img [src]="img.image" height=":600px;" width="100%;" alt="Random first slide"></div>
+                                            </ng-template>
+                                        </ngb-carousel>
+                                    </nb-card-body>
+                                </nb-card>
+
+                          </div>
                           <div *ngIf="placement != '' ">
                               <div class="row">
                                       <div class="col-lg-12">
@@ -71,7 +84,7 @@
                                       </div>
                                   </div>
                       </div>
-                      <div>
+                      <!-- <div>
                               <nb-card size="medium" [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerSize="xlarge">
                                   <nb-card-header>
                                           Colleges offered : {{collegelistCount}}
@@ -85,7 +98,7 @@
                                       
                                   </nb-list>
                               </nb-card>
-                      </div>
+                      </div> -->
                   </div>
                   <div class="col-lg-8" *ngFor= "let college of collegelist">
                       <div *ngIf = "college.description != '' ">
@@ -126,8 +139,29 @@
                                           </nb-accordion>
                                   </nb-card-body>
                               </nb-card>
-                          </div>
+                    </div>
+                    <div *ngIf="video != '' ">
+                            <nb-card  status="active">
+                                <nb-card-header>
+                                    Videos
+                                </nb-card-header>
+                                <nb-card-body >
+                                    <div class="row">
+                                        <div class="offset-lg-2"></div>
+                                        <div class="col-lg-10">
+                                            <ngb-carousel  >
+                                                <ng-template ngbSlide *ngFor="let img of video">
+                                                    <youtube-player 
+                                                    [videoId]="img.videos" >
+                                                    </youtube-player>
+                                                    </ng-template>
+                                                </ngb-carousel>
+                                        </div>
+                                    </div>
+                                </nb-card-body>
+                            </nb-card>
                       </div>
+                    </div>
               </div>
          </div>
       </div>

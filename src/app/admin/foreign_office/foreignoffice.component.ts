@@ -7,6 +7,7 @@ import { saveAs } from 'file-saver';
 import { PreferencesDialogComponent } from './dialog/studentPreferences';
 import { PaymentDetailsDialogComponent } from './dialog/paymentDetails';
 import { EducationDetailsDialogComponent } from './dialog/education_details';
+import { SeatAllocationDialogComponent } from './dialog/seatAllocation';
 import { NbDateService, NbDialogService, NbToastrService,NbStepperComponent,NbThemeService } from '@nebular/theme';
 import {ConfirmationService} from 'primeng/api';
 import * as $ from 'jquery';
@@ -51,10 +52,11 @@ export class AdminForeignOfficeComponent {
   
   getApplicationAcceptedForeignOffice(e) {
     var index = e.index;
-   
     if(index == 0){
-      this.tab_type = 'seat_allocation'
+      this.tab_type = 'new'
     }else if(index == 1){
+      this.tab_type = 'seat_allocation'
+    }else if(index == 2){
       this.tab_type = 'third_payment'
     }
     this.adminApi.getApplicationinForeignOffice(this.tab_type).subscribe(data=>{
@@ -381,4 +383,75 @@ export class AdminForeignOfficeComponent {
             err => console.error(err)
         });
   }
+
+  saveMarks(id,course_id){
+    var pi_test_marks = ((document.getElementById("eligib_number"+id) as HTMLInputElement).value);
+    var online_test_Marks = ((document.getElementById("onlineMark"+id) as HTMLInputElement).value);
+    console.log("online_test_Marks=========>"+online_test_Marks);
+    if(online_test_Marks==null || online_test_Marks=="" || online_test_Marks==undefined){
+      document.getElementById("elignumbererror"+id).innerHTML ="Online Test Marks is null";
+			document.getElementById("elignumbererror"+id).style.color = "red";
+    }else if(pi_test_marks==null || pi_test_marks=="" || pi_test_marks==undefined){
+      document.getElementById("elignumbererror"+id).innerHTML ="Please Enter Personal Interview Marks.";
+			document.getElementById("elignumbererror"+id).style.color = "red";
+    }else{
+      document.getElementById("elignumbererror"+id).innerHTML ="";
+      this.adminApi.enterPIMarks(id,pi_test_marks,course_id)
+      .subscribe(data => {
+        if(data['status'] == 200){
+          console.log("DONE!!!!!!!!!!!!!!!");
+        }else{
+          this.dialog_Message ="Error on server, Please try again later !!";
+          this.display = true;
+          var obj = {
+            index: 0
+          };
+          this.getApplicationAcceptedForeignOffice(obj);
+        }
+      });
+    }
+  }
+
+  acceptApplication(userId,courseId,id){
+    this.dialogService.open(SeatAllocationDialogComponent,{
+      closeOnBackdropClick : false,
+      context: {
+        userid : userId,
+        appid : id,
+        courseid : courseId
+      }
+     }).onClose
+        .subscribe(
+          (data: any) => {
+            var obj = {
+              index: 1
+            };
+            this.getApplicationAcceptedForeignOffice(obj);
+        });
+  }
+
+  rejectApplication(userId,courseId,id){
+    this.confirmationService.confirm({
+      message: 'Do you want to perform this action??',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.adminApi.failStudent(userId,courseId,id).subscribe(data=>{
+          if(data['status'] == 200){
+            this.confirmationService.confirm({
+              message: 'Application Rejected!!!',
+              header: 'Confirmation',
+              icon: 'pi pi-exclamation-triangle',
+              accept: () => { 
+              }
+            });
+          } 
+        })
+      },
+      reject: () => {
+      }
+    });
+  }
+
+
 }

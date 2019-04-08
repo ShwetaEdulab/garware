@@ -28,6 +28,7 @@ import {
     NbTabsetModule,
     NbListModule,
     NbSpinnerModule,
+    NbPopoverModule,
   } from '@nebular/theme';  
 
 
@@ -43,6 +44,7 @@ import {
   import { MoreCollegesDialogComponent } from "./dialog/addMorePreference";
   import { EducationDetailsDialogComponent } from "./dialog/education_details";
   import { PaymentDetailsDialogComponent } from "./dialog/paymentDetails";
+  import { SeatAllocationDialogComponent } from "./dialog/seatAllocation";
   import {DataTableModule} from "angular-6-datatable";
   import {MatSelectModule} from '@angular/material/select';
   import { AdminForeignOfficeComponent } from './foreignoffice.component';
@@ -81,20 +83,23 @@ import {
       ConfirmDialogModule,
       DialogModule,
       ReactiveFormsModule,
-      SharedModule
+      SharedModule,
+      NbPopoverModule,
     ],
     declarations: [
       AdminForeignOfficeComponent,
       PreferencesDialogComponent,
       MoreCollegesDialogComponent,
       PaymentDetailsDialogComponent,
-      EducationDetailsDialogComponent
+      EducationDetailsDialogComponent,
+      SeatAllocationDialogComponent
     ],
     entryComponents: [
       PreferencesDialogComponent,
       MoreCollegesDialogComponent,
       PaymentDetailsDialogComponent,
-      EducationDetailsDialogComponent
+      EducationDetailsDialogComponent,
+      SeatAllocationDialogComponent
     ],
     providers: [],
   })
