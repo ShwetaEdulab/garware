@@ -3,21 +3,69 @@ import { NbDialogRef, NbDialogService, NbThemeService } from '@nebular/theme';
 import { ApiService } from '../../../../app/shared/api.service';
 import { AdminApiService } from '../../../../app/shared/adminapi.service';
 import { FormBuilder } from '@angular/forms';
-import { MoreCollegesDialogComponent } from './addMorePreference';
 import {ConfirmationService} from 'primeng/api';
 
 @Component({
 selector: 'nb-dialog',
 providers:[ConfirmationService],
 template: `
-<nb-card style="font-size: 20px" class="col-md-6 offset-md-3" [style.overflow]="'auto'" [style.height.px]="400" [style.width.px]="1000">
+<nb-card style="font-size: 19px" class="col-md-6 offset-md-3" status="success" [style.overflow]="'auto'" [style.height.px]="500" [style.width.px]="1500">
     <nb-card-header><h2>Seat Allocation</h2></nb-card-header>
     <nb-card-body>
         <div class="row" style="margin-bottom:7px">
-            Remaining Seats : {{listdata?.seats}}
+            <h5>Student Name : {{listdata?.user.name}}</h5>
         </div>
+        <div class="row" style="margin-bottom:7px">
+            <h5>Student Category : {{listdata?.user.student_category}}</h5>
+        </div>
+        <div class="row" style="margin-bottom:7px">
+            <h5>Apply Course Name : {{listdata?.course_name}}</h5>
+        </div>
+        <div class="row" style="margin-bottom:7px">
+            <h5>Remaining Seats : {{listdata?.seats}}</h5>
+        </div>
+        <br>
         <div class="row">
-            Course Name : {{listdata?.course_name}}
+            <table class="table-bordered" style="width: 100%;border: 2px solid black;">
+                <tbody>
+                    <tr style="border: 2px solid black;">
+                        <th style="padding: 8px;text-align: left;"><h5>Category</h5></th>
+                        <th style="padding: 8px;text-align: left;"><h5>Seats</h5></th>
+                    </tr>
+                    <tr style="border: 2px solid black;">
+                        <th style="padding: 8px;text-align: left;"><h5>1. S.C. Seats</h5></th>
+                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.SC_seats}}</h5></td>
+                    </tr>
+                    <tr style="border: 2px solid black;">
+                        <th style="padding: 8px;text-align: left;"><h5>2. S.T. Seats</h5></th>
+                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.ST_seats}}</h5></td>
+                    </tr>
+                    <tr style="border: 2px solid black;">
+                        <th style="padding: 8px;text-align: left;"><h5>3. D.T.(A) Seats</h5></th>
+                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.DTA_seats}}</h5></td>
+                    </tr>
+                    <tr style="border: 2px solid black;">
+                        <th style="padding: 8px;text-align: left;"><h5>4. N.T.(B) Seats</h5></th>
+                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.NTB_seats}}</h5></td>
+                    </tr>
+                    <tr style="border: 2px solid black;">
+                        <th style="padding: 8px;text-align: left;"><h5>5. N.T.(C) Seats</h5></th>
+                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.NTC_seats}}</h5></td>
+                    </tr>
+                    <tr style="border: 2px solid black;">
+                        <th style="padding: 8px;text-align: left;"><h5>6. N.T.(D) Seats</h5></th>
+                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.NTD_seats}}</h5></td>
+                    </tr>
+                    <tr style="border: 2px solid black;">
+                        <th style="padding: 8px;text-align: left;"><h5>7. O.B.C. Seats</h5></th>
+                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.OBC_seats}}</h5></td>
+                    </tr>
+                    <tr style="border: 2px solid black;">
+                        <th style="padding: 8px;text-align: left;"><h5>8. GENERAL Seats</h5></th>
+                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.GENERAL_seats}}</h5></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </nb-card-body>
     <nb-card-footer>
@@ -77,6 +125,8 @@ constructor(protected ref: NbDialogRef<SeatAllocationDialogComponent>,
         this.adminApi.totalseats(this.userid,this.courseid,this.appid).subscribe(
             (data: any) => {
                 this.listdata =  data['data'];
+                //console.log("listdata.intake=========>"+this.listdata.intake.id);
+                //console.log("listdata.intake=========>"+JSON.stringify(this.listdata));
         });
     
     }

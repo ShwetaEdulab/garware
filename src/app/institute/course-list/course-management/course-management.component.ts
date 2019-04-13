@@ -43,8 +43,12 @@ export class CourseManagementComponent implements OnInit {
   public filterPlaceholder: string;
   public filterInput = new FormControl();
   serverUrl = config.serverUrl;
+  appdate;
 
   courseOverviewForm: FormGroup;
+  latedate: any;
+  commencementdate: any;
+  commencementtime: any;
 
   constructor(
     protected instituteApi : InstituteApiService,
@@ -78,9 +82,17 @@ export class CourseManagementComponent implements OnInit {
       toDateCtrl : ['', [Validators.required,]],
       intakefromDateCtrl : ['', [Validators.required,]],
       intaketoDateCtrl : ['', [Validators.required,]],
-      NRIseatsCtrl : [''],
-      PIOseatsCtrl : [''],
-      OCIseatsCtrl : [''],
+      // NRIseatsCtrl : [''],
+      // PIOseatsCtrl : [''],
+      // OCIseatsCtrl : [''],
+      scseatsCtrl : [''],
+      stseatsCtrl : [''],
+      dtaseatsCtrl : [''],
+      ntbseatsCtrl : [''],
+      ntcseatsCtrl : [''],
+      ntdseatsCtrl : [''],
+      obcseatsCtrl : [''],
+      generalseatsCtrl : [''],
       TotalseatsCtrl : [''],
       courseFeeCtrl : [''],
       bankNameCtrl : [''],
@@ -93,6 +105,10 @@ export class CourseManagementComponent implements OnInit {
       admissionProcedureCtrl : [''],
       femalepopulationCtrl : ['', [Validators.required,]],
       malepopulationCtrl : ['', [Validators.required,]],
+      appFormDateCtrl : [''],
+      LateFeeFormDateCtrl : [''],
+      Date_of_commencementctrl : [''],
+      Date_of_commencement_timectrl : [''],
     });
 
     this.instituteApi.courseList(this.courseID).subscribe(data=>{
@@ -113,10 +129,17 @@ export class CourseManagementComponent implements OnInit {
       this.degreeName = data['data']['course_overview']['degree'];
       this.facultyValues = data['data']['faculties'];
       this.curriculumValues = data['data']['academics_fees'];
+      this.appdate = data['data']['course_overview']['appform'] ? new Date(data['data']['course_overview']['appform']) : null;
+      this.latedate = data['data']['course_overview']['latefee'] ? new Date(data['data']['course_overview']['latefee']) : null;
+      this.commencementdate = data['data']['course_overview']['commencementdate'] ? new Date(data['data']['course_overview']['commencementdate']) : null;
+      this.commencementtime = data['data']['course_overview']['commencementtime'];
     })
   }
 
   saveCourseOverview(){
+    this.courseOverviewForm.get('appFormDateCtrl').disable();
+    this.courseOverviewForm.get('LateFeeFormDateCtrl').disable();
+    this.courseOverviewForm.get('Date_of_commencementctrl').disable();
     this.courseOverviewForm.controls.courseNameCtrl.markAsDirty();
     this.courseOverviewForm.controls.courseSpecializationCtrl.markAsDirty();
     this.courseOverviewForm.controls.fromDateCtrl.markAsDirty();
@@ -134,9 +157,17 @@ export class CourseManagementComponent implements OnInit {
         CoursetoDate : this.courseOverviewForm.controls.toDateCtrl.value,
         IntakefromDate : this.courseOverviewForm.controls.intakefromDateCtrl.value,
         IntaketoDate : this.courseOverviewForm.controls.intaketoDateCtrl.value,
-        NRIseats : this.courseOverviewForm.controls.NRIseatsCtrl.value,
-        PIOseats : this.courseOverviewForm.controls.PIOseatsCtrl.value,
-        OCIseats : this.courseOverviewForm.controls.OCIseatsCtrl.value,
+        // NRIseats : this.courseOverviewForm.controls.NRIseatsCtrl.value,
+        // PIOseats : this.courseOverviewForm.controls.PIOseatsCtrl.value,
+        // OCIseats : this.courseOverviewForm.controls.OCIseatsCtrl.value,
+        SCseats : this.courseOverviewForm.controls.scseatsCtrl.value,
+        STseats : this.courseOverviewForm.controls.stseatsCtrl.value,
+        DTAseats : this.courseOverviewForm.controls.dtaseatsCtrl.value,
+        NTBseats : this.courseOverviewForm.controls.ntbseatsCtrl.value,
+        NTCseats : this.courseOverviewForm.controls.ntcseatsCtrl.value,
+        NTDseats : this.courseOverviewForm.controls.ntdseatsCtrl.value,
+        OBCseats : this.courseOverviewForm.controls.obcseatsCtrl.value,
+        Generalseats : this.courseOverviewForm.controls.generalseatsCtrl.value,  
         totalseats : this.courseOverviewForm.controls.TotalseatsCtrl.value,
         CourseFee : this.courseOverviewForm.controls.courseFeeCtrl.value,
         BankName : this.courseOverviewForm.controls.bankNameCtrl.value,
@@ -149,6 +180,10 @@ export class CourseManagementComponent implements OnInit {
         AdmissionProcedure : this.courseOverviewForm.controls.admissionProcedureCtrl.value,
         FemalePopulation : this.courseOverviewForm.controls.femalepopulationCtrl.value,
         Malepopulation : this.courseOverviewForm.controls.malepopulationCtrl.value,
+        lastDateAppForm : this.courseOverviewForm.controls.appFormDateCtrl.value,
+        LateFeeFormDate : this.courseOverviewForm.controls.LateFeeFormDateCtrl.value,
+        Dateofcommencement :this.courseOverviewForm.controls.Date_of_commencementctrl.value,
+        DateofcommencementTime :this.courseOverviewForm.controls.Date_of_commencement_timectrl.value,
       }
       this.instituteApi.saveCourseOverview(this.collegeId,overview_data,this.courseID)
       .subscribe(
@@ -161,6 +196,15 @@ export class CourseManagementComponent implements OnInit {
         });
    
     }else{
+      const invalid = [];
+      const controls = this.courseOverviewForm.controls;
+      for (const name in controls) {
+        if (controls[name].invalid) {
+            invalid.push(name);
+        }
+      }
+      //return invalid;
+      //console.log("invalid========>"+invalid)
     }
   }
 

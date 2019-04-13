@@ -131,72 +131,81 @@ export class AdminReportComponent {
         });
       })
     }else if(index == 3){
-      this.adminApi.firstPaymentChallanData().subscribe(data=> {
-        this.firstPaymentChallanData = data['data'];
-        this.filterText = "";
-        this.filterPlaceholder = "Search";
-        this.filterInput
-          .valueChanges
-          .debounceTime(200)
-          .subscribe(term => {
-          this.filterText = term;
-        });
-      })
-    }else if(index == 4){
-      this.adminApi.secondPaymentChallanData().subscribe(data=> {
-        this.secondPaymentChallanData = data['data'];
-        this.filterText = "";
-        this.filterPlaceholder = "Search";
-        this.filterInput
-          .valueChanges
-          .debounceTime(200)
-          .subscribe(term => {
-          this.filterText = term;
-        });
-      })
-    }else if(index == 5){
-      this.adminApi.collegeAttendedStudents().subscribe(data=> {
-        this.collegeAttendedStudents = data['data'];
-        this.filterText = "";
-        this.filterPlaceholder = "Search";
-        this.filterInput
-          .valueChanges
-          .debounceTime(200)
-          .subscribe(term => {
-          this.filterText = term;
-        });
-      })
-    }else if(index == 6){
-      this.adminApi.getApplication('new',this.selectedYear).subscribe(data=>{
-       this.application_data = data['data'];
-     })
-       this.filterInput
-       .valueChanges
-       .debounceTime(200)
-       .subscribe(term => {
-       this.filterText = term;
-     });
-    }else if(index == 7){
-     this.adminApi.getApplicationinEligibility('new',this.selectedYear).subscribe(data=>{
-       this.application_data = data['data'];
-     })
-     this.filterText = "";
-     this.filterPlaceholder = "Search";
-     this.filterInput
-       .valueChanges
-       .debounceTime(200)
-       .subscribe(term => {
-       this.filterText = term;
-     });
-    }else if(index == 8){
       this.tab_type = 'email_activity';
       this.loadingbutton = true;
       this.adminApi.getEmailTracker().subscribe(data =>{
         this.emailActivityData = data['data']['messages'];
+        console.log("this.emailActivityData========>"+JSON.stringify(this.emailActivityData));
         this.loadingbutton = false;
+        this.filterText = "";
+        this.filterPlaceholder = "Search";
+        this.filterInput
+          .valueChanges
+          .debounceTime(200)
+          .subscribe(term => {
+          this.filterText = term;
+        });
       });
     }
-    
+    // else if(index == 3){
+    //   this.adminApi.firstPaymentChallanData().subscribe(data=> {
+    //     this.firstPaymentChallanData = data['data'];
+    //     this.filterText = "";
+    //     this.filterPlaceholder = "Search";
+    //     this.filterInput
+    //       .valueChanges
+    //       .debounceTime(200)
+    //       .subscribe(term => {
+    //       this.filterText = term;
+    //     });
+    //   })
+    // }else if(index == 4){
+    //   this.adminApi.secondPaymentChallanData().subscribe(data=> {
+    //     this.secondPaymentChallanData = data['data'];
+    //     this.filterText = "";
+    //     this.filterPlaceholder = "Search";
+    //     this.filterInput
+    //       .valueChanges
+    //       .debounceTime(200)
+    //       .subscribe(term => {
+    //       this.filterText = term;
+    //     });
+    //   })
+    // }else if(index == 5){
+    //   this.adminApi.collegeAttendedStudents().subscribe(data=> {
+    //     this.collegeAttendedStudents = data['data'];
+    //     this.filterText = "";
+    //     this.filterPlaceholder = "Search";
+    //     this.filterInput
+    //       .valueChanges
+    //       .debounceTime(200)
+    //       .subscribe(term => {
+    //       this.filterText = term;
+    //     });
+    //   })
+    // }else if(index == 6){
+    //   this.adminApi.getApplication('new',this.selectedYear).subscribe(data=>{
+    //    this.application_data = data['data'];
+    //  })
+    //    this.filterInput
+    //    .valueChanges
+    //    .debounceTime(200)
+    //    .subscribe(term => {
+    //    this.filterText = term;
+    //  });
+    // }else if(index == 7){
+    //  this.adminApi.getApplicationinEligibility('new',this.selectedYear).subscribe(data=>{
+    //    this.application_data = data['data'];
+    //  })
+    //  this.filterText = "";
+    //  this.filterPlaceholder = "Search";
+    //  this.filterInput
+    //    .valueChanges
+    //    .debounceTime(200)
+    //    .subscribe(term => {
+    //    this.filterText = term;
+    //  });
+    // }
   }
 
   filterYear(tab,tab_type,year){

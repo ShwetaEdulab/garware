@@ -84,6 +84,17 @@
                                       </div>
                                   </div>
                       </div>
+                      <div *ngFor= "let college of collegelist">
+                        <nb-card status="success">
+                            <nb-card-header><b>Admission Schedule  :</b></nb-card-header>
+                            <nb-card-body>
+                                <h6>Last date for submission of completed application form : {{college?.admissionDate}} </h6><br>
+                                <h6>Last date of submission with late fee : {{college?.LateFeeFormDate}} </h6><br>
+                                <h6>Date of commencement of course : {{college?.Dateofcommencement}}  </h6>
+                                <h6>time: {{college?.DateofcommencementTime}}</h6>
+                            </nb-card-body>
+                        </nb-card>
+                    </div>
                       <!-- <div>
                               <nb-card size="medium" [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerSize="xlarge">
                                   <nb-card-header>

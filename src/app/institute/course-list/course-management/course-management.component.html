@@ -47,7 +47,7 @@
               <div class="form-group">
                 <input readonly class="form-control" [(ngModel)]="course_from"  formControlName="fromDateCtrl" nbInput
                   placeholder="From Date" [nbDatepicker]="frompicker" [ngClass]="{'form-control-danger': courseOverviewForm.controls.fromDateCtrl.invalid && (courseOverviewForm.controls.fromDateCtrl.dirty || courseOverviewForm.controls.fromDateCtrl.touched)}">
-                  <nb-datepicker #frompicker [(date)]="date" [min]="max"></nb-datepicker>
+                  <nb-datepicker #frompicker [(date)]="date"></nb-datepicker>
               </div>
             </div>
             <div class="col-xl-1">To Date</div>
@@ -66,7 +66,7 @@
               <div class="form-group">
                 <input readonly class="form-control" [(ngModel)]="intake_from" formControlName="intakefromDateCtrl" nbInput
                 placeholder="From Date" [nbDatepicker]="intakefrompicker" [ngClass]="{'form-control-danger': courseOverviewForm.controls.intakefromDateCtrl.invalid && (courseOverviewForm.controls.intakefromDateCtrl.dirty || courseOverviewForm.controls.intakefromDateCtrl.touched)}" >
-                <nb-datepicker #intakefrompicker [(date)]="date" [min]="max"></nb-datepicker>
+                <nb-datepicker #intakefrompicker [(date)]="date"></nb-datepicker>
               </div>
             </div>
             <div class="col-xl-1">To Date</div>
@@ -79,29 +79,64 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-xl-4">Intake Seats Category Wise:</div>
-            <div class="col-xl-2">
+            <div class="col-xl-2">Intake Seats Category Wise:</div>
+            <div class="col-xl-1">
               <div class="form-group">
-                <label>NRI Seats</label><br>
-                <input type="text"  class="form-control" ngModel="{{courseOverviewValues?.NRI_seats}}" formControlName="NRIseatsCtrl"
-                placeholder="NRI Seats">
+                <label>S.C.</label><br>
+                <input type="text"  class="form-control" ngModel="{{courseOverviewValues?.SC_seats}}" formControlName="scseatsCtrl"
+                placeholder="S.C. Seats">
               </div>
             </div>
-            <div class="col-xl-2">
+            <div class="col-xl-1">
               <div class="form-group">
-                <label>PIO Seats</label><br>
-                <input type="text"  class="form-control" ngModel="{{courseOverviewValues?.PIO_seats}}" formControlName="PIOseatsCtrl"
-                placeholder="PIO Seats">
+                <label>S.T.</label><br>
+                <input type="text"  class="form-control" ngModel="{{courseOverviewValues?.ST_seats}}" formControlName="stseatsCtrl"
+                placeholder="S.T. Seats">
               </div>
             </div>
-            <div class="col-xl-2">
+            <div class="col-xl-1">
               <div class="form-group">
-                <label>OCI Seats</label><br>
-                <input type="text"  class="form-control" ngModel="{{courseOverviewValues?.COI_GulfSouth_seats}}" formControlName="OCIseatsCtrl"
-                placeholder="OCI Seats">
+                <label>D.T.(A)</label><br>
+                <input type="text"  class="form-control" ngModel="{{courseOverviewValues?.DTA_seats}}" formControlName="dtaseatsCtrl"
+                placeholder="D.T.(A) Seats">
               </div>
             </div>
-            <div class="col-xl-2">
+            <div class="col-xl-1">
+              <div class="form-group">
+                <label>N.T.(B)</label><br>
+                <input type="text"  class="form-control" formControlName="ntbseatsCtrl" ngModel="{{courseOverviewValues?.NTB_seats}}"
+                placeholder="N.T.(B) Seats">
+              </div>
+            </div>
+            <div class="col-xl-1">
+              <div class="form-group">
+                <label>N.T.(C)</label><br>
+                <input type="text"  class="form-control" formControlName="ntcseatsCtrl" ngModel="{{courseOverviewValues?.NTC_seats}}"
+                placeholder="N.T.(C) Seats">
+              </div>
+            </div>
+            <div class="col-xl-1">
+              <div class="form-group">
+                <label>N.T.(D)</label><br>
+                <input type="text"  class="form-control" formControlName="ntdseatsCtrl" ngModel="{{courseOverviewValues?.NTD_seats}}"
+                placeholder="N.T.(D) Seats">
+              </div>
+            </div>
+            <div class="col-xl-1">
+              <div class="form-group">
+                <label>O.B.C.</label><br>
+                <input type="text"  class="form-control" formControlName="obcseatsCtrl" ngModel="{{courseOverviewValues?.OBC_seats}}"
+                placeholder="O.B.C. Seats">
+              </div>
+            </div>
+            <div class="col-xl-1">
+              <div class="form-group">
+                <label>General</label><br>
+                <input type="text"  class="form-control" formControlName="generalseatsCtrl" ngModel="{{courseOverviewValues?.GENERAL_seats}}"
+                placeholder="General Seats">
+              </div>
+            </div>
+            <div class="col-xl-1">
               <div class="form-group">
                 <label>Total Seats</label><br>
                 <input type="text"  class="form-control" ngModel="{{courseOverviewValues?.seats}}" formControlName="TotalseatsCtrl"
@@ -231,6 +266,53 @@
               </div>
             </div>
             <div class="col-md-1"></div>
+          </div>
+          <br><br>
+          <div class="row">  
+            <div class="col-xl-5">
+              <label> Last date for submission of completed application form :</label>
+            </div>
+            <div class="col-xl-4">
+              <div class="form-group"> 
+                <input nbInput class="form-control" formControlName="appFormDateCtrl"  placeholder="submission date" [nbDatepicker]="ngmodel" [(ngModel)]="appdate">
+                <nb-datepicker #ngmodel [(date)]="date"></nb-datepicker>
+              </div>
+            </div> 
+          </div>
+          <div class="row">  
+            <div class="col-xl-5">
+              <label>Last date of submission with late fee :</label>
+            </div>
+            <div class="col-xl-4">
+              <div class="form-group"> 
+                <input nbInput class="form-control" formControlName="LateFeeFormDateCtrl"  placeholder="submission with late fees" [nbDatepicker]="ngmodel2" [(ngModel)]="latedate">
+                <nb-datepicker #ngmodel2 [(date)]="date"></nb-datepicker>
+              </div>
+            </div> 
+          </div>
+          <div class="row">  
+            <div class="col-md-5">
+              <label>Date of commencement of course :</label>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group"> 
+                <div style="width:200px">
+                  <input nbInput class="form-control" formControlName="Date_of_commencementctrl"  placeholder="date of commencement" [nbDatepicker]="ngmodel1" [(ngModel)]="commencementdate">
+                  <nb-datepicker #ngmodel1 [(date)]="date" ></nb-datepicker>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group"> 
+                <div style="width:200px">
+                  <input [ngxTimepicker]="picker1" id="inputPITime" formControlName="Date_of_commencement_timectrl" [(ngModel)]="commencementtime" nbInput 
+                  placeholder="Select Time " name="onlineTime"><br>
+                  <ngx-material-timepicker #picker1></ngx-material-timepicker><br>
+                </div>
+              
+              </div>
+
+            </div> 
           </div>
 
           <div class="row">

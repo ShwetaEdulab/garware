@@ -55,10 +55,10 @@ export class HeaderComponent implements OnInit {
               protected api: ApiService,
               public themeService : NbThemeService,
             ) {
+              if(this.user.role == 'student'){
                 this.api.notification(this.user.id);
-       
-
-  }
+              }
+            }
 
   ngOnInit() {
     this.userService.onUserChange()

@@ -152,6 +152,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
       resource: 'institute-application'
     },
   },
+  {
+    title: 'College Management',
+    icon: 'nb-compose',
+    link: '/pages/college-management',
+    data: {
+      permission: 'view',
+      resource: 'college-management'
+    },
+  }, 
    {
     title: 'course-list',
     icon: 'nb-compose',

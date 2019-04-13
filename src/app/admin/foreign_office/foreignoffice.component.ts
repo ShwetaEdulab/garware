@@ -57,8 +57,13 @@ export class AdminForeignOfficeComponent {
     }else if(index == 1){
       this.tab_type = 'seat_allocation'
     }else if(index == 2){
-      this.tab_type = 'third_payment'
+      this.tab_type = 'seat_alloted_student'
+    }else if(index == 3){
+      this.tab_type = 'failed_student'
     }
+    // else if(index == 2){
+    //   this.tab_type = 'third_payment'
+    // }
     this.adminApi.getApplicationinForeignOffice(this.tab_type).subscribe(data=>{
       this.application_data = data['data'];
     })
@@ -399,7 +404,8 @@ export class AdminForeignOfficeComponent {
       this.adminApi.enterPIMarks(id,pi_test_marks,course_id)
       .subscribe(data => {
         if(data['status'] == 200){
-          console.log("DONE!!!!!!!!!!!!!!!");
+          //console.log("DONE!!!!!!!!!!!!!!!");
+          this.ngOnInit();
         }else{
           this.dialog_Message ="Error on server, Please try again later !!";
           this.display = true;

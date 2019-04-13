@@ -31,6 +31,7 @@ import { ChatComponent } from './chat/chat.component';
 import { CourseListComponent } from "./../institute/course-list/course-list.component";
 import { CourseManagementComponent } from '../institute/course-list/course-management/course-management.component';
 import { InstituteApplicationComponent } from './../institute/institute-application/institute-application.component';
+import { CollegeManagementComponent } from '../institute/college-management/college-management.component';
 
 //Admin
 import { AdminDashboardComponent } from '../admin/admin-dashboard/admin-dashboard.component';
@@ -136,6 +137,11 @@ const routes: Routes = [{
     component: SettingsComponent,
   }, 
    /*INSTITUTE Components*/
+   {
+    path: 'college-management',
+    component: CollegeManagementComponent,
+ 
+  },
   {
     path: 'course-list',
     component: CourseListComponent,

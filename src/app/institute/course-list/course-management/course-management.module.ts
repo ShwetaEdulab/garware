@@ -33,6 +33,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDatepickerModule, MatNativeDateModule} from '@angular/material';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 
 import { CourseManagementComponent } from './course-management.component';
@@ -72,6 +73,7 @@ import { CourseManagementComponent } from './course-management.component';
     NbCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    NgxMaterialTimepickerModule
   ]
 })
 export class CourseManagementModule { }

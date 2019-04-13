@@ -246,6 +246,12 @@ getApplicationinForeignOffice(tab_type){
         return this.httpClient.get(`${this.baseUrl}/admin_api/foreignoffice/seat_allocation?tab=`+tab_type);
       }else if(tab_type == "third_payment"){
           return this.httpClient.get(`${this.baseUrl}/admin_api/foreignoffice/third_payment_details?tab=`+tab_type);
+      }else if(tab_type == "seat_alloted_student"){
+        var tab = 'accept';
+        return this.httpClient.get(`${this.baseUrl}/admin_api/foreignoffice/seat_alloted?tab=`+tab);
+      }else if(tab_type == "failed_student"){
+        var tab = 'reject';
+        return this.httpClient.get(`${this.baseUrl}/admin_api/foreignoffice/seat_alloted?tab=`+tab);
       }
       
   }catch(error) {

@@ -32,6 +32,7 @@ import { PeerModule } from "./peers/peers.module";
 import { InstituteApplicationModule } from "../institute/institute-application/institute-application.module";
 import { CourseListModule } from "../institute/course-list/course-list.module";
 import { CourseManagementModule } from '../institute/course-list/course-management/course-management.module';
+import { CollegeManagementModule } from '../institute/college-management/college-management.module';
 
 //Admin
 import { AdminDashboardModule } from '../admin/admin-dashboard/admin-dashboard.module';
@@ -67,6 +68,7 @@ const PAGES_COMPONENTS = [
     CourseModule,
     ApplicationStepsModule,
     InstituteApplicationModule,
+    CollegeManagementModule,
     CourseListModule,
     SecondCancelModule,
     SecondFailureModule,

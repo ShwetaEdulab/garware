@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import { NbAuthService } from '@nebular/auth';
 import { NbThemeService } from '@nebular/theme';
 import { config } from '../../../config';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -148,13 +149,145 @@ export class InstituteApiService {
   //Dashboard Ends Here//
 
 
+  //College Management //
+
+  //Institute service
+
+getInstCalender(){
+  try{
+    return this.httpClient.get(`${this.baseUrl}/institute_api/instituteCalendar`);
+}catch(error) {
+  this.handleError("getInstCalender : "+JSON.stringify(error));
+}
+}
+
+instit_save(dataa,prinID){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/institute_api/updateInstituteDetail`,{dataa : dataa,"prinID":prinID});
+  }catch(error) {
+  this.handleError("instit_save : "+JSON.stringify(error));
+  }
+}
+instit_save2(dataa,vprinID){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/institute_api/updateInstituteDetail22`,{dataa : dataa,vprinID:vprinID});
+  }catch(error) {
+  this.handleError("instit_save : "+JSON.stringify(error));
+  }
+}
+
+
+Videogallery(data){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/institute_api/Videogallery`,{data : data});
+  }catch(error) {
+  this.handleError("Videogallery : "+JSON.stringify(error));
+  }
+}
+
+enterselectrating(rating){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/institute_api/naac`,{"rating" : rating});
+  }catch(error) {
+  this.handleError("enterselectrating : "+JSON.stringify(error));
+  }
+}
+
+
+
+
+updateclgdetail(data){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/institute_api/updateclgdetail`,{data : data});
+}catch(error) {
+  this.handleError("updateclgdetail : "+JSON.stringify(error));
+}
+}
+
+updateclgform(data){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/institute_api/updateclgform`,{data : data});
+}catch(error) {
+  this.handleError("updateclgform : "+JSON.stringify(error));
+  }
+}
+
+getcollegedetail(data){
+  try{
+    return this.httpClient.get(`${this.baseUrl}/institute_api/collegedetails`);
+  }
+  catch(error) {
+    this.handleError("getcollegedetail: "+JSON.stringify(error));
+  }
+}
+
+getclgdetails(user_id,college_id){
+  try{
+    return this.httpClient.get(`${this.baseUrl}/institute_api/collegedetails`);     
+  }catch(error) {
+    this.handleError("getclgdetails : "+error);
+  }
+}
+
+
+downloadclgform1(data):Observable<Blob>{
+  try{
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.httpClient.get(`${this.baseUrl}/institute_api/getcollegeform?userid={{user?.id}}&transcript_name={{transcript_name}}`,{headers: headers, responseType: 'blob'}).map(
+      (res) => {
+        return new Blob([res], { type: 'application/pdf' });
+      });
+  }catch(error) {
+  this.handleError("downloadclgform : "+JSON.stringify(error));
+}
+}
+
+ downloadclgform(file): Observable<any> {
+  // Create url
+  let url = `${this.baseUrl}${"/institute_api/getcollegeform"}`;
+  var body = { filename: file };
+
+  return this.httpClient.post(url, body, {
+    responseType: "blob",
+    headers: new HttpHeaders().append("Content-Type", "application/json")
+  });
+}
+
+
+deleteaccreditation(Id){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/institute_api/deleteaccreditation`,{"Id":Id})
+    .map(res => {
+      return res;
+    })
+    
+  }catch(error) {
+    this.handleError("deleteaccreditation : "+error);
+  }
+  
+}
+deletegalleriess(Id){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/institute_api/deletegalleries`,{"Id":Id})
+    .map(res => {
+      return res;
+    })
+    
+  }catch(error) {
+    this.handleError("deletegalleriess : "+error);
+  }
+  
+}
+
+
+  //College Management ends here//
+
+
 
 
   private handleError(error){
     console.error(error);
   }
-
-
-
 
 }

@@ -148,7 +148,7 @@ export const NB_CORE_PROVIDERS = [
       //   // remove: '*',
       // },
       institute:{
-        view: ['dashboard','theme','course-list','institute-application'],
+        view: ['dashboard','theme','course-list','institute-application','college-management'],
       },
     },
   }).providers,

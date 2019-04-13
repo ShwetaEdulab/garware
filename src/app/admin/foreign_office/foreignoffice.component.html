@@ -64,71 +64,153 @@
 					<pagination-controls (pageChange)="p = $event"></pagination-controls>
 				</p-tabPanel>
 				<p-tabPanel header="Seat Allotment">
-						<b><h3>Mark Details</h3></b><br>
-						<div class="row">
-							<div class="col-md-12 ">
-								<mat-form-field class="example-full-width">
-									<input matInput  type="text" [value]="filterText"
-									[placeholder]="filterPlaceholder" [formControl]="filterInput" />
-								</mat-form-field>
-							</div>
+					<b><h3>Mark Details</h3></b><br>
+					<div class="row">
+						<div class="col-md-12 ">
+							<mat-form-field class="example-full-width">
+								<input matInput  type="text" [value]="filterText"
+								[placeholder]="filterPlaceholder" [formControl]="filterInput" />
+							</mat-form-field>
 						</div>
-						
-						<table class="table table-striped w-auto">
-							<thead>
-								<tr><b><h5>Total Count:{{application_data?.length}}</h5></b></tr>
-								<tr>
-									<th>Application Id</th>
-									<th>Student Name</th>
-									<th>Email Address</th>
-									<th>Selected Course</th>
-									<!-- <th>Online Entrance Marks</th>
-									<th>Personal Interview Marks</th> -->
-									<th>Total Marks</th>
-									<th>Actions</th>
-									<th>Raise Ticket</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="info" *ngFor="let application of application_data | filter:{stu_name: filterText, email: filterText, specialization: filterText, course: filterText} | paginate: { itemsPerPage: 10, currentPage: p }">
-									<td>{{application?.enrollment_no}}</td>
-									<td>{{application?.stu_name}}</td>
-									<td>{{application?.email}}</td>
-									<td>{{application?.specialization}}</td>
-									<td>{{application?.total_marks}}</td>
-									<!-- <td>
-										<mat-form-field class="example-full-width">
-											<input matInput placeholder="Online Test Marks" id='onlineMark{{application.id}}' value="{{application?.online_marks}}" readonly>
-										</mat-form-field></td>
-									<td>
-										<mat-form-field class="example-full-width">
-											<input matInput placeholder="PI Test Marks" id='eligib_number{{application.id}}' value="{{application?.pi_marks}}">
-										</mat-form-field><br>
-										<button *ngIf="application?.pi_marks == ''" nbButton  size="xsmall" outline status="info" (click)="saveMarks(application.id,application.course_id)">Save Marks</button>
-										<span id="elignumbererror{{application.id}}"></span>
-									</td> -->
-									<td>
-										<i class="fa ion-person" id='view_eligibility{{application.id}}' status="danger" nbPopover="View More" nbPopoverMode="hover" (click)="viewMore('eligibility',application.user_id,application.course_id,'new',application.id);"></i>
-										<i class="fa ion-android-lock" id='documentverify{{application.id}}' nbPopover="Errata" nbPopoverMode="hover" (click)="errata(application.user_id,'self_financed');"></i>
-										<i class="fa ion-checkmark" id='acceptbutton{{application.id}}' nbPopover="Accept" nbPopoverMode="hover" (click)="acceptApplication(application.user_id,application.course_id,application.id);"></i>
-										<i class="fa ion-close-round" id='rejectbutton{{application.id}}' nbPopover = "Reject"  nbPopoverMode="hover" (click)="rejectApplication(application.user_id,application.course_id,application.id);"></i>
-										<div *ngIf="application.requestToReupload ==true">
-											<div>
-												<span style="color: red;">You have requested {{application.stu_name}} to re-upload transcript !</span>
-											</div>	
-										</div>
-									</td>
-									<td>
-										<i class="fa ion-email" status="info" nbPopover="Raise Ticket" nbPopoverMode="hover" (click)="Ticket(application.email);"></i>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<div *ngIf="application_data?.length==0">
-							<b><h3>No Result Found</h3></b>
+					</div>
+					
+					<table class="table table-striped w-auto">
+						<thead>
+							<tr><b><h5>Total Count:{{application_data?.length}}</h5></b></tr>
+							<tr>
+								<th>Application Id</th>
+								<th>Student Name</th>
+								<th>Email Address</th>
+								<th>Selected Course</th>
+								<!-- <th>Online Entrance Marks</th>
+								<th>Personal Interview Marks</th> -->
+								<th>Total Marks</th>
+								<th>Actions</th>
+								<th>Raise Ticket</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="info" *ngFor="let application of application_data | filter:{stu_name: filterText, email: filterText, specialization: filterText, course: filterText} | paginate: { itemsPerPage: 10, currentPage: p }">
+								<td>{{application?.enrollment_no}}</td>
+								<td>{{application?.stu_name}}</td>
+								<td>{{application?.email}}</td>
+								<td>{{application?.specialization}}</td>
+								<td>{{application?.total_marks}}</td>
+								<!-- <td>
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="Online Test Marks" id='onlineMark{{application.id}}' value="{{application?.online_marks}}" readonly>
+									</mat-form-field></td>
+								<td>
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="PI Test Marks" id='eligib_number{{application.id}}' value="{{application?.pi_marks}}">
+									</mat-form-field><br>
+									<button *ngIf="application?.pi_marks == ''" nbButton  size="xsmall" outline status="info" (click)="saveMarks(application.id,application.course_id)">Save Marks</button>
+									<span id="elignumbererror{{application.id}}"></span>
+								</td> -->
+								<td>
+									<i class="fa ion-person" id='view_eligibility{{application.id}}' status="danger" nbPopover="View More" nbPopoverMode="hover" (click)="viewMore('eligibility',application.user_id,application.course_id,'new',application.id);"></i>
+									<i class="fa ion-android-lock" id='documentverify{{application.id}}' nbPopover="Errata" nbPopoverMode="hover" (click)="errata(application.user_id,'self_financed');"></i>
+									<i class="fa ion-checkmark" id='acceptbutton{{application.id}}' nbPopover="Accept" nbPopoverMode="hover" (click)="acceptApplication(application.user_id,application.course_id,application.id);"></i>
+									<i class="fa ion-close-round" id='rejectbutton{{application.id}}' nbPopover = "Reject"  nbPopoverMode="hover" (click)="rejectApplication(application.user_id,application.course_id,application.id);"></i>
+									<div *ngIf="application.requestToReupload ==true">
+										<div>
+											<span style="color: red;">You have requested {{application.stu_name}} to re-upload transcript !</span>
+										</div>	
+									</div>
+								</td>
+								<td>
+									<i class="fa ion-email" status="info" nbPopover="Raise Ticket" nbPopoverMode="hover" (click)="Ticket(application.email);"></i>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div *ngIf="application_data?.length==0">
+						<b><h3>No Result Found</h3></b>
+					</div>
+					<pagination-controls (pageChange)="p = $event"></pagination-controls>
+				</p-tabPanel>
+				<p-tabPanel header="Seat Alloted Student Details">
+					<b><h3>Seat Alloted Student</h3></b><br>
+					<div class="row">
+						<div class="col-md-12 ">
+							<mat-form-field class="example-full-width">
+								<input matInput  type="text" [value]="filterText"
+								[placeholder]="filterPlaceholder" [formControl]="filterInput" />
+							</mat-form-field>
 						</div>
-						<pagination-controls (pageChange)="p = $event"></pagination-controls>
-					</p-tabPanel>
+					</div>
+					
+					<table class="table table-striped w-auto">
+						<thead>
+							<tr><b><h5>Total Count:{{application_data?.length}}</h5></b></tr>
+							<tr>
+								<th>Application Id</th>
+								<th>Student Name</th>
+								<th>Email Address</th>
+								<th>Selected Course</th>
+								<th>Total Marks</th>
+								<th>Raise Ticket</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="info" *ngFor="let application of application_data | filter:{stu_name: filterText, email: filterText, specialization: filterText, course: filterText} | paginate: { itemsPerPage: 10, currentPage: p }">
+								<td>{{application?.enrollment_no}}</td>
+								<td>{{application?.stu_name}}</td>
+								<td>{{application?.email}}</td>
+								<td>{{application?.specialization}}</td>
+								<td>{{application?.total_marks}}</td>
+								<td>
+									<i class="fa ion-email" status="info" nbPopover="Raise Ticket" nbPopoverMode="hover" (click)="Ticket(application.email);"></i>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div *ngIf="application_data?.length==0">
+						<b><h3>No Result Found</h3></b>
+					</div>
+					<pagination-controls (pageChange)="p = $event"></pagination-controls>
+				</p-tabPanel>
+				<p-tabPanel header="Failed Student Details">
+					<b><h3>Failed Student Details</h3></b><br>
+					<div class="row">
+						<div class="col-md-12 ">
+							<mat-form-field class="example-full-width">
+								<input matInput  type="text" [value]="filterText"
+								[placeholder]="filterPlaceholder" [formControl]="filterInput" />
+							</mat-form-field>
+						</div>
+					</div>
+					
+					<table class="table table-striped w-auto">
+						<thead>
+							<tr><b><h5>Total Count:{{application_data?.length}}</h5></b></tr>
+							<tr>
+								<th>Application Id</th>
+								<th>Student Name</th>
+								<th>Email Address</th>
+								<th>Selected Course</th>
+								<th>Total Marks</th>
+								<th>Raise Ticket</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="info" *ngFor="let application of application_data | filter:{stu_name: filterText, email: filterText, specialization: filterText, course: filterText} | paginate: { itemsPerPage: 10, currentPage: p }">
+								<td>{{application?.enrollment_no}}</td>
+								<td>{{application?.stu_name}}</td>
+								<td>{{application?.email}}</td>
+								<td>{{application?.specialization}}</td>
+								<td>{{application?.total_marks}}</td>
+								<td>
+									<i class="fa ion-email" status="info" nbPopover="Raise Ticket" nbPopoverMode="hover" (click)="Ticket(application.email);"></i>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div *ngIf="application_data?.length==0">
+						<b><h3>No Result Found</h3></b>
+					</div>
+					<pagination-controls (pageChange)="p = $event"></pagination-controls>
+				</p-tabPanel>
 				<!-- <p-tabPanel header="Seat Allotment">
 					<b><h3>Seat Allotment </h3></b><br>
 					<div class="row">
