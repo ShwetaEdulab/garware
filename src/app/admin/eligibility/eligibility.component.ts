@@ -52,11 +52,18 @@ export class AdminEligibilityComponent {
       this.severPITest = data['dates']['pitest'];
       this.serverOnlineTime = data['dates']['pi_time'];
       this.serverTimeId = data['dates']['pitestId'];
-      this.onlinePITime = data['dates']['pi_time'];
+      //this.onlinePITime = data['dates']['pi_time'];
       if(data['dates']['pitest'] == null || data['dates']['pitest'] == '' || data['dates']['pitest'] == undefined){
         this.piTest = null;
       }else{
         this.piTest =  new Date(data['dates']['pitest']);
+      }
+
+      if(data['dates']['pi_time'] == null || data['dates']['pi_time'] == '' || data['dates']['pi_time'] == undefined){
+        this.onlinePITime = null;
+      }else{
+        var AnnouncementDate = new Date(data['dates']['pi_time']);
+        this.onlinePITime = AnnouncementDate;
       }
     })
     this.filterText = "";
@@ -86,6 +93,13 @@ export class AdminEligibilityComponent {
           this.piTest = null;
         }else{
           this.piTest =  new Date(data['dates']['pitest']);
+        }
+
+        if(data['dates']['pi_time'] == null || data['dates']['pi_time'] == '' || data['dates']['pi_time'] == undefined){
+          this.onlinePITime = null;
+        }else{
+          var AnnouncementDate = new Date(data['dates']['pi_time']);
+          this.onlinePITime = AnnouncementDate;
         }
       })
       this.filterText = "";
@@ -158,7 +172,8 @@ export class AdminEligibilityComponent {
         value:e.checked
     }
     var PI_test_date = ((document.getElementById("DOBtxt") as HTMLInputElement).value);
-    var PI_test_time = ((document.getElementById("inputPITime") as HTMLInputElement).value);
+    //var PI_test_time = ((document.getElementById("inputPITime") as HTMLInputElement).value);
+    var PI_test_time = this.onlinePITime;
     if(PI_test_date=="" || PI_test_date==null || PI_test_date==undefined){
       this.showOne = true;
       this.message ="Please Select Date";
@@ -378,7 +393,8 @@ export class AdminEligibilityComponent {
 
   saveTime(value){
     var PI_test_date = ((document.getElementById("DOBtxt") as HTMLInputElement).value);
-    var PI_test_time = ((document.getElementById("inputPITime") as HTMLInputElement).value);
+    //var PI_test_time = ((document.getElementById("inputPITime") as HTMLInputElement).value);
+    var PI_test_time = this.onlinePITime;
     if(PI_test_date == "" || PI_test_date == null || PI_test_date == undefined || this.severPITest==null || this.severPITest =="" || this.severPITest ==undefined){
       this.confirmationService.confirm({
         message: 'Please first add date.',

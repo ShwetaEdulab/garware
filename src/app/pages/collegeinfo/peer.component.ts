@@ -3,6 +3,7 @@ import { NbDialogRef } from '@nebular/theme';
 import { Router} from '@angular/router';
 import { ApiService } from '../../shared/api.service';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'nb-dialog',
@@ -27,9 +28,8 @@ import { NbDialogService, NbToastrService } from '@nebular/theme';
     <div style="visibility:hidden; color: red;" id="num">phone/contact number required</div>
     <b> Peer is not available now.Please select time by clicking on below box for scheduling your call</b>
     <div class="24hr-example">
-            <input placeholder="Select time" aria-label="24hr format" [ngxTimepicker]="fullTime" [format]="24" #Time  readonly>
-            <ngx-material-timepicker #fullTime></ngx-material-timepicker>
-       </div>   
+      <p-calendar [readonlyInput]="true" [(ngModel)]="mytime" [timeOnly]="true"></p-calendar>
+    </div>   
     <div style="visibility:hidden; color: red;" id="time">This Peer is not available at entered time.Please select time between {{available_to}} to {{available_from}}</div>
     </nb-card-body>
     <nb-card-footer>
@@ -61,6 +61,7 @@ mytime;
       private router : Router,
       protected api : ApiService,
       private toastrService: NbToastrService,
+      private datePipe: DatePipe
       ) {
     }
 
@@ -103,16 +104,22 @@ mytime;
       this.num = this.phone_number;
       this.peer_id = this.peer_id;
       this.timenew;
-      this.mytime =this.timenew.nativeElement.value+ ':00' ;
-      this.time = this.mytime;
+      //this.mytime =this.timenew.nativeElement.value+ ':00' ;
+      var t= this.mytime;
+      var dateFormat = new DatePipe('en-ISO');
+      this.time = this.datePipe.transform(t,"HH:mm:ss");
+      //this.time = this.mytime;
       this.peer_cntc = this.mobile;
       this.available_from =this.available_from;
       this.available_to =this.available_to;
       if(this.num == undefined ){
         document.getElementById('num').style.visibility = "visible";
         document.getElementById('time').style.visibility = "visible";
-     }else{
-      
+      }else if(this.num == undefined){
+        document.getElementById('num').style.visibility = "visible";
+      }else if(this.time == undefined){
+       document.getElementById('time').style.visibility = "visible";
+      }else{
       this.ref.close();
       this.api.callSchedule( this.peer_id,this.num,this.peer_cntc, this.time,this.available_to,this.available_from).subscribe(data=>{
         if(data['status'] == 404){

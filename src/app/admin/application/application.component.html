@@ -26,9 +26,10 @@
 					</div>
 					<div class="col-xl-4">
 						<label for="inputTime">Time of Online Entrance Test<span style="color:red;">*</span></label><br>
-						<input [ngxTimepicker]="picker1" id="inputTime" [(ngModel)]="onlineTime" nbInput 
+						<!-- <input [ngxTimepicker]="picker1" id="inputTime" [(ngModel)]="onlineTime" nbInput 
 						placeholder="Select Time of Online Test" name="onlineTime"><br>
-						<ngx-material-timepicker #picker1></ngx-material-timepicker><br>
+						<ngx-material-timepicker #picker1></ngx-material-timepicker><br> -->
+						<p-calendar [readonlyInput]="true" id="inputTime" [(ngModel)]="onlineTime" [timeOnly]="true"></p-calendar><br><br>
 						<button nbButton size="xsmall" outline status="info" (click)="saveTime(serverDateId)">Save Time</button>
 						<span *ngIf="showTwo" style="color: red">{{message}}</span><br>
 					</div>

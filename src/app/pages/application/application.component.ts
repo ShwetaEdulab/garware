@@ -44,6 +44,7 @@ export class ApplicationComponent  {
             console.error("status 400");
           }else if(this.status == '200'){
           this.applications =  data['data']['userApplications'];
+          //console.log("this.applicationsthis.applications========>"+JSON.stringify(this.applications));
           this.applicationID = this.applications[0]['application']['id'];
           this.courseID = this.applications[0]['application']['course_id'];
           }
@@ -63,6 +64,9 @@ export class ApplicationComponent  {
   }
   openReject(){
     this.alertflag = 2;
+  }
+  showalert3(){
+    this.alertflag = 3;
   }
   onClose(){		  		
     this.alertflag = 0;		

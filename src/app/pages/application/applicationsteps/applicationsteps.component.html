@@ -1,4 +1,110 @@
 <div class="row" [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerSize="xlarge">
+  <div class="col-md-12">
+    <nb-card status="success">
+      <nb-card-header>Complete all steps to complete your admission process !!!</nb-card-header>
+      <nb-card-body>
+        <nb-stepper orientation="vertical" disableStepNavigation #stepper>
+          <nb-step [stepControl]="OnlineEntranceForm" [completed]="tabcheck1"  label="Online Entrance Exam Details" class="step-container">
+            <form [formGroup]="OnlineEntranceForm" class="step-container" style="width: 635px;">
+                <nb-card status="success">
+                  <nb-card-header>Online Entrance Exam Details</nb-card-header>
+                  <nb-card-body>
+                    <div class="row paddingForDetails">
+                      <div class="col-md-4 enrollDetailsCol1">
+                          Date of exam
+                      </div>
+                      <div class="col-md-1 enrollDetailsCol1">
+                        :
+                      </div>
+                      <div class="col-md-5 enrollDetailsCol2">
+                        {{OnlinePersonaldetails?.online_test_date}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-4 enrollDetailsCol1">
+                        Time
+                      </div>
+                      <div class="col-md-1 enrollDetailsCol1">
+                        :
+                      </div>
+                      <div class="col-xl-5" enrollDetailsCol2>
+                          {{OnlinePersonaldetails?.online_test_time}}
+                      </div>
+                      </div>
+                  </nb-card-body>
+                  <button nbButton nbStepperNext>next</button>
+                </nb-card>
+            </form>
+          </nb-step>
+          <nb-step [stepControl]="PersonalInterviewForm" [completed]="tabcheck2"  label="Personal Interview Details" class="step-container">
+            <form [formGroup]="PersonalInterviewForm" class="step-container" style="width: 635px;">
+                <nb-card status="success">
+                  <nb-card-header>Personal Interview Details</nb-card-header>
+                  <nb-card-body>
+                    <div class="row paddingForDetails">
+                      <div class="col-md-4 enrollDetailsCol1">
+                          Date of exam
+                      </div>
+                      <div class="col-md-1 enrollDetailsCol1">
+                        :
+                      </div>
+                      <div class="col-md-5 enrollDetailsCol2">
+                        {{OnlinePersonaldetails?.pi_test_date}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-4 enrollDetailsCol1">
+                        Time
+                      </div>
+                      <div class="col-md-1 enrollDetailsCol1">
+                        :
+                      </div>
+                      <div class="col-xl-5" enrollDetailsCol2>
+                          {{OnlinePersonaldetails?.pi_test_time}}
+                      </div>
+                      </div>
+                  </nb-card-body>
+                  <button nbButton nbStepperNext>next</button>
+                </nb-card>
+            </form>
+          </nb-step>
+          <nb-step [stepControl]="MarksForm" [completed]="tabcheck3"  label="Marks Details" class="step-container">
+              <form [formGroup]="MarksForm" class="step-container" style="width: 635px;">
+                  <nb-card status="success">
+                    <nb-card-header>Online Entrance and Personal Interview Marks Details</nb-card-header>
+                    <nb-card-body>
+                      <div class="row paddingForDetails">
+                        <div class="col-md-4 enrollDetailsCol1">
+                            Marks
+                        </div>
+                        <div class="col-md-1 enrollDetailsCol1">
+                          :
+                        </div>
+                        <div class="col-md-5 enrollDetailsCol2">
+                          {{Marksdetails?.total_marks}}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xl-6" >
+                          <button nbButton type='button' size="small" status="success">Pass</button>
+                        </div>
+                        <div class="col-xl-6" >
+                          <button nbButton type='button' size="small" status="success">Fail</button>
+                        </div>
+                      </div>
+                    </nb-card-body>
+                    <!-- <button nbButton nbStepperNext>next</button> -->
+                  </nb-card>
+              </form>
+            </nb-step>
+        </nb-stepper>
+      </nb-card-body>
+    </nb-card> 
+  </div>
+</div>
+
+
+<!-- <div class="row" [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerSize="xlarge">
     <div class="col-md-12">
       <nb-card status="success">
         <nb-card-header>Complete all steps to complete your admission process !!!</nb-card-header>
@@ -65,9 +171,6 @@
                           <div class="col-md-4"></div>
                         </div>
                         <div class="row paddingForDetails">
-                          <!-- <div class="col-md-1 enrollDetailsCol1">
-                            
-                          </div> -->
                           <div class="col-md-6 enrollDetailsCol1">
                               Visa Number :
                             </div>
@@ -80,9 +183,6 @@
                           </div>
                         </div>
                         <div class="row paddingForDetails">
-                          <!-- <div class="col-md-1 enrollDetailsCol1">
-                        
-                          </div> -->
                           <div class="col-md-6 enrollDetailsCol1">
                               Place of Issuance :
                             </div>
@@ -829,15 +929,6 @@
                       <br>
                       <br>
                       <br>
-                      <!-- <div class="row">
-                        <h4>
-                          Click on below link to fill form for hallticket and other college requirements :-
-                        </h4>
-                      </div>
-                      <br>
-                      <div>
-                        <a href="http://mum.digitaluniversity.ac/" style="text-decoration: underline">http://mum.digitaluniversity.ac/</a>
-                      </div> -->
                       <div *ngIf='showfirmnext == 0' >
                       </div>
                       <div *ngIf='showfirmnext == 1' style="margin-top: 50px;">
@@ -1154,4 +1245,4 @@
       </nb-card>
     </div>
   </div>
-  
+   -->

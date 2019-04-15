@@ -132,7 +132,7 @@ export class CourseManagementComponent implements OnInit {
       this.appdate = data['data']['course_overview']['appform'] ? new Date(data['data']['course_overview']['appform']) : null;
       this.latedate = data['data']['course_overview']['latefee'] ? new Date(data['data']['course_overview']['latefee']) : null;
       this.commencementdate = data['data']['course_overview']['commencementdate'] ? new Date(data['data']['course_overview']['commencementdate']) : null;
-      this.commencementtime = data['data']['course_overview']['commencementtime'];
+      this.commencementtime = data['data']['course_overview']['commencementtime'] ? new Date(data['data']['course_overview']['commencementtime']) : null ;
     })
   }
 

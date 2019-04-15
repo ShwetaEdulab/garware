@@ -13,6 +13,7 @@ import { PeerComponent } from './peer.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { config } from '../../../../config';
 import { InternationalPhoneModule } from 'ng4-intl-phone';
+import {CalendarModule} from 'primeng/calendar';
 @NgModule({
     imports: [
       ThemeModule,
@@ -22,6 +23,7 @@ import { InternationalPhoneModule } from 'ng4-intl-phone';
       NbAlertModule,
       NbButtonModule,
       YoutubePlayerModule,
+      CalendarModule,
       NgxMaterialTimepickerModule.forRoot(),
       NbDialogModule.forRoot(),
       AgmCoreModule.forRoot({

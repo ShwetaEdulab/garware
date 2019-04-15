@@ -55,6 +55,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { EligibilityComponent } from './Eligibility.Component';
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
   imports: [
@@ -96,7 +97,8 @@ import { EligibilityComponent } from './Eligibility.Component';
     NbDialogModule,
     NbCheckboxModule,
     ConfirmDialogModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    CalendarModule,
   ],
   declarations: [
       AdminApplicationComponent,

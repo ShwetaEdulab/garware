@@ -305,9 +305,10 @@
             <div class="col-md-3">
               <div class="form-group"> 
                 <div style="width:200px">
-                  <input [ngxTimepicker]="picker1" id="inputPITime" formControlName="Date_of_commencement_timectrl" [(ngModel)]="commencementtime" nbInput 
+                  <p-calendar class="form-control" [readonlyInput]="true" id="inputPITime" formControlName="Date_of_commencement_timectrl" [(ngModel)]="commencementtime" [timeOnly]="true"></p-calendar><br><br>
+                  <!-- <input [ngxTimepicker]="picker1" id="inputPITime" formControlName="Date_of_commencement_timectrl" [(ngModel)]="commencementtime" nbInput 
                   placeholder="Select Time " name="onlineTime"><br>
-                  <ngx-material-timepicker #picker1></ngx-material-timepicker><br>
+                  <ngx-material-timepicker #picker1></ngx-material-timepicker><br> -->
                 </div>
               
               </div>

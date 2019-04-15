@@ -25,6 +25,7 @@ import {
 } from '@nebular/theme/components/datepicker/datepicker.module';
 import {MatIconModule} from '@angular/material/icon';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {CalendarModule} from 'primeng/calendar';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     MatIconModule,
     NbInputModule,
     NbSpinnerModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    CalendarModule
   ],
   declarations: [
     AdminEligibilityComponent,

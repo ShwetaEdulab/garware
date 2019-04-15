@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NbDialogRef,NbDialogService } from '@nebular/theme';
 import { EligibilityComponent } from './Eligibility.Component';
 import {ConfirmationService} from 'primeng/api';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'application',
@@ -44,6 +45,7 @@ export class AdminApplicationComponent {
 	protected adminApi : AdminApiService,
   private router : Router,
   private confirmationService: ConfirmationService,
+  private datePipe: DatePipe
 ) { 
   }
 
@@ -57,13 +59,22 @@ export class AdminApplicationComponent {
       this.severOnlineTest = data['dates']['onlinetest'];
       this.serverOnlineTime = data['dates']['onlinetime'];
       this.serverDateId = data['dates']['onlinetestId'];
-      this.onlineTime = data['dates']['onlinetime'];
+      //this.onlineTime = data['dates']['onlinetime'];
       
       if(data['dates']['onlinetest'] == null || data['dates']['onlinetest'] == '' || data['dates']['onlinetest'] == undefined){
         this.onlineTest = null;
       }else{
         this.onlineTest = new Date(data['dates']['onlinetest']);
       }
+
+      if(data['dates']['onlinetime'] == null || data['dates']['onlinetime'] == '' || data['dates']['onlinetime'] == undefined){
+        this.onlineTime = null;
+      }else{
+        var AnnouncementDate = new Date(data['dates']['onlinetime']);
+        this.onlineTime = AnnouncementDate;
+      }
+
+
     })
       this.filterInput
       .valueChanges
@@ -96,6 +107,13 @@ export class AdminApplicationComponent {
           this.onlineTest = null;
         }else{
           this.onlineTest = new Date(data['data']['onlinetest']);
+        }
+
+        if(data['dates']['onlinetime'] == null || data['dates']['onlinetime'] == '' || data['dates']['onlinetime'] == undefined){
+          this.onlineTime = null;
+        }else{
+          var AnnouncementDate = new Date(data['dates']['onlinetime']);
+          this.onlineTime = AnnouncementDate;
         }
   
         // if(data['dates']['pitest'] == null || data['dates']['pitest'] == '' || data['dates']['pitest'] == undefined){
@@ -149,7 +167,8 @@ export class AdminApplicationComponent {
         value:e.checked
     }
     var Online_test_date = ((document.getElementById("inputDob") as HTMLInputElement).value);
-    var Online_test_time = ((document.getElementById("inputTime") as HTMLInputElement).value);
+    //var Online_test_time = ((document.getElementById("inputTime") as HTMLInputElement).value);
+    var Online_test_time = this.onlineTime;
     if(Online_test_date=="" || Online_test_date==null || Online_test_date==undefined ){
       this.showOne = true;
       this.message = "Please Select Date";
@@ -330,7 +349,11 @@ export class AdminApplicationComponent {
 
   saveTime(value){
     var Online_test_date = ((document.getElementById("inputDob") as HTMLInputElement).value);
-    var Online_test_time = ((document.getElementById("inputTime") as HTMLInputElement).value);
+    // //var Online_test_time = ((document.getElementById("inputTime") as HTMLInputElement).value);
+    // var t= this.onlineTime;
+    // var dateFormat = new DatePipe('en-ISO');
+    // var Online_test_time = this.datePipe.transform(t,"HH:mm:ss");
+    var Online_test_time = this.onlineTime;
     if(Online_test_date=="" || Online_test_date==null || Online_test_date==undefined || this.severOnlineTest==null || this.severOnlineTest =="" || this.severOnlineTest ==undefined){
       this.confirmationService.confirm({
         message: 'Please first add date.',
