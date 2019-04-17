@@ -1,4 +1,3 @@
-
 import { Component , OnInit , ViewChild } from '@angular/core';
 import { Router , ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../shared/api.service';
@@ -41,6 +40,8 @@ export class ApplicationStepsComponent implements OnInit {
   tabcheck3;
   Marksdetails: any;
   loading = false;
+  alertflag = 0;
+  message;
   
   // specialization;
   // letter;
@@ -161,12 +162,42 @@ export class ApplicationStepsComponent implements OnInit {
     });
     this.OnlinePersonalTest();
     this.marksDetail();
+    var checkTabs = this.api.myApplicationCheckTabs(this.applicationId)
+    .subscribe(
+    (data: any) => {
+      this.tabcheck1 = data.data.tab1;
+			this.tabcheck2 = data.data.tab2;
+      this.tabcheck3 = data.data.tab3;
+      if(data.data.tab1 == false){
+				setTimeout(()=>{
+					this.checktabs(0,this.tabcheck1,this.tabcheck2,this.tabcheck3);
+				  },1500);
+			}else if(data.data.tab2 == false){
+				setTimeout(()=>{
+					this.checktabs(1,this.tabcheck1,this.tabcheck2,this.tabcheck3);
+				  },1500);
+			}else if(data.data.tab3 == false){
+				setTimeout(()=>{
+					this.checktabs(2,this.tabcheck1,this.tabcheck2,this.tabcheck3);
+				  },1500);
+			}else if(data.data.tab1 && data.data.tab2 && data.data.tab3){
+        setTimeout(()=>{
+					this.checktabs(11,this.tabcheck1,this.tabcheck2,this.tabcheck3);
+				},1500);
+      }
+    });
   }
 
-   private OnlinePersonalTest() : void{
+  private OnlinePersonalTest() : void{
     this.OnlineEntranceForm = this.formBuilder.group({
+      testDateCtrl : ['', Validators.required],
+      testTimeCtrl : ['', Validators.required],
+      PersonalExamCtrl : ['', Validators.required],
     });
     this.PersonalInterviewForm= this.formBuilder.group({
+      interviewDateCtrl : ['', Validators.required],
+      interviewTimeCtrl : ['', Validators.required],
+      MarksExamCtrl : ['', Validators.required],
     });
     this.api.getenrollmentdetails('onlinedetail',this.route.snapshot.queryParamMap.get('appId'))
     .subscribe(
@@ -181,6 +212,7 @@ export class ApplicationStepsComponent implements OnInit {
 
   private marksDetail() : void{
     this.MarksForm = this.formBuilder.group({
+      totalMarksCtrl : ['', Validators.required],
     });
     this.api.getenrollmentdetails('marksdetail',this.route.snapshot.queryParamMap.get('appId'))
     .subscribe(
@@ -193,6 +225,97 @@ export class ApplicationStepsComponent implements OnInit {
     );
   }
 
+  examresult(result){
+    if(result=='Pass'){
+      this.dialogService.open(Secondpaymentdialog, {
+        context: {
+        title: 'This is a title passed to the dialog component',
+        },
+      }).onClose
+      .subscribe(
+        (data: any) => {
+         // this.marksDetail();
+          err => console.error(err)
+        })
+    }else if(result=='Fail'){
+      this.alertflag = 1;
+      this.message = "You have not cleared the examination. You could re-apply for the online entrance test and give one more shot!";
+    }else if(result=='new'){
+      this.alertflag = 1;
+      this.message = "Your Application is under process.";
+    }else{
+      this.alertflag = 1;
+      this.message = "There is something went wrong.";
+    }
+  }
+
+  onClose(){		  		
+    this.alertflag = 0;		
+  }
+
+  public checktabs(tab_index,tab1,tab2,tab3){
+    if(this.OnlineEntranceForm.valid){
+			this.tabcheck1 = true;
+		}else{
+			this.tabcheck1 = false;
+		}
+
+		if(this.PersonalInterviewForm.valid){
+			this.tabcheck2 = true;
+		}else{
+			this.tabcheck2 = false;
+    }
+    
+		if(this.MarksForm.valid){
+			this.tabcheck3 = true;
+		}else{
+			this.tabcheck3 = false;
+    }
+    
+     if(tab_index == 0){
+       if(tab_index<1){
+         this.stepper.selectedIndex = tab_index;
+       }else{
+         if(tab1 == false){
+           this.stepper.selectedIndex = 0;
+         } else {
+           this.stepper.selectedIndex = tab_index;
+         }
+       }	
+     }else if(tab_index == 1){
+       if(tab_index<2){
+         if(tab1 == false){
+           this.stepper.selectedIndex = 0;
+         }else if(tab2 == false){
+           this.stepper.selectedIndex = 0;
+         }
+       }else{
+         if(tab2 == false){
+           this.stepper.selectedIndex = 0;
+         }else if(tab3 == false){
+           this.stepper.selectedIndex = 1;
+         }
+       }	
+     }else if(tab_index == 2){
+       if(tab_index<3){
+         if(tab1 == false){
+           this.stepper.selectedIndex = 0;
+         }else if(tab2 == false){
+           this.stepper.selectedIndex = 0;
+         }else if(tab3 == false) {
+           this.stepper.selectedIndex = 1;
+         }
+       }else{
+         if(tab2 == false){
+           this.stepper.selectedIndex = 0;
+         }else if(tab3 == false){
+           this.stepper.selectedIndex = 1;
+         }
+       }	
+     }else if(tab_index == 11){
+      this.stepper.selectedIndex = 2;
+     }
+   }
 
 
 

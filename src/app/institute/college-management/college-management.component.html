@@ -469,6 +469,23 @@
                 <span *ngIf="showerror == true" style="color:red;">Url is required.</span>
               </form>
             </div>
+            <form [formGroup]="updateVideoURL" >
+                <div *ngFor = "let galleries of galleries"  > 
+                  <div class = "row">
+                    <div class="col-md-6">
+                      <input type="text" readonly formControlName="VideoURL1Ctrl"  nbInput fullWidth fieldSize="large" *ngIf = "galleries.type == 'video' && galleries.path != 'null' && galleries.gallery_for_id !='null ' && alertflag == 0  " ngModel="{{galleries?.path}}" placeholder="URL link">
+                      <input type="text" formControlName="VideoURLCtrl" nbInput fullWidth fieldSize="large" *ngIf = "galleries.type == 'video' && alertflag == 2   " ngModel="{{galleries?.path}}" placeholder="URL link">
+                      <!-- <input fieldSize="large" *ngIf = "galleries.type == 'video' && galleries.path != 'null' && galleries.gallery_for_id !='null'  " ngModel="{{galleries?.path}}"  type="text" nbInput placeholder="URL link"> -->
+                    </div>
+                    <div class="col-md-6">
+                      <button nbButton *ngIf ="galleries.type == 'video' && galleries.path != 'null' && galleries.gallery_for_id !='null' && alertflag == 0" outline status="info" style="height:50px; width: 100px;" ><label style="color:blue" (click)="edit()" >Edit</label></button>
+                      <button nbButton *ngIf ="galleries.type == 'video' && galleries.path != 'null' && galleries.gallery_for_id !='null' && alertflag == 2" outline status="info" style="height:50px; width: 100px;" (click)="savevideoURL(galleries?.id)"><label style="color:blue"  >Save</label></button>
+                      <button nbButton *ngIf ="galleries.type == 'video' && galleries.path != 'null' && galleries.gallery_for_id !='null' && alertflag == 2" outline status="danger" style="height:50px; width: 100px;" (click)="cancel()" ><label style="color:red"   >cancel</label></button>
+                      <button nbButton *ngIf ="galleries.type == 'video' && galleries.path != 'null' && galleries.gallery_for_id !='null'&& alertflag == 0 " outline status="danger" style="height:50px; width: 100px;" (click)="deleteVideoURL(galleries?.id)"><label style="color:red"> delete</label></button>
+                    </div>
+                  </div>
+                </div>
+              </form> 
           </div>
         </div>  
         <div style="padding-top: 25px;" class="col-xs-12 affliTitle">Promotional materials</div>
@@ -488,7 +505,7 @@
           </div>
         <br>
 
-        <div class="instiPriBox">
+        <!-- <div class="instiPriBox">
           <div style="padding: 0 10px;" class="row">
             <div class="col-md-12">
               <div class="row courseDetailsWrap">
@@ -505,7 +522,32 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
+        <div class="instiPriBox">
+            <div class="table-responsive" > 
+              <table class="table">
+                  <thead class="seatsHeader" >
+                    <th>List of materials</th>
+                  </thead>
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Title</th>
+                      <th>file name</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor = "let promotional of promotionalMat;  let i=index">
+                      <td>{{ i + 1}}</td>
+                      <td>{{promotional?.title}}</td>
+                      <td>{{promotional?.file}}</td>
+                      <td><button nbButton   (click)="deletePromotionalMaterial(promotional?.id)" style="width:100px; height:40px; outline:crimson ">Delete</button></td>
+                    </tr>
+                  </tbody>
+              </table>
+            </div> 
+          </div>
       </p-tabPanel>
 
       <p-tabPanel header="College Form">

@@ -40,6 +40,7 @@ export class CollegeManagementComponent implements OnInit {
   ClgForm:FormGroup;
   AccreditationForm:FormGroup;
   VideogalleryForm:FormGroup;
+  updateVideoURL:FormGroup;
   Years: any;
   messages:any;
   selectedyear:any; 
@@ -97,6 +98,7 @@ export class CollegeManagementComponent implements OnInit {
   valueB: any;
   valueC: any;
   NaacCrating: any;
+  promotionalMat: any;
  
   constructor(private dialogService: NbDialogService,
     private apiservice : ApiService,
@@ -139,6 +141,7 @@ export class CollegeManagementComponent implements OnInit {
           this.image= user['data']['college_accreditations']['image']
           this.image11 = user['data']['banner']
           this.galleries=user['data']['galleries'];
+          this.promotionalMat = user['data']['promotional_materials']
           if(this.image11== null || this.image11== 'null' || this.image11== "" ){
             this.show = false;
           }else{
@@ -208,6 +211,11 @@ export class CollegeManagementComponent implements OnInit {
     this.VideogalleryForm = this.fb.group({
       VideogalleryCtrl:['', [ Validators.required, Validators.maxLength(70),Validators.minLength(3)]]
     })
+
+    this.updateVideoURL = this.fb.group({
+      VideoURLCtrl:[''],
+      VideoURL1Ctrl:['']
+    })
   }
   
   getValues(e){
@@ -234,6 +242,7 @@ export class CollegeManagementComponent implements OnInit {
         this.priID = user['data']['principal']['id'];
         this.clgaccreditations=user['data']['college_accreditations']
         this.galleries=user['data']['galleries'];
+        this.promotionalMat = user['data']['promotional_materials']
     }); 
   }
    
@@ -306,7 +315,6 @@ export class CollegeManagementComponent implements OnInit {
      
 
     if (check_validation) {
-      console.log("check_validationcheck_validationcheck_validation"+check_validation);
       this.instituteapi.updateclgdetail(userdb)
         .subscribe( 
           (data: any) => {
@@ -552,6 +560,7 @@ export class CollegeManagementComponent implements OnInit {
         this.image= user['data']['college_accreditations']['image']
         this.image11 = user['data']['banner']
         this.galleries=user['data']['galleries'];
+        this.promotionalMat = user['data']['promotional_materials']
         if(this.image11== null || this.image11== 'null' || this.image11== "" ){
           this.show = false;
         }else{
@@ -595,13 +604,54 @@ export class CollegeManagementComponent implements OnInit {
   }
 
   onFilesAdded(files: File[]) {
-    console.log(files);
     files.forEach(file => {
       const reader = new FileReader();
       reader.onload = (e: ProgressEvent) => {
         const content = (e.target as FileReader).result;
-        console.log(content);
       };
     });
   }
+
+  deletePromotionalMaterial(Id){
+    this.instituteapi.deletePromotionalMaterials(Id).subscribe(
+      (data: any) => {
+        if(data['status']== 200){
+          this.loaddata();
+        }
+      err => console.error(err)
+      });
+  }
+
+  edit(){
+    this.alertflag = 2;
+    this.loaddata();
+  }
+
+  cancel(){
+    this.alertflag = 0;
+    this.loaddata();
+  }
+
+  savevideoURL(Id){
+    var Video_URL = this.updateVideoURL.controls.VideoURLCtrl.value;
+    this.instituteapi.addvideoURL(Id,Video_URL).subscribe(
+      (data: any) => {
+        if(data['status']== 200){
+          this.alertflag= 0;
+          this.loaddata();
+        }
+      err => console.error(err)
+      });
+  }
+
+  deleteVideoURL(Id){
+    this.instituteapi.deleteVideourl(Id).subscribe(
+      (data: any) => {
+        if(data['status']== 200){
+          this.loaddata();
+        }
+      err => console.error(err)
+      });
+  }
+
 }

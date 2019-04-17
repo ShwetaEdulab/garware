@@ -11,12 +11,8 @@ template: `
 <nb-card [style.width.px]="700" [style.height.px]="600" status="success">
   <nb-card-header>
     <div class="row">
-      <div class="col-md-3">
-      </div>
-      <div class="col-md-6">
-        <h3 style="color:#ffffff">SECOND PAYMENT</h3>
-      </div>
-      <div class="col-md-3">
+      <div class="col-md-12">
+        <h3 style="color:#ffffff">SECOND PAYMENT for Course {{course_name}}</h3>
       </div>
     </div>
   </nb-card-header>
@@ -49,12 +45,6 @@ template: `
       <div class="col-md-3">Zipcode</div>
       <div class="col-md-9"> 
         <input type="text" nbInput fullWidth placeholder="Zipcode" ngModel="{{user_data?.postal_code}}" [readonly]="true">
-      </div>
-    </div>
-    <div class="row" style="margin-bottom:7px">
-      <div class="col-md-3">Country</div>
-      <div class="col-md-9"> 
-        <input type="text" nbInput fullWidth placeholder="Country" ngModel="{{user_data?.country_id}}" [readonly]="true">
       </div>
     </div>
     <div class="row" style="margin-bottom:7px">
@@ -94,6 +84,7 @@ user_data;
 amount;
 applicationId;
 courseID;
+course_name;
 constructor(protected ref: NbDialogRef<Secondpaymentdialog>,
   protected api : ApiService,
   private authService: NbAuthService,
@@ -105,32 +96,29 @@ constructor(protected ref: NbDialogRef<Secondpaymentdialog>,
   this.ref.close();
   }
   ngOnInit() {
-    this.api.getProfileValue('Personal')
+    this.api.getenrollmentdetails('second_payment',this.route.snapshot.queryParamMap.get('appId'))
       .subscribe(
         (data: any) => {  
-          this.user_data =  data['data']['user_data'];
-          this.amount = 'INR 80546';
+          this.user_data =  data['data']['user'];
+          this.amount = data['data']['fees'];
+          this.course_name = data['data']['specialization'];
           err => console.log(err)
       });
   }
 
   async secondpayment(){
-    //console.log('send req to payment gateway');
     this.applicationId = this.route.snapshot.queryParamMap.get('appId');
     this.courseID = this.route.snapshot.queryParamMap.get('courseID');
-    //console.log('this.applicationId====>'+this.applicationId+'@@@@@@@@@this.courseID===========>'+this.courseID);
-    var secondpayment = await this.api.secondpaymentrequest(this.applicationId,this.courseID);
-    secondpayment.subscribe(
-        data => {
-          //console.log('response url==>'+data['data']);
-          //window.location.assign(data['data']);
-          this.ref.close();
-        },
-        error => {
-            console.log("Error", error);
-        }
-    ); 
+    // var secondpayment = await this.api.secondpaymentrequest(this.applicationId,this.courseID);
+    // secondpayment.subscribe(
+    //     data => {
+    //       //console.log('response url==>'+data['data']);
+    //       //window.location.assign(data['data']);
+    //       this.ref.close();
+    //     },
+    //     error => {
+    //         console.log("Error", error);
+    //     }
+    // ); 
   }
-
-  
 }

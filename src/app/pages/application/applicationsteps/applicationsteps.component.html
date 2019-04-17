@@ -1,7 +1,10 @@
+<nb-alert status="danger" closable (close)="onClose()" *ngIf="alertflag == 1">
+  {{message}}
+</nb-alert>
 <div class="row" [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerSize="xlarge">
   <div class="col-md-12">
     <nb-card status="success">
-      <nb-card-header>Complete all steps to complete your admission process !!!</nb-card-header>
+      <nb-card-header>Complete all steps to complete your admission process for Course {{OnlinePersonaldetails?.specialization}} !!!</nb-card-header>
       <nb-card-body>
         <nb-stepper orientation="vertical" disableStepNavigation #stepper>
           <nb-step [stepControl]="OnlineEntranceForm" [completed]="tabcheck1"  label="Online Entrance Exam Details" class="step-container">
@@ -9,6 +12,7 @@
                 <nb-card status="success">
                   <nb-card-header>Online Entrance Exam Details</nb-card-header>
                   <nb-card-body>
+                    <input type="hidden" ngModel="{{OnlinePersonaldetails?.pi_test_date}}" formControlName="PersonalExamCtrl">
                     <div class="row paddingForDetails">
                       <div class="col-md-4 enrollDetailsCol1">
                           Date of exam
@@ -17,7 +21,8 @@
                         :
                       </div>
                       <div class="col-md-5 enrollDetailsCol2">
-                        {{OnlinePersonaldetails?.online_test_date}}
+                          <input type="text" nbInput class="form-control" ngModel="{{OnlinePersonaldetails?.online_test_date}}"
+                          formControlName="testDateCtrl">
                       </div>
                     </div>
                     <div class="row">
@@ -27,8 +32,9 @@
                       <div class="col-md-1 enrollDetailsCol1">
                         :
                       </div>
-                      <div class="col-xl-5" enrollDetailsCol2>
-                          {{OnlinePersonaldetails?.online_test_time}}
+                      <div class="col-xl-5 enrollDetailsCol2">
+                          <input type="text" nbInput class="form-control" ngModel="{{OnlinePersonaldetails?.online_test_time}}"
+                          formControlName="testTimeCtrl">
                       </div>
                       </div>
                   </nb-card-body>
@@ -41,6 +47,7 @@
                 <nb-card status="success">
                   <nb-card-header>Personal Interview Details</nb-card-header>
                   <nb-card-body>
+                    <input type="hidden" ngModel="{{Marksdetails?.total_marks}}" formControlName="MarksExamCtrl">
                     <div class="row paddingForDetails">
                       <div class="col-md-4 enrollDetailsCol1">
                           Date of exam
@@ -49,7 +56,8 @@
                         :
                       </div>
                       <div class="col-md-5 enrollDetailsCol2">
-                        {{OnlinePersonaldetails?.pi_test_date}}
+                          <input type="text" nbInput class="form-control" ngModel="{{OnlinePersonaldetails?.pi_test_date}}"
+                          formControlName="interviewDateCtrl">
                       </div>
                     </div>
                     <div class="row">
@@ -59,8 +67,9 @@
                       <div class="col-md-1 enrollDetailsCol1">
                         :
                       </div>
-                      <div class="col-xl-5" enrollDetailsCol2>
-                          {{OnlinePersonaldetails?.pi_test_time}}
+                      <div class="col-xl-5 enrollDetailsCol2">
+                          <input type="text" nbInput class="form-control" ngModel="{{OnlinePersonaldetails?.pi_test_time}}"
+                          formControlName="interviewTimeCtrl">
                       </div>
                       </div>
                   </nb-card-body>
@@ -69,34 +78,33 @@
             </form>
           </nb-step>
           <nb-step [stepControl]="MarksForm" [completed]="tabcheck3"  label="Marks Details" class="step-container">
-              <form [formGroup]="MarksForm" class="step-container" style="width: 635px;">
-                  <nb-card status="success">
-                    <nb-card-header>Online Entrance and Personal Interview Marks Details</nb-card-header>
-                    <nb-card-body>
-                      <div class="row paddingForDetails">
-                        <div class="col-md-4 enrollDetailsCol1">
-                            Marks
-                        </div>
-                        <div class="col-md-1 enrollDetailsCol1">
-                          :
-                        </div>
-                        <div class="col-md-5 enrollDetailsCol2">
-                          {{Marksdetails?.total_marks}}
-                        </div>
+            <form [formGroup]="MarksForm" class="step-container" style="width: 635px;">
+                <nb-card status="success">
+                  <nb-card-header>Online Entrance and Personal Interview Marks Details</nb-card-header>
+                  <nb-card-body>
+                    <div class="row paddingForDetails">
+                      <div class="col-md-4 enrollDetailsCol1">
+                          Marks
                       </div>
-                      <div class="row">
-                        <div class="col-xl-6" >
-                          <button nbButton type='button' size="small" status="success">Pass</button>
-                        </div>
-                        <div class="col-xl-6" >
-                          <button nbButton type='button' size="small" status="success">Fail</button>
-                        </div>
+                      <div class="col-md-1 enrollDetailsCol1">
+                        :
                       </div>
-                    </nb-card-body>
-                    <!-- <button nbButton nbStepperNext>next</button> -->
-                  </nb-card>
-              </form>
-            </nb-step>
+                      <div class="col-md-5 enrollDetailsCol2">
+                          <input type="text" nbInput class="form-control" ngModel="{{Marksdetails?.total_marks}}"
+                          formControlName="totalMarksCtrl">
+                      </div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div class="col-xl-12">
+                            <button nbButton class="col-md-4 col-sm-4 col-xs-4 offset-md-4" style="margin-top:10px;" (click)="examresult(Marksdetails?.application_status)"
+                            hero status="info">{{Marksdetails?.application_status}}</button>
+                        </div>
+                    </div>
+                  </nb-card-body>
+                  <!-- <button nbButton nbStepperNext>next</button> -->
+                </nb-card>
+            </form>
+          </nb-step>
         </nb-stepper>
       </nb-card-body>
     </nb-card> 

@@ -280,6 +280,43 @@ deletegalleriess(Id){
   
 }
 
+deletePromotionalMaterials(Id){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/institute_api/deletePromotionalMaterials`,{"Id":Id})
+    .map(res => {
+      return res;
+    })
+    
+  }catch(error) {
+    this.handleError("deletegalleriess : "+error);
+  }
+  
+}
+
+addvideoURL(Id,data){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/institute_api/updateVideoURL`,{"Id":Id,data:data})
+    .map(res => {
+      return res;
+    })
+    
+  }catch(error) {
+    this.handleError("addvideoURL : "+error);
+  }
+}
+
+deleteVideourl(Id){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/institute_api/deleteVideourl`,{"Id":Id})
+    .map(res => {
+      return res;
+    })
+    
+  }catch(error) {
+    this.handleError("deleteVideourl : "+error);
+  }
+}
+
 
   //College Management ends here//
 
