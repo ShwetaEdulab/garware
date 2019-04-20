@@ -12,6 +12,8 @@ import { NbDateService, NbDialogService, NbToastrService,NbStepperComponent,NbTh
 import {ConfirmationService} from 'primeng/api';
 import * as $ from 'jquery';
 import { FormGroup, FormControl } from '@angular/forms';
+import { NbAuthJWTToken,NbAuthService } from '@nebular/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'adminForeignOffice',
@@ -33,13 +35,24 @@ export class AdminForeignOfficeComponent {
   public filterPlaceholder: string;
   public filterInput = new FormControl();
  // @ViewChild('embassyEmail') input :ElementRef; 
-  constructor(protected adminApi : AdminApiService, 
-              protected countries : CountriesService,
-              private confirmationService: ConfirmationService,
-              @Inject(DOCUMENT) document,
-              private dialogService: NbDialogService) { 
-              this.Countries = this.countries.getData();
-  }
+  constructor(
+    protected adminApi : AdminApiService, 
+    protected countries : CountriesService,
+    private confirmationService: ConfirmationService,
+    private authService : NbAuthService,
+    private router : Router,
+    @Inject(DOCUMENT) document,
+    private dialogService: NbDialogService) 
+      {
+        this.authService.onTokenChange()
+        .subscribe((token: NbAuthJWTToken) => {
+          console.log("token.getPayload()['role']"+token.getPayload()['role']);
+          if(token.getPayload()['role'] !="admin"){
+            this.router.navigate(['auth/logout'])
+          }
+        });
+        this.Countries = this.countries.getData();
+      }
 
   ngOnInit(){
     this.filterText = "";
@@ -457,6 +470,10 @@ export class AdminForeignOfficeComponent {
       reject: () => {
       }
     });
+  }
+
+  errata(userId,category){
+    this.router.navigate(['pages/adminErrata'],{queryParams:{userId : userId ,category:category}});
   }
 
 

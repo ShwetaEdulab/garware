@@ -48,7 +48,7 @@ export class PeerComponent {
   @ViewChild('Time')  timenew:ElementRef
 alertflag=0;
 otpalertflag=0;
-phone_number;
+phone_number = '+91';
 num;
 time;
 fullTime;
@@ -69,7 +69,7 @@ mytime;
      var duration = 10000;
       this.num = this.phone_number;
       this.peer_cntc = this.mobile;
-      if(this.num == undefined){
+      if(this.num == '+91'){
          document.getElementById('num').style.visibility = "visible";
       }else{
         this.ref.close();
@@ -95,8 +95,6 @@ mytime;
           }
        });
       }
-      
-   
     }
 
     offlineCall(){
@@ -112,12 +110,12 @@ mytime;
       this.peer_cntc = this.mobile;
       this.available_from =this.available_from;
       this.available_to =this.available_to;
-      if(this.num == undefined ){
+      if(this.num == '+91' ){
         document.getElementById('num').style.visibility = "visible";
         document.getElementById('time').style.visibility = "visible";
-      }else if(this.num == undefined){
+      }else if(this.num == '+91'){
         document.getElementById('num').style.visibility = "visible";
-      }else if(this.time == undefined){
+      }else if(this.time == '+91'){
        document.getElementById('time').style.visibility = "visible";
       }else{
       this.ref.close();
@@ -137,9 +135,6 @@ mytime;
          }
      });
      }
-
-     
-     
     }
 
     close()

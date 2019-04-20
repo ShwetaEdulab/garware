@@ -4,6 +4,8 @@ import { ApiService } from '../../../../app/shared/api.service';
 import { AdminApiService } from '../../../../app/shared/adminapi.service';
 import { FormBuilder } from '@angular/forms';
 import {ConfirmationService} from 'primeng/api';
+import { NbAuthJWTToken,NbAuthService } from '@nebular/auth';
+import { Router } from '@angular/router';
 
 @Component({
 selector: 'nb-dialog',
@@ -34,35 +36,51 @@ template: `
                     </tr>
                     <tr style="border: 2px solid black;">
                         <th style="padding: 8px;text-align: left;"><h5>1. S.C. Seats</h5></th>
-                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.SC_seats}}</h5></td>
+                        <td style="padding: 8px;text-align: left;">
+                            <h5>{{listdata?.intake.SC_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="1" (click)="checkradio('S.C')" />
+                        </td>
                     </tr>
                     <tr style="border: 2px solid black;">
                         <th style="padding: 8px;text-align: left;"><h5>2. S.T. Seats</h5></th>
-                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.ST_seats}}</h5></td>
+                        <td style="padding: 8px;text-align: left;">
+                            <h5>{{listdata?.intake.ST_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="2" (click)="checkradio('S.T')" />
+                        </td>
                     </tr>
                     <tr style="border: 2px solid black;">
                         <th style="padding: 8px;text-align: left;"><h5>3. D.T.(A) Seats</h5></th>
-                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.DTA_seats}}</h5></td>
+                        <td style="padding: 8px;text-align: left;">
+                            <h5>{{listdata?.intake.DTA_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="3" (click)="checkradio('D.T.(A)')" />
+                        </td>
                     </tr>
                     <tr style="border: 2px solid black;">
                         <th style="padding: 8px;text-align: left;"><h5>4. N.T.(B) Seats</h5></th>
-                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.NTB_seats}}</h5></td>
+                        <td style="padding: 8px;text-align: left;">
+                            <h5>{{listdata?.intake.NTB_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="4" (click)="checkradio('N.T.(B)')" />
+                        </td>
                     </tr>
                     <tr style="border: 2px solid black;">
                         <th style="padding: 8px;text-align: left;"><h5>5. N.T.(C) Seats</h5></th>
-                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.NTC_seats}}</h5></td>
+                        <td style="padding: 8px;text-align: left;">
+                            <h5>{{listdata?.intake.NTC_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="5" (click)="checkradio('N.T.(C)')" />
+                        </td>
                     </tr>
                     <tr style="border: 2px solid black;">
                         <th style="padding: 8px;text-align: left;"><h5>6. N.T.(D) Seats</h5></th>
-                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.NTD_seats}}</h5></td>
+                        <td style="padding: 8px;text-align: left;">
+                            <h5>{{listdata?.intake.NTD_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="6" (click)="checkradio('N.T.(D)')" />
+                        </td>
                     </tr>
                     <tr style="border: 2px solid black;">
                         <th style="padding: 8px;text-align: left;"><h5>7. O.B.C. Seats</h5></th>
-                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.OBC_seats}}</h5></td>
+                        <td style="padding: 8px;text-align: left;">
+                            <h5>{{listdata?.intake.OBC_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="7" (click)="checkradio('O.B.C.')" />
+                        </td>
                     </tr>
                     <tr style="border: 2px solid black;">
                         <th style="padding: 8px;text-align: left;"><h5>8. GENERAL Seats</h5></th>
-                        <td style="padding: 8px;text-align: left;"><h5>{{listdata?.intake.GENERAL_seats}}</h5></td>
+                        <td style="padding: 8px;text-align: left;">
+                            <h5>{{listdata?.intake.GENERAL_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="8" (click)="checkradio('GENERAL')" />
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -72,6 +90,7 @@ template: `
         <div class="row">
             <div class="col-xl-6">
                 <button nbButton status="info" (click)="allocateSeat( userid, appid, courseid)" >Allocate</button>
+                <span *ngIf="errorshow == true" style="color:red;">Please Select One Category</span>
             </div>
             <div class="col-xl-6">
                 <button nbButton hero status="primary" (click)="dismiss()">Close</button>
@@ -96,7 +115,9 @@ readonly emailValidate = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|
 result_date: any;
 message;
 seats;
-    listdata: any;
+listdata: any;
+selectedCategory;
+errorshow = false;
 
 constructor(protected ref: NbDialogRef<SeatAllocationDialogComponent>,
   protected api : ApiService,
@@ -104,8 +125,17 @@ constructor(protected ref: NbDialogRef<SeatAllocationDialogComponent>,
   private fb: FormBuilder,
   private dialogService: NbDialogService,
   public themeService : NbThemeService,
-  private confirmationService: ConfirmationService,) {
-    
+  private confirmationService: ConfirmationService,
+  private authService : NbAuthService,
+  private router : Router,
+) {
+    this.authService.onTokenChange()
+    .subscribe((token: NbAuthJWTToken) => {
+      console.log("token.getPayload()['role']"+token.getPayload()['role']);
+      if(token.getPayload()['role'] !="admin"){
+        this.router.navigate(['auth/logout'])
+      }
+    });
   }
 
   dismiss() {
@@ -125,25 +155,29 @@ constructor(protected ref: NbDialogRef<SeatAllocationDialogComponent>,
         this.adminApi.totalseats(this.userid,this.courseid,this.appid).subscribe(
             (data: any) => {
                 this.listdata =  data['data'];
-                //console.log("listdata.intake=========>"+this.listdata.intake.id);
-                //console.log("listdata.intake=========>"+JSON.stringify(this.listdata));
         });
     
     }
 
     allocateSeat( userid, appid, courseid){
-        this.adminApi.allocateSeat(userid, courseid, appid).subscribe(
+        if(this.selectedCategory==undefined){
+            this.errorshow = true;
+        }else{
+            this.adminApi.allocateSeat(userid, courseid, appid,this.selectedCategory).subscribe(
             (data: any) => {
                 if(data[status]=='200'){
-                    console.log("200000000000000000");
                     alert(data['message']);
                     this.ref.close();
                 }else{
-                    console.log("Errorrrrrrrrrrrrr");
                     alert(data['message']);
                     this.ref.close();
                 }
-        }); 
+            });
+        } 
+    }
+
+    checkradio(value){
+        this.selectedCategory = value;
     }
 
 }

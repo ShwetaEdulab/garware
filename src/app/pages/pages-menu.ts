@@ -89,6 +89,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     },
   },
   {
+    title: 'Institute Management',
+    icon: 'far fa-building',
+    link: '/pages/adminInstitute',
+    data: {
+      permission: 'view',
+      resource: 'adminInstitute'
+    },
+  },
+  {
     title: 'Reports',
     icon: 'nb-bar-chart',
     link: '/pages/AdminReport',

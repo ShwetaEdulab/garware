@@ -7,6 +7,7 @@ import {
 import {Location} from '@angular/common';
 import { saveAs } from 'file-saver';
 import { config } from '../../../../config';
+import { NbAuthJWTToken,NbAuthService } from '@nebular/auth';
 
 @Component({
   selector: 'view',
@@ -23,8 +24,17 @@ export class AdminViewComponent {
   serverUrl = config.serverUrl;
   constructor(protected adminApi : AdminApiService,
     private route: ActivatedRoute,
-    private _location: Location
-    ) { 
+    private _location: Location,
+    private authService : NbAuthService,
+    private router : Router,
+    ) {
+      this.authService.onTokenChange()
+      .subscribe((token: NbAuthJWTToken) => {
+        console.log("token.getPayload()['role']"+token.getPayload()['role']);
+        if(token.getPayload()['role'] !="admin"){
+          this.router.navigate(['auth/logout'])
+        }
+      });
     
   }
 

@@ -43,6 +43,8 @@ import { AdminForeignOfficeComponent } from '../admin/foreign_office/foreignoffi
 import { AdminReuploadedTranscriptComponent } from '../admin/re_Uploaded_Transcript/re_Uploaded_Transcript.component';
 import { StudentManagementComponent } from '../admin/student-management/student-management.component';
 import { AdminReportComponent } from '../admin/report/report.component';
+import { InstituteManagementComponent } from '../admin/institute-management/institute-management.component';
+import { ViewInstituteComponent } from '../admin/view-institute/view-institute.component';
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
@@ -166,6 +168,16 @@ const routes: Routes = [{
   {
     path: 'adminDashboard',
     component: AdminDashboardComponent,
+  
+  },
+  {
+    path: 'adminInstitute',
+    component: InstituteManagementComponent,
+  
+  },
+  {
+    path: 'adminInstituteView',
+    component: ViewInstituteComponent,
   
   },
    {

@@ -78,6 +78,10 @@ import { config } from '../../../../config';
     }
 
     redirectCourse(course_id,specialization){
+      this.api.trackVisits(specialization)
+      .subscribe(data => { 
+        
+      });
       this.router.navigate(['pages/course'],{queryParams:{course_id:course_id,specialization:specialization}});
     }
 

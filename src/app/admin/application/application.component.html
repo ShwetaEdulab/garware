@@ -57,12 +57,13 @@
 							<td>{{application?.email}}</td>
 							<td>{{application?.specialization}} ({{application?.course}})</td>
 							<td><i class="fa ion-person" status="danger" nbPopover="View More" nbPopoverMode="hover" (click)="viewMore('application',application.user_id,application.course_id,'new',application.id);"></i>
+								<i class="fa ion-android-lock" id='documentverify{{application.id}}' nbPopover="Errata" nbPopoverMode="hover" (click)="errata(application.user_id,'self_financed');"></i>
 								<section class="example-section">
 									<mat-slide-toggle
 										id='sendToEligibilitytick{{application.id}}'
 										class="example-margin"
 										[color]="color"
-										(change)="sendToEligibility($event,application.id,application.course_id,application.user_id,application.check_eligibility)"
+										(change)="sendToEligibility($event,application.id,application.course_id,application.user_id,application.check_eligibility,application?.enrollment_no)"
 										[checked]="application.check_eligibility"
 										[disabled]="disabled">
 										Send Email about Online Test 

@@ -35,10 +35,11 @@
 						<th>Sr.no</th>
 						<th>Full Name</th>
 						<th>Email Address</th>
-						<th>City</th>
-						<th>State</th>
+						<!-- <th>City</th>
+						<th>State</th> -->
 						<!-- <th>Country Birth</th>
 						<th>Country Id</th> -->
+						<th>Interested Courses</th>
 						<th>Course Applied</th>
 						<th>Registered Date</th>
 						<th>Action</th>
@@ -50,10 +51,11 @@
 						<th scope="row">{{ i + 1}}</th>
 						<td>{{student?.name}}</td>
 						<td>{{student?.email}}</td>
-						<td>{{student?.city}}</td>
-						<td>{{student?.state}}</td>
+						<!-- <td>{{student?.city}}</td>
+						<td>{{student?.state}}</td> -->
 						<!-- <td>{{student?.country}}</td>
 						<td>{{student?.country_id}}</td> -->
+						<td>{{student?.interested_courses}}</td>
 						<td>{{student.courses ? student.courses : 'Not applied'}}</td>
 						<td>{{student.registerDate}}</td>
 						<td>

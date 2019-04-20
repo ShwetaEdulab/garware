@@ -44,6 +44,8 @@ import { AdminForeignOfficeModule } from '../admin/foreign_office/foreignoffice.
 import { AdminReuploadedTranscriptModule } from '../admin/re_Uploaded_Transcript/re_Uploaded_Transcript.module';
 import { StudentMgmtModule } from '../admin/student-management/student-management.module';
 import { AdminReportModule } from '../admin/report/report.module';
+import { InstituteManagementModule } from '../admin/institute-management/institute-management.module';
+import { ViewInstituteModule } from '../admin/view-institute/view-institute.module';
 
 
 const PAGES_COMPONENTS = [
@@ -90,6 +92,8 @@ const PAGES_COMPONENTS = [
     AdminReuploadedTranscriptModule,
     StudentMgmtModule,
     AdminReportModule,
+    InstituteManagementModule,
+    ViewInstituteModule,
   ],
   providers: [Data],
   declarations: [

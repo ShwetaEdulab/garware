@@ -34,7 +34,6 @@ export class PeersComponent  {
   ngOnInit() {
   this.college_id =  this.route.snapshot.queryParamMap.get('college_id');
   this.courseid = this.route.snapshot.queryParamMap.get('cour_id');
-  //console.log("this.courseid============>"+this.courseid);
     this.api.getPeers(this.college_id,this.courseid) 
     .subscribe(data => { 
       this.available_counsellors =  data['data']['available_counsellors'];
@@ -46,6 +45,7 @@ export class PeersComponent  {
       this.peerstatus = status;
       this.mobile =peer;
       this.dialogService.open(PeerComponent, {
+        closeOnBackdropClick : false,
         context: {
           peerstatus : this.peerstatus,
           mobile :this.mobile
@@ -60,6 +60,7 @@ export class PeersComponent  {
       this.mobile =peer;
       this.peer_id = peer_id
       this.dialogService.open(PeerComponent, {
+        closeOnBackdropClick : false,
         context: {
           peer_id : this.peer_id,
           peerstatus : this.peerstatus,

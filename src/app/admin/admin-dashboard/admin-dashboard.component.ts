@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminApiService } from '../../shared/adminapi.service';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NbAuthJWTToken,NbAuthService } from '@nebular/auth';
 @Component({
   selector: 'ngx-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -34,8 +35,15 @@ export class AdminDashboardComponent implements OnInit {
 	selectedYear ='2019';
     constructor(	
 	  protected adminApi : AdminApiService,
-	  private router : Router
+		private router : Router,
+		private authService : NbAuthService,
       ) {
+				this.authService.onTokenChange()
+				.subscribe((token: NbAuthJWTToken) => {
+					if(token.getPayload()['role'] !="admin"){
+						this.router.navigate(['auth/logout'])
+					}
+				});
         
     }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { AdminApiService } from '../../shared/adminapi.service';
 import { Router } from '@angular/router';
+import { NbAuthJWTToken,NbAuthService } from '@nebular/auth';
 
 @Component({
   selector: 'ngx-student-management',
@@ -16,7 +17,19 @@ export class StudentManagementComponent implements OnInit {
   p: number = 1;
   studentdata: any;
   active: any;
-  constructor(protected adminApi : AdminApiService,private router : Router) { }
+  constructor(
+    protected adminApi : AdminApiService,
+    private router : Router,
+    private authService : NbAuthService,
+  ) {
+    this.authService.onTokenChange()
+      .subscribe((token: NbAuthJWTToken) => {
+        console.log("token.getPayload()['role']"+token.getPayload()['role']);
+        if(token.getPayload()['role'] !="admin"){
+          this.router.navigate(['auth/logout'])
+        }
+      });
+   }
 
   ngOnInit() {
     this.filterText = "";

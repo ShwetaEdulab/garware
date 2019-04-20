@@ -8,6 +8,7 @@ import {Location} from '@angular/common';
 import {ConfirmationService} from 'primeng/api';
 import {Message} from 'primeng/api';
 import { config } from '../../../../config';
+import { NbAuthJWTToken,NbAuthService } from '@nebular/auth';
 
 @Component({
   selector: 'errata',
@@ -28,7 +29,15 @@ export class AdminErrataComponent {
     private _location: Location,
     private confirmationService: ConfirmationService,
     private router : Router,
-    ) { 
+    private authService : NbAuthService,
+    ) {
+      this.authService.onTokenChange()
+      .subscribe((token: NbAuthJWTToken) => {
+        console.log("token.getPayload()['role']"+token.getPayload()['role']);
+        if(token.getPayload()['role'] !="admin"){
+          this.router.navigate(['auth/logout'])
+        }
+      });
     
   }
 

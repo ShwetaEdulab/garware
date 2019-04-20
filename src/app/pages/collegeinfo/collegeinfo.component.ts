@@ -154,6 +154,7 @@ import { HeaderComponent } from '../../@theme/components/header/header.component
      this.peerstatus = status;
      this.mobile =peer;
      this.dialogService.open(PeerComponent, {
+      closeOnBackdropClick : false,
        context: {
          peerstatus : this.peerstatus,
          mobile :this.mobile
@@ -168,6 +169,7 @@ import { HeaderComponent } from '../../@theme/components/header/header.component
      this.mobile =peer;
      this.peer_id = peer_id
      this.dialogService.open(PeerComponent, {
+      closeOnBackdropClick : false,
        context: {
          peer_id : this.peer_id,
          peerstatus : this.peerstatus,

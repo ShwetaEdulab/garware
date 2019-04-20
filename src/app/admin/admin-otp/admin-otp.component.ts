@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminApiService } from '../../shared/adminapi.service';
 import { Router,ActivatedRoute } from '@angular/router';
+import { NbAuthJWTToken,NbAuthService } from '@nebular/auth';
 @Component({
   selector: 'ngx-admin-otp',
   templateUrl: './admin-otp.component.html',
@@ -15,7 +16,17 @@ export class AdminOtpComponent {
   otpValidation: boolean;
   constructor(private router : Router,
     private route : ActivatedRoute,
-    protected adminApi : AdminApiService) { }
+    protected adminApi : AdminApiService,
+    private authService : NbAuthService,
+  ) {
+      this.authService.onTokenChange()
+				.subscribe((token: NbAuthJWTToken) => {
+					console.log("token.getPayload()['role']"+token.getPayload()['role']);
+					if(token.getPayload()['role'] !="admin"){
+						this.router.navigate(['auth/logout'])
+					}
+				});
+     }
 
   ngOnInit() {
     console.log("COMIG here in OTP Modal");

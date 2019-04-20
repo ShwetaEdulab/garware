@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {ConfirmationService} from 'primeng/api';
 import {Message} from 'primeng/api';
 import {config} from '../../../../config';
+import { NbAuthJWTToken,NbAuthService } from '@nebular/auth';
 
 @Component({
   selector: 'eligibility',
@@ -40,8 +41,16 @@ export class AdminEligibilityComponent {
   onlinePITime: any;
   constructor(protected adminApi : AdminApiService,
     private router : Router,
-    private confirmationService: ConfirmationService) { 
-    
+    private confirmationService: ConfirmationService,
+    private authService : NbAuthService,
+  ) {
+    this.authService.onTokenChange()
+    .subscribe((token: NbAuthJWTToken) => {
+      console.log("token.getPayload()['role']"+token.getPayload()['role']);
+      if(token.getPayload()['role'] !="admin"){
+        this.router.navigate(['auth/logout'])
+      }
+    });
   }
 
   ngOnInit(){

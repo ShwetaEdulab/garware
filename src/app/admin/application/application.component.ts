@@ -6,6 +6,7 @@ import { NbDialogRef,NbDialogService } from '@nebular/theme';
 import { EligibilityComponent } from './Eligibility.Component';
 import {ConfirmationService} from 'primeng/api';
 import { DatePipe } from '@angular/common';
+import { NbAuthJWTToken,NbAuthService } from '@nebular/auth';
 
 @Component({
   selector: 'application',
@@ -45,8 +46,16 @@ export class AdminApplicationComponent {
 	protected adminApi : AdminApiService,
   private router : Router,
   private confirmationService: ConfirmationService,
-  private datePipe: DatePipe
-) { 
+  private datePipe: DatePipe,
+  private authService : NbAuthService,
+) {
+  this.authService.onTokenChange()
+    .subscribe((token: NbAuthJWTToken) => {
+      console.log("token.getPayload()['role']"+token.getPayload()['role']);
+      if(token.getPayload()['role'] !="admin"){
+        this.router.navigate(['auth/logout'])
+      }
+    });
   }
 
   ngOnInit(){
@@ -159,7 +168,7 @@ export class AdminApplicationComponent {
     this.router.navigate(['pages/adminView'],{queryParams:{category:category,userId : userId, courseId:courseId,tab:tab,applicationId:applicationId }});
   }
 
-  sendToEligibility(e,id,course_id,user_id,checkEligiblity){
+  sendToEligibility(e,id,course_id,user_id,checkEligiblity,enrollment_no){
     var data={
         id:id,
         user_id:user_id,
@@ -204,8 +213,14 @@ export class AdminApplicationComponent {
           this.adminApi.checkeligiblity(data).subscribe(data=>{
             if(data['status'] === 200){
               this.loading = false;
-              //alert(data['message']);
-              this.ngOnInit();
+              //this.ngOnInit();
+              console.log("data['data']------->"+data['data']);
+              this.adminApi.downloadFiles(data[`data`])
+              .subscribe(data => {
+                saveAs(data, enrollment_no+'_hallticket.pdf');
+                this.ngOnInit();  
+              });
+
             }else if(data['status'] === 400){
               this.loading = false;
               alert(data['message']);
@@ -395,6 +410,10 @@ export class AdminApplicationComponent {
       })
 
     }
+  }
+
+  errata(userId,category){
+    this.router.navigate(['pages/adminErrata'],{queryParams:{userId : userId ,category:category}});
   }
 
 }

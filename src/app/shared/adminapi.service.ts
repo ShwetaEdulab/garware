@@ -785,12 +785,13 @@ totalseats(user_id,course_id,application_id){
   }
 }
 
-allocateSeat(user_id,course_id,application_id){
+allocateSeat(user_id,course_id,application_id,category){
   try{
       return this.httpClient.post(`${this.baseUrl}/admin_api/foreignoffice/allocateSeat`,{
           applicationId : application_id,
           userId : user_id,
-          course_id :course_id                 
+          course_id :course_id,
+          category : category             
       });
   }catch(error) {
       this.handleError("getStudentPreferencesList : "+JSON.stringify(error));
@@ -806,6 +807,14 @@ failStudent(user_id,course_id,application_id){
       });
   }catch(error) {
       this.handleError("getStudentPreferencesList : "+JSON.stringify(error));
+  }
+}
+
+getAllCollegeDetail(college_id){
+  try{
+    return this.httpClient.get(`${this.baseUrl}/admin_api/institute_management/institute_view?id=`+college_id);
+  }catch(error) {
+      this.handleError("getAllCollegeDetail : "+JSON.stringify(error));
   }
 }
 

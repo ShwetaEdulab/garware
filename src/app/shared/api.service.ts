@@ -94,6 +94,16 @@ getProfileCompleteness(){
     }
   }
 
+  trackVisits(specialization){
+    try{
+      return this.httpClient.post(`${this.baseUrl}/api/search/trackVisits`,{
+        "specialization" : specialization
+      });
+    }catch(error) {
+      this.handleError("getSpecialization : "+error);
+    }
+  }
+
   delete_education(type){
     try{      
         return this.httpClient.delete(`${this.baseUrl}/api/profile/delete_education?type=`+type);

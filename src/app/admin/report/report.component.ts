@@ -3,6 +3,7 @@ import { AdminApiService } from '../../shared/adminapi.service';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbThemeService } from '@nebular/theme';
+import { NbAuthJWTToken,NbAuthService } from '@nebular/auth';
 
 @Component({
   selector: 'report',
@@ -30,8 +31,16 @@ export class AdminReportComponent {
   constructor(
     protected adminApi : AdminApiService,
     private router : Router,
-    private theme: NbThemeService
-    ) { 
+    private theme: NbThemeService,
+    private authService : NbAuthService,
+    ) {
+      this.authService.onTokenChange()
+      .subscribe((token: NbAuthJWTToken) => {
+        console.log("token.getPayload()['role']"+token.getPayload()['role']);
+        if(token.getPayload()['role'] !="admin"){
+          this.router.navigate(['auth/logout'])
+        }
+      });
     
   }
 

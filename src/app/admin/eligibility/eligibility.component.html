@@ -59,6 +59,7 @@
 								<td>{{application?.specialization}} ({{application?.course}})</td>
 								<!-- <td><button nbButton  size="xsmall" outline status="info" (click)="Check_Eligibility(application.user_id,application.college_university,application.college_name,application.Subject_first_hsc,application.Subject_Second_hsc,application.Subject_Third_hsc,application.Subject_fourth_hsc,application.Subject_fifth_hsc,application.Subject_Six_hsc,application.specialization,application.course)">Check Eligibility</button></td> -->
 								<td><i class="fa ion-person" status="danger" nbPopover="View More" nbPopoverMode="hover" (click)="viewMore('application',application.user_id,application.course_id,'new',application.id);"></i>
+									<i class="fa ion-android-lock" id='documentverify{{application.id}}' nbPopover="Errata" nbPopoverMode="hover" (click)="errata(application.user_id,'self_financed');"></i>
 									<section class="example-section">
 										<mat-slide-toggle
 											class="example-margin"
