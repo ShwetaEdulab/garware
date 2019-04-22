@@ -405,7 +405,6 @@ export class AdminForeignOfficeComponent {
   saveMarks(id,course_id){
     var pi_test_marks = ((document.getElementById("eligib_number"+id) as HTMLInputElement).value);
     var online_test_Marks = ((document.getElementById("onlineMark"+id) as HTMLInputElement).value);
-    console.log("online_test_Marks=========>"+online_test_Marks);
     if(online_test_Marks==null || online_test_Marks=="" || online_test_Marks==undefined){
       document.getElementById("elignumbererror"+id).innerHTML ="Online Test Marks is null";
 			document.getElementById("elignumbererror"+id).style.color = "red";

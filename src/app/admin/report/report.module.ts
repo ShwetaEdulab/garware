@@ -23,6 +23,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import { SharedModule } from '../../pages/shared-authpipe.module';
 import {MatSelectModule} from '@angular/material/select';
+import { MatDatepickerModule , MatNativeDateModule } from '@angular/material';
 @NgModule({
   imports: [
     NbSelectModule,
@@ -44,7 +45,9 @@ import {MatSelectModule} from '@angular/material/select';
     CommonModule,
     SharedModule,
     NbSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   declarations: [
     AdminReportComponent,

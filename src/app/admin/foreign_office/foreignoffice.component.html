@@ -41,6 +41,7 @@
 										<input matInput placeholder="PI Test Marks" id='eligib_number{{application.id}}' value="{{application?.pi_marks}}">
 									</mat-form-field><br>
 									<button *ngIf="application?.pi_marks == ''" nbButton  size="xsmall" outline status="info" (click)="saveMarks(application.id,application.course_id)">Save Marks</button>
+									<button *ngIf="application?.pi_marks != ''" nbButton  size="xsmall" outline status="info" (click)="saveMarks(application.id,application.course_id)">Edit Marks</button>
 									<span id="elignumbererror{{application.id}}"></span>
 								</td>
 								<td>

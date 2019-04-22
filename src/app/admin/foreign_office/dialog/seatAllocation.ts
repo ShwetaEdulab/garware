@@ -35,51 +35,51 @@ template: `
                         <th style="padding: 8px;text-align: left;"><h5>Seats</h5></th>
                     </tr>
                     <tr style="border: 2px solid black;">
-                        <th style="padding: 8px;text-align: left;"><h5>1. S.C. Seats</h5></th>
+                        <th style="padding: 8px;text-align: left;">1. S.C. Seats <input id="rdb1" type="radio" name="address_Radio" value="1" (click)="checkradio('S.C')" /></th>
                         <td style="padding: 8px;text-align: left;">
-                            <h5>{{listdata?.intake.SC_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="1" (click)="checkradio('S.C')" />
+                            {{listdata?.intake.SC_seats}}
                         </td>
                     </tr>
                     <tr style="border: 2px solid black;">
-                        <th style="padding: 8px;text-align: left;"><h5>2. S.T. Seats</h5></th>
+                        <th style="padding: 8px;text-align: left;">2. S.T. Seats <input id="rdb1" type="radio" name="address_Radio" value="2" (click)="checkradio('S.T')" /></th>
                         <td style="padding: 8px;text-align: left;">
-                            <h5>{{listdata?.intake.ST_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="2" (click)="checkradio('S.T')" />
+                            {{listdata?.intake.ST_seats}}
                         </td>
                     </tr>
                     <tr style="border: 2px solid black;">
-                        <th style="padding: 8px;text-align: left;"><h5>3. D.T.(A) Seats</h5></th>
+                        <th style="padding: 8px;text-align: left;">3. D.T.(A) Seats <input id="rdb1" type="radio" name="address_Radio" value="3" (click)="checkradio('D.T.(A)')" /></th>
                         <td style="padding: 8px;text-align: left;">
-                            <h5>{{listdata?.intake.DTA_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="3" (click)="checkradio('D.T.(A)')" />
+                            {{listdata?.intake.DTA_seats}}
                         </td>
                     </tr>
                     <tr style="border: 2px solid black;">
-                        <th style="padding: 8px;text-align: left;"><h5>4. N.T.(B) Seats</h5></th>
+                        <th style="padding: 8px;text-align: left;">4. N.T.(B) Seats <input id="rdb1" type="radio" name="address_Radio" value="4" (click)="checkradio('N.T.(B)')" /></th>
                         <td style="padding: 8px;text-align: left;">
-                            <h5>{{listdata?.intake.NTB_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="4" (click)="checkradio('N.T.(B)')" />
+                            {{listdata?.intake.NTB_seats}}
                         </td>
                     </tr>
                     <tr style="border: 2px solid black;">
-                        <th style="padding: 8px;text-align: left;"><h5>5. N.T.(C) Seats</h5></th>
+                        <th style="padding: 8px;text-align: left;">5. N.T.(C) Seats <input id="rdb1" type="radio" name="address_Radio" value="5" (click)="checkradio('N.T.(C)')" /></th>
                         <td style="padding: 8px;text-align: left;">
-                            <h5>{{listdata?.intake.NTC_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="5" (click)="checkradio('N.T.(C)')" />
+                           {{listdata?.intake.NTC_seats}}
                         </td>
                     </tr>
                     <tr style="border: 2px solid black;">
-                        <th style="padding: 8px;text-align: left;"><h5>6. N.T.(D) Seats</h5></th>
+                        <th style="padding: 8px;text-align: left;">6. N.T.(D) Seats <input id="rdb1" type="radio" name="address_Radio" value="6" (click)="checkradio('N.T.(D)')" /></th>
                         <td style="padding: 8px;text-align: left;">
-                            <h5>{{listdata?.intake.NTD_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="6" (click)="checkradio('N.T.(D)')" />
+                            {{listdata?.intake.NTD_seats}}
                         </td>
                     </tr>
                     <tr style="border: 2px solid black;">
-                        <th style="padding: 8px;text-align: left;"><h5>7. O.B.C. Seats</h5></th>
+                        <th style="padding: 8px;text-align: left;">7. O.B.C. Seats <input id="rdb1" type="radio" name="address_Radio" value="7" (click)="checkradio('O.B.C.')" /></th>
                         <td style="padding: 8px;text-align: left;">
-                            <h5>{{listdata?.intake.OBC_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="7" (click)="checkradio('O.B.C.')" />
+                            {{listdata?.intake.OBC_seats}}
                         </td>
                     </tr>
                     <tr style="border: 2px solid black;">
-                        <th style="padding: 8px;text-align: left;"><h5>8. GENERAL Seats</h5></th>
+                        <th style="padding: 8px;text-align: left;">8. GENERAL Seats <input id="rdb1" type="radio" name="address_Radio" value="8" (click)="checkradio('GENERAL')" /></th>
                         <td style="padding: 8px;text-align: left;">
-                            <h5>{{listdata?.intake.GENERAL_seats}}</h5><input id="rdb1" type="radio" name="address_Radio" value="8" (click)="checkradio('GENERAL')" />
+                            {{listdata?.intake.GENERAL_seats}}
                         </td>
                     </tr>
                 </tbody>
@@ -131,7 +131,6 @@ constructor(protected ref: NbDialogRef<SeatAllocationDialogComponent>,
 ) {
     this.authService.onTokenChange()
     .subscribe((token: NbAuthJWTToken) => {
-      console.log("token.getPayload()['role']"+token.getPayload()['role']);
       if(token.getPayload()['role'] !="admin"){
         this.router.navigate(['auth/logout'])
       }

@@ -81,7 +81,6 @@ export class FirstSuccessComponent  {
   }
 
   async pdfChallan(){
-    console.log('pdfChallan');
     var generatereceipt = await this.api.OnlinePaymentChallan('1',this.data.storage.transaction_id,this.data.storage.payment_amount,this.data.storage.payment_status,this.data.storage.application_id,this.data.storage.payment_date_time,this.data.storage.enrollment_no,this.data.storage.user_id);
     generatereceipt.subscribe(
       data => {

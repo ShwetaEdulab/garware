@@ -119,7 +119,6 @@ constructor(protected ref: NbDialogRef<uploadreceiptdialog>,
        this.showclose = 0
       };
     }
-    console.log('upload completed ...');
   }
 
   mySelect(event){

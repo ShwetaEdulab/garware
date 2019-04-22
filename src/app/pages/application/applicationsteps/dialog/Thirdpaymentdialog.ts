@@ -118,7 +118,6 @@ constructor(protected ref: NbDialogRef<Thirdpaymentdialog>,
     this.applicationId = this.route.snapshot.queryParamMap.get('appId');
     this.courseID = this.route.snapshot.queryParamMap.get('courseID');
     this.amount = this.title;
-    console.log('this.amount=========>'+this.amount);
     //console.log('this.applicationId====>'+this.applicationId+'@@@@@@@@@this.courseID===========>'+this.courseID);
     var thirdpayment = await this.api.thirdpaymentrequest(this.applicationId,this.courseID,this.amount)
     thirdpayment.subscribe(

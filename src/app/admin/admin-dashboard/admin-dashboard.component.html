@@ -197,6 +197,30 @@
 				</div>
 			<pagination-controls (pageChange)="p = $event" *ngIf="show == true"></pagination-controls>			
 			</p-tabPanel>
+			<p-tabPanel header="Email Tracker" [selected]="i == 5">
+				<div [nbSpinner]="loadingbutton" nbSpinnerStatus="primary">
+					<h3>Email Tracker</h3>
+					<mat-form-field>
+						<input matInput [matDatepicker]="picker" placeholder="Choose a month and year" [formControl]="date">
+						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+						<mat-datepicker #picker (monthSelected)="monthSelected($event)" startView="multi-year"></mat-datepicker>
+					</mat-form-field>
+					<p-chart  class="titleWrap" type="pie" [data]="email_pie" *ngIf = 'show_emailPie == 1'></p-chart>		
+				</div>
+			</p-tabPanel>
+			<p-tabPanel header="SMS Tracker" [selected]="i == 6">
+				<div [nbSpinner]="loadingbutton" nbSpinnerStatus="primary">
+					<h3>SMS Tracker</h3>
+					<br>
+					<h5 style="color: red">Note :- Data last updated on {{ yesterday }}-{{ month }}-{{ year }}  11:59:59</h5>
+					<mat-form-field>
+						<input matInput [matDatepicker]="picker1" placeholder="Choose a month and year" [formControl]="date">
+						<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+						<mat-datepicker #picker1 (monthSelected)="monthSelectedSMS($event)" startView="multi-year"></mat-datepicker>
+					</mat-form-field>
+					<p-chart  class="titleWrap" type="pie" [data]="sms_pie" *ngIf = 'show_smsPie == 1'></p-chart>		
+				</div>
+			</p-tabPanel>
 		</p-tabView>    
 	</nb-card-body>
 </nb-card>

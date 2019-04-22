@@ -30,7 +30,6 @@ export class AdminViewComponent {
     ) {
       this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
-        console.log("token.getPayload()['role']"+token.getPayload()['role']);
         if(token.getPayload()['role'] !="admin"){
           this.router.navigate(['auth/logout'])
         }

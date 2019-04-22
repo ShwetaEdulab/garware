@@ -66,10 +66,6 @@ export class NewTicketComponent implements OnInit {
       }
   
     send(){
-      console.log("this.subject====>"+this.subject)
-      console.log("this.content====>"+this.content)
-      console.log("this.group====>"+this.group)
-      console.log("this.owner====>"+this.owner)
       var response =  this.supportapi.createTicket(this.subject,this.content,this.group,this.owner);
       response.subscribe(
         data => {

@@ -134,7 +134,6 @@ import { SupportapiService } from '../../shared/supportapi.service';
                                 if(data['status'] == 200){
                                    // this.supportapi.registerUser(this.userEmail,this.userPassword,this.userPassword,this.userName,this.userEmail).subscribe( anydata => {
                                         this.user_id=data['data'];
-                                        console.log("this.user_id===== RegisterValues ========>"+this.user_id);
                                         this.loading = false;
                                         this.messagealertflag = 0;
                                         this.ref.close();

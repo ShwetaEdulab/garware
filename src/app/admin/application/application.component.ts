@@ -51,7 +51,6 @@ export class AdminApplicationComponent {
 ) {
   this.authService.onTokenChange()
     .subscribe((token: NbAuthJWTToken) => {
-      console.log("token.getPayload()['role']"+token.getPayload()['role']);
       if(token.getPayload()['role'] !="admin"){
         this.router.navigate(['auth/logout'])
       }
@@ -214,7 +213,6 @@ export class AdminApplicationComponent {
             if(data['status'] === 200){
               this.loading = false;
               //this.ngOnInit();
-              console.log("data['data']------->"+data['data']);
               this.adminApi.downloadFiles(data[`data`])
               .subscribe(data => {
                 saveAs(data, enrollment_no+'_hallticket.pdf');

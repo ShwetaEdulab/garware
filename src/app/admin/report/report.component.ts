@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { AdminApiService } from '../../shared/adminapi.service';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbThemeService } from '@nebular/theme';
 import { NbAuthJWTToken,NbAuthService } from '@nebular/auth';
+import { MatDatepicker } from '@angular/material';
 
 @Component({
   selector: 'report',
@@ -28,6 +29,16 @@ export class AdminReportComponent {
   selectedYear: any ='2019';
   emailActivityData : any;
   loadingbutton;
+  yesterday;
+  month;
+  year;
+  smsshow = 0;
+  smsActivityData: any;
+  p1: number = 1;
+  p2: number = 1;
+  p3: number = 1;
+  p4: number = 1;
+  p5: number = 1;
   constructor(
     protected adminApi : AdminApiService,
     private router : Router,
@@ -36,12 +47,34 @@ export class AdminReportComponent {
     ) {
       this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
-        console.log("token.getPayload()['role']"+token.getPayload()['role']);
         if(token.getPayload()['role'] !="admin"){
           this.router.navigate(['auth/logout'])
         }
       });
     
+  }
+
+  @ViewChild(MatDatepicker) picker;
+  date = new FormControl();
+
+  monthSelectedSMS(params) {
+    this.date.setValue(params);
+    this.picker.close();
+    this.smsshow = 0;
+    this.loadingbutton = true;
+    this.adminApi.getSMSActivityMonthWise(params).subscribe(data=> {
+      this.loadingbutton = false;
+      if(data['status'] == 200){
+        this.smsshow = 1
+        this.smsActivityData = data['data'];
+      }else if(data['status'] == 400){
+        this.smsshow = 0;
+       
+      }else{
+        this.smsshow = 0;
+      }
+      
+    });
   }
 
   ngOnInit(){
@@ -144,7 +177,6 @@ export class AdminReportComponent {
       this.loadingbutton = true;
       this.adminApi.getEmailTracker().subscribe(data =>{
         this.emailActivityData = data['data']['messages'];
-        console.log("this.emailActivityData========>"+JSON.stringify(this.emailActivityData));
         this.loadingbutton = false;
         this.filterText = "";
         this.filterPlaceholder = "Search";
@@ -155,7 +187,18 @@ export class AdminReportComponent {
           this.filterText = term;
         });
       });
+    }else if(index == 4){
+      this.tab_type = 'sms_activity';
+      var today = new Date();
+			var date = today.getDate() ;
+			var month = today.getMonth() + 1;
+			var year = today.getFullYear();
+			var yesterday = date - 1;
+			this.yesterday = yesterday;
+			this.month = month;
+			this.year = year;
     }
+
     // else if(index == 3){
     //   this.adminApi.firstPaymentChallanData().subscribe(data=> {
     //     this.firstPaymentChallanData = data['data'];

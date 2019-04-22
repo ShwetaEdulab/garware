@@ -987,7 +987,6 @@ export class ProfileComponent {
   }
 
   onFirstSubmit() {
-    console.log("this.firstForm.controls.maritalCtrl.value========>"+this.firstForm.controls.maritalCtrl.value);
     var check_validation;
     var validation_messages;
     var alternate_message_show;

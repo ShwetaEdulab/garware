@@ -45,8 +45,6 @@ export class InstituteApplicationComponent implements OnInit {
 
     if(this.tab_type === 'requested' ||   this.tab_type ==='accept' ||  this.tab_type === 'reject'){
       this.instituteApi.getApplication(this.tab_type).subscribe(data=>{
-        console.log("data['data']======>"+data['data']);
-        console.log("data['data']===========>"+JSON.stringify(data['data']));
         this.application_data = data['data'];
       })
       //   this.filterInput

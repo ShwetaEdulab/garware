@@ -17,7 +17,6 @@ export class SocketService {
     // }
     getMessage(){
       this.socket.on('messagefromserver',function(value){
-        console.log("value "+ JSON.stringify(value));
        // console.log("value name "+ value.name);
       });
       
@@ -36,7 +35,6 @@ export class SocketService {
     getvalue()
     {
       this.socket.on('profilevalue',function(value){
-        console.log("value "+ JSON.stringify(value));
         
        return value;
       });

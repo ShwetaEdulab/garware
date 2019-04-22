@@ -45,7 +45,7 @@
 					</thead>
 					<tbody>
 						<tr class="info" *ngFor="let application of application_data | filter:{application_date: filterText, student_name: filterText, student_city: filterText, country_name: filterText,degree: filterText,
-							course_name: filterText,specialization: filterText,college_name: filterText,duration: filterText,fees: filterText} | paginate: { itemsPerPage: 10, currentPage: p } ">
+							course_name: filterText,specialization: filterText,college_name: filterText,duration: filterText,fees: filterText} | paginate: { itemsPerPage: 10, currentPage: p1 ,id:'1'} ">
 							<td>{{application?.application_date}}</td>
 							<td>{{application?.student_name}}</td>
 							<td>{{application?.student_city}}</td>
@@ -66,7 +66,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<pagination-controls (pageChange)="p = $event"></pagination-controls>			
+				<pagination-controls (pageChange)="p1 = $event" id='1'></pagination-controls>			
 			</p-tabPanel>
 			<p-tabPanel header="Admission Acceptance">
 				<h3>Note : All accepted applications with payment done.</h3>
@@ -110,7 +110,7 @@
 					</thead>
 					<tbody>
 						<tr class="info" *ngFor="let application of application_data | filter:{application_date: filterText, student_name: filterText, student_city: filterText, country_name: filterText,degree: filterText,
-							course_name: filterText,specialization: filterText,college_name: filterText,duration: filterText,fees: filterText} | paginate: { itemsPerPage: 10, currentPage: p } ">
+							course_name: filterText,specialization: filterText,college_name: filterText,duration: filterText,fees: filterText} | paginate: { itemsPerPage: 10, currentPage: p2, id:'2' } ">
 							<td>{{application?.application_date}}</td>
 							<td>{{application?.student_name}}</td>
 							<td>{{application?.student_city}}</td>
@@ -132,7 +132,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<pagination-controls (pageChange)="p = $event"></pagination-controls>			
+				<pagination-controls (pageChange)="p2 = $event" id='2'></pagination-controls>			
 			</p-tabPanel>
 			<p-tabPanel header="Activity Tracker">
 				<h3>Note : All Activity.</h3>
@@ -154,7 +154,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="info" *ngFor="let activity of activity_data | filter:{created_at: filterText, username:filterText, action:filterText, data:filterText } | paginate: { itemsPerPage: 10, currentPage: p } ">
+						<tr class="info" *ngFor="let activity of activity_data | filter:{created_at: filterText, username:filterText, action:filterText, data:filterText } | paginate: { itemsPerPage: 10, currentPage: p3, id:'3' } ">
 							<td>{{activity?.created_at}}</td>
 							<td>{{activity?.username}}</td>
 							<td>{{activity?.action}}</td>
@@ -162,7 +162,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<pagination-controls (pageChange)="p = $event"></pagination-controls>
+				<pagination-controls (pageChange)="p3 = $event" id='3'></pagination-controls>
 			</p-tabPanel>
 			<p-tabPanel header="Email Activity">
 				<div [nbSpinner]="loadingbutton" nbSpinnerStatus="primary">
@@ -191,7 +191,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="info" *ngFor="let email of emailActivityData | filter:{to_email:filterText,subject:filterText,status:filterText,opens_count:filterText,clicks_count:filterText,last_event_time:filterText} | paginate: { itemsPerPage: 10, currentPage: p }">
+							<tr class="info" *ngFor="let email of emailActivityData | filter:{to_email:filterText,subject:filterText,status:filterText,opens_count:filterText,clicks_count:filterText,last_event_time:filterText} | paginate: { itemsPerPage: 10, currentPage: p4, id:'4' }">
 								<td>{{email.to_email}}</td>
 								<td>{{email.subject}}</td>
 								<td>{{email.status}}</td>
@@ -201,7 +201,52 @@
 							</tr>
 						</tbody>	
 					</table>
-					<pagination-controls (pageChange)="p = $event"></pagination-controls>	
+					<pagination-controls (pageChange)="p4 = $event" id='4'></pagination-controls>	
+				</div>
+			</p-tabPanel>
+			<p-tabPanel header="SMS Activity">
+				<div [nbSpinner]="loadingbutton" nbSpinnerStatus="primary">
+					<h3>SMS Activity</h3>
+					<br>
+					<h5 style="color: red">Note :- Data last updated on {{ yesterday }}-{{ month }}-{{ year }}  11:59:59</h5>
+					<mat-form-field>
+						<input matInput [matDatepicker]="picker" placeholder="Choose a month and year" [formControl]="date">
+						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+						<mat-datepicker #picker (monthSelected)="monthSelectedSMS($event)" startView="multi-year"></mat-datepicker>
+					</mat-form-field>
+					<div *ngIf="smsshow == 1">
+						<div class="col-md-8">
+							<mat-form-field class="example-full-width">
+								<input matInput  type="text" [value]="filterText"
+								[placeholder]="filterPlaceholder" [formControl]="filterInput" />
+								<button mat-button *ngIf="filterText" matSuffix mat-icon-button aria-label="Clear" (click)="filterText=''">
+									<mat-icon>close</mat-icon>
+								</button>
+							</mat-form-field>
+						</div>
+						<table class="table table-striped w-auto">
+							<thead>
+								<h5><b>Total Count:</b></h5>{{smsActivityData?.length}}
+								<tr>
+									<th>Mobile No.</th>
+									<th>Message</th>
+									<th>SentDate</th>
+									<th>Status</th>
+									<th>Error</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="info" *ngFor="let sms of smsActivityData | filter:{to:filterText,errorMessage:filterText,msg:filterText,date:filterText,status:filterText} | paginate: { itemsPerPage: 10, currentPage: p5, id:'5' }">
+									<td>{{sms.to}}</td>
+									<td>{{sms.body}}</td>
+									<td>{{sms.dateSent}}</td>
+									<td>{{sms.status}}</td>
+									<td>{{sms.errorMessage}}</td>
+								</tr>
+							</tbody>	
+						</table>
+						<pagination-controls (pageChange)="p5 = $event" id='5'></pagination-controls>
+					</div>
 				</div>
 			</p-tabPanel>
 			<!-- <p-tabPanel header="Student Statistics">

@@ -92,7 +92,7 @@ export class HeaderComponent implements OnInit {
         });
 
         this.socket.on('connect', function () {
-        console.log('connected to garwareadmin.admissiondesk.org'); 
+        //console.log('connected to garwareadmin.admissiondesk.org'); 
         });
 
         this.socket.emit('confirmation');
@@ -112,7 +112,6 @@ export class HeaderComponent implements OnInit {
 
 
   notify(){
-    console.log("notify");
     if(this.notification_no > 0){
       this.api.makeReadNotification(this.user.id)
       .subscribe(

@@ -41,7 +41,6 @@ export class ApplicationComponent  {
          
           this.status = data['status'];
           if(this.status == '400'){
-            console.error("status 400");
           }else if(this.status == '200'){
           this.applications =  data['data']['userApplications'];
           //console.log("this.applicationsthis.applications========>"+JSON.stringify(this.applications));

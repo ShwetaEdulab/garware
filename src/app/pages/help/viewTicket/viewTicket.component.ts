@@ -84,7 +84,6 @@ export class ViewTicketComponent{
     }
 
     changeStatus(event){
-      console.log(event.value);
       var response =  this.supportapi.updateStatus(this.ticketData.ticket_id,event.value);
         response.subscribe(
         data => {

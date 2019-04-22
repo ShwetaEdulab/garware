@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
   }
 
   onContecxtItemSelection(title) {
-    console.log("menu "+ title);
     if(title == 'Light'){
       this.themeService.changeTheme('default'); 
       this.api.setTheme('default')

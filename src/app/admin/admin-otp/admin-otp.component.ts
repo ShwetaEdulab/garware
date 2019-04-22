@@ -21,7 +21,6 @@ export class AdminOtpComponent {
   ) {
       this.authService.onTokenChange()
 				.subscribe((token: NbAuthJWTToken) => {
-					console.log("token.getPayload()['role']"+token.getPayload()['role']);
 					if(token.getPayload()['role'] !="admin"){
 						this.router.navigate(['auth/logout'])
 					}
@@ -29,7 +28,6 @@ export class AdminOtpComponent {
      }
 
   ngOnInit() {
-    console.log("COMIG here in OTP Modal");
     this.adminApi.sendOtp().subscribe(data=>{
       if(data['status'] == 200){
         this.otp = data['data']

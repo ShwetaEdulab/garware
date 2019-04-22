@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdminApiService } from '../../shared/adminapi.service';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbAuthJWTToken,NbAuthService } from '@nebular/auth';
+import { MatDatepicker } from '@angular/material';
 @Component({
   selector: 'ngx-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -33,7 +34,20 @@ export class AdminDashboardComponent implements OnInit {
 	length ;
 	Count: any;
 	selectedYear ='2019';
-    constructor(	
+	//SMS
+	show_emailPie;
+	@ViewChild(MatDatepicker) picker;
+	@ViewChild(MatDatepicker) picker1;
+	date = new FormControl();
+	loadingbutton;
+	email_pie: { labels: string[]; datasets: { data: number[]; backgroundColor: string[]; hoverBackgroundColor: string[]; }[]; };
+	show_smsPie;
+	sms_pie: { labels: string[]; datasets: { data: number[]; backgroundColor: string[]; hoverBackgroundColor: string[]; }[]; };	
+	i: any;
+	yesterday;
+	month;
+	year;
+	constructor(	
 	  protected adminApi : AdminApiService,
 		private router : Router,
 		private authService : NbAuthService,
@@ -45,7 +59,67 @@ export class AdminDashboardComponent implements OnInit {
 					}
 				});
         
-    }
+		}
+		
+		monthSelected(params) {
+			this.show_emailPie = 0;
+			this.date.setValue(params);
+			this.picker.close();
+			this.loadingbutton = true;
+			this.adminApi.getEmailActivityTrackerMonthWise(params).subscribe(data =>{
+				this.loadingbutton = false;
+				this.show_emailPie = 1;
+				this.email_pie = {
+					labels: ['Emails Opened :- '+data['open_count'],'Emails Not Opened :- '+data['not_open']],
+					datasets: [
+							{
+									data: [	data['open_count'], data['not_open'] 	],
+									backgroundColor: [
+										"#88C443",
+										"#F3354C"
+									],
+									hoverBackgroundColor: [
+										"#FFCE56",
+										"#FF6384"
+									]
+							}]    
+					};
+			});
+		}
+
+		monthSelectedSMS(params) {
+			this.show_smsPie = 0;
+			this.date.setValue(params);
+			this.picker1.close();
+			this.loadingbutton = true;
+			this.adminApi.getSMSTrackerMonthWise(params).subscribe(data =>{
+				this.loadingbutton = false;
+				this.show_smsPie = 1;
+				this.sms_pie = {
+					labels: ['delivered :- '+data['delivered'],'undelivered :- '+data['undelivered'],'sent :- '+data['sent'],'failed :- '+data['failed'],'queued :- '+data['queued'],'received :- '+data['received']],
+					datasets: [
+							{
+									data: [	data['delivered'], data['undelivered'],data['sent'], data['failed'],data['queued'], data['received'] 	],
+									backgroundColor: [
+										"#88C443",
+										"#F3354C",
+										"#14BAEB",
+										"#2e9e73",
+										"#d35ce0",
+										"#ebaa14"
+									],
+									hoverBackgroundColor: [
+										"#FFCE56",
+										"#FF6384",
+										"#36A2EB",
+										"#3a5b3c",
+										"#de8be8",
+										"#f4ee7f"
+									]
+							}]    
+					};
+			});
+		}
 
   	ngOnInit() {
     	this.filterText = "";
@@ -160,6 +234,22 @@ export class AdminDashboardComponent implements OnInit {
           this.length = 0;
         }
 			})
+		}else if(index == 5){
+			this.tab_type = "email_tracker";
+			this.loadingbutton = true;
+			this.adminApi.getEmailActivityTracker().subscribe(data =>{
+				this.loadingbutton = false;
+			});
+		}else if(index == 6){
+			this.tab_type = "sms_tracker";
+			var today = new Date();
+			var date = today.getDate() ;
+			var month = today.getMonth() + 1;
+			var year = today.getFullYear();
+			var yesterday = date - 1;
+			this.yesterday = yesterday;
+			this.month = month;
+			this.year = year;
 		}
 
 		if(this.tab_type === 'admission' ||   this.tab_type ==='institute'){

@@ -51,7 +51,7 @@ import { SharedModule } from '../../pages/shared-authpipe.module';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
+import { MatDatepickerModule , MatNativeDateModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -93,6 +93,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     NbRadioModule ,
     NbDialogModule,
     NbCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   declarations: [AdminDashboardComponent],
   

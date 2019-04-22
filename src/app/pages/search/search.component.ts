@@ -72,7 +72,6 @@ export class SearchComponent  {
       .debounceTime(200)
       .subscribe(term => {
         this.filterText = term;
-        console.log(term);
       });
 
     });   
@@ -194,7 +193,6 @@ openQuickApply(){
 }
 
 redirectToPeers(college_id,id){
-  console.log("id========>"+id);
   this.router.navigate(['pages/peers'],{queryParams:{college_id:college_id,cour_id:id}}); 
  }
 }

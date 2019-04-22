@@ -72,6 +72,44 @@ getEmailTracker(){
   }
 }
 
+getSMSTrackerMonthWise(params){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/admin_api/Dashboard/getSMSTrackerMonthWise`,{
+      yearMonth : params,          
+    });
+  } catch(error) {
+      this.handleError("getSMSTrackerMonthWise : "+JSON.stringify(error));
+  }
+}
+
+getSMSActivityMonthWise(params){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/admin_api/report/getSMSActivityMonthWise`,{
+      yearMonth : params, 
+    });
+  }catch(error) {
+      this.handleError("getSMSActivityMonthWise : "+JSON.stringify(error));
+  }
+}
+
+getEmailActivityTrackerMonthWise(params){
+  try{
+    return this.httpClient.post(`${this.baseUrl}/admin_api/Dashboard/getEmailActivityTrackerMonthWise`,{
+      yearMonth : params,          
+    });
+  } catch(error) {
+      this.handleError("getEmailActivityTrackerMonthWise : "+JSON.stringify(error));
+  }
+}
+
+getEmailActivityTracker(){
+  try{
+    return this.httpClient.get(`${this.baseUrl}/admin_api/Dashboard/getEmailActivityTracker`);
+  }catch(error) {
+    this.handleError("getEmailActivityTracker : "+JSON.stringify(error));
+  }
+}
+
 getICCRApplicationinEligibility(status){
   try{
       return this.httpClient.get(`${this.baseUrl}/admin_api/iccr/iccr_elgibility?tab=`+status);

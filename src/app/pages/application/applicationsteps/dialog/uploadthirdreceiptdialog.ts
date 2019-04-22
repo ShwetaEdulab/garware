@@ -77,7 +77,6 @@ constructor(protected ref: NbDialogRef<uploadthirdreceiptdialog>,
     if (this.ThirdUploadForm.invalid) {
       return;
     }else{
-      console.log('in success');
       this.ref.close(value);
     }
     
@@ -116,7 +115,6 @@ constructor(protected ref: NbDialogRef<uploadthirdreceiptdialog>,
        this.showclose = 0
       };
     }
-    console.log('upload completed ...');
   }
 
   mySelect(event){

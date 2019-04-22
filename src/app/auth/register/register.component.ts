@@ -157,7 +157,6 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
 		}
 	}
     onSubmit(duration,status){
-		console.log("form error========>"+JSON.stringify(this.RegisterForm.value))					
 		var check_validation;
     this.RegisterForm.controls.genderCtrl.markAsDirty();     
 		this.RegisterForm.controls.emailCtrl.markAsDirty();
@@ -186,7 +185,6 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
 					  );	
 				}			
 			}else{
-				console.log("form error========>"+JSON.stringify(this.RegisterForm.value))					
 				check_validation = false;
 				this.alertflag = 1;
 				this.validation_messages =  "Fill in the all required details !";
