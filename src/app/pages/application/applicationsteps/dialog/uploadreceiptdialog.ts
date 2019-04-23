@@ -75,14 +75,7 @@ constructor(protected ref: NbDialogRef<uploadreceiptdialog>,
   get s() { return this.SecondUploadForm.controls; }
 
   dismiss(value) {
-  this.secondsubmitted = true;
-  if (this.SecondUploadForm.invalid) {
-    return;
-  }else{
-    //console.log('in success');
     this.ref.close(value);
-  }
-  
   }
 
   closepop(){
@@ -94,7 +87,6 @@ constructor(protected ref: NbDialogRef<uploadreceiptdialog>,
     this.userService.onUserChange()
     .subscribe(
       (user: any) => {
-
         this.userId = user['id'];
       });
   }
@@ -116,17 +108,13 @@ constructor(protected ref: NbDialogRef<uploadreceiptdialog>,
         dynamicController.patchValue({
           file: reader.result
        });
+       this.ref.close();
        this.showclose = 0
       };
     }
   }
 
   mySelect(event){
-    
   }
-
-
-
-
   
 }

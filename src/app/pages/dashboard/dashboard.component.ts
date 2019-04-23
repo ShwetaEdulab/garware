@@ -68,7 +68,6 @@ export class DashboardComponent {
 
     this.authService.onTokenChange()
     .subscribe((token: NbAuthJWTToken) => {
-      //console.log("token.getPayload()['role']==========>"+token.getPayload()['role']);
         if(token.getPayload()['role'] == "admin"){
           this.router.navigate(['auth/adminOtp'])
         }
@@ -103,55 +102,55 @@ export class DashboardComponent {
           this.length = data['length'];
           if(this.length == 1){
             this.ucaFlag = true;
-        
-          this.applicationID = this.application.id;
-          this.courseID = this.application.course_id;
-          if(this.application.provisional_letter_exists == true){
+            this.applicationID = this.application.id;
+            this.courseID = this.application.course_id;
             setTimeout(() => {
               this.setOrientation();
-              this.stepper.selectedIndex = 2;
+              this.stepper.selectedIndex = 1;
             },1000);
-          }
-          if(this.application.visa_document_exists == true){
-            setTimeout(() => {
-              this.setOrientation();
-              this.stepper.selectedIndex = 3;
-            },1000);
-          }
-          if(this.application.collegeName){
-            setTimeout(() => {
-              this.setOrientation();
-              this.stepper.selectedIndex = 4;
-            },1000);
-          }
-          if(this.application.final_letter_exists == true){
-            setTimeout(() => {
-              this.setOrientation();
-              this.stepper.selectedIndex = 5;
-            },1000);
-          }
-          }else if(this.length > 1 ){
-          this.ucaFlag = true;
-          
-          this.applicationData = data['data'];
-          setTimeout(() => {
-            this.setOrientation();
-            this.stepper.selectedIndex = 1;
-          },1000);
-          this.applicationData.forEach(element => {
-            if(element.status == "accept"){
-              this.status = true;
+            if(this.application.online_test_details == true){
+              setTimeout(() => {
+                this.setOrientation();
+                this.stepper.selectedIndex = 2;
+              },1000);
             }
-          });
+            if(this.application.pi_test_details == true){
+              setTimeout(() => {
+                this.setOrientation();
+                this.stepper.selectedIndex = 3;
+              },1000);
+            }
+            if(this.application.exam_result == true){
+              setTimeout(() => {
+                this.setOrientation();
+                this.stepper.selectedIndex = 4;
+              },1000);
+            }
+            if(this.application.paidfee == true){
+              setTimeout(() => {
+                this.setOrientation();
+                this.stepper.selectedIndex = 5;
+              },1000);
+            }
+          }else if(this.length > 1 ){
+            this.ucaFlag = true;
+            this.applicationData = data['data'];
+            setTimeout(() => {
+              this.setOrientation();
+              this.stepper.selectedIndex = 1;
+            },1000);
+            this.applicationData.forEach(element => {
+              if(element.status == "accept"){
+                this.status = true;
+              }
+            });
           }
 
         });
-
       }else if(this.user.role == 'institute'){
         var applications = await  this.instituteApi.getDashboardData();
         applications.subscribe(data =>{
         this.coursedata = data['data']['courses'];
-        //console.log("data['data']['courses']================>"+data['data']['courses'].length)
         });
 
         this.filterInput
@@ -186,16 +185,16 @@ export class DashboardComponent {
       if(this.length > 0){
         this.stepper.selectedIndex = 1;
       }
-      if(this.application.provisional_letter_exists == true){
+      if(this.application.online_test_details == true){
         this.stepper.selectedIndex = 2;
       }
-      if(this.application.visa_document_exists == true){
+      if(this.application.pi_test_details == true){
         this.stepper.selectedIndex = 3;
       }
-      if(this.application.collegeName){
+      if(this.application.exam_result == true){
         this.stepper.selectedIndex = 4;
       }
-      if(this.application.final_letter_exists == true){
+      if(this.application.paidfee == true){
         this.stepper.selectedIndex = 5;
       }
     });
@@ -220,34 +219,38 @@ export class DashboardComponent {
         this.timer();
       }
     }else if(this.stepper.selectedIndex == 2){
-      if(this.application.provisional_letter_exists == true){
+      if(this.application.online_test_details == true){
         this.router.navigate(['pages/application/process'],{queryParams:{appId :this.applicationID,courseID:this.courseID,selectedIndex:0}});
       }else{
-        this.message = "Provisional Letter is not genearated yet";
+        this.message = "Your Online entrance test is not scheduled.";
         this.alertFlag = 1;
         this.timer();
       }
     }else if(this.stepper.selectedIndex == 3 ){
-      if(this.application.visa_document_exists == true){
-        this.router.navigate(['pages/application/process'],{queryParams:{appId :this.applicationID,courseID:this.courseID,selectedIndex:2}});
+      if(this.application.pi_test_details == true){
+        this.router.navigate(['pages/application/process'],{queryParams:{appId :this.applicationID,courseID:this.courseID,selectedIndex:1}});
       }else{
-        this.message = "Upload your Visa";
+        this.message = "Your Personal Interview is not scheduled.";
         this.alertFlag = 1;
         this.timer();
       }
     }else if(this.stepper.selectedIndex == 4){
-      if(this.application.collegeName){
-        this.router.navigate(['pages/application/process'],{queryParams:{appId :this.applicationID,courseID:this.courseID,selectedIndex:3}});
+      if(this.application.exam_result == true){
+        this.router.navigate(['pages/application/process'],{queryParams:{appId :this.applicationID,courseID:this.courseID,selectedIndex:2}});
       }else{
-        this.message = "College is not assigned yet";
+        this.message = "Your Merit List is not yet out.";
         this.alertFlag = 1;
         this.timer();
       }
     }else if(this.stepper.selectedIndex == 5){
-      if(this.application.final_letter_exists == true){
-        this.router.navigate(['pages/application/process'],{queryParams:{appId :this.applicationID,courseID:this.courseID,selectedIndex:4}});
+      if(this.application.exam_result == true && this.application.paidfee == false){
+        this.router.navigate(['pages/application/process'],{queryParams:{appId :this.applicationID,courseID:this.courseID,selectedIndex:3}});
+      }else if(this.application.paidfee == true){
+        this.message = "You have already paid amount. You have to upload receipt.";
+        this.alertFlag = 1;
+        this.timer();
       }else{
-        this.message = "Final letter is not generated yet";
+        this.message = "You can not pay fees until the result will be out.";
         this.alertFlag = 1;
         this.timer();
       }

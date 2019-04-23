@@ -14,6 +14,7 @@ import { uploadreceiptdialog } from './dialog/uploadreceiptdialog';
 import { uploadthirdreceiptdialog } from './dialog/uploadthirdreceiptdialog';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../../shared-authpipe.module';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 //import { AuthPipe } from '../../../pipe/auth-pipe.pipe';
 
 @NgModule({
@@ -37,7 +38,7 @@ import { SharedModule } from '../../shared-authpipe.module';
     ReactiveFormsModule,
     NgbModalModule,
     NbDialogModule.forRoot(),
-    
+    ConfirmDialogModule,
   ],
   declarations: [
     ApplicationStepsComponent,

@@ -13,13 +13,14 @@ import { uploadreceiptdialog } from './dialog/uploadreceiptdialog';
 import { uploadthirdreceiptdialog } from './dialog/uploadthirdreceiptdialog';
 import { config } from '../../../../../config';
 import { HeaderComponent } from '../../../@theme/components/header/header.component';
+import {ConfirmationService} from 'primeng/api';
 
 
 @Component({
   selector: 'applicationsteps',
   styleUrls: ['./applicationsteps.component.scss'],
   templateUrl: './applicationsteps.component.html',
-  providers:[HeaderComponent],
+  providers:[HeaderComponent,ConfirmationService],
 })
 export class ApplicationStepsComponent implements OnInit {
   @ViewChild('stepper') stepper: NbStepperComponent;
@@ -32,16 +33,24 @@ export class ApplicationStepsComponent implements OnInit {
   OnlineEntranceForm : FormGroup;
   PersonalInterviewForm : FormGroup;
   MarksForm : FormGroup;
+  CoursePayForm : FormGroup;
   min: Date;
   max: Date;
   OnlinePersonaldetails: any;
   tabcheck1;
   tabcheck2;
   tabcheck3;
+  tabcheck4;
   Marksdetails: any;
   loading = false;
   alertflag = 0;
   message;
+  application_status_value;
+  user_data: any;
+  amount: any;
+  course_name: any;
+  upload_location;
+  amountpay: any;
   
   // specialization;
   // letter;
@@ -136,6 +145,7 @@ export class ApplicationStepsComponent implements OnInit {
     private userService: UserService,
     private dialogService: NbDialogService,
     private comp: HeaderComponent,
+    private confirmationService: ConfirmationService,
   ) {
     this.min = this.dateService.today();
     this.max = this.dateService.today();
@@ -162,28 +172,30 @@ export class ApplicationStepsComponent implements OnInit {
     });
     this.OnlinePersonalTest();
     this.marksDetail();
+    this.secondpayment();
     var checkTabs = this.api.myApplicationCheckTabs(this.applicationId)
     .subscribe(
     (data: any) => {
       this.tabcheck1 = data.data.tab1;
 			this.tabcheck2 = data.data.tab2;
       this.tabcheck3 = data.data.tab3;
+      this.tabcheck4 = data.data.tab4;
       if(data.data.tab1 == false){
 				setTimeout(()=>{
-					this.checktabs(0,this.tabcheck1,this.tabcheck2,this.tabcheck3);
+					this.checktabs(0,this.tabcheck1,this.tabcheck2,this.tabcheck3,this.tabcheck4);
 				  },1500);
 			}else if(data.data.tab2 == false){
 				setTimeout(()=>{
-					this.checktabs(1,this.tabcheck1,this.tabcheck2,this.tabcheck3);
+					this.checktabs(1,this.tabcheck1,this.tabcheck2,this.tabcheck3,this.tabcheck4);
 				  },1500);
 			}else if(data.data.tab3 == false){
 				setTimeout(()=>{
-					this.checktabs(2,this.tabcheck1,this.tabcheck2,this.tabcheck3);
+					this.checktabs(2,this.tabcheck1,this.tabcheck2,this.tabcheck3,this.tabcheck4);
 				  },1500);
-			}else if(data.data.tab1 && data.data.tab2 && data.data.tab3){
+      }else if(data.data.tab4 == false){
         setTimeout(()=>{
-					this.checktabs(11,this.tabcheck1,this.tabcheck2,this.tabcheck3);
-				},1500);
+					this.checktabs(3,this.tabcheck1,this.tabcheck2,this.tabcheck3,this.tabcheck4);
+				  },1500);
       }
     });
   }
@@ -194,15 +206,31 @@ export class ApplicationStepsComponent implements OnInit {
       testTimeCtrl : ['', Validators.required],
       PersonalExamCtrl : ['', Validators.required],
     });
-    this.PersonalInterviewForm= this.formBuilder.group({
+    this.PersonalInterviewForm = this.formBuilder.group({
       interviewDateCtrl : ['', Validators.required],
       interviewTimeCtrl : ['', Validators.required],
       MarksExamCtrl : ['', Validators.required],
+    });
+    this.CoursePayForm = this.formBuilder.group({
+      examStatusCtrl : ['', Validators.required],
+      stuNameCtrl : ['', Validators.required],
+      stuAddCtrl: ['', Validators.required],
+      stuCityCtrl: ['', Validators.required],
+      stuStateCtrl: ['', Validators.required],
+      stuZipCtrl: ['', Validators.required],
+      stuTelCtrl: ['', Validators.required],
+      stuEmailCtrl: ['', Validators.required],
+      stuAmountCtrl: ['', Validators.required],
     });
     this.api.getenrollmentdetails('onlinedetail',this.route.snapshot.queryParamMap.get('appId'))
     .subscribe(
       (data: any) => {
         this.OnlinePersonaldetails = data['data'];
+        if(this.OnlinePersonaldetails.application_status=="accept"){
+          this.application_status_value = this.OnlinePersonaldetails.application_status;
+        }else{
+          this.application_status_value = null;
+        }
       },
       error => {
         console.error("Error", error);
@@ -213,6 +241,7 @@ export class ApplicationStepsComponent implements OnInit {
   private marksDetail() : void{
     this.MarksForm = this.formBuilder.group({
       totalMarksCtrl : ['', Validators.required],
+      examStatusInMarkCtrl: ['', Validators.required],
     });
     this.api.getenrollmentdetails('marksdetail',this.route.snapshot.queryParamMap.get('appId'))
     .subscribe(
@@ -225,6 +254,49 @@ export class ApplicationStepsComponent implements OnInit {
     );
   }
 
+  private secondpayment(){
+    this.api.getenrollmentdetails('second_payment',this.route.snapshot.queryParamMap.get('appId'))
+      .subscribe(
+        (data: any) => {  
+          this.user_data =  data['data']['user'];
+          this.amount = data['data']['fees'];
+          this.course_name = data['data']['specialization'];
+          this.upload_location = data['data']['upload_challan_location'];
+          this.amountpay = data['data']['amountpay']; 
+          err => console.log(err)
+      });
+  }
+
+
+  
+  async paysecondpayment(){
+    this.applicationId = this.route.snapshot.queryParamMap.get('appId');
+    this.courseID = this.route.snapshot.queryParamMap.get('courseID');
+    this.confirmationService.confirm({
+      message: 'Are You Sure to want to proceed?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      rejectVisible:false,
+      acceptLabel :'OK',
+      accept: () => {
+        
+        this.api.secondpaymentrequest(this.applicationId,this.courseID)
+        .subscribe(
+          data => {
+            this.secondpayment();
+          },
+          error => {
+            console.log("Error", error);
+          }
+        ); 
+      },
+      reject: () => {
+        //this.ngOnInit();
+      }
+    })
+  }
+  
+
   examresult(result){
     if(result=='Pass'){
       this.dialogService.open(Secondpaymentdialog, {
@@ -234,7 +306,6 @@ export class ApplicationStepsComponent implements OnInit {
       }).onClose
       .subscribe(
         (data: any) => {
-         // this.marksDetail();
           err => console.error(err)
         })
     }else if(result=='Fail'){
@@ -253,7 +324,7 @@ export class ApplicationStepsComponent implements OnInit {
     this.alertflag = 0;		
   }
 
-  public checktabs(tab_index,tab1,tab2,tab3){
+  public checktabs(tab_index,tab1,tab2,tab3,tab4){
     if(this.OnlineEntranceForm.valid){
 			this.tabcheck1 = true;
 		}else{
@@ -270,6 +341,12 @@ export class ApplicationStepsComponent implements OnInit {
 			this.tabcheck3 = true;
 		}else{
 			this.tabcheck3 = false;
+    }
+
+    if(this.CoursePayForm.valid){
+      this.tabcheck4 = true;
+		}else{
+			this.tabcheck4 = false;
     }
     
      if(tab_index == 0){
@@ -312,9 +389,42 @@ export class ApplicationStepsComponent implements OnInit {
            this.stepper.selectedIndex = 1;
          }
        }	
-     }else if(tab_index == 11){
-      this.stepper.selectedIndex = 2;
-     }
+     }else if(tab_index == 3){
+      if(tab_index<4){
+        if(tab1 == false){
+          this.stepper.selectedIndex = 0;
+        }else if(tab2 == false){
+          this.stepper.selectedIndex = 0;
+        }else if(tab3 == false) {
+          this.stepper.selectedIndex = 1;
+        }else if(tab4 == false){
+          this.stepper.selectedIndex = 3;
+        }
+      }else{
+        if(tab2 == false){
+          this.stepper.selectedIndex = 0;
+        }else if(tab3 == false){
+          this.stepper.selectedIndex = 1;
+        }else if(tab4 == false){
+          this.stepper.selectedIndex = 3;
+        }
+      }	
+    }
+   }
+
+  uploadsecondpaymentreceipt(){
+    this.dialogService.open(uploadreceiptdialog, {
+        closeOnBackdropClick : false,
+        context: {
+        title: 'This is a title passed to the dialog component',
+        },
+    }).onClose
+    .subscribe(
+      (data: any) => {
+        this.secondpayment();
+        err => console.error(err)
+      })
+
    }
 
 
