@@ -268,6 +268,10 @@ export class ProfileComponent {
   eduerrortext: string;
   alertflagEducation :boolean = false;
   user_id: any;
+  result_date: any;
+  college_result_date: any;
+  diploma_result_date: any;
+  degree_result_date: any;
 
   constructor(private userService: UserService,
     private fb: FormBuilder,
@@ -438,7 +442,7 @@ export class ProfileComponent {
 			this.tabcheck2 = false;
 		}
 
-    //third form cbse,hsc, degree forms validation variable below 
+    //third form cbse,hsc, degree forms validation variable below
 		if(this.education_next_validation){
 			this.tabcheck3 = true;
 		}else{
@@ -809,10 +813,11 @@ export class ProfileComponent {
             this.cbse = data['data']['cbse'];
             this.cbse.university = data['data']['cbse']['university'];
             this.cbse.school_name = data['data']['cbse']['school_name'];
+            this.result_date = data['data']['result_date'];
           } else {
             this.cbse.university = '';
             this.cbse.school_name = '';
-            this.cbse.result_date = '';
+            this.result_date = '';
             this.cbse.school_marks = '';
           }
 
@@ -820,32 +825,35 @@ export class ProfileComponent {
             this.hsc = data['data']['hsc'];
             this.hsc.college_university = data['data']['hsc']['college_university'];
             this.hsc.college_name = data['data']['hsc']['college_name'];
+            this.college_result_date = data['data']['college_result_date'];
           } else {
             this.hsc.college_university = '';
             this.hsc.college_name = '';
-            this.hsc.college_result_date = '';
+            this.college_result_date = '';
             this.hsc.college_marks = '';
           }
 
           if (data['data']['diploma'] != null) {
             this.diploma = data['data']['diploma'];
             this.diploma.diploma_university = data['data']['diploma']['diploma_university'];
-            this.diploma.diploma_coll_name = data['data']['diploma']['diploma_coll_name'];             
+            this.diploma.diploma_coll_name = data['data']['diploma']['diploma_coll_name']; 
+            this.diploma_result_date = data['data']['diploma_result_date'];            
           } else {
             this.diploma.diploma_university = '';
             this.diploma.diploma_coll_name = '';
-            this.diploma.diploma_result_date = '';
+            this.diploma_result_date = '';
             this.diploma.diploma_marks = '';
           }
 
           if (data['data']['degree'] != null) {
             this.degree = data['data']['degree'];
             this.degree.degree_university = data['data']['degree']['degree_university'];
-            this.degree.degree_coll_name = data['data']['degree']['degree_coll_name'];    
+            this.degree.degree_coll_name = data['data']['degree']['degree_coll_name'];
+            this.degree_result_date = data['data']['degree_result_date'];  
           } else {
             this.degree.degree_university = '';
             this.degree.degree_coll_name = '';
-            this.degree.degree_result_date = '';
+            this.degree_result_date = '';
             this.degree.degree_marks = '';
           }
           //this.next_disable();
@@ -1438,7 +1446,15 @@ export class ProfileComponent {
   }
 
   onThirdSubmit() {
-    if(this.edudegreecheck == null || this.edudegreecheck == "Bachelor's" ){
+    const invalid = [];
+      const controls = this.thirdForm.controls;
+      for (const name in controls) {
+        if (controls[name].invalid) {
+            invalid.push(name);
+        }
+      }
+      //return invalid;
+    if(this.edudegreecheck == null || this.edudegreecheck == "Bachelor's" ||  this.edudegreecheck == "Under graduate diploma"){
       if(this.hsc.college_university == '' || this.hsc == null || this.cbse.university == '' || this.cbse == null){ 
         this.eduerrorflag = 1;
         this.eduerrortext = "Please fill all mandatory fields( hsc )";	
@@ -1446,12 +1462,19 @@ export class ProfileComponent {
         this.api.getcheckTabs().subscribe((data: any) => {
         });
       }
-    }else if(this.edudegreecheck == "Master\'s" || this.edudegreecheck == "Post graduate diplomas"){
+    }else if(this.edudegreecheck == "Master's" || this.edudegreecheck == "Post graduate diplomas"){
       if(this.hsc.college_university == '' || this.hsc == null  || this.degree.degree_university == '' || this.degree == null || this.cbse.university == '' || this.cbse == null){ 
         this.eduerrorflag = 1;
         this.eduerrortext = "Please fill all mandatory fields( hsc & degree )";
       }else if(this.hsc.college_university != '' || this.hsc != null || this.degree.degree_university != '' || this.degree != null || this.cbse.university != '' || this.cbse != null){ 
-        this.api.getcheckTabs().subscribe((data: any) => {
+        // this.api.getcheckTabs().subscribe((data: any) => {
+        // });
+        this.api.getProfileCompleteness()
+        .subscribe((user: any) =>{
+          if (user['data'] == 100) {
+          } else {
+            window.location.reload();
+          }
         });
       }
     }
@@ -1583,7 +1606,7 @@ export class ProfileComponent {
             if (data !== undefined) {
               this.cbse.university = data.sscUniversity;
               this.cbse.school_name = data.sscCollege;
-              this.cbse.result_date = data.sscResultDate;
+              this.result_date = data.sscResultDate;
               this.cbse.school_marks = data.sscMarks;
             }
             this.eduerrorflag = 0;
@@ -1600,7 +1623,7 @@ export class ProfileComponent {
 
               this.hsc.college_university = data.hscUniversity;
               this.hsc.college_name = data.hscCollege;
-              this.hsc.college_result_date = data.hscResultDate;
+              this.college_result_date = data.hscResultDate;
               this.hsc.college_marks = data.hscMarks;
             }
             this.eduerrorflag = 0;
@@ -1616,7 +1639,7 @@ export class ProfileComponent {
 
               this.diploma.diploma_university = data.diplomaUniversity;
               this.diploma.diploma_coll_name = data.diplomaCollege;
-              this.diploma.diploma_result_date = data.diplomaResultDate;
+              this.diploma_result_date = data.diplomaResultDate;
               this.diploma.diploma_marks = data.diplomaMarks;
             }
             this.eduerrorflag = 0;
@@ -1632,9 +1655,9 @@ export class ProfileComponent {
 
               this.degree.degree_university = data.degreeUniversity;
               this.degree.degree_coll_name = data.degreeCollege;
-              this.degree.degree_result_date = data.degreeResultDate;
+              this.degree_result_date = data.degreeResultDate;
               this.degree.degree_marks = data.degreeMarks;
-              this.buildForm5();
+              //this.buildForm5();
             }
             this.eduerrorflag = 0;
             //this.next_disable();
@@ -2001,7 +2024,7 @@ export class ProfileComponent {
 			});
 		}
 
-		if(value!=undefined && (extension!='jpg' && extension!='jpeg' && extension!='png' ) ) {
+		if(value!=undefined && (extension!='jpg' && extension!='jpeg' && extension!='png' && extension!='JPG' && extension!='JPEG' && extension!='PNG' ) ) {
 			this.confirmationService.confirm({
 				message: 'Please upload your transcript in .jpeg or .jpg or .png formats',
 				header: 'Invalid File Type',
@@ -2011,7 +2034,7 @@ export class ProfileComponent {
 			});
 		}
 
-		if(value==undefined && (extension!='jpg' && extension!='jpeg' && extension!='png' && extension!='pdf' )){
+		if(value==undefined && (extension!='jpg' && extension!='jpeg' && extension!='png' && extension!='pdf' && extension!='JPG' && extension!='JPEG' && extension!='PNG' && extension!='PDF' )){
 			this.confirmationService.confirm({
 				message: 'Please upload your transcript in .jpeg or .jpg or .png or .pdf formats',
 				header: 'Invalid File Type',

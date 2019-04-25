@@ -21,20 +21,8 @@ template: `
       <div class="col-md-9"> <input ngModel="{{diploma_marks?.diploma_university}}" nbInput type="text" [ngClass]="{'form-control-danger': diploma_form.controls.diplomaUniversityCtrl.invalid && (diploma_form.controls.diplomaUniversityCtrl.dirty || diploma_form.controls.diplomaUniversityCtrl.touched)}" formControlName="diplomaUniversityCtrl" placeholder="" id="" class="form-control"> </div><br>
       <div class="col-md-3">School/College Name : </div>
       <div class="col-md-9"> <input ngModel="{{diploma_marks?.diploma_coll_name}}" nbInput type="text"  [ngClass]="{'form-control-danger': diploma_form.controls.diplomaCollegeCtrl.invalid && (diploma_form.controls.diplomaCollegeCtrl.dirty || diploma_form.controls.diplomaCollegeCtrl.touched)}" formControlName="diplomaCollegeCtrl" placeholder="" id="" class="form-control"> </div><br>
-      <div class="col-md-12"> <button type='button' nbButton hero status="primary" (click)="open()">Find College</button></div>
       <div class="col-md-3">Address of School/College : </div>
       <div class="col-md-9"> <input ngModel="{{diploma_marks?.diploma_add}}" nbInput type="text"  [ngClass]="{'form-control-danger': diploma_form.controls.diplomaAddCtrl.invalid && (diploma_form.controls.diplomaAddCtrl.dirty || diploma_form.controls.diplomaAddCtrl.touched)}" formControlName="diplomaAddCtrl" placeholder="" id="" class="form-control"> </div><br>
-      <div class="col-md-3">School/College Country : </div>
-      <div class="col-md-9">
-      <mat-form-field>
-      <mat-select [(ngModel)]="diploma_country" name="selectedCountry" formControlName="diplomaCountryCtrl">
-        <mat-option *ngFor="let country of Countries" [value]="country.name">
-        {{country.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-      <span *ngIf="diplomaCountryValidation===false" style="color:red;">Please select country</span> 
-      </div><br>
       <div class="col-md-3">Email address : </div>
       <div class="col-md-9"> <input ngModel="{{diploma_marks?.diploma_email}}" nbInput type="text"  [ngClass]="{'form-control-danger': diploma_form.controls.diplomaEmailCtrl.invalid && (diploma_form.controls.diplomaEmailCtrl.dirty || diploma_form.controls.diplomaEmailCtrl.touched)}" formControlName="diplomaEmailCtrl" placeholder="" id="" class="form-control"> </div><br>
       <div class="col-md-3">URL : </div>
@@ -153,7 +141,6 @@ constructor(protected ref: NbDialogRef<ThirdDialogComponent>,
           diplomaNameCtrl: [ '' ,  Validators.required],
           diplomaUniversityCtrl: [ '' ,  Validators.required],
           diplomaCollegeCtrl: ['', Validators.required],
-          diplomaCountryCtrl: ['', Validators.required],
           diplomaAddCtrl:['',  Validators.required],
           diplomaEmailCtrl:  ['', [Validators.required,Validators.pattern(this.emailValidate)]], 
           diplomaUrlCtrl:['',  Validators.required],
@@ -197,7 +184,6 @@ constructor(protected ref: NbDialogRef<ThirdDialogComponent>,
         this.diploma_form.controls.diplomaNameCtrl.markAsDirty();
         this.diploma_form.controls.diplomaUniversityCtrl.markAsDirty();
         this.diploma_form.controls.diplomaCollegeCtrl.markAsDirty();
-        //this.diploma_form.controls.diplomaCountryCtrl.markAsDirty();
         this.diploma_form.controls.diplomaAddCtrl.markAsDirty();
         this.diploma_form.controls.diplomaEmailCtrl.markAsDirty();
         this.diploma_form.controls.diplomaUrlCtrl.markAsDirty();
@@ -222,23 +208,12 @@ constructor(protected ref: NbDialogRef<ThirdDialogComponent>,
         this.diploma_form.controls.outOfFourthDipCtrl.markAsDirty();
         
         this.diploma_form.controls.diplomaMarksCtrl.markAsDirty();
-
-        if(this.diploma_form.controls.diplomaCountryCtrl.value === null || this.diploma_form.controls.diplomaCountryCtrl.value ==='' || this.diploma_form.controls.diplomaCountryCtrl.value ===undefined){
-    
-          this.diplomaCountryValidation = false;
-          
-        }else {
-          
-          this.diplomaCountryValidation = true;
-          
-        }
         
       }else{
         var diploma_data ={
           diplomaName : this.diploma_form.controls.diplomaNameCtrl.value,
           diplomaUniversity : this.diploma_form.controls.diplomaUniversityCtrl.value,
           diplomaCollege : this.diploma_form.controls.diplomaCollegeCtrl.value,
-          diplomaCountry : this.diploma_form.controls.diplomaCountryCtrl.value,
           diplomaAdd : this.diploma_form.controls.diplomaAddCtrl.value,
           diplomaEmail : this.diploma_form.controls.diplomaEmailCtrl.value,
           diplomaUrl : this.diploma_form.controls.diplomaUrlCtrl.value,
@@ -294,7 +269,6 @@ constructor(protected ref: NbDialogRef<ThirdDialogComponent>,
         if(data!==undefined){
          this.diploma_form.controls['diplomaEmailCtrl'].setValue(data[0].school_email);
          this.diploma_form.controls['diplomaCollegeCtrl'].setValue(data[0].school_name);
-         this.diploma_form.controls['diplomaCountryCtrl'].setValue(data[0].school_country);
          this.diploma_form.controls['diplomaAddCtrl'].setValue(data[0].school_add);
          this.diploma_form.controls['diplomaUrlCtrl'].setValue(data[0].school_url);
         } 

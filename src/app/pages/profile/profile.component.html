@@ -36,7 +36,7 @@
       <h1>Your Profile Completeness</h1>
     </nb-card-header>
     <nb-card-body>
-      <nb-stepper orientation="vertical" disableStepNavigation #stepper>
+      <nb-stepper (click)="checktabs(stepper.selectedIndex)" orientation="vertical" disableStepNavigation #stepper>
         <nb-step [completed]="tabcheck1" [stepControl]="firstForm" label="1st step">
 
           <h3>Personal information <nb-action icon="ion-information" nbPopover="All the information asked in this and subsequent screen is a part of the final application for the university of your choice. Please add all the details as per your passport or any other identity proof. Press Save and Next to move to the next step in your application."></nb-action>
@@ -496,7 +496,7 @@
               <form [formGroup]="thirdForm" class="step-container">
                 <input type="hidden" ngModel="{{hsc?.college_university}}" id="hscUniversity" formControlName="hscUniversityCtrl">
                 <input type="hidden" ngModel="{{cbse?.university}}" id="cbseUniversity" formControlName="cbseUniversityCtrl">
-                <input type="hidden" ngModel="{{degree.degree_university}}" id="degreeUniversity" formControlName="degreeUniversityCtrl">
+                <input type="hidden" ngModel="{{degree?.degree_university}}" id="degreeUniversity" formControlName="degreeUniversityCtrl">
               </form>
             <table class="table">
               <thead>
@@ -515,7 +515,7 @@
                   <td>CBSE / ICSE / SSC Equivalent<span style="color:red;">*</span></td>
                   <td ngModel="{{cbse?.university}}" ngDefaultControl>{{cbse?.university}}</td>
                   <td ngModel="{{cbse?.school_name}}" ngDefaultControl>{{cbse?.school_name}}</td>
-                  <td ngModel="{{cbse?.result_date}}" ngDefaultControl>{{cbse?.result_date}}</td>
+                  <td ngModel="{{result_date}}" ngDefaultControl>{{result_date}}</td>
                   <td ngModel="{{cbse?.school_marks}}" ngDefaultControl>{{cbse?.school_marks}}</td>
                   <td><button nbButton (click)="open(1)">Edit</button></td>
                   <td><button nbButton (click)="delete_education_details('cbse')">Delete</button></td>
@@ -524,7 +524,7 @@
                   <td>HSC Equivalent <span style="color:red;">*</span></td>
                   <td ngModel="{{hsc?.college_university}}" ngDefaultControl>{{hsc?.college_university}}</td>
                   <td ngModel="{{hsc?.college_name}}" ngDefaultControl>{{hsc?.college_name}}</td>
-                  <td ngModel="{{hsc?.college_result_date}}" ngDefaultControl>{{hsc?.college_result_date}}</td>
+                  <td ngModel="{{college_result_date}}" ngDefaultControl>{{college_result_date}}</td>
                   <td ngModel="{{hsc?.college_marks}}" ngDefaultControl>{{hsc?.college_marks}}</td>
                   <td><button nbButton (click)="open(2)">Edit</button></td>
                   <td><button nbButton (click)="delete_education_details('hsc')">Delete</button></td>
@@ -533,7 +533,7 @@
                   <td>Diploma</td>
                   <td ngModel="{{diploma?.diploma_university}}" ngDefaultControl>{{diploma?.diploma_university}}</td>
                   <td ngModel="{{diploma?.diploma_coll_name}}" ngDefaultControl>{{diploma?.diploma_coll_name}}</td>
-                  <td ngModel="{{diploma?.diploma_result_date}}" ngDefaultControl>{{diploma?.diploma_result_date}}</td>
+                  <td ngModel="{{diploma_result_date}}" ngDefaultControl>{{diploma_result_date}}</td>
                   <td ngModel="{{diploma?.diploma_marks}}" ngDefaultControl>{{diploma?.diploma_marks}}</td>
                   <td><button nbButton (click)="open(3)">Edit</button></td>
                   <td><button nbButton (click)="delete_education_details('diploma')">Delete</button></td>
@@ -542,7 +542,7 @@
                   <td>Degree/PG</td>
                   <td ngModel="{{degree?.degree_university}}" ngDefaultControl>{{degree?.degree_university}}</td>
                   <td ngModel="{{degree?.degree_coll_name}}" ngDefaultControl>{{degree?.degree_coll_name}}</td>
-                  <td ngModel="{{degree?.degree_result_date}}" ngDefaultControl>{{degree?.degree_result_date}}</td>
+                  <td ngModel="{{degree_result_date}}" ngDefaultControl>{{degree_result_date}}</td>
                   <td ngModel="{{degree?.degree_marks}}" ngDefaultControl>{{degree?.degree_marks}}</td>
                   <td><button nbButton (click)="open(4)">Edit</button></td>
                   <td><button nbButton (click)="delete_education_details('degree')">Delete</button></td>

@@ -59,7 +59,6 @@ export class DashboardComponent {
       this.min = this.dateService.addMonth(this.dateService.today(), -1);
       this.max = this.dateService.addMonth(this.dateService.today(), 1);
       this.getScreenSize();
-      
     }
   
   async ngOnInit() {
@@ -243,13 +242,23 @@ export class DashboardComponent {
         this.timer();
       }
     }else if(this.stepper.selectedIndex == 5){
-      if(this.application.exam_result == true && this.application.paidfee == false){
-        this.router.navigate(['pages/application/process'],{queryParams:{appId :this.applicationID,courseID:this.courseID,selectedIndex:3}});
-      }else if(this.application.paidfee == true){
-        this.message = "You have already paid amount. You have to upload receipt.";
+      if(this.application.status=='accept'){
+        if(this.application.exam_result == true && this.application.paidfee == false){
+          this.router.navigate(['pages/application/process'],{queryParams:{appId :this.applicationID,courseID:this.courseID,selectedIndex:3}});
+        }else if(this.application.paidfee == true){
+          this.message = "You have already paid amount. You have to upload receipt.";
+          this.alertFlag = 1;
+          this.timer();
+        }else{
+          this.message = "You can not pay fees until the result will be out.";
+          this.alertFlag = 1;
+          this.timer();
+        }
+      }else if(this.application.status=='reject'){
+        this.message = "Your application is rejected.";
         this.alertFlag = 1;
         this.timer();
-      }else{
+      }else if(this.application.status=='new'){
         this.message = "You can not pay fees until the result will be out.";
         this.alertFlag = 1;
         this.timer();

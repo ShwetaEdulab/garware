@@ -408,8 +408,6 @@ getProfileCompleteness(){
  }
 
 
-
-
   setvisadetails(visa_no,visa_place,visa_issue,visa_expiry){
     try{
       return this.httpClient.post(`${this.baseUrl}/api/myApplication/visa_details`,{"visa_no":visa_no,"visa_place":visa_place,"visa_expiry":visa_expiry,"visa_issue":visa_issue});
@@ -743,6 +741,16 @@ getProfileCompleteness(){
   find_intake(courseid){
     try{
       return this.httpClient.post(`${this.baseUrl}/api/find_intake`,{"courseid":courseid});
+     }catch(error) {
+       this.handleError("find_intake : "+error);
+     }
+   }
+
+   //find_intake_new
+
+   find_intake_new(courseid){
+    try{
+      return this.httpClient.post(`${this.baseUrl}/api/find_intake_new`,{"courseid":courseid});
      }catch(error) {
        this.handleError("find_intake : "+error);
      }

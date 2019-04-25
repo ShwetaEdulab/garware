@@ -20,20 +20,8 @@ template: `
       <div class="col-md-9"> <input ngModel="{{cbse_marks?.university}}" nbInput type="text" [ngClass]="{'form-control-danger': ssc_form.controls.sscUniversityCtrl.invalid && (ssc_form.controls.sscUniversityCtrl.dirty || ssc_form.controls.sscUniversityCtrl.touched)}" formControlName="sscUniversityCtrl" placeholder="" id="" class="form-control"> </div><br>
       <div class="col-md-3">School/College Name : </div>
       <div class="col-md-9"> <input ngModel="{{cbse_marks?.school_name}}" nbInput type="text"  [ngClass]="{'form-control-danger': ssc_form.controls.sscCollegeCtrl.invalid && (ssc_form.controls.sscCollegeCtrl.dirty || ssc_form.controls.sscCollegeCtrl.touched)}" formControlName="sscCollegeCtrl" placeholder="" id="" class="form-control"> </div><br>
-      <div class="col-md-12"> <button type='button' nbButton hero status="primary" (click)="open()">Find School</button></div>
       <div class="col-md-3">Address of School/College : </div>
       <div class="col-md-9"> <input ngModel="{{cbse_marks?.school_add}}" nbInput type="text"  [ngClass]="{'form-control-danger': ssc_form.controls.sscAddCtrl.invalid && (ssc_form.controls.sscAddCtrl.dirty || ssc_form.controls.sscAddCtrl.touched)}" formControlName="sscAddCtrl" placeholder="" id="" class="form-control"> </div><br>
-      <div class="col-md-3">School/College Country : </div>
-      <div class="col-md-9">
-      <mat-form-field>
-        <mat-select [(ngModel)]="cbse_country" name="selectedCountry"   formControlName="sscCountryCtrl">
-          <mat-option *ngFor="let country of Countries" [value]="country.name">
-          {{country.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <span *ngIf="sscCountryValidation===false" style="color:red;">Please select country</span> 
-      </div><br>
       <div class="col-md-3">Email address : </div>
       <div class="col-md-9"> <input ngModel="{{cbse_marks?.school_email}}" nbInput type="text"  [ngClass]="{'form-control-danger': ssc_form.controls.sscEmailCtrl.invalid && (ssc_form.controls.sscEmailCtrl.dirty || ssc_form.controls.sscEmailCtrl.touched)}" formControlName="sscEmailCtrl" placeholder="" id="" class="form-control"> </div><br>
       <div class="col-md-3">URL : </div>
@@ -152,7 +140,6 @@ constructor(protected ref: NbDialogRef<FirstDialogComponent>,
           sscResultDateCtrl: [ '',  Validators.required],
           sscRollNoCtrl:['',  Validators.required],
           ssccertiNoCtrl:['',  Validators.required],
-          sscCountryCtrl:['',  Validators.required],
           sscMediumCtrl:['',  Validators.required],
           subjectFirstsscCtrl:['', Validators.required],
           markFirstsscCtrl:['',  Validators.required],
@@ -191,7 +178,6 @@ constructor(protected ref: NbDialogRef<FirstDialogComponent>,
         this.ssc_form.controls.sscAddCtrl.markAsDirty();
         this.ssc_form.controls.sscEmailCtrl.markAsDirty();
         this.ssc_form.controls.sscUrlCtrl.markAsDirty();
-        //this.ssc_form.controls.sscCountryCtrl.markAsDirty();
         this.ssc_form.controls.sscResultDateCtrl.markAsDirty();
         this.ssc_form.controls.sscRollNoCtrl.markAsDirty();
         this.ssc_form.controls.ssccertiNoCtrl.markAsDirty();
@@ -213,20 +199,11 @@ constructor(protected ref: NbDialogRef<FirstDialogComponent>,
         this.ssc_form.controls.outOfFourthsscCtrl.markAsDirty();
         
         this.ssc_form.controls.sscMarksCtrl.markAsDirty();
-        if(this.ssc_form.controls.sscCountryCtrl.value === null || this.ssc_form.controls.sscCountryCtrl.value ==='' || this.ssc_form.controls.sscCountryCtrl.value ===undefined){
-    
-          this.sscCountryValidation = false;
-          
-        }else {
-          
-          this.sscCountryValidation = true;
-          
-        }
      }else{
         var ssc_data ={
           sscUniversity : this.ssc_form.controls.sscUniversityCtrl.value,
           sscCollege : this.ssc_form.controls.sscCollegeCtrl.value,
-          sscCountry: this.ssc_form.controls.sscCountryCtrl.value,
+          sscCountry: '',
           sscAdd : this.ssc_form.controls.sscAddCtrl.value,
           sscEmail : this.ssc_form.controls.sscEmailCtrl.value,
           sscUrl : this.ssc_form.controls.sscUrlCtrl.value,
@@ -286,7 +263,6 @@ constructor(protected ref: NbDialogRef<FirstDialogComponent>,
           if(data!==undefined){
             this.ssc_form.controls['sscEmailCtrl'].setValue(data[0].school_email);
             this.ssc_form.controls['sscCollegeCtrl'].setValue(data[0].school_name);
-            this.ssc_form.controls['sscCountryCtrl'].setValue(data[0].school_country);
             this.ssc_form.controls['sscAddCtrl'].setValue(data[0].school_add);
             this.ssc_form.controls['sscUrlCtrl'].setValue(data[0].school_url);
           }

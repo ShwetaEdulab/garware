@@ -22,20 +22,8 @@ template: `
       <div class="col-md-9"> <input ngModel="{{degree_marks?.degree_university}}" name="univ_name_deg" nbInput type="text" [ngClass]="{'form-control-danger': degree_form.controls.degreeUniversityCtrl.invalid && (degree_form.controls.degreeUniversityCtrl.dirty || degree_form.controls.degreeUniversityCtrl.touched)}" placeholder="" formControlName="degreeUniversityCtrl" id="" class="form-control" > </div><br>
       <div class="col-md-3">School/College Name : </div>
       <div class="col-md-9"> <input ngModel="{{degree_marks?.degree_coll_name}}" name="college_name_deg" nbInput type="text" [ngClass]="{'form-control-danger': degree_form.controls.degreeCollegeCtrl.invalid && (degree_form.controls.degreeCollegeCtrl.dirty || degree_form.controls.degreeCollegeCtrl.touched)}" formControlName="degreeCollegeCtrl" placeholder="" id="" class="form-control"> </div><br>
-      <div class="col-md-12"> <button type='button' nbButton hero status="primary" (click)="open()">Find College</button></div>
       <div class="col-md-3">Address of School/College : </div>
       <div class="col-md-9"> <input ngModel="{{degree_marks?.degree_add}}" name="address_deg" nbInput type="text" [ngClass]="{'form-control-danger': degree_form.controls.degreeAddCtrl.invalid && (degree_form.controls.degreeAddCtrl.dirty || degree_form.controls.degreeAddCtrl.touched)}" formControlName="degreeAddCtrl" placeholder="" id="" class="form-control"> </div><br>
-      <div class="col-md-3">School/College Country : </div>
-      <div class="col-md-9">
-      <mat-form-field>
-        <mat-select [(ngModel)]="degree_country" name="selectedCountry" formControlName="degreeCountryCtrl">
-          <mat-option *ngFor="let country of Countries" [value]="country.name">
-          {{country.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <span *ngIf="degreeCountryValidation===false" style="color:red;">Please select country</span> 
-      </div><br>
       <div class="col-md-3">Email address : </div>
       <div class="col-md-9"> <input nbInput ngModel="{{degree_marks?.degree_email}}" name="email_deg" type="text" [ngClass]="{'form-control-danger': degree_form.controls.degreeEmailCtrl.invalid && (degree_form.controls.degreeEmailCtrl.dirty || degree_form.controls.degreeEmailCtrl.touched)}" formControlName="degreeEmailCtrl" placeholder="" id="" class="form-control"> </div><br>
       <div class="col-md-3">URL : </div>
@@ -137,7 +125,6 @@ constructor(protected ref: NbDialogRef<FourthDialogComponent>,
       this.degree_form.controls.degreeUniversityCtrl.markAsDirty();
       this.degree_form.controls.degreeCollegeCtrl.markAsDirty();
       this.degree_form.controls.degreeAddCtrl.markAsDirty();
-      // this.degree_form.controls.degreeCountryCtrl.markAsDirty();
       this.degree_form.controls.degreeEmailCtrl.markAsDirty();
       this.degree_form.controls.degreeUrlCtrl.markAsDirty();
       this.degree_form.controls.degreeResultDateCtrl.markAsDirty();
@@ -161,24 +148,12 @@ constructor(protected ref: NbDialogRef<FourthDialogComponent>,
       this.degree_form.controls.outOfFourthDegCtrl.markAsDirty();
       
       this.degree_form.controls.degreeMarksCtrl.markAsDirty();
-
-      if(this.degree_form.controls.degreeCountryCtrl.value === null || this.degree_form.controls.degreeCountryCtrl.value ==='' || this.degree_form.controls.degreeCountryCtrl.value ===undefined){
-    
-        this.degreeCountryValidation = false;
-        
-      }else {
-        
-        this.degreeCountryValidation = true;
-        
-      }
-      
     }else{
       
       var degreee_data ={
         degreeName : this.degree_form.controls.degreeNameCtrl.value,
         degreeUniversity : this.degree_form.controls.degreeUniversityCtrl.value,
         degreeCollege : this.degree_form.controls.degreeCollegeCtrl.value,
-        degreeCountry : this.degree_form.controls.degreeCountryCtrl.value,
         degreeAdd : this.degree_form.controls.degreeAddCtrl.value,
         degreeEmail : this.degree_form.controls.degreeEmailCtrl.value,
         degreeUrl : this.degree_form.controls.degreeUrlCtrl.value,
@@ -250,7 +225,6 @@ constructor(protected ref: NbDialogRef<FourthDialogComponent>,
           degreeNameCtrl: [ '' ,  Validators.required],
           degreeUniversityCtrl: [ '' ,  Validators.required],
           degreeCollegeCtrl: ['', Validators.required],
-          degreeCountryCtrl:['',  Validators.required],
           degreeAddCtrl:['',  Validators.required],
           degreeEmailCtrl:  ['', [Validators.required,Validators.pattern(this.emailValidate)]],  
           degreeUrlCtrl:['',  Validators.required],
@@ -293,7 +267,6 @@ constructor(protected ref: NbDialogRef<FourthDialogComponent>,
       if(data!==undefined){
         this.degree_form.controls['degreeEmailCtrl'].setValue(data[0].school_email);
         this.degree_form.controls['degreeCollegeCtrl'].setValue(data[0].school_name);
-        this.degree_form.controls['degreeCountryCtrl'].setValue(data[0].school_country);
         this.degree_form.controls['degreeAddCtrl'].setValue(data[0].school_add);
         this.degree_form.controls['degreeUrlCtrl'].setValue(data[0].school_url);
       }  

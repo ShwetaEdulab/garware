@@ -24,7 +24,9 @@
       <nb-alert status="danger" closable (close)="onClose()" *ngIf="alertflag == 1">
           You have already applied for this course!!!!
       </nb-alert>
-      
+      <nb-alert status="danger" closable (close)="onClose()" *ngIf="alertflag == 3">
+        This course is already in Cart. If you want to apply this course then go to cart and make the payment.
+      </nb-alert>
       <div class="row">
         <div class="col-md-12">
                <div class="row">
@@ -39,7 +41,7 @@
                           <div *ngFor= "let college of collegelist">
                               <nb-card status="primary">
                                   <nb-card-body>
-                                      <h4>{{college?.name}}</h4> <br><h3>{{college?.specialization}} </h3><br>
+                                      <h3>{{college?.specialization}} </h3><br>
                                       <div class="row">
                                             <div class="col-md-4">
                                             <img src="https://img.icons8.com/color/100/000000/property-time.png">

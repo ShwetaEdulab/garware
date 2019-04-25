@@ -198,9 +198,10 @@ export class CourseComponent {
         }
       }else if(data['status'] ==300){
         this.alertflag = 1;
-      
       }else if(data['status'] ==400){
-          this.alertflag = 2;
+        this.alertflag = 2;
+      }else if(data['status'] == 301){
+        this.alertflag = 3;
       }
       error => {
           console.error("Error in cart :", error);
@@ -209,8 +210,6 @@ export class CourseComponent {
     }
 
   redirectToPeers(college_id,id){
-    //console.log("id========>"+id);
-    //console.log("college_id========>"+college_id);
     this.router.navigate(['pages/peers'],{queryParams:{college_id:college_id,cour_id:id}}); 
   }
 

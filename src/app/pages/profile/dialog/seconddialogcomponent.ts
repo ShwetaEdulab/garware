@@ -39,20 +39,8 @@ import {
       <div class="col-md-9"> <input ngModel="{{hsc_marks?.college_university}}" nbInput type="text" [ngClass]="{'form-control-danger': hsc_form.controls.hscUniversityCtrl.invalid && (hsc_form.controls.hscUniversityCtrl.dirty || hsc_form.controls.hscUniversityCtrl.touched)}" formControlName="hscUniversityCtrl" placeholder="" id="" class="form-control"> </div><br>
       <div class="col-md-3">School/College Name : </div>
       <div class="col-md-9"> <input ngModel="{{hsc_marks?.college_name}}" nbInput type="text" [ngClass]="{'form-control-danger': hsc_form.controls.hscCollegeCtrl.invalid && (hsc_form.controls.hscCollegeCtrl.dirty || hsc_form.controls.hscCollegeCtrl.touched)}" formControlName="hscCollegeCtrl" placeholder="" id="" class="form-control"> </div><br>
-      <div class="col-md-12"> <button type='button' nbButton hero status="primary" (click)="open()">Find College</button></div>
       <div class="col-md-3">Address of School/College : </div>
       <div class="col-md-9"> <input ngModel="{{hsc_marks?.college_add}}" nbInput type="text" [ngClass]="{'form-control-danger': hsc_form.controls.hscAddCtrl.invalid && (hsc_form.controls.hscAddCtrl.dirty || hsc_form.controls.hscAddCtrl.touched)}" formControlName="hscAddCtrl" placeholder="" id="" class="form-control"> </div><br>
-      <div class="col-md-3">School/College Country : </div>
-      <div class="col-md-9">
-      <mat-form-field>
-        <mat-select [(ngModel)]="hsc_country" name="selectedCountry" formControlName="hscCountryCtrl">
-          <mat-option *ngFor="let country of Countries" [value]="country.name">
-          {{country.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <span *ngIf="hscCountryValidation===false" style="color:red;">Please select country</span> 
-      </div><br>
       <div class="col-md-3">Email address : </div>
       <div class="col-md-9"> <input  ngModel="{{hsc_marks?.college_email}}" nbInput type="text" [ngClass]="{'form-control-danger': hsc_form.controls.hscEmailCtrl.invalid && (hsc_form.controls.hscEmailCtrl.dirty || hsc_form.controls.hscEmailCtrl.touched)}" formControlName="hscEmailCtrl" placeholder="" id="" class="form-control"> </div><br>
       <div class="col-md-3">URL : </div>
@@ -225,7 +213,6 @@ date;
       //Radio_hsc: ['', Validators.required, ],
       hscUniversityCtrl: ['', Validators.required],
       hscCollegeCtrl: ['', Validators.required],
-      hscCountryCtrl: ['', Validators.required],
       hscAddCtrl: ['', Validators.required],
       hscEmailCtrl: ['', [Validators.required, Validators.pattern(this.emailValidate)]],
       hscUrlCtrl: ['', Validators.required],
@@ -269,7 +256,6 @@ date;
       this.hsc_form.controls.hscCollegeCtrl.markAsDirty();
       this.hsc_form.controls.hscAddCtrl.markAsDirty();
       this.hsc_form.controls.hscEmailCtrl.markAsDirty();
-      this.hsc_form.controls.hscCountryCtrl.markAsDirty();
       this.hsc_form.controls.hscUrlCtrl.markAsDirty();
       this.hsc_form.controls.hscResultDateCtrl.markAsDirty();
       this.hsc_form.controls.hscRollNoCtrl.markAsDirty();
@@ -292,15 +278,6 @@ date;
       this.hsc_form.controls.outOfFourthhscCtrl.markAsDirty();
 
       this.hsc_form.controls.hscMarksCtrl.markAsDirty();
-      if(this.hsc_form.controls.hscCountryCtrl.value === null || this.hsc_form.controls.hscCountryCtrl.value ==='' || this.hsc_form.controls.hscCountryCtrl.value ===undefined){
-    
-        this.hscCountryValidation = false;
-        
-      }else {
-        
-        this.hscCountryValidation = true;
-        
-      }
     } else {
 
       var hsc_data = {
@@ -309,7 +286,6 @@ date;
         qualification: '',
         hscUniversity: this.hsc_form.controls.hscUniversityCtrl.value,
         hscCollege: this.hsc_form.controls.hscCollegeCtrl.value,
-        hscCountry: this.hsc_form.controls.hscCountryCtrl.value,
         hscAdd: this.hsc_form.controls.hscAddCtrl.value,
         hscEmail: this.hsc_form.controls.hscEmailCtrl.value,
         hscUrl: this.hsc_form.controls.hscUrlCtrl.value,
@@ -367,7 +343,6 @@ date;
             this.hsc_form.controls['hscEmailCtrl'].setValue(data[0].school_email);
             this.hsc_form.controls['hscCollegeCtrl'].setValue(data[0].school_name);
             this.hsc_form.controls['hscAddCtrl'].setValue(data[0].school_add);
-            this.hsc_form.controls['hscCountryCtrl'].setValue(data[0].school_country);
             this.hsc_form.controls['hscUrlCtrl'].setValue(data[0].school_url);
           }
           err => console.log(err)
