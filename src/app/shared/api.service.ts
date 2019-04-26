@@ -764,6 +764,14 @@ getProfileCompleteness(){
      }
    }
 
+   totalcoursedetails(){
+    try{
+      return this.httpClient.get(`${this.baseUrl}/api/allcourselist`);
+     }catch(error) {
+       this.handleError("find_intake : "+error);
+     }
+   }
+
    getDegree(courseid){
     try{
        return this.httpClient.post(`${this.baseUrl}/api/getDegree`,{"courseid":courseid});

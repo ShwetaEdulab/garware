@@ -272,6 +272,8 @@ export class ProfileComponent {
   college_result_date: any;
   diploma_result_date: any;
   degree_result_date: any;
+  selectedCategory: any;
+  isDisabled = false;
 
   constructor(private userService: UserService,
     private fb: FormBuilder,
@@ -615,8 +617,13 @@ export class ProfileComponent {
             this.date_of_issuance = date_of_issuance1 ? new Date(data['data']['user_data']['date_of_issuance']) : null; 
             this.passport_exp_date = passport_exp_date1 ? new Date(data['data']['user_data']['passport_exp_date']) : null;
       
+          //this.firstdob = new Date(data['data']['user_data']['dob']);
+          if(data['data']['user_data']['dob'] == null || data['data']['user_data']['dob'] == '' || data['data']['user_data']['dob'] == undefined){
+            this.firstdob = null;
+          }else{
+            this.firstdob =  new Date(data['data']['user_data']['dob']);
+          }
 
-          this.firstdob = new Date(data['data']['user_data']['dob']);
           this.Country_id_personal = data['data']['user_data']['country_id'];
           this.permCountry = data['data']['user_data']['country_id'];
           this.permCountry_guardian = "" + data['data']['user_data']['country_id'];
@@ -626,6 +633,12 @@ export class ProfileComponent {
           this.selectedGender = data['data']['user_data']['gender'];
           this.selectedMaritalStatus = data['data']['user_data']['maritalstatus'];
           this.countryofbirth = data['data']['user_data']['country_birth'];
+          this.selectedCategory = data['data']['user_data']['student_category'];
+          if(this.selectedCategory!=null){
+            this.isDisabled = true;
+          }else{
+            this.isDisabled = false;
+          }
           err => console.log(err)
         });
 
@@ -651,6 +664,7 @@ export class ProfileComponent {
       phonecodeCtrl: ['', [Validators.required]],
       phoneCtrl: ['', [Validators.required, Validators.pattern(this.mobileValidate)]],
       adharCardCtrl : ['', [Validators.required, Validators.pattern(this.mobileValidate), Validators.minLength(12)]], 
+      categoryCtrl: ['', [Validators.required]],
       //passIssueCtrl: ['', [Validators.required]],
       //permCountryCtrl: ['', [Validators.required]],
       //countryidCtrl: ['', [Validators.required]],
@@ -1001,6 +1015,7 @@ export class ProfileComponent {
     var date_message_show = false;
     this.firstForm.controls.fullNameCtrl.markAsDirty();
     this.firstForm.controls.surnameCtrl.markAsDirty();
+    this.firstForm.controls.categoryCtrl.markAsDirty();
     //this.firstForm.controls.nationalityCtrl.markAsDirty();
     this.firstForm.controls.emailCtrl.markAsDirty();
     //this.firstForm.controls.genderCtrl.markAsDirty(); //dropdown
@@ -1159,6 +1174,7 @@ export class ProfileComponent {
       Email: this.firstForm.controls.emailCtrl.value,
       CountryCode: this.firstForm.controls.phonecodeCtrl.value,
       Mobile: this.firstForm.controls.phoneCtrl.value,
+      student_category : this.firstForm.controls.categoryCtrl.value,
       Permanent_address: this.firstForm.controls.permAddCtrl.value,
       Permanent_city: this.firstForm.controls.permCityCtrl.value,
       Permanent_state: this.firstForm.controls.permStateCtrl.value,

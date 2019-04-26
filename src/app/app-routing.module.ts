@@ -13,7 +13,7 @@ import { ForgotPasswordComponent } from './auth/Forgot-password/forgot-password.
 import { resetPasswordComponent } from './auth/Reset-password/reset-password.component';
 import { AdminOtpComponent } from './admin/admin-otp/admin-otp.component';
 import { InstituteRegisterComponent } from './auth/institute-register/institute-register.component';
-
+import { TotalCourseListComponent } from "./auth/totalcourselist/totalcourselist.component";
 const routes: Routes = [
   { path: 'pages',canActivate: [AuthGuard], loadChildren: 'app/pages/pages.module#PagesModule' },
   {
@@ -60,6 +60,10 @@ const routes: Routes = [
       {
         path: 'instituteRegister',
         component: InstituteRegisterComponent,
+      },
+      {
+        path:'totalcourselist',
+        component: TotalCourseListComponent
       },
     ],
   },

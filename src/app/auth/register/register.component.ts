@@ -77,13 +77,13 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
         emailCtrl: ['', [ Validators.required, Validators.pattern(this.emailValidate)]], // Validators.pattern("^[0-9]*$")
         passwordCtrl:['',[Validators.required, Validators.pattern(this.passwordValidate)]],
         repasswordCtrl:['',[Validators.required, Validators.pattern(this.passwordValidate)]],
-        AddCtrl:['', [ Validators.required, Validators.maxLength(250),Validators.minLength(3)]],
-        genderCtrl: [ '', [ Validators.required]],
-        categoryCtrl: [ '', [ Validators.required]],
-        CityCtrl:['', [ Validators.required, Validators.maxLength(30),Validators.minLength(2)]],
-        StateCtrl:['', [ Validators.required, Validators.maxLength(30),Validators.minLength(2)]],
-        PostCodeCtrl:['', [ Validators.required, Validators.pattern(this.postalValidate), Validators.maxLength(10),Validators.minLength(5)]],
-        dobCtrl:['', Validators.required],
+        //AddCtrl:['', [ Validators.required, Validators.maxLength(250),Validators.minLength(3)]],
+        //genderCtrl: [ '', [ Validators.required]],
+        //categoryCtrl: [ '', [ Validators.required]],
+        //CityCtrl:['', [ Validators.required, Validators.maxLength(30),Validators.minLength(2)]],
+        //StateCtrl:['', [ Validators.required, Validators.maxLength(30),Validators.minLength(2)]],
+        //PostCodeCtrl:['', [ Validators.required, Validators.pattern(this.postalValidate), Validators.maxLength(10),Validators.minLength(5)]],
+        //dobCtrl:['', Validators.required],
         phonecodeCtrl:[''],
         phoneCtrl:['', [ Validators.required, Validators.pattern(this.mobileValidate)]],
 				captchaCtrl:['', Validators.required],
@@ -158,19 +158,19 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
 	}
     onSubmit(duration,status){
 		var check_validation;
-    this.RegisterForm.controls.genderCtrl.markAsDirty();     
+    //this.RegisterForm.controls.genderCtrl.markAsDirty();     
 		this.RegisterForm.controls.emailCtrl.markAsDirty();
 		this.RegisterForm.controls.passwordCtrl.markAsDirty();
 		this.RegisterForm.controls.repasswordCtrl.markAsDirty();
 		this.RegisterForm.controls.firstNameCtrl.markAsDirty();
 		this.RegisterForm.controls.LastNameCtrl.markAsDirty();
-		this.RegisterForm.controls.categoryCtrl.markAsDirty();
+		//this.RegisterForm.controls.categoryCtrl.markAsDirty();
 		this.RegisterForm.controls.sourInfoCtrl.markAsDirty();
-		this.RegisterForm.controls.AddCtrl.markAsDirty();
-		this.RegisterForm.controls.CityCtrl.markAsDirty();
-		this.RegisterForm.controls.StateCtrl.markAsDirty();
-		this.RegisterForm.controls.PostCodeCtrl.markAsDirty();		
-		this.RegisterForm.controls.dobCtrl.markAsDirty();    
+		//this.RegisterForm.controls.AddCtrl.markAsDirty();
+		//this.RegisterForm.controls.CityCtrl.markAsDirty();
+		//this.RegisterForm.controls.StateCtrl.markAsDirty();
+		//this.RegisterForm.controls.PostCodeCtrl.markAsDirty();		
+		//this.RegisterForm.controls.dobCtrl.markAsDirty();    
 		this.RegisterForm.controls.phoneCtrl.markAsDirty();
     //this.RegisterForm.controls.phonecodeCtrl.markAsDirty();
     this.RegisterForm.controls.captchaCtrl.markAsDirty();
@@ -205,16 +205,16 @@ readonly passwordValidate = /^[A-Za-z0-9!@#$%^&*()_]{6,}$/;
 						userName : this.RegisterForm.controls.firstNameCtrl.value,
 						Surname: this.RegisterForm.controls.LastNameCtrl.value,
 						userPassword : this.RegisterForm.controls.passwordCtrl.value,
-						Gender : this.RegisterForm.controls.genderCtrl.value,
-						userDob : this.RegisterForm.controls.dobCtrl.value,
+						//Gender : this.RegisterForm.controls.genderCtrl.value,
+						//userDob : this.RegisterForm.controls.dobCtrl.value,
 						userEmail : this.RegisterForm.controls.emailCtrl.value,
-						student_category : this.RegisterForm.controls.categoryCtrl.value,
+						//student_category : this.RegisterForm.controls.categoryCtrl.value,
 						userCountryCode : '91',
 						userContactNo : this.RegisterForm.controls.phoneCtrl.value,
-						userAddress : this.RegisterForm.controls.AddCtrl.value,
-						userCity: this.RegisterForm.controls.CityCtrl.value,
-						userState : this.RegisterForm.controls.StateCtrl.value,
-						postal_code : this.RegisterForm.controls.PostCodeCtrl.value,
+						//userAddress : this.RegisterForm.controls.AddCtrl.value,
+						//userCity: this.RegisterForm.controls.CityCtrl.value,
+						//userState : this.RegisterForm.controls.StateCtrl.value,
+						//postal_code : this.RegisterForm.controls.PostCodeCtrl.value,
 						sourInfo : this.RegisterForm.controls.sourInfoCtrl.value,
 					},
 				});

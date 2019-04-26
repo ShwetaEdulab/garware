@@ -76,14 +76,6 @@
                     <nb-option value="UnMarried">Un-Married</nb-option>
                   </nb-select>
                 </div>
-              <!-- <div class="col-xl-3">
-                <div class="form-group">
-                  <label for="inputNationality">Nationality <span style="color:red;">*</span></label>
-                  <input type="text" ngModel="{{profile_info?.citizenship}}" class="form-control" id="inputNationality"
-                    formControlName="nationalityCtrl" [ngClass]="{'form-control-danger': firstForm.controls.nationalityCtrl.invalid && (firstForm.controls.nationalityCtrl.dirty || firstForm.controls.nationalityCtrl.touched)}"
-                    placeholder="Nationality">
-                </div>
-              </div> -->
             </div>
             <div class="row">
               <div class="col-xl-3">
@@ -100,17 +92,6 @@
                     placeholder="Email">
                 </div>
               </div>
-              <!-- <div class="col-xl-2">
-                <label for="inputCountry">Country <span style="color:red;">*</span></label>
-                <mat-form-field style="width:135px;">
-                  <mat-select [(ngModel)]="Country_id_personal" name="selectedCountry"   formControlName="countryidCtrl"   (ngModelChange)="onValueChange_PhoneCode($event)">
-                    <mat-option *ngFor="let country of Countries" [value]="country.id">
-                    {{country.name}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <span *ngIf="countryValidation===false" style="color:red;">Please select country</span> 
-            </div> -->
             <div class="col-xl-3">
                 <label for="inputCountryCode">Country Code <span style="color:red;">*</span></label>
                 <div class="input-group">
@@ -159,17 +140,6 @@
                     placeholder="Postal Code">
                 </div>
               </div>
-              <!-- <div class="col-xl-2">
-                <label for="inputPermCountry">Country <span style="color:red;">*</span></label>
-                <mat-form-field style="width:135px;">
-                  <mat-select [(ngModel)]="permCountry" name="permCountry" formControlName="permCountryCtrl">
-                    <mat-option *ngFor="let country of Countries" [value]="country.id">
-                    {{country.name}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <span *ngIf="permcountryValidation===false" style="color:red;">Please select country</span> 
-              </div> -->
             </div>
             <div class="row">
               <div class="col-xl-5">
@@ -205,7 +175,7 @@
                 </div>
               </div>
             </div>
-            <h3>Adhar Card details</h3>
+            <br>
             <div class="row">
               <div class="col-xl-6">
                 <div class="form-group">
@@ -214,6 +184,21 @@
                     formControlName="adharCardCtrl" [ngClass]="{'form-control-danger': firstForm.controls.adharCardCtrl.invalid && (firstForm.controls.adharCardCtrl.dirty || firstForm.controls.adharCardCtrl.touched)}"
                     placeholder="Adhar Card Number">
                 </div>
+              </div>
+              <div class="col-xl-6">
+                <label for="inputCategory">Student Category  <span style="color:red;">*</span></label><br>
+                <mat-form-field>
+                  <mat-select [(ngModel)]="selectedCategory" name="selectedCategory"   formControlName="categoryCtrl" [disabled]="isDisabled" >
+                    <mat-option value="GENERAL">GENERAL</mat-option>
+                    <mat-option value="SC">Scheduled Castes</mat-option>
+                    <mat-option value="ST">Scheduled Tribes</mat-option>
+                    <mat-option value="DTA">DT(A)</mat-option>
+                    <mat-option value="NTB">NT(B)</mat-option>
+                    <mat-option value="NTC">NT(C)</mat-option>
+                    <mat-option value="NTD">NT(D)</mat-option>
+                    <mat-option value="OBC">Other Backward Class</mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
             </div>
             <button nbButton nbStepperNext (click)="onFirstSubmit()" style="margin-top:10px;" >next</button>
@@ -359,22 +344,6 @@
                       formControlName="perm_guardian_state" class="form-control" [ngClass]="{'form-control-danger': secondForm.controls.perm_guardian_state.invalid && (secondForm.controls.perm_guardian_state.dirty  || secondForm.controls.perm_guardian_state.touched)}">
                   </div>
                 </div>
-                <!-- <div class="col-xl-4">
-                  <div class="form-group">
-                      <label for="PermCountry">Country <span style="color:red;">*</span></label>
-                    <nb-select disabled ngModel="{{permCountry_guardian}}" placeholder="Select country" status="success"
-                      formControlName="perm_guardian_country" [(selected)]="permCountry_guardian">
-                      <nb-option value="{{country.id}}" *ngFor="let country of Countries;">{{country.name}}</nb-option>
-                    </nb-select>
-                  </div>
-                </div> -->
-                <!-- <div class="col-xl-4">
-                  <div class="form-group">
-                    <input [readonly]="true" type="text" ngModel="{{profile_info?.citizenship}}" formControlName="perm_guardian_citizenship"
-                      placeholder="Enter citizenship" id="Ctxt" [ngClass]="{'form-control-danger': secondForm.controls.perm_guardian_citizenship.invalid && (secondForm.controls.perm_guardian_citizenship.dirty  || secondForm.controls.perm_guardian_citizenship.touched)}"
-                      class="form-control">
-                  </div>
-                </div> -->
               </div>
             </div>
 
@@ -409,21 +378,6 @@
                       formControlName="alt_guardian_state" class="form-control" [ngClass]="{'form-control-danger': secondForm.controls.alt_guardian_state.invalid && (secondForm.controls.alt_guardian_state.dirty  || secondForm.controls.alt_guardian_state.touched)}">
                   </div>
                 </div>
-                <!-- <div class="col-xl-4">
-                  <div class="form-group">
-                      <label for="Country">Country<span style="color:red;">*</span></label>
-                    <nb-select disabled ngModel="{{altCountry_guardian}}" formControlName="alt_guardian_country"
-                      placeholder="Select country" [(selected)]="altCountry_guardian" status="success">
-                      <nb-option value="{{country.id}}" *ngFor="let country of Countries">{{country.name}}</nb-option>
-                    </nb-select>
-                  </div>
-                </div> -->
-                <!-- <div class="col-xl-4">
-                  <div class="form-group">
-                    <input [readonly]="true" ngModel="{{profile_info?.citizenship}}" type="text" formControlName="alt_guardian_citizenship"
-                      placeholder="Enter citizenship" id="Ctxt2" class="form-control" [ngClass]="{'form-control-danger': secondForm.controls.alt_guardian_citizenship.invalid && (secondForm.controls.alt_guardian_citizenship.dirty  || secondForm.controls.alt_guardian_citizenship.touched)}">
-                  </div>
-                </div> -->
               </div>
             </div>
             <div *ngIf="Dropdownvar==3">
@@ -456,25 +410,6 @@
                       formControlName="other_guardian_state" class="form-control" [ngClass]="{'form-control-danger': secondForm.controls.other_guardian_state.invalid && (secondForm.controls.other_guardian_state.dirty  || secondForm.controls.other_guardian_state.touched)}">
                   </div>
                 </div>
-                <!-- <div class="col-xl-4">
-                  <div class="form-group">
-                      <label for="Country">Country<span style="color:red;">*</span></label>
-                      <mat-form-field>
-                        <mat-select [(ngModel)]="guardian_other_address" name="guardian_other_address"   formControlName="other_guardian_country">
-                          <mat-option *ngFor="let country of Countries" [value]="country.id">
-                          {{country.name}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    <span *ngIf="guardianOtherCountryValidation===false" style="color:red;">Please select country</span> 
-                  </div>
-                </div> -->
-                <!-- <div class="col-xl-4">
-                  <div class="form-group">
-                    <input ngModel="{{guardian_other_address_values?.citizenship}}" type="text" placeholder="Enter citizenship"
-                      id="Ctxt3" class="form-control" formControlName="other_guardian_citizenship" [ngClass]="{'form-control-danger': secondForm.controls.other_guardian_citizenship.invalid && (secondForm.controls.other_guardian_citizenship.dirty  || secondForm.controls.other_guardian_citizenship.touched)}">
-                  </div>
-                </div> -->
               </div>
             </div>
             <button nbButton nbStepperNext (click)="onSecondSubmit()">next</button>
@@ -482,8 +417,6 @@
               {{errortext}}
           </div>
           </form>
-          <!-- <button nbButton disabled nbStepperNext>prev</button>
-        <button nbButton nbStepperNext>next</button> -->
         </nb-step>
         <nb-step [completed]="tabcheck3" [stepControl]="thirdForm" label="3rd step">
           <h3>Educational Information</h3>
@@ -492,7 +425,6 @@
               <nb-alert status="danger" closable (close)="onCloseEducation()" *ngIf="alertflagEducation == true">
                   Degree information is mandatory for applying master's course !!
                 </nb-alert>
-            <!-- <form [formGroup]="thirdForm" class="step-container">      -->
               <form [formGroup]="thirdForm" class="step-container">
                 <input type="hidden" ngModel="{{hsc?.college_university}}" id="hscUniversity" formControlName="hscUniversityCtrl">
                 <input type="hidden" ngModel="{{cbse?.university}}" id="cbseUniversity" formControlName="cbseUniversityCtrl">
@@ -549,7 +481,6 @@
                 </tr>
               </tbody>
             </table>
-            <!-- </form>   -->
           </div>
           <div *ngIf="eduerrorflag == 1" style="color:red">
               {{eduerrortext}}
@@ -661,8 +592,7 @@
                           <nb-option [value]="partTime">partTime</nb-option>
                           <nb-option [value]="internship">internship</nb-option>
                         </nb-select>
-                        <!-- <input [(ngModel)] ="employment.typeofwork" type="text" placeholder="Type of Work" id="TWtb" class="form-control"></td> -->
-                      <td><textarea [(ngModel)]="employment.workdesc" placeholder="Work Description" id="WDtb" class="form-control"></textarea></td>
+                        <td><textarea [(ngModel)]="employment.workdesc" placeholder="Work Description" id="WDtb" class="form-control"></textarea></td>
                       <td><button (click)="save_employment_details()" nbButton>Save</button></td>
                     </tr>
                     <tr *ngFor="let employment of updated_emp">

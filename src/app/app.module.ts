@@ -24,6 +24,7 @@ import { OtpComponent } from './auth/register/otp.component';
 import { RegisteredComponent } from './auth/register/registered.component';
 import { TermsComponent } from './auth/register/terms.component';
 import { OTPModule } from './auth/otp/otp.module';
+import { TotalCourseListModule } from './auth/totalcourselist/totalcourselist.module';
 import {  NbToastrModule, 
   NbTooltipModule,
   NbSpinnerModule,
@@ -49,8 +50,9 @@ import { InstituteRegisterComponent } from './auth/institute-register/institute-
 import { config } from '../../config';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {MatDialogModule} from '@angular/material/dialog';
-const socketconfig: SocketIoConfig = { url: 'http://93.104.211.51:2', options: {} };
+//const socketconfig: SocketIoConfig = { url: 'http://93.104.211.51:2', options: {} };
 //const socketconfig: SocketIoConfig = { url: 'http://93.104.211.51', options: {reconnection: true,transports: ['websocket'],secure: true} };
+const socketconfig: SocketIoConfig = { url: 'wss://garware.admissiondesk.org', options: {reconnection: true,transports: ['websocket'],secure: true} };
 @NgModule({
   declarations: [AppComponent,
     RegisterComponent,
@@ -87,6 +89,7 @@ const socketconfig: SocketIoConfig = { url: 'http://93.104.211.51:2', options: {
    NbInputModule,
    MatSelectModule,
    OTPModule,
+   TotalCourseListModule,
    SocketIoModule.forRoot(socketconfig),
    AdminOtpModule,
    ConfirmDialogModule,
