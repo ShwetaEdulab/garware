@@ -208,7 +208,8 @@ export class AdminEligibilityComponent {
       },2500);
     }else{
       this.confirmationService.confirm({
-        message: 'Are you sure that you want to proceed?',
+        //message: 'Are you sure that you want to proceed?',
+        message:'Do you want to schedule the exam on '+PI_test_date+'?',
         header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {

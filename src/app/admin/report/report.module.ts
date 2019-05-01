@@ -24,6 +24,7 @@ import {CommonModule} from '@angular/common';
 import { SharedModule } from '../../pages/shared-authpipe.module';
 import {MatSelectModule} from '@angular/material/select';
 import { MatDatepickerModule , MatNativeDateModule } from '@angular/material';
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
   imports: [
     NbSelectModule,
@@ -47,7 +48,8 @@ import { MatDatepickerModule , MatNativeDateModule } from '@angular/material';
     NbSpinnerModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    ChartsModule
   ],
   declarations: [
     AdminReportComponent,

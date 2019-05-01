@@ -545,6 +545,22 @@ studentStatisticsPiechart(){
   }
 }
 
+getRegistrationTracker(){
+  try{
+    return this.httpClient.get(`${this.baseUrl}/admin_api/report/getRegistrationTracker`);
+  }catch(error) {
+      this.handleError("getRegistrationTracker : "+JSON.stringify(error));
+  }
+}
+
+getRefererLink(){
+  try{
+    return this.httpClient.get(`${this.baseUrl}/admin_api/report/getRefererLink`);
+  }catch(error) {
+      this.handleError("getRefererLink : "+JSON.stringify(error));
+  }
+}
+
 DownloadProvisionalLetter(user_id,id){
   try{
     return this.httpClient.post(`${this.baseUrl}/admin_api/Eligibility/DownloadProvisionalLetter`,{user_id: user_id,id:id});

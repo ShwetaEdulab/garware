@@ -39,6 +39,15 @@ export class AdminReportComponent {
   p3: number = 1;
   p4: number = 1;
   p5: number = 1;
+  showmedium: number;
+  registrationData: any;
+  registrationDatacount: any;
+  pieData: number;
+  showregdata: number;
+  notnull: any;
+  registrationFromMainWebsite: any;
+  alldata: any;
+  registrationDatacounts: any;
   constructor(
     protected adminApi : AdminApiService,
     private router : Router,
@@ -57,6 +66,13 @@ export class AdminReportComponent {
   @ViewChild(MatDatepicker) picker;
   date = new FormControl();
 
+  pieChartOptions = {
+    responsive: true
+  }
+  pieChartLabels  :any ;
+  pieChartColor  :any ;
+  pieChartData:any ;
+  
   monthSelectedSMS(params) {
     this.date.setValue(params);
     this.picker.close();
@@ -197,6 +213,53 @@ export class AdminReportComponent {
 			this.yesterday = yesterday;
 			this.month = month;
 			this.year = year;
+    }else if(index == 5){
+      //this.pieData = 0;
+      this.adminApi.getRegistrationTracker().subscribe(data =>{
+        if(data['status'] == 200){
+          this.showmedium = 1
+          this.registrationData = data['data'];
+          this.registrationDatacount = data['counts'];
+          var label = [];
+          var count = [];
+          for(var a in data['counts']){
+            label.push(data['counts'][a]['source_of_information']);
+            count.push(data['counts'][a]['count']);
+          }
+          this.pieChartLabels = label;
+          this.pieChartData =[
+              { 
+                data: count
+              }
+            ];
+        }else{
+          this.showmedium = 0;
+        }
+      })
+    }else if(index == 6){
+      this.adminApi.getRefererLink().subscribe(data =>{
+        if(data['status'] == 200){
+          this.showregdata = 1
+          this.registrationDatacounts = data['counts'];
+          this.notnull = data['otherwebsite'];
+          this.registrationFromMainWebsite = data['dataa'];
+          this.alldata = data['table'];
+          var label = [];
+          var count = [];
+          for(var a in data['counts']){
+            label.push(data['counts'][a]['referer_link']);
+            count.push(data['counts'][a]['count']);
+          }
+          this.pieChartLabels = label;
+          this.pieChartData =[
+              { 
+                data: count
+              }
+            ];
+        }else{
+          this.showregdata = 0
+        }
+      })
     }
 
     // else if(index == 3){

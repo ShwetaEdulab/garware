@@ -114,14 +114,14 @@
                       </div> -->
                   </div>
                   <div class="col-lg-8" *ngFor= "let college of collegelist">
-                      <div *ngIf = "college.description != '' ">
+                      <!-- <div *ngIf = "college.description != '' ">
                           <nb-card status="success">
                               <nb-card-header><b>Course Description  :</b></nb-card-header>
                               <nb-card-body>
                                       <h6>{{college?.description}}</h6><br>
                               </nb-card-body>
                           </nb-card>
-                      </div>
+                      </div> -->
                       <div *ngIf = "college.overview != '' ">
                           <nb-card status="success">
                               <nb-card-header><b>Course Overview  :</b></nb-card-header>

@@ -71,7 +71,8 @@ import { config } from '../../../../config';
     }
 
     redirectCourse(){
-      this.router.navigate(['auth/login'])
+      //this.router.navigate(['auth/login'])
+      this.router.navigate(['auth/register']);
     }
 
     

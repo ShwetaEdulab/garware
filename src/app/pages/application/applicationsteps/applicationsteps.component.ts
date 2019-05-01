@@ -245,19 +245,19 @@ export class ApplicationStepsComponent implements OnInit {
   }
 
   public checktabs(tab_index,tab1,tab2,tab3,tab4){
-    if(this.OnlinePersonaldetails.online_test_date!=null && this.OnlinePersonaldetails.online_test_time!=null){
+    if(this.OnlinePersonaldetails.online_test_date!='' && this.OnlinePersonaldetails.online_test_time!=''){
 			this.tabcheck1 = true;
 		}else{
 			this.tabcheck1 = false;
 		}
 
-		if(this.OnlinePersonaldetails.pi_test_date!=null && this.OnlinePersonaldetails.pi_test_time!=null){
+		if(this.OnlinePersonaldetails.pi_test_date!='' && this.OnlinePersonaldetails.pi_test_time!=''){
 			this.tabcheck2 = true;
 		}else{
 			this.tabcheck2 = false;
     }
     
-		if(this.Marksdetails.total_marks!=null){
+		if(this.Marksdetails.total_marks!=''){
 			this.tabcheck3 = true;
 		}else{
 			this.tabcheck3 = false;
