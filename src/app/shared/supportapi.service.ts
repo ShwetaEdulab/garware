@@ -26,9 +26,9 @@ export class SupportapiService {
     }   
   }
 
-    commentOnTicket(ticket_id,comment){
+    commentOnTicket(ticket_id,comment,role,email){
       try{
-        return  this.httpClient.post(`${this.baseUrl}/api/support/addcomment`,{"comment":comment,"ticket_id":ticket_id});
+        return  this.httpClient.post(`${this.baseUrl}/api/support/addcomment`,{"comment":comment,"ticket_id":ticket_id,"role":role,"email":email});
       }catch(error) {
         this.handleError("commentOnTicket : "+error);
       }
@@ -41,14 +41,24 @@ export class SupportapiService {
         this.handleError("getSingleTicket : "+error);
       } 
     }
-    createTicket(subject,issue,group,owner){
+    
+    createTicket(subject,issue,group,owner,email){
       try{
-       return  this.httpClient.post(`${this.baseUrl}/api/support/createTicket`,{"subject":subject,"issue":issue,"group":group,"owner":owner});
+       return  this.httpClient.post(`${this.baseUrl}/api/support/createTicket`,{"subject":subject,"issue":issue,"group":group,"owner":owner,"email":email});
   
       }catch(error) {
         this.handleError("getPriority : "+error);
       }
     }
+
+    // createTicket(subject,issue,group,owner){
+    //   try{
+    //    return  this.httpClient.post(`${this.baseUrl}/api/support/createTicket`,{"subject":subject,"issue":issue,"group":group,"owner":owner});
+  
+    //   }catch(error) {
+    //     this.handleError("getPriority : "+error);
+    //   }
+    // }
   
       //chat
      getChatUsersList(){

@@ -868,9 +868,8 @@ private notification_no : any;
 private messages = [];
 
 
-notification(userId){
-  
-  return this.httpClient.post(`${this.baseUrl}/api/downloads/notification`,{"id":userId}).subscribe(response =>{
+notification(userId,type){
+  return this.httpClient.post(`${this.baseUrl}/api/downloads/notification`,{"id":userId,"type":type}).subscribe(response =>{
     this.messages = response['data'];
     this.notification_no = response['notification_no'];
     if(response['data'].length == 0){
@@ -885,29 +884,71 @@ notification(userId){
   });
 }
 
-reloadnotification(userId){
+reloadnotification(userId,type){
   try{
-    return this.httpClient.post(`${this.baseUrl}/api/downloads/notification`,{"id":userId});
+    return this.httpClient.post(`${this.baseUrl}/api/downloads/notification`,{"id":userId,"type":type});
   }catch(error) {
     this.handleError("notification : "+error);
   }
 }
 
-makeReadNotification(userId){
+makeReadNotification(userId,type){
   try{
-    return this.httpClient.post(`${this.baseUrl}/api/downloads/makeReadNotification`,{"id":userId});
+    return this.httpClient.post(`${this.baseUrl}/api/downloads/makeReadNotification`,{"id":userId,"type":type});
   }catch(error) {
     this.handleError("makeReadNotification : "+error);
   }
 }
 
-deleteNotification(userId,noti_id){
+deleteNotification(userId,noti_id,type){
   try{
-    return this.httpClient.post(`${this.baseUrl}/api/downloads/deleteNotification`,{"id":userId,"noti_id":noti_id});
+    return this.httpClient.post(`${this.baseUrl}/api/downloads/deleteNotification`,{"id":userId,"noti_id":noti_id,"type":type});
   }catch(error) {
     this.handleError("deleteNotification : "+error);
   }
 }
+
+
+// notification(userId){
+  
+//   return this.httpClient.post(`${this.baseUrl}/api/downloads/notification`,{"id":userId}).subscribe(response =>{
+//     this.messages = response['data'];
+//     this.notification_no = response['notification_no'];
+//     if(response['data'].length == 0){
+//       this.socketNotificationNo.next('');
+//       this.socketmessage.next('');
+//     }else if(response['data'].length > 0){
+//       this.socketNotificationNo.next(this.notification_no);
+//       this.socketmessage.next(this.messages);
+//     }
+//   },error => {
+//     console.error("error api service notification : "+error);
+//   });
+// }
+
+// reloadnotification(userId){
+//   try{
+//     return this.httpClient.post(`${this.baseUrl}/api/downloads/notification`,{"id":userId});
+//   }catch(error) {
+//     this.handleError("notification : "+error);
+//   }
+// }
+
+// makeReadNotification(userId){
+//   try{
+//     return this.httpClient.post(`${this.baseUrl}/api/downloads/makeReadNotification`,{"id":userId});
+//   }catch(error) {
+//     this.handleError("makeReadNotification : "+error);
+//   }
+// }
+
+// deleteNotification(userId,noti_id){
+//   try{
+//     return this.httpClient.post(`${this.baseUrl}/api/downloads/deleteNotification`,{"id":userId,"noti_id":noti_id});
+//   }catch(error) {
+//     this.handleError("deleteNotification : "+error);
+//   }
+// }
 
 //routes regarding api
 

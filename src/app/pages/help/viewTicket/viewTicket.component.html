@@ -64,7 +64,7 @@
                                         <textarea  nbInput [(ngModel)]="comment" shape="semi-round" fullWidth fieldSize="large" placeholder="Comment"></textarea>
                                     </div>
                                     <div class="col-md-12">
-                                        <button nbButton outline status="danger" size="xsmall" shape="semi-round" style="margin-top:50px;" (click)="writeComment()">Comment</button>
+                                        <button nbButton outline status="danger" size="xsmall" shape="semi-round" style="margin-top:50px;" (click)="writeComment(user?.role,ticketData?.owner)">Comment</button>
                                     </div>
                                 </div>   
                             </nb-list-item>

@@ -26,6 +26,7 @@ import { DatePipe } from '@angular/common';
     <nb-card-body>
     <int-phone-prefix [(ngModel)]="phone_number"></int-phone-prefix>
     <div style="visibility:hidden; color: red;" id="num">phone/contact number required</div>
+    <div style="visibility:hidden; color: red;" id="numnew">phone/contact number required with country code.</div>
     <b> Peer is not available now.Please select time by clicking on below box for scheduling your call</b>
     <div class="24hr-example">
       <p-calendar [readonlyInput]="true" [(ngModel)]="mytime" [timeOnly]="true"></p-calendar>
@@ -102,21 +103,22 @@ mytime;
       this.num = this.phone_number;
       this.peer_id = this.peer_id;
       this.timenew;
-      //this.mytime =this.timenew.nativeElement.value+ ':00' ;
       var t= this.mytime;
       var dateFormat = new DatePipe('en-ISO');
       this.time = this.datePipe.transform(t,"HH:mm:ss");
-      //this.time = this.mytime;
       this.peer_cntc = this.mobile;
       this.available_from =this.available_from;
       this.available_to =this.available_to;
-      if(this.num == '+91' ){
+      if(this.num == '+91' && this.time == null){
         document.getElementById('num').style.visibility = "visible";
         document.getElementById('time').style.visibility = "visible";
       }else if(this.num == '+91'){
         document.getElementById('num').style.visibility = "visible";
-      }else if(this.time == '+91'){
+      }else if(this.time == null){
        document.getElementById('time').style.visibility = "visible";
+      }else if(this.num ==""){
+        document.getElementById('numnew').style.visibility = "visible";
+        console.log("Please enter correct no")
       }else{
       this.ref.close();
       this.api.callSchedule( this.peer_id,this.num,this.peer_cntc, this.time,this.available_to,this.available_from).subscribe(data=>{

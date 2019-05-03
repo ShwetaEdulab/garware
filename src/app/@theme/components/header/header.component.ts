@@ -9,6 +9,7 @@ import { ApiService } from '../../../shared/api.service';
 import * as io from 'socket.io-client';
 import { Socket } from 'ngx-socket-io';
 import { config } from '../../../../../config';
+import { Router } from '@angular/router';
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
@@ -20,7 +21,7 @@ export class HeaderComponent implements OnInit {
   user = {
     id: "",
     email:"",
-    role:""
+    role:"",
   };
   notification;
   notification_no: any;
@@ -54,25 +55,70 @@ export class HeaderComponent implements OnInit {
               private socket : Socket,
               protected api: ApiService,
               public themeService : NbThemeService,
+              private router : Router,
             ) {
-              if(this.user.role == 'student'){
-                this.api.notification(this.user.id);
-              }
+                this.userService.onUserChange()
+                .subscribe((user: any) => this.user = user);
+                if(this.user.role === 'student'){
+                  this.api.notification(this.user.id,'student');
+                }else if(this.user.role === 'admin'){
+                  this.api.notification(this.user.id,'admin');
+                }
             }
+
+  // ngOnInit() {
+  //   this.userService.onUserChange()
+  //     .subscribe((user: any) => this.user = user);
+  //     this.api.getTheme().subscribe((data: any) => {
+  //       if(data['data']){
+  //         this.themeService.changeTheme(data['data']);
+  //       }else{
+  //         this.themeService.changeTheme('default');
+  //       }
+  //     });
+      
+  //     if(this.user.role == 'student'){
+
+  //       this.api.socketNotificationNo.subscribe(nn =>{
+  //         if(nn==""){
+  //           //do nothing
+  //         }else{
+  //           this.notification_no = nn;
+  //         }
+  //       });
+
+  //       this.api.socketmessage.subscribe(notification_data =>{
+  //         if(notification_data==""){
+  //           this.deleteShow = false;
+  //           this.notification = notification_data;
+  //         }else{
+  //           this.deleteShow = true;
+  //           this.notification = notification_data;
+  //         }
+  //       });
+
+  //       this.socket.on('connect', function () {
+  //       //console.log('connected to garwareadmin.admissiondesk.org'); 
+  //       });
+
+  //       this.socket.emit('confirmation');
+  //       this.socket.emit('join', {email: this.user.email});
+
+  //       this.socket.on('person', function(person){  
+  //       //  console.log(person.name, 'is', person.age, 'years old.');
+  //       });
+        
+  //       this.socket.on('new_msg', (data) => {
+  //         this.ReloadNotification();
+  //       });
+  //     }
+
+  // }
 
   ngOnInit() {
     this.userService.onUserChange()
       .subscribe((user: any) => this.user = user);
-      this.api.getTheme().subscribe((data: any) => {
-        if(data['data']){
-          this.themeService.changeTheme(data['data']);
-        }else{
-          this.themeService.changeTheme('default');
-        }
-      });
-      
       if(this.user.role == 'student'){
-
         this.api.socketNotificationNo.subscribe(nn =>{
           if(nn==""){
             //do nothing
@@ -80,7 +126,7 @@ export class HeaderComponent implements OnInit {
             this.notification_no = nn;
           }
         });
-
+  
         this.api.socketmessage.subscribe(notification_data =>{
           if(notification_data==""){
             this.deleteShow = false;
@@ -90,32 +136,72 @@ export class HeaderComponent implements OnInit {
             this.notification = notification_data;
           }
         });
-
         this.socket.on('connect', function () {
-        //console.log('connected to garwareadmin.admissiondesk.org'); 
+         console.log('connected to garwareadmin.admissiondesk.org'); 
         });
 
         this.socket.emit('confirmation');
         this.socket.emit('join', {email: this.user.email});
-
+    
         this.socket.on('person', function(person){  
         //  console.log(person.name, 'is', person.age, 'years old.');
         });
+    
+        this.socket.on('goodbye', function(){  
+        // console.log('goodbye goodbye goodbye goodbye goodbye');
+        });
         
         this.socket.on('new_msg', (data) => {
-          this.ReloadNotification();
+        // console.log("data.msg NEW----->"+data);
+          this.ReloadNotification('student');
+        });
+
+      }else if(this.user.role == 'admin'){
+        this.api.socketNotificationNo.subscribe(nn =>{
+          if(nn==""){
+            //do nothing
+          }else{
+            this.notification_no = nn;
+          }
+        });
+  
+        this.api.socketmessage.subscribe(notification_data =>{
+          if(notification_data==""){
+            this.deleteShow = false;
+            this.notification = notification_data;
+          }else{
+            this.deleteShow = true;
+            this.notification = notification_data;
+          }
+        });
+        this.socket.on('sp',(data) =>{
+          this.ReloadNotification('admin');
         });
       }
-
+     
   }
 
 
 
-  notify(){
+  // notify(){
+  //   if(this.notification_no > 0){
+  //     this.api.makeReadNotification(this.user.id)
+  //     .subscribe(
+  //       (data: any) => {
+  //         this.notification_no = '';
+  //       },
+  //       error => {
+  //         console.error("Error", error);
+  //       });
+  //   }
+  // }
+
+  notify(type){
     if(this.notification_no > 0){
-      this.api.makeReadNotification(this.user.id)
+      this.api.makeReadNotification(this.user.id,type)
       .subscribe(
         (data: any) => {
+          //console.log("Upadted data==========>");
           this.notification_no = '';
         },
         error => {
@@ -124,20 +210,59 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  deleteNotification(id){;
-    this.api.deleteNotification(this.user.id,id)
-      .subscribe(
-        (data: any) => {
-          this.ReloadNotification();
-        },
-        error => {
-          console.error("Error", error);
-        });
-  }
+  // deleteNotification(id){;
+  //   this.api.deleteNotification(this.user.id,id)
+  //     .subscribe(
+  //       (data: any) => {
+  //         this.ReloadNotification();
+  //       },
+  //       error => {
+  //         console.error("Error", error);
+  //       });
+  // }
+
+  deleteNotification(id,type){
+    // console.log("id============>"+id);
+     this.api.deleteNotification(this.user.id,id,type)
+       .subscribe(
+         (data: any) => {
+          // console.log("Delete data==========>");
+           //this.ReloadNotification(type);
+           window.location.reload();
+         },
+         error => {
+           console.error("Error", error);
+         });
+   }
   
-  public ReloadNotification(){
+  // public ReloadNotification(){
+  //   this.notification=[];
+  //   this.api.reloadnotification(this.user.id)
+  //     .subscribe(
+  //       (data: any) => {
+  //         if(data['data'].length == 0){
+  //           this.deleteShow = false;
+  //           this.notification_no = '';
+  //         }else if(data['data'].length > 0){
+  //           this.deleteShow = true;
+  //           if(data['notification_no'] == 0){
+  //             this.notification_no = '';
+  //           }else{
+  //             this.notification_no = data['notification_no'];
+  //           }
+  //           for(let notify of data['data']) {
+  //             this.notification.push(notify);
+  //           }
+  //         }
+  //       },
+  //       error => {
+  //         console.error("Error", error);
+  //       });
+  // }
+
+  public  ReloadNotification(type){
     this.notification=[];
-    this.api.reloadnotification(this.user.id)
+    this.api.reloadnotification(this.user.id,type)
       .subscribe(
         (data: any) => {
           if(data['data'].length == 0){
@@ -173,8 +298,16 @@ export class HeaderComponent implements OnInit {
     return false;
   }
 
+  // goToHome() {
+  //   this.menuService.navigateHome();
+  // }
+
   goToHome() {
-    this.menuService.navigateHome();
+    if(this.user.role==="student" || this.user.role==='student'){
+      this.menuService.navigateHome();
+    }else if(this.user.role==="admin"){
+      this.router.navigate(['pages/adminDashboard'])
+    }
   }
 
   startSearch() {

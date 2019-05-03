@@ -20,6 +20,7 @@ export class NewTicketComponent implements OnInit {
     user={email:"",role:""};
     groups; 
     group;
+    email: any;
   
     constructor(protected ref: NbDialogRef<NewTicketComponent>,
       private api : ApiService,
@@ -64,9 +65,41 @@ export class NewTicketComponent implements OnInit {
     dismiss() {
       this.ref.close();
       }
+
+      getData(e){
+        this.email = e.name;
+      }
   
+    // send(){
+    //   var response =  this.supportapi.createTicket(this.subject,this.content,this.group,this.owner);
+    //   response.subscribe(
+    //     data => {
+    //       if(data['status'] == 200){
+    //         this.toastrService.show(
+    //           status || 'Success',       
+    //           `Ticket Created susccessfully ! ! `, 
+    //         );
+    //         this.ref.close();
+    //       }else{
+    //         this.toastrService.show(
+    //           status || 'Denger',       
+    //           `Ticket Not Created  ! ! `, 
+    //         );
+    //       }
+    //     },
+    //     error => {
+    //       console.error("createTicket : ", error);
+    //     }
+    //   ); 
+    // }
+
     send(){
-      var response =  this.supportapi.createTicket(this.subject,this.content,this.group,this.owner);
+      if(this.user.role == 'admin'){
+        var response =  this.supportapi.createTicket(this.subject,this.content,this.group.id,this.owner,this.email);
+      }else if(this.user.role == 'student'){
+        var response =  this.supportapi.createTicket(this.subject,this.content,this.group,this.owner,'');
+      }
+      //var response =  this.supportapi.createTicket(this.subject,this.content,this.group.id,this.owner,this.email);
       response.subscribe(
         data => {
           if(data['status'] == 200){

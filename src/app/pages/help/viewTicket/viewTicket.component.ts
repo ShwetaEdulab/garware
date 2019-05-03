@@ -66,8 +66,8 @@ export class ViewTicketComponent{
         this._location.back();
     }
 
-    writeComment(){
-      var response =  this.supportapi.commentOnTicket(this.ticketData.ticket_id,this.comment);
+    writeComment(role,email){
+      var response =  this.supportapi.commentOnTicket(this.ticketData.ticket_id,this.comment,role,email);
         response.subscribe(
         data => {
           this.toastrService.show(

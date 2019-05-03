@@ -139,9 +139,9 @@ export class DashboardComponent {
               this.stepper.selectedIndex = 1;
             },1000);
             this.applicationData.forEach(element => {
-              if(element.status == "accept"){
+              //if(element.status == "accept"){
                 this.status = true;
-              }
+              //}
             });
           }
 
