@@ -445,7 +445,7 @@ export class ProfileComponent {
 		}
 
     //third form cbse,hsc, degree forms validation variable below
-		if(this.education_next_validation){
+		if(this.thirdForm.valid){
 			this.tabcheck3 = true;
 		}else{
 			this.tabcheck3 = false;
@@ -485,7 +485,7 @@ export class ProfileComponent {
 				
 				if(this.secondForm.valid == false){
 					this.stepper.selectedIndex = 1;
-				}else if(this.education_next_validation == false){
+				}else if(this.thirdForm.valid == false){
 					this.stepper.selectedIndex = 2;
 				}else if(this.fourthForm.valid == false){
 					this.stepper.selectedIndex = 3;
@@ -508,7 +508,7 @@ export class ProfileComponent {
 				// 	this.stepper.selectedIndex = 0;
 				if(this.secondForm.valid == false){
 					this.stepper.selectedIndex = 1;
-				}else if(this.education_next_validation == false){
+				}else if(this.thirdForm.valid == false){
 					this.stepper.selectedIndex = 2;
 				}else if(this.fourthForm.valid == false){
 					this.stepper.selectedIndex = 3;
@@ -523,7 +523,7 @@ export class ProfileComponent {
 					this.stepper.selectedIndex = 0;
 				}else if(this.secondForm.valid == false){
 					this.stepper.selectedIndex = 1;
-				}else if(this.education_next_validation == false){
+				}else if(this.thirdForm.valid == false){
 					this.stepper.selectedIndex = 2;
 				}else {
 					this.stepper.selectedIndex = tab_index;
@@ -533,7 +533,7 @@ export class ProfileComponent {
 				// 	this.stepper.selectedIndex = 0;
 				if(this.secondForm.valid == false){
 					this.stepper.selectedIndex = 1;
-				}else if(this.education_next_validation == false){
+				}else if(this.thirdForm.valid == false){
 					this.stepper.selectedIndex = 2;
 				}else if(this.fourthForm.valid == false){
 					this.stepper.selectedIndex = 3;
@@ -548,7 +548,7 @@ export class ProfileComponent {
 					this.stepper.selectedIndex = 0;
 				}else if(this.secondForm.valid == false){
 					this.stepper.selectedIndex = 1;
-				}else if(this.education_next_validation == false){
+				}else if(this.thirdForm.valid == false){
 					this.stepper.selectedIndex = 2;
 				}else if(this.fourthForm.valid == false){
 					this.stepper.selectedIndex = 3;
@@ -560,7 +560,7 @@ export class ProfileComponent {
 				// 	this.stepper.selectedIndex = 0;
 				if(this.secondForm.valid == false){
 					this.stepper.selectedIndex = 1;
-				}else if(this.education_next_validation == false){
+				}else if(this.thirdForm.valid == false){
 					this.stepper.selectedIndex = 2;
 				}else if(this.fourthForm.valid == false){
 					this.stepper.selectedIndex = 3;
@@ -932,7 +932,6 @@ export class ProfileComponent {
       this.preferences = data['data']['preferences'];
       this.degreeCheck = data['data']['degreeCheck'];
       this.married = data['data']['married']
-      //console.log("this.married==========>"+data['data']['married']);
       this.Photo = data['data']['photo'];
       this.Sign = data['data']['sign'];
       this.SSCcertificate = data['data']['ssc_certificate'];
@@ -1473,23 +1472,32 @@ export class ProfileComponent {
     if(this.edudegreecheck == null || this.edudegreecheck == "Bachelor's" ||  this.edudegreecheck == "Under graduate diploma"){
       if(this.hsc.college_university == '' || this.hsc == null || this.cbse.university == '' || this.cbse == null){ 
         this.eduerrorflag = 1;
-        this.eduerrortext = "Please fill all mandatory fields( hsc )";	
-      }else if(this.hsc.college_university != '' && this.hsc != null && this.cbse.university != '' && this.cbse != null){ 
+        this.eduerrortext = "Please fill all mandatory fields( ssc and hsc )";	
+      }else if(this.hsc.college_university != '' && this.hsc != null && this.cbse.university != '' && this.cbse != null){
+        this.thirdForm.patchValue({ 
+          cbseUniversityCtrl: this.cbse.university,
+          hscUniversityCtrl: this.hsc.college_university,
+        });
         this.api.getcheckTabs().subscribe((data: any) => {
         });
       }
     }else if(this.edudegreecheck == "Master's" || this.edudegreecheck == "Post graduate diplomas"){
       if(this.hsc.college_university == '' || this.hsc == null  || this.degree.degree_university == '' || this.degree == null || this.cbse.university == '' || this.cbse == null){ 
         this.eduerrorflag = 1;
-        this.eduerrortext = "Please fill all mandatory fields( hsc & degree )";
+        this.eduerrortext = "Please fill all mandatory fields( ssc, hsc & degree )";
       }else if(this.hsc.college_university != '' || this.hsc != null || this.degree.degree_university != '' || this.degree != null || this.cbse.university != '' || this.cbse != null){ 
         // this.api.getcheckTabs().subscribe((data: any) => {
         // });
+        this.thirdForm.patchValue({ 
+          cbseUniversityCtrl: this.cbse.university,
+          hscUniversityCtrl: this.hsc.college_university,
+          degreeUniversityCtrl: this.degree.degree_university,
+        });
         this.api.getProfileCompleteness()
         .subscribe((user: any) =>{
           if (user['data'] == 100) {
           } else {
-            window.location.reload();
+            //window.location.reload();
           }
         });
       }
